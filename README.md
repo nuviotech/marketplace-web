@@ -1,4 +1,4 @@
-## MARTFURY TEMPLATE - REACT VERSION v2.2.0 (Using Strapi CMS)
+## MARTFURY TEMPLATE - REACT VERSION v2.2.0 (Using Strapi CMS)(web related)
 
 ### Version 2.2.1
 
