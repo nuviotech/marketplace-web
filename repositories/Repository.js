@@ -10,6 +10,7 @@ export const marketplaceUrl = "http://manageecom.com:8084";//marketplace api url
 
 export const customHeaders = {
     Accept: 'application/json',
+    Access-Control-Allow-Origin: 'https://manageecom.com:8001,https://manageecom.com:8003,https://manageecom.com:8004'
 };
 
 export const baseUrl = `${baseDomain}`;
