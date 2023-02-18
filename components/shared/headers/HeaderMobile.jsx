@@ -42,9 +42,9 @@ class HeaderMobile extends Component {
                         <Link href="/">
                             <a className="ps-logo">
                                 <img
-                                    src="/static/img/nuvio.png"
+                                    src="/static/img/nuvioseller.png"
                                     alt="martfury"
-                                    style={{width:98 ,height:42}}
+                                    style={{width:48 ,height:42}}
                                 />
                             </a>
                         </Link>

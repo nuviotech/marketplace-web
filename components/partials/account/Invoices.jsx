@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import AccountMenuSidebar from './modules/AccountMenuSidebar';
 import TableInvoices from './modules/TableInvoices';
+import Link from 'next/link';
+import { userIsLogin} from '../../../store/auth/action';
+import { userData } from '~/repositories/UserDeatils';
 
-class Invoices extends Component {
-    constructor(props) {
+function Invoices() {
+   /* constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            user:null
+        };
     }
-
-    render() {
+*/
+    //render() {
         const accountLinks = [
             {
                 text: 'Account Information',
@@ -42,13 +47,60 @@ class Invoices extends Component {
                 icon: 'icon-papers',
             },
         ];
+
+    //getUserDetails();
+      const [user,setUser]=useState([]);
+      useEffect(async()=>{
+        setUser(await userData())
+      },[]);
+
+        
         return (
             <section className="ps-my-account ps-page--account">
+                {
+                userIsLogin()?
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
                             <div className="ps-page__left">
-                                <AccountMenuSidebar data={accountLinks} />
+                                <aside className="ps-widget--account-dashboard">
+                                <div className="ps-widget__header">
+                                    <img src="/static/img/users/3.jpg" />
+                                    <figure>
+                                        <figcaption>Hello <span className='text-capitalize'>{user.firstName}</span></figcaption>
+                                        <p>{user.email}</p>
+                                    </figure>
+                                </div>
+                                <div className="ps-widget__content">
+                                    <ul className="ps-list--user-links">
+                                        {accountLinks.map((link) => (
+                                            <li
+                                                key={link.text}
+                                                className={
+                                                    link.active ? 'active' : ''
+                                                }>
+                                                <Link href={link.url}>
+                                                    <a>
+                                                        <i
+                                                            className={
+                                                                link.icon
+                                                            }></i>
+                                                        {link.text}
+                                                    </a>
+                                                </Link>
+                                            </li>
+                                        ))}
+                                        <li>
+                                            <Link href="/account/my-account">
+                                                <a>
+                                                    <i className="icon-power-switch"></i>
+                                                    Logout
+                                                </a>
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </aside>
                             </div>
                         </div>
                         <div className="col-lg-8">
@@ -58,16 +110,22 @@ class Invoices extends Component {
                                         <h3>Invoices</h3>
                                     </div>
                                     <div className="ps-section__content">
-                                        <TableInvoices />
+                                        <TableInvoices data={user} />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                :
+                <div className='text-center'>
+                    <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
+                    <a href='/account/login' className='btn btn-lg btn-warning text-center'>Login Here !!</a>
+                </div>
+                }
             </section>
         );
-    }
+  //  }
 }
 
 export default Invoices;

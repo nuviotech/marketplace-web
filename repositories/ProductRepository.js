@@ -64,6 +64,7 @@ class ProductRepository {
         console.log("total record call "+JSON.stringify(reponse));    
         return reponse;
     }
+    
     //getProduct
     async getProductsById(payload) {
         const reponse = await Repository.get(`${sellerProductUrl}/products/${payload}`)

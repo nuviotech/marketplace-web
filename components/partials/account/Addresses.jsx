@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+import { logOut, userIsLogin} from '../../../store/auth/action';
 
 class Addresses extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+    }
+
+    e =()=>{
+       
     }
 
     render() {
@@ -43,6 +48,9 @@ class Addresses extends Component {
         ];
         return (
             <section className="ps-my-account ps-page--account">
+
+                {
+                userIsLogin()?    
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
@@ -77,12 +85,16 @@ class Addresses extends Component {
                                                 </li>
                                             ))}
                                             <li>
-                                                <Link href="/account/my-account">
-                                                    <a>
+                                                
+                                                    <a onClick={()=> { 
+
+                                                        logOut();
+                                                        window.location.assign("/account/login")
+                                                    }}>
                                                         <i className="icon-power-switch"></i>
                                                         Logout
                                                     </a>
-                                                </Link>
+                                
                                             </li>
                                         </ul>
                                     </div>
@@ -131,6 +143,13 @@ class Addresses extends Component {
                         </div>
                     </div>
                 </div>
+                :
+                <div className='text-center'>
+                    <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
+                    <a href='/account/login' className='btn btn-lg btn-warning text-center'>Login Here !!</a>
+                </div>
+                }
+
             </section>
         );
     }

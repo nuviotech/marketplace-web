@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const baseDomain = 'https://nuvio.in:8443'; // API for products
 export const basePostUrl = 'https://nuvio.in:8443'; // API for post
 export const baseStoreURL = 'https://nuvio.in:8443'; // API for vendor(store)

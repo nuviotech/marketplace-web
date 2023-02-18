@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import FormEditAddress from './modules/FormEditAddress';
+import { userIsLogin} from '../../../store/auth/action';
 
 class EditAddress extends Component {
     constructor(props) {
@@ -44,6 +45,8 @@ class EditAddress extends Component {
         ];
         return (
             <section className="ps-my-account ps-page--account">
+                {
+                userIsLogin()?  
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
@@ -97,6 +100,12 @@ class EditAddress extends Component {
                         </div>
                     </div>
                 </div>
+                :
+                <div className='text-center'>
+                    <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
+                    <a href='/account/login' className='btn btn-lg btn-warning text-center'>Login Here !!</a>
+                </div>
+                }
             </section>
         );
     }
