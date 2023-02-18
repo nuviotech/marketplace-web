@@ -21,6 +21,7 @@
         "next-redux-saga": "^4.1.2",
         "next-redux-wrapper": "^6.0.2",
         "next-routes": "^1.4.2",
+        "next.js": "^1.0.3",
         "prettier": "^2.0.5",
         "react": "^17.0.2",
         "react-cookie": "^4.0.3",
