@@ -8,15 +8,15 @@ export default function Document() {
         <Html>
             <Head>
                 <link rel="shortcut icon" href={'/static/img/.png'} />
-                <link rel="icon" href={'/static/img/nuvio.png'} sizes="32x32" />
+                <link rel="icon" href={'/static/img/nuvioseller.png'} sizes="32x32" />
                 <link
                     rel="icon"
-                    href={'/static/img/nuvio.png'}
+                    href={'/static/img/nuvioseller.png'}
                     sizes="192x192"
                 />
                 <link
                     rel="apple-touch-icon-precomposed"
-                    href={'/static/img/nuvio.png'}
+                    href={'/static/img/nuvioseller.png'}
                 />
 
                 <link

@@ -2,18 +2,110 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { login } from '../../../store/auth/action';
+import { marketplaceUrl } from '~/repositories/Repository';
+import axios from 'axios';
 
-import { Form, Input } from 'antd';
+import { Form, Input,Modal } from 'antd';
 import { connect } from 'react-redux';
+import TextArea from 'antd/lib/input/TextArea';
 
 class Register extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            firstName:null,
+            lastName:null,
+            email:null,
+            password:null,
+            password2:null,
+            phone:null,
+            city:null,
+            country:null,
+            shippingAddress:null
+
+
+        };
     }
+   
 
     handleSubmit = e => {
-        e.preventDefault();
+       // e.preventDefault();
+        console.log(JSON.stringify(this.state))
+        if(this.state.firstName=='' || this.state.lastName==''){
+            const modal = Modal.error({
+                centered: true,
+                title: 'Invalid input!',
+                content: `Please enter first name or last name.`,
+            });
+            modal.update;
+        }else if(this.state.phone.length < 10 ){
+            const modal = Modal.error({
+                centered: true,
+                title: 'Invalid input!',
+                content: `Please enter correct phone number.`,
+            });
+        }else if(this.state.password.length <4 || this.state.password.length >20){
+            const modal = Modal.error({
+                centered: true,
+                title: 'Invalid password!',
+                content: `password must be greter than 4 character or less than 20 character.`,
+            });
+            modal.update;
+        } else if(this.state.password!=this.state.password2){
+            const modal = Modal.error({
+                centered: true,
+                title: 'Wrong confirm password!',
+                content: `enter the same password in password field or confirm password field.`,
+            });
+            modal.update;
+        }else{
+            axios.post(`${marketplaceUrl}/saveUser`, this.state).then(
+                (response)=>{
+                    var statusCode = response.data;
+                    if(statusCode == '-1'){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Invalid input!',
+                            content: `Please enter valid first name or last name.`,
+                        });
+                        modal.update;
+                    }else if(statusCode == '-2'){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Invalid input!',
+                            content: `Please enter valid first name or last name.`,
+                        });
+                        modal.update;
+                    }else if(statusCode == '-3'){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Invalid input!',
+                            content: `Please enter valid first name or last name.`,
+                        });
+                        modal.update;
+                    }else if(statusCode == '-4'){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Invalid input!',
+                            content: `Please enter valid first name or last name.`,
+                        });
+                        modal.update;
+                    }else if(statusCode=='0'){
+                        const modal = Modal.success({
+                            centered: true,
+                            title: 'Successfully Registered !',
+                            content: `You'r Information is successfully saved on server, please login with credentials..`,
+                        });
+                        modal.update;
+                        Router.push('/account/login');
+                    }
+                },
+                (error)=>{
+                    alert("Something went wrong on server!!");
+                }
+            )
+        }
+
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 this.props.dispatch(login());
@@ -25,11 +117,12 @@ class Register extends Component {
 
     render() {
         return (
+            
             <div className="ps-my-account">
                 <div className="container">
                     <Form
                         className="ps-form--account"
-                        onSubmit={this.handleSubmit}>
+                        onFinish={this.handleSubmit.bind(this)}>
                         <ul className="ps-tab-list">
                             <li>
                                 <Link href="/account/login">
@@ -45,6 +138,53 @@ class Register extends Component {
                         <div className="ps-tab active" id="register">
                             <div className="ps-form__content">
                                 <h5>Register An Account</h5>
+
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <div className="form-group">
+                                            <Form.Item
+                                                name="firstName"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Enter your first name!',
+                                                    },
+                                                ]}>
+                                                <Input
+                                                    className="form-control"
+                                                    type="text"
+                                                    placeholder="First Name"
+                                                    name="fname"
+                                                    onChange={(event)=> {this.setState({firstName:event.target.value})} }
+
+                                                />
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="form-group">
+                                            <Form.Item
+                                                name="lastName"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Enter your last name!!',
+                                                    },
+                                                ]}>
+                                                <Input
+                                                    className="form-control"
+                                                    type="text"
+                                                    placeholder="Last Name"
+                                                    name="last_name"
+                                                    onChange={(event)=> {this.setState({lastName:event.target.value})} }
+
+                                                />
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                                 <div className="form-group">
                                     <Form.Item
                                         name="email"
@@ -59,9 +199,97 @@ class Register extends Component {
                                             className="form-control"
                                             type="email"
                                             placeholder="Email address"
+                                            onChange={(event)=> {this.setState({email:event.target.value})} }
+
                                         />
                                     </Form.Item>
                                 </div>
+                                <div className="form-group">
+                                    <Form.Item
+                                        name="phone"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    'Please input your contact!',
+                                            },
+                                        ]}>
+                                        <Input
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="Enter contact"
+                                            onChange={(event)=> {this.setState({phone:event.target.value})} }
+
+                                        />
+                                    </Form.Item>
+                                </div>
+
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <div className="form-group">
+                                            <Form.Item
+                                                name="city"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Enter your city!',
+                                                    },
+                                                ]}>
+                                                <Input
+                                                    className="form-control"
+                                                    type="text"
+                                                    placeholder="Enter the city"
+                                                    name="fname"
+                                                    onChange={(event)=> {this.setState({city:event.target.value})} }
+
+                                                />
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="form-group">
+                                            <Form.Item
+                                                name="country"
+                                                rules={[
+                                                    {
+                                                        required: true,
+                                                        message: 'Enter your country !!',
+                                                    },
+                                                ]}>
+                                                <Input
+                                                    className="form-control"
+                                                    type="text"
+                                                    placeholder="Enter the country"
+                                                    name="last_name"
+                                                    onChange={(event)=> {this.setState({country:event.target.value})} }
+
+                                                />
+                                            </Form.Item>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="form-group">
+                                    <Form.Item
+                                        name="shippingAddress"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    'Please enter your address!',
+                                            },
+                                        ]}>
+                                        <TextArea
+                                            rows='5'
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="Enter address"
+                                            onChange={(event)=> {this.setState({shippingAddress:event.target.value})} }
+
+                                        />
+                                    </Form.Item>
+                                </div>
+
                                 <div className="form-group form-forgot">
                                     <Form.Item
                                         name="password"
@@ -76,6 +304,28 @@ class Register extends Component {
                                             className="form-control"
                                             type="password"
                                             placeholder="Password..."
+                                            onChange={(event)=> {this.setState({password:event.target.value})} }
+
+                                        />
+                                    </Form.Item>
+                                </div>
+                                <div className="form-group form-forgot">
+                                    <Form.Item
+                                        name="password2"
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    'Please repeat your password!',
+                                            },
+                                        ]}>
+                                        <Input
+                                            className="form-control"
+                                            type="password"
+                                            placeholder="repeat password.."
+                                            id='password2'
+                                            onChange={(event)=> {this.setState({password2:event.target.value})} }
+
                                         />
                                     </Form.Item>
                                 </div>
@@ -115,6 +365,8 @@ class Register extends Component {
                         </div>
                     </Form>
                 </div>
+
+
             </div>
         );
     }

@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component ,useEffect,useState} from 'react';
 import Link from 'next/link';
 import FormChangeUserInformation from '~/components/shared/FormChangeUserInformation';
+import {userIsLogin} from '../../../store/auth/action';
+import { userData } from '~/repositories/UserDeatils';
 
 const UserInformation = () => {
     const accountLinks = [
@@ -49,9 +51,23 @@ const UserInformation = () => {
         </li>
     ));
 
+    
+    
+   
+     //getUserDetails();
+      const [user,setUser]=useState([]);
+
+      useEffect(async()=>{
+        setUser( await userData())
+      },[]);
+    
+
     return (
         <section className="ps-my-account ps-page--account">
+            {
+            userIsLogin()?  
             <div className="container">
+                
                 <div className="row">
                     <div className="col-lg-3">
                         <div className="ps-section__left">
@@ -59,8 +75,8 @@ const UserInformation = () => {
                                 <div className="ps-widget__header">
                                     <img src="/static/img/users/3.jpg" />
                                     <figure>
-                                        <figcaption>Hello</figcaption>
-                                        <p>username@gmail.com</p>
+                                        <figcaption>Hello <span className='text-capitalize'>{user.firstName}</span></figcaption>
+                                        <p>{user.email}</p>
                                     </figure>
                                 </div>
                                 <div className="ps-widget__content">
@@ -97,11 +113,17 @@ const UserInformation = () => {
                     </div>
                     <div className="col-lg-9">
                         <div className="ps-page__content">
-                            <FormChangeUserInformation />
+                            <FormChangeUserInformation data={user} />
                         </div>
                     </div>
                 </div>
             </div>
+            :
+                <div className='text-center'>
+                    <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
+                    <a href='/account/login' className='btn btn-lg btn-warning text-center'>Login Here !!</a>
+                </div>
+            }
         </section>
     );
 };

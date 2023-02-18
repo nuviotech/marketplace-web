@@ -83,8 +83,10 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     let productItemsView;
     if (!loading) {
         if (productItems && productItems.length > 0) {
+           
             if (listView) {
-                const items = productItems.map((item) => (
+               const items = productItems.map((item) => (
+                    
                     <div className={classes} key={item.id}>
                         <Product product={item} />
                     </div>
