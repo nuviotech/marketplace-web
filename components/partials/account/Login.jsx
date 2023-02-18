@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { login } from '../../../store/auth/action';
+import axios from 'axios';
+import { login,saveToken} from '../../../store/auth/action';
+import { marketplaceUrl } from '~/repositories/Repository';
 
-import { Form, Input, notification } from 'antd';
+import { Form, Input, notification ,Modal} from 'antd';
 import { connect } from 'react-redux';
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            email:null,
+            password:null,
+            login:false,
+            store:null,
+        };
     }
+
+    
 
     static getDerivedStateFromProps(props) {
         if (props.isLoggedIn === true) {
@@ -28,11 +37,51 @@ class Login extends Component {
         });
     }
 
+    
+
     handleLoginSubmit = e => {
         console.log('test');
-        this.props.dispatch(login());
-        Router.push('/');
+        //alert(this.state.email+" | "+this.state.password);
+        const loginCredentials = {
+            email:this.state.email,
+            password:this.state.password,
+        }
 
+
+        
+        axios.post(`${marketplaceUrl}/login`,loginCredentials).then(
+            async (response) => {
+                console.log(JSON.stringify(response));
+               var token=response.data.Token;
+                var status=response.data.status;
+                if(status==0){
+                    saveToken(token);
+                    this.props.dispatch(login());
+                    Router.push('/');
+                }else if(status==1){
+                    const modal = Modal.error({
+                        centered: true,
+                        title: 'Opps, something went wrong!!',
+                        content: ``+response.data.message,
+                        });
+                        modal.update;
+                }
+            },
+            (error)=>{
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Wrong credentials !!',
+                    content: `Email or password is wrong, please enter correct one.. `,
+                });
+                modal.update;
+                console.error("error : "+error);
+                
+            }
+        )
+        
+
+       // this.props.dispatch(login());
+      //  Router.push('/');
     };
 
     render() {
@@ -70,7 +119,8 @@ class Login extends Component {
                                         <Input
                                             className="form-control"
                                             type="text"
-                                            placeholder="Username or email address"
+                                            placeholder="enter email address"
+                                            onChange={(event)=> {this.setState({email:event.target.value})} }
                                         />
                                     </Form.Item>
                                 </div>
@@ -88,6 +138,7 @@ class Login extends Component {
                                             className="form-control"
                                             type="password"
                                             placeholder="Password..."
+                                            onChange={(event)=>{this.setState({password:event.target.value})}}
                                         />
                                     </Form.Item>
                                 </div>

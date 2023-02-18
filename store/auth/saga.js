@@ -2,13 +2,13 @@ import { all, put, takeEvery } from 'redux-saga/effects';
 import {notification } from 'antd';
 
 import { actionTypes, loginSuccess, logOutSuccess } from './action';
-
+/*
 const modalSuccess = type => {
     notification[type]({
         message: 'Wellcome back',
         description: 'You are login successful!',
     });
-};
+};*/
 
 const modalWarning = type => {
     notification[type]({

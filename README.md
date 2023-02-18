@@ -32,4 +32,3 @@ yarn install
 ```bash
 yarn dev 
 ```
-# marketplace-web

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
+import { userIsLogin} from '../../../store/auth/action';
 
 class MyAccount extends Component {
     constructor(props) {
@@ -9,7 +10,10 @@ class MyAccount extends Component {
 
     render() {
         return (
+
             <section className="ps-my-account ps-page--account">
+                 {
+                userIsLogin()?  
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-md-12">
@@ -86,6 +90,12 @@ class MyAccount extends Component {
                         </div>
                     </div>
                 </div>
+                :
+                <div className='text-center'>
+                    <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
+                    <a href='/account/login' className='btn btn-lg btn-warning text-center'>Login Here !!</a>
+                </div>
+                }
             </section>
         );
     }
