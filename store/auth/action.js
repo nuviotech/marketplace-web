@@ -1,3 +1,5 @@
+import { message, Modal, notification } from "antd";
+
 export const actionTypes = {
     LOGIN_REQUEST: 'LOGIN_REQUEST',
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
@@ -16,8 +18,11 @@ export function loginSuccess() {
 
 export function logOut() {
    // localStorage.clear();
+
    console.log("user is logout");
     localStorage.removeItem("token");
+    window.location.assign("/account/login");
+    modalWarning2("success");
     return { type: actionTypes.LOGOUT };
 }
 
@@ -26,6 +31,7 @@ export function logOutSuccess() {
 }
 
 export function saveToken(token){
+    modalSuccess2("success");
     localStorage.setItem("token",token); 
     return true;
 }
@@ -33,7 +39,6 @@ export function saveToken(token){
 export function getToken(){
     var token=null;
    // token= localStorage.getItem("token");
-   
    if (typeof window !== 'undefined') {
     token=localStorage.getItem("token");
 }
@@ -48,3 +53,19 @@ export function userIsLogin(){
     else 
         return true;    
 }
+
+
+const modalSuccess2 = type => {
+    notification[type]({
+        message: 'Wellcome back',
+        description: 'You are login successful!',
+    });
+};
+
+const modalWarning2 = type => {
+    notification[type]({
+        message: 'Good bye!',
+        description: 'Your account has been logged out!',
+    });
+};
+

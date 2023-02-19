@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { logOut, userIsLogin} from '../../../store/auth/action';
+import { userData } from '~/repositories/UserDeatils';
 
-class Addresses extends Component {
-    constructor(props) {
+function Addresses() {
+   /* constructor(props) {
         super(props);
         this.state = {};
-    }
+    }*/
 
-    e =()=>{
-       
-    }
-
-    render() {
+   // render() {
         const accountLinks = [
             {
                 text: 'Account Information',
@@ -46,6 +43,13 @@ class Addresses extends Component {
                 icon: 'icon-heart',
             },
         ];
+
+        //getUserDetails();
+        const [user,setUser]=useState([]);
+        useEffect(async()=>{
+            setUser(await userData())
+        },[]);
+
         return (
             <section className="ps-my-account ps-page--account">
 
@@ -59,8 +63,8 @@ class Addresses extends Component {
                                     <div className="ps-widget__header">
                                         <img src="/static/img/users/3.jpg" />
                                         <figure>
-                                            <figcaption>Hello</figcaption>
-                                            <p>username@gmail.com</p>
+                                            <figcaption>Hello, <span className='text-capitalize'>{user.firstName}</span></figcaption>
+                                            <p>{user.email}</p>
                                         </figure>
                                     </div>
                                     <div className="ps-widget__content">
@@ -87,7 +91,6 @@ class Addresses extends Component {
                                             <li>
                                                 
                                                     <a onClick={()=> { 
-
                                                         logOut();
                                                         window.location.assign("/account/login")
                                                     }}>
@@ -112,8 +115,8 @@ class Addresses extends Component {
                                                 </figcaption>
                                                 <div className="ps-block__content">
                                                     <p>
-                                                        You Have Not Set Up This
-                                                        Type Of Address Yet.
+                                                        {user.billingAddress==''?"None !!":user.billingAddress}
+                                        
                                                     </p>
                                                     <Link href="/account/edit-address">
                                                         <a>Edit</a>
@@ -128,8 +131,7 @@ class Addresses extends Component {
                                                 </figcaption>
                                                 <div className="ps-block__content">
                                                     <p>
-                                                        You Have Not Set Up This
-                                                        Type Of Address Yet.
+                                                        {user.shippingAddress}
                                                     </p>
                                                     <Link href="/account/edit-address">
                                                         <a>Edit</a>
@@ -152,7 +154,7 @@ class Addresses extends Component {
 
             </section>
         );
-    }
+   // }
 }
 
 export default Addresses;
