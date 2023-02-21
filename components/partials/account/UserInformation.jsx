@@ -1,7 +1,7 @@
 import React, { Component ,useEffect,useState} from 'react';
 import Link from 'next/link';
 import FormChangeUserInformation from '~/components/shared/FormChangeUserInformation';
-import {userIsLogin} from '../../../store/auth/action';
+import {userIsLogin , logOut} from '../../../store/auth/action';
 import { userData } from '~/repositories/UserDeatils';
 
 const UserInformation = () => {
@@ -99,12 +99,12 @@ const UserInformation = () => {
                                             </li>
                                         ))}
                                         <li>
-                                            <Link href="/account/my-account">
-                                                <a>
+                                    
+                                                <a onClick={()=>{logOut()} }>
                                                     <i className="icon-power-switch"></i>
                                                     Logout
                                                 </a>
-                                            </Link>
+                                        
                                         </li>
                                     </ul>
                                 </div>
