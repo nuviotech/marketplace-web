@@ -10,7 +10,7 @@ const SiteFeatures = () => (
                     </div>
                     <div className="ps-block__right">
                         <h4>Free Delivery</h4>
-                        <p>For all oders over $99</p>
+                        <p>For all oders over 1000 ₹</p>
                     </div>
                 </div>
                 <div className="ps-block__item">
@@ -18,7 +18,7 @@ const SiteFeatures = () => (
                         <i className="icon-sync"></i>
                     </div>
                     <div className="ps-block__right">
-                        <h4>90 Days Return</h4>
+                        <h4>7 Days Return</h4>
                         <p>If goods have problems</p>
                     </div>
                 </div>
@@ -37,18 +37,10 @@ const SiteFeatures = () => (
                     </div>
                     <div className="ps-block__right">
                         <h4>24/7 Support</h4>
-                        <p>Dedicated support</p>
+                        <p>Dedicated chat support</p>
                     </div>
                 </div>
-                <div className="ps-block__item">
-                    <div className="ps-block__left">
-                        <i className="icon-gift"></i>
-                    </div>
-                    <div className="ps-block__right">
-                        <h4>Gift Service</h4>
-                        <p>Support gift service</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

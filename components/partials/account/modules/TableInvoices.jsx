@@ -21,12 +21,12 @@ class TableInvoices extends Component {
         const tableData=[];
         this.props.data.orders?.map((data)=>{
           //  var r=data.razorpayOrderDetails?.replace("\\","");
-          
+          console.log(data);
             var obj={
                 id: data.orderId,
                 invoiceId: data.orderId,
                 razorpayId:JSON.parse(data.razorpayOrderDetails)?.id,
-                title: 'Marshall Kilburn Portable Wireless Speaker',
+                title: data.productNames,
                 dateCreate: ""+new Date(data.orderDate).toISOString().split('T')[0] ,
                 amount: data.totalBill,
                 paymentStatus:data.paymentStatus,
@@ -172,6 +172,7 @@ class TableInvoices extends Component {
                 rowKey: 'amount',
                 dataIndex: 'amount',
                 key: 'amount',
+                width:'72px',
                 render: (text, record) => (
                     <span className="text-right">₹{record.amount}</span>
                 ),

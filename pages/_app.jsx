@@ -29,7 +29,7 @@ function App({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <title>Martfury - React eCommerce Template</title>
+                <title>Nuvio Sellers</title>
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta
                     name="viewport"
@@ -44,7 +44,7 @@ function App({ Component, pageProps }) {
                 />
                 <meta
                     name="description"
-                    content="Martfury - React eCommerce Template"
+                    content="Nuvio sellers | eCommerce"
                 />
             </Head>
             <CookiesProvider>

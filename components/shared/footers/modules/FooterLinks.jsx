@@ -176,6 +176,10 @@ const Links = {
 };
 
 const FooterLinks = () => (
+    <div>
+        
+    </div>
+   /* 
     <div className="ps-footer__links">
         <p>
             <strong>Consumer Electric:</strong>
@@ -226,6 +230,7 @@ const FooterLinks = () => (
             ))}
         </p>
     </div>
+    */
 );
 
 export default FooterLinks;
