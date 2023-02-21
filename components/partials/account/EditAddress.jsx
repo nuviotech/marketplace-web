@@ -1,15 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Link from 'next/link';
 import FormEditAddress from './modules/FormEditAddress';
 import { userIsLogin} from '../../../store/auth/action';
+import { userData } from '~/repositories/UserDeatils';
 
-class EditAddress extends Component {
-    constructor(props) {
+function EditAddress() {
+    /* constructor(props) {
         super(props);
         this.state = {};
-    }
+        //getUserDetails()
+      useEffect(async()=>{
+        this.state(await userData())
+      },[]);
+        
+    }*/
+    
 
-    render() {
+ //   render() {
         const accountLinks = [
             {
                 text: 'Account Information',
@@ -43,6 +50,14 @@ class EditAddress extends Component {
                 icon: 'icon-heart',
             },
         ];
+
+
+        //getUserDetails();
+        const [user,setUser]=useState([]);
+        useEffect(async()=>{
+            setUser(await userData())
+        },[]);
+
         return (
             <section className="ps-my-account ps-page--account">
                 {
@@ -55,8 +70,8 @@ class EditAddress extends Component {
                                     <div className="ps-widget__header">
                                         <img src="/static/img/users/3.jpg" />
                                         <figure>
-                                            <figcaption>Hello</figcaption>
-                                            <p>username@gmail.com</p>
+                                            <figcaption>Helo, {user.firstName }</figcaption>
+                                            <p>user.email</p>
                                         </figure>
                                     </div>
                                     <div className="ps-widget__content">
@@ -81,12 +96,15 @@ class EditAddress extends Component {
                                                 </li>
                                             ))}
                                             <li>
-                                                <Link href="/account/my-account">
-                                                    <a>
+                                                
+                                                    <a onClick={()=> { 
+                                                        logOut();
+                                                        window.location.assign("/account/login")
+                                                    }}>
                                                         <i className="icon-power-switch"></i>
                                                         Logout
                                                     </a>
-                                                </Link>
+                                            
                                             </li>
                                         </ul>
                                     </div>
@@ -108,7 +126,7 @@ class EditAddress extends Component {
                 }
             </section>
         );
-    }
+   // }
 }
 
 export default EditAddress;

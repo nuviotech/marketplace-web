@@ -3,19 +3,20 @@ import {notification } from 'antd';
 
 import { actionTypes, loginSuccess, logOutSuccess } from './action';
 /*
-const modalSuccess = type => {
+const modalSuccess2 = type => {
     notification[type]({
         message: 'Wellcome back',
         description: 'You are login successful!',
     });
-};*/
+};
 
-const modalWarning = type => {
+const modalWarning2 = type => {
     notification[type]({
         message: 'Good bye!',
         description: 'Your account has been logged out!',
     });
 };
+*/
 
 function* loginSaga() {
     try {

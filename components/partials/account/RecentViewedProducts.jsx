@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { userIsLogin} from '../../../store/auth/action';
+import { logOut, userIsLogin} from '../../../store/auth/action';
+import { userData } from '~/repositories/UserDeatils';
 
-class RecentViewedProducts extends Component {
-    constructor(props) {
+function RecentViewedProducts()  {
+   /* constructor(props) {
         super(props);
         this.state = {};
-    }
+    }*/
 
-    render() {
+  //  render() {
         const accountLinks = [
             {
                 text: 'Account Information',
@@ -42,6 +43,14 @@ class RecentViewedProducts extends Component {
                 icon: 'icon-heart',
             },
         ];
+
+        //getUserDetails();
+        const [user,setUser]=useState([]);
+        useEffect(async()=>{
+            setUser(await userData())
+        },[]);
+
+
         return (
             <section className="ps-my-account ps-page--account">
                 {
@@ -54,8 +63,8 @@ class RecentViewedProducts extends Component {
                                     <div className="ps-widget__header">
                                         <img src="/static/img/users/3.jpg" />
                                         <figure>
-                                            <figcaption>Hello</figcaption>
-                                            <p>username@gmail.com</p>
+                                            <figcaption>Hello, <span className='text-capitalize'>{user.firstName}</span></figcaption>
+                                            <p>{user.email}</p>
                                         </figure>
                                     </div>
                                     <div className="ps-widget__content">
@@ -80,12 +89,15 @@ class RecentViewedProducts extends Component {
                                                 </li>
                                             ))}
                                             <li>
-                                                <Link href="/account/my-account">
-                                                    <a>
+                                                
+                                                    <a onClick={()=> { 
+                                                        logOut();
+                                                        window.location.assign("/account/login")
+                                                    }}>
                                                         <i className="icon-power-switch"></i>
                                                         Logout
                                                     </a>
-                                                </Link>
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -109,7 +121,7 @@ class RecentViewedProducts extends Component {
                 }
             </section>
         );
-    }
+   // }
 }
 
 export default RecentViewedProducts;
