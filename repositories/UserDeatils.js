@@ -42,4 +42,24 @@ export const updateUserDetails= async (updatedData)=>{
     return data;
 }
 
+export const returnPolicyByUser=async (info)=>{
+    const data=await axios.post(`${marketplaceUrl}/returnPolicyByUser`,info,{
+        headers: {
+            Authorization: "Bearer "+getToken(),
+        }
+    }).then(
+        (responce)=>{
+            //alert("res :"+responce.data);
+            return responce.data;
+        },
+        (error)=>{
+            alert("something wrong  "+error);
+        }
+    ).catch(err=>{
+        return(err)
+    });
+    //alert(data);
+    return data;
+}
+
 
