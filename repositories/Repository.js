@@ -11,6 +11,7 @@ export const sellerProductUrl = 'http://localhost:8083'; // API seller product u
 export const sellerPolicyUrl = "http://localhost:9001";//change the name policy maker  url
 export const marketplaceUrl = "http://localhost:8089";//marketplace api url
 */
+
 export const customHeaders = {
     Accept: 'application/json',
 	//'Access-Control-Allow-Origin': 'https://manageecom.com:8001,https://manageecom.com:8003,https://manageecom.com:8004,https://nuvio.in:8443,https://nuvio.in'

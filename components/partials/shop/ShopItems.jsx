@@ -78,12 +78,11 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
         getProducts(params);
         handleSetColumns();
     }, [query]);
-
+    
     // Views
     let productItemsView;
     if (!loading) {
         if (productItems && productItems.length > 0) {
-           
             if (listView) {
                const items = productItems.map((item) => (
                     

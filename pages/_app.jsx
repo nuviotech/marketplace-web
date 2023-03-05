@@ -19,6 +19,8 @@ import '~/scss/technology.scss';
 import '~/scss/autopart.scss';
 import '~/scss/electronic.scss';
 import Head from 'next/head';
+import { AuthContext, AuthContextProvider } from '~/context/loginContext';
+import { useContext } from 'react';
 function App({ Component, pageProps }) {
     useEffect(() => {
         setTimeout(function () {
@@ -26,32 +28,35 @@ function App({ Component, pageProps }) {
         }, 100);
     });
 
+    
     return (
         <>
-            <Head>
-                <title>Nuvio Sellers</title>
-                <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                />
-                <meta name="format-detection" content="telephone=no" />
-                <meta name="apple-mobile-web-app-capable" content="yes" />
-                <meta name="author" content="nouthemes" />
-                <meta
-                    name="keywords"
-                    content="Martfury, React, eCommerce, Template"
-                />
-                <meta
-                    name="description"
-                    content="Nuvio sellers | eCommerce"
-                />
-            </Head>
-            <CookiesProvider>
-                <MasterLayout>
-                    <Component {...pageProps} />
-                </MasterLayout>
-            </CookiesProvider>
+            <AuthContextProvider>
+                <Head>
+                    <title>Nuvio Sellers</title>
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1.0"
+                    />
+                    <meta name="format-detection" content="telephone=no" />
+                    <meta name="apple-mobile-web-app-capable" content="yes" />
+                    <meta name="author" content="nouthemes" />
+                    <meta
+                        name="keywords"
+                        content="Martfury, React, eCommerce, Template"
+                    />
+                    <meta
+                        name="description"
+                        content="Nuvio sellers | eCommerce"
+                    />
+                </Head>
+                <CookiesProvider>
+                    <MasterLayout>
+                        <Component {...pageProps} />
+                    </MasterLayout>
+                </CookiesProvider>
+            </AuthContextProvider>
         </>
     );
 }
