@@ -21,6 +21,7 @@ export default axios.create({
 });
 
 export const serializeQuery = (query) => {
+    console.log("Serializing query : "+query);
     return Object.keys(query)
         .map(
             (key) =>
