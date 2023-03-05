@@ -1,7 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { logOut, userIsLogin} from '../../../store/auth/action';
 import { userData } from '~/repositories/UserDeatils';
+import { AuthContext } from '~/context/loginContext';
 
 function Addresses() {
    /* constructor(props) {
@@ -44,12 +45,15 @@ function Addresses() {
             },
         ];
 
+        const {currentUser}= useContext(AuthContext);
+
+        /*
         //getUserDetails();
         const [user,setUser]=useState([]);
         useEffect(async()=>{
             setUser(await userData())
         },[]);
-
+        */
         return (
             <section className="ps-my-account ps-page--account">
 
@@ -63,8 +67,8 @@ function Addresses() {
                                     <div className="ps-widget__header">
                                         <img src="/static/img/users/3.jpg" />
                                         <figure>
-                                            <figcaption>Hello, <span className='text-capitalize'>{user.firstName}</span></figcaption>
-                                            <p>{user.email}</p>
+                                            <figcaption>Hello, <span className='text-capitalize'>{currentUser.firstName}</span></figcaption>
+                                            <p>{currentUser.email}</p>
                                         </figure>
                                     </div>
                                     <div className="ps-widget__content">
@@ -115,7 +119,7 @@ function Addresses() {
                                                 </figcaption>
                                                 <div className="ps-block__content">
                                                     <p>
-                                                        {user.billingAddress==''?"None !!":user.billingAddress}
+                                                        {currentUser.billingAddress==''?"None !!":currentUser.billingAddress}
                                         
                                                     </p>
                                                     <Link href="/account/edit-address">
@@ -131,7 +135,7 @@ function Addresses() {
                                                 </figcaption>
                                                 <div className="ps-block__content">
                                                     <p>
-                                                        {user.shippingAddress}
+                                                        {currentUser.shippingAddress}
                                                     </p>
                                                     <Link href="/account/edit-address">
                                                         <a>Edit</a>

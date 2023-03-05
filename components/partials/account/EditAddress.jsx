@@ -1,8 +1,9 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import FormEditAddress from './modules/FormEditAddress';
 import { userIsLogin} from '../../../store/auth/action';
 import { userData } from '~/repositories/UserDeatils';
+import { AuthContext } from '~/context/loginContext';
 
 function EditAddress() {
     /* constructor(props) {
@@ -51,12 +52,14 @@ function EditAddress() {
             },
         ];
 
-
+        const {currentUser}= useContext(AuthContext);
+        /*
         //getUserDetails();
         const [user,setUser]=useState([]);
         useEffect(async()=>{
             setUser(await userData())
         },[]);
+        */
 
         return (
             <section className="ps-my-account ps-page--account">
@@ -70,8 +73,8 @@ function EditAddress() {
                                     <div className="ps-widget__header">
                                         <img src="/static/img/users/3.jpg" />
                                         <figure>
-                                            <figcaption>Helo, {user.firstName }</figcaption>
-                                            <p>user.email</p>
+                                            <figcaption>Helo, {currentUser.firstName }</figcaption>
+                                            <p>{currentUser.email}</p>
                                         </figure>
                                     </div>
                                     <div className="ps-widget__content">

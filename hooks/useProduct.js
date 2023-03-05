@@ -59,13 +59,15 @@ export default function useProduct() {
                         </>
                     );
                 }*/
-                if (payload.images.length>0) {
+               console.log(payload.images?.length+" PAYLOAD : "+JSON.stringify(payload));
+               
+                if (payload.images?.length>0) {
                     return (
                         <>
                             <LazyLoad>
                                 <img
                                     src={payload.images[0].url}
-                                    alt={getImageURL(payload.images[0].url)}
+                                    alt={"no Img"}
                                 />
                             </LazyLoad>
                         </>
