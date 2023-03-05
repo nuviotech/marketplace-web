@@ -1,8 +1,9 @@
-import React, { Component ,useEffect,useState} from 'react';
+import React, { Component ,useContext,useEffect,useState} from 'react';
 import Link from 'next/link';
 import FormChangeUserInformation from '~/components/shared/FormChangeUserInformation';
 import {userIsLogin , logOut} from '../../../store/auth/action';
 import { userData } from '~/repositories/UserDeatils';
+import { AuthContext } from '~/context/loginContext';
 
 const UserInformation = () => {
     const accountLinks = [
@@ -52,8 +53,10 @@ const UserInformation = () => {
     ));
 
     
-    
-   
+    const {currentUser}= useContext(AuthContext);
+    //console.log("Login user is : "+JSON.stringify( currentUser))
+    //alert("current user is :"+JSON.stringify(currentUser));
+    /*
      //getUserDetails();
       const [user,setUser]=useState([]);
 
@@ -61,6 +64,7 @@ const UserInformation = () => {
         setUser( await userData())
       },[]);
     
+    */
 
     return (
         <section className="ps-my-account ps-page--account">
@@ -75,8 +79,8 @@ const UserInformation = () => {
                                 <div className="ps-widget__header">
                                     <img src="/static/img/users/3.jpg" />
                                     <figure>
-                                        <figcaption>Hello <span className='text-capitalize'>{user.firstName}</span></figcaption>
-                                        <p>{user.email}</p>
+                                        <figcaption>Hello <span className='text-capitalize'>{currentUser.firstName}</span></figcaption>
+                                        <p>{currentUser.email}</p>
                                     </figure>
                                 </div>
                                 <div className="ps-widget__content">
@@ -113,7 +117,7 @@ const UserInformation = () => {
                     </div>
                     <div className="col-lg-9">
                         <div className="ps-page__content">
-                            <FormChangeUserInformation data={user} />
+                            <FormChangeUserInformation data={currentUser} />
                         </div>
                     </div>
                 </div>

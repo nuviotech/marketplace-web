@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import axios from 'axios';
-import { login,saveToken} from '../../../store/auth/action';
+import { login,loginSuccess,saveToken} from '../../../store/auth/action';
 import { marketplaceUrl } from '~/repositories/Repository';
 
 import { Form, Input, notification ,Modal} from 'antd';
 import { connect } from 'react-redux';
+import { AuthContextProvider } from '~/context/loginContext';
 
 class Login extends Component {
     constructor(props) {
@@ -56,8 +57,10 @@ class Login extends Component {
                 var status=response.data.status;
                 if(status==0){
                     saveToken(token);
-                    this.props.dispatch(login());
-                    Router.push('/');
+                    //this.props.dispatch(login());
+                    //this.props.dispatch(loginSuccess());
+                   // Router.push('/');
+                    window.location.assign('/');
                 }else if(status==1){
                     const modal = Modal.error({
                         centered: true,
