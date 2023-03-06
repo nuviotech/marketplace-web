@@ -1,9 +1,9 @@
-import Repository, { baseUrl, serializeQuery,sellerProductUrl,sellerPolicyUrl } from './Repository';
+import Repository, { baseUrl, serializeQuery, marketplaceUrl } from './Repository';
 
 class ProductRepository {
     async getRecords(params) {
         const reponse = await Repository.get(
-            `${sellerProductUrl}/products?${serializeQuery(params)}`
+            `${marketplaceUrl}/products?${serializeQuery(params)}`
         )
             .then((response) => {
                 return response.data;
@@ -15,7 +15,7 @@ class ProductRepository {
 
     async getProducts(params) {
         const reponse = await Repository.get(
-            `${sellerProductUrl}/products?${serializeQuery(params)}`
+            `${marketplaceUrl}/products?${serializeQuery(params)}`
         )
             .then((response) => {
                 if (response.data && response.data.length > 0) {
@@ -35,7 +35,7 @@ class ProductRepository {
 
     async getBrands() {
         //`${baseUrl}/brands`
-        const reponse = await Repository.get(`${sellerPolicyUrl}/brands`)
+        const reponse = await Repository.get(`${marketplaceUrl}/brands`)
             .then((response) => {
                 return response.data;
             })
@@ -46,7 +46,7 @@ class ProductRepository {
 
     async getProductCategories() {
         //${baseUrl}/product-categories
-        const reponse = await Repository.get(`${sellerPolicyUrl}/product-categories`)
+        const reponse = await Repository.get(`${marketplaceUrl}/product-categories`)
             .then((response) => {
                 return response.data;
             })
@@ -56,7 +56,7 @@ class ProductRepository {
     }
 
     async getTotalRecords() {
-        const reponse = await Repository.get(`${sellerProductUrl}/products/count`)
+        const reponse = await Repository.get(`${marketplaceUrl}/products/count`)
             .then((response) => {
                 return response.data;
             })
@@ -67,7 +67,7 @@ class ProductRepository {
     
     //getProduct
     async getProductsById(payload) {
-        const reponse = await Repository.get(`${sellerProductUrl}/products/${payload}`)
+        const reponse = await Repository.get(`${marketplaceUrl}/products/${payload}`)
             .then((response) => {
                 return response.data;
             })
@@ -78,7 +78,7 @@ class ProductRepository {
 
     async getProductsByCategory(payload) {
         const reponse = await Repository.get(
-            `${sellerProductUrl}/product-categories?slug=${payload}`
+            `${marketplaceUrl}/product-categories?slug=${payload}`
         )
             .then((response) => {
                 if (response.data) {
@@ -98,7 +98,7 @@ class ProductRepository {
 
     async getProductsByBrand(payload) {
         const reponse = await Repository.get(
-            `${sellerProductUrl}/brands?slug=${payload}`
+            `${marketplaceUrl}/brands?slug=${payload}`
         )
             .then((response) => {
                 if (response.data) {
@@ -118,7 +118,7 @@ class ProductRepository {
 
     async getProductsByIds(payload) {
         //const endPoint = `${baseUrl}/products?${payload}`;
-        const endPoint = `${sellerProductUrl}/productsByIds?${payload}`;
+        const endPoint = `${marketplaceUrl}/productsByIds?${payload}`;
         const reponse = await Repository.get(endPoint)
             .then((response) => {
                 if (response.data && response.data.length > 0) {
