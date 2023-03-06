@@ -3,8 +3,8 @@ const baseDomain = 'https://nuvio.in:8443'; // API for products
 export const basePostUrl = 'https://nuvio.in:8443'; // API for post
 export const baseStoreURL = 'https://nuvio.in:8443'; // API for vendor(store)
 
-export const policyMakerUrl = "http://localhost:9001";//change the name policy maker  url
-export const marketplaceUrl = "http://localhost:8089";//marketplace api url
+export const policyMakerUrl = "https://nuviosellers.com:8003";//change the name policy maker  url
+export const marketplaceUrl = "https://nuvio.in:8004";//marketplace api url
 
 export const customHeaders = {
     Accept: 'application/json',
