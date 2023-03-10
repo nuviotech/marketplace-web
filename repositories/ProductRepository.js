@@ -1,4 +1,4 @@
-import Repository, { baseUrl, serializeQuery, marketplaceUrl } from './Repository';
+import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl } from './Repository';
 
 class ProductRepository {
     async getRecords(params) {
@@ -35,7 +35,7 @@ class ProductRepository {
 
     async getBrands() {
         //`${baseUrl}/brands`
-        const reponse = await Repository.get(`${marketplaceUrl}/brands`)
+        const reponse = await Repository.get(`${policyMakerUrl}/brands`)
             .then((response) => {
                 return response.data;
             })
@@ -46,7 +46,7 @@ class ProductRepository {
 
     async getProductCategories() {
         //${baseUrl}/product-categories
-        const reponse = await Repository.get(`${marketplaceUrl}/product-categories`)
+        const reponse = await Repository.get(`${policyMakerUrl}/product-categories`)
             .then((response) => {
                 return response.data;
             })
