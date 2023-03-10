@@ -59,7 +59,6 @@ export default function useProduct() {
                         </>
                     );
                 }*/
-               console.log(payload.images?.length+" PAYLOAD : "+JSON.stringify(payload));
                
                 if (payload.images?.length>0) {
                     return (
