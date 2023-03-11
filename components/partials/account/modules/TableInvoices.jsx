@@ -31,11 +31,11 @@ class TableInvoices extends Component {
         const tableData = [];
         this.props.data.orders?.map((data) => {
             //  var r=data.razorpayOrderDetails?.replace("\\","");
-            console.log(data.paymentDetails.rzPaymentId);
+            //console.log(data.paymentDetails.rzPaymentId);
             var obj = {
                 id: data.orderId,
                 categoryId: data.products[0].categoryId,
-                paymentId: data.paymentDetails.rzPaymentId,
+                paymentId: data.paymentDetails?.rzPaymentId,
                 invoiceId: data.orderId,
                 razorpayId: JSON.parse(data.razorpayOrderDetails)?.id,
                 title: data.productNames,
@@ -43,6 +43,7 @@ class TableInvoices extends Component {
                 amount: data.totalBill,
                 paymentStatus: data.paymentStatus,
                 status: data.orderStatus,
+                under_return_policy:data.under_return_policy
             }
             tableData.push(obj);
         })
@@ -264,10 +265,10 @@ class TableInvoices extends Component {
                         {
                             record.paymentStatus == "unpaid" ?
                                 <button onClick={() => { removeOrder(record.id) }} className="btn btn-outline-danger">Remove</button>
-                                : record.status == null ?
+                                : (record.status == null && record.under_return_policy===1) ?
                                     <button onClick={() => { openModel(record.id, record.categoryId, record.paymentId, record.amount) }} className="btn btn-outline-warning">Return</button>
                                     :
-                                    <></>
+                                    <button className='btn btn-outline-info'>under return policy</button>
                         }
                     </span>
                 ),
