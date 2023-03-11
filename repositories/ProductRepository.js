@@ -112,7 +112,7 @@ class ProductRepository {
             .catch(() => {
                 return null;
             });
-        console.log("get product by brands : "+reponse);    
+        console.log("@@@@ get product by brands : "+JSON.stringify(reponse));    
         return reponse;
     }
 

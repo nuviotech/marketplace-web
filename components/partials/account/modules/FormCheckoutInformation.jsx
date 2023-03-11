@@ -71,15 +71,17 @@ const FormCheckoutInformation = ({ ecomerce }) => {
             }
         }).then(
             async (response) => {
+                console.log("RESO : "+JSON.stringify(response));
                 const result = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
                 if (!result) {
                     alert("network issue...");
                     return;
                 }
                 const amt = totalAmount;
-                console.log("amt " + amt)
+                console.log("amt " + JSON.stringify(response.data));
                 const Razorpay_payment = response.data.RZ_order;
                 const order_ref_id = response.data.order_id;
+                console.log("order id : "+Razorpay_payment.id);
                 const options = {
                     key: response.data.rzKey,
                     currency: "INR",
