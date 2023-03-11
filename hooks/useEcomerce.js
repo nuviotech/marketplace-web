@@ -37,7 +37,7 @@ export default function useEcomerce() {
                         let cartItems = responseData;
                         payload.forEach((item) => {
                             let existItem = cartItems.find(
-                                (val) => val.id === item.id
+                                (val) => val?.id === item.id
                             );
                             if (existItem) {
                                 existItem.quantity = item.quantity;
