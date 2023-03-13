@@ -28,7 +28,7 @@ const ProductDetailVariants = ({ product }) => {
                             <ModuleDetailTopInformation product={product} />
                             <ModuleProductDetailDescription product={product} />
                             <ModuleDetailShoppingActions product={product} />
-                            <ModuleProductDetailSpecification />
+                            <ModuleProductDetailSpecification product={product} />
                             <ModuleProductDetailSharing />
                             <ModuleDetailActionsMobile />
                         </div>

@@ -43,7 +43,7 @@ class TableInvoices extends Component {
                 amount: data.totalBill,
                 paymentStatus: data.paymentStatus,
                 status: data.orderStatus,
-                under_return_policy:data.under_return_policy
+                under_return_policy:data.underReturnPolicy
             }
             tableData.push(obj);
         })
@@ -263,9 +263,10 @@ class TableInvoices extends Component {
                 render: (text, record) => (
                     <span className="text-right">
                         {
+                                                           
                             record.paymentStatus == "unpaid" ?
                                 <button onClick={() => { removeOrder(record.id) }} className="btn btn-outline-danger">Remove</button>
-                                : (record.status == null && record.under_return_policy===1) ?
+                                : (record.under_return_policy===0) ?
                                     <button onClick={() => { openModel(record.id, record.categoryId, record.paymentId, record.amount) }} className="btn btn-outline-warning">Return</button>
                                     :
                                     <button className='btn btn-outline-info'>under return policy</button>

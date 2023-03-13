@@ -71,7 +71,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
             }
         }).then(
             async (response) => {
-                console.log("RESO : "+JSON.stringify(response));
+                
                 const result = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
                 if (!result) {
                     alert("network issue...");
@@ -150,7 +150,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
             (error) => {
                 //order details is not save to database
                 alert("Something went wrong! ");
-                console.log("" + JSON.stringify(error));
+                console.log("error !!!!!!!!!!" + JSON.stringify(error));
             }
         )
     }
