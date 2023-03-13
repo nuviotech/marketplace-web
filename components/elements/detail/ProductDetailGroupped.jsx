@@ -19,12 +19,12 @@ const ProductDetailGroupped = ({ product }) => (
                 <ModuleProductDetailDescription product={product} />
                 <ModuleDetailProductGroup />
                 <ModuleDetailShoppingActions product={product} />
-                <ModuleProductDetailSpecification />
+                <ModuleProductDetailSpecification product={product} />
                 <ModuleProductDetailSharing />
                 <ModuleDetailActionsMobile />
             </div>
         </div>
-        <DefaultDescription />
+        <DefaultDescription product={product} />
     </div>
 );
 
