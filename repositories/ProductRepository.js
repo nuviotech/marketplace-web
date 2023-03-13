@@ -2,6 +2,7 @@ import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl } f
 
 class ProductRepository {
     async getRecords(params) {
+       // alert(JSON.stringify(params));
         const reponse = await Repository.get(
             `${marketplaceUrl}/products?${serializeQuery(params)}`
         )
@@ -9,7 +10,7 @@ class ProductRepository {
                 return response.data;
             })
             .catch((error) => ({ error: JSON.stringify(error) }));
-          console.log("get Recorder quesry: products?  : "+JSON.stringify(response) );
+          //console.log("get Recorder quesry: products?  : "+JSON.stringify(response) );
         return reponse;
     }
 

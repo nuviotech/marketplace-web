@@ -19,12 +19,12 @@ const ProductDetailSidebar = ({ product }) => (
                     product={product}
                     extended={true}
                 />
-                <ModuleProductDetailSpecification />
+                <ModuleProductDetailSpecification product={product} />
                 <ModuleProductDetailSharing />
                 <ModuleDetailActionsMobile />
             </div>
         </div>
-        <DefaultDescription />
+        <DefaultDescription product={product} />
     </div>
 );
 

@@ -15,12 +15,12 @@ const ProductDetailVideoFeatured = ({ product }) => (
                 <ModuleDetailTopInformation product={product} />
                 <ModuleProductDetailDescription product={product} />
                 <ModuleDetailShoppingActions product={product} />
-                <ModuleProductDetailSpecification />
+                <ModuleProductDetailSpecification  product={product} />
                 <ModuleProductDetailSharing />
                 <ModuleDetailActionsMobile />
             </div>
         </div>
-        <DefaultDescription />
+        <DefaultDescription product={product} />
     </div>
 );
 
