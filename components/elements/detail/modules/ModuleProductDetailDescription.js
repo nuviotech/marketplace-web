@@ -13,7 +13,7 @@ const ModuleProductDetailDescription = ({ product }) => (
             </Link>
         </p>
         <ul className="ps-list--dot">
-            {product.bulletpoints.split("##")?.map(item => {return(<li>{item}</li>)})}
+            {product?.bulletpoints?.split("##")?.map(item => {return(<li>{item}</li>)})}
         </ul>
     </div>
 );
