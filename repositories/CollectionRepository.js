@@ -7,14 +7,19 @@ class CollectionRepository {
             `${baseUrl}/collections?slug_in=${slug}`
         )
             .then((response) => {
+                console.log("getProductByCollections :  "+slug)
                 if (response.data && response.data.length > 0) {
+
                     return { items: response.data[0].products };
                 } else {
+                    console.log("empty");
                     return null;
+
                 }
                 return response.data;
             })
             .catch((error) => {
+                alert("error : "+error);
                 console.log(JSON.stringify(error));
                 return null;
             });

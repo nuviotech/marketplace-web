@@ -1,14 +1,14 @@
 import axios from 'axios';
-const baseDomain = 'https://nuvio.in:8443'; // API for products
-export const basePostUrl = 'https://nuvio.in:8443'; // API for post
-export const baseStoreURL = 'https://nuvio.in:8443'; // API for vendor(store)
+const baseDomain = 'http://localhost:1337'; // API for products
+export const basePostUrl = 'http://localhost:1337'; // API for post
+export const baseStoreURL = 'http://localhost:1337'; // API for vendor(store)
 
 export const policyMakerUrl = "http://localhost:9001";//change the name policy maker  url
 export const marketplaceUrl = "http://localhost:8089";//marketplace api url
 
 export const customHeaders = {
     Accept: 'application/json',
-    'Access-Control-Allow-Origin': 'https://manageecom.com:8001,https://manageecom.com:8003,https://manageecom.com:8004'
+   // 'Access-Control-Allow-Origin': 'https://manageecom.com:8001,https://manageecom.com:8003,https://manageecom.com:8004'
 };
 
 export const baseUrl = `${baseDomain}`;
