@@ -69,6 +69,7 @@ const HomeDefaultBanner = () => {
             </Slider>
         );
     }
+    
     return (
         <div className="ps-home-banner ps-home-banner--1">
             <div className="ps-container">
