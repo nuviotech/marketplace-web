@@ -107,9 +107,10 @@ const ProductGroupByCarousel = ({
     let productItemsView;
     if (!loading) {
         if (productItems && productItems.length > 0) {
-            const slideItems = productItems.map((item) => (
-                <Product product={item} key={item.id} />
-            ));
+            const slideItems = productItems.map((item) => {
+                if(item!==null)
+                    {return <Product product={item} key={item?.product_ref_id} />}
+        });
             if (layout !== 'standard') {
                 productItemsView = (
                     <Slider

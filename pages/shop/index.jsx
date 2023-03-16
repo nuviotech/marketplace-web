@@ -41,10 +41,14 @@ const ShopDefaultPage = () => {
                                 collectionSlug="shop-best-seller-items"
                                 title="Best Sale Items"
                             />
-                            <ProductGroupByCarousel
+                            {  // recommended 
+                                /*
+                                <ProductGroupByCarousel
                                 collectionSlug="shop-recommend-items"
                                 title="Recommended Items"
-                            />
+                                />
+                                */
+                            }
                             <ShopItems columns={6} ize={18} />
                         </div>
                     </div>

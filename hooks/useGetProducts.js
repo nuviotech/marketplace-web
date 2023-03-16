@@ -25,7 +25,16 @@ export default function useGetProducts() {
             setLoading(true);
             const responseData = await getProductsByCollectionHelper(payload);
             if (responseData) {
-                setProductItems(responseData.items);
+                //console.log("responseData : "+JSON.stringify(responseData.items));
+                var pQuery="";
+                responseData.items.map((item) => {
+                    pQuery=pQuery+"id_in="+item.product_ref_id+"&"
+                });
+                if(pQuery.length>1)
+                var data=await ProductRepository.getProductsByIds(pQuery);
+                //console.log("DATA : "+data);
+                //setProductItems(responseData.items);
+                setProductItems(data);
                 setTimeout(
                     function () {
                         setLoading(false);
