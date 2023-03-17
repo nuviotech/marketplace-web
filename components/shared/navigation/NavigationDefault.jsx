@@ -41,12 +41,12 @@ class NavigationDefault extends Component {
                                     <a>Tract your order</a>
                                 </Link>
                             </li>
+                            {/*
                             <li>
                                 <CurrencyDropdown />
-                            </li>
-                            <li>
-                                <LanguageSwicher />
-                            </li>
+                            </li> <li>
+                                <CurrencyDropdown />
+                            </li>*/}
                         </ul>
                     </div>
                 </div>
