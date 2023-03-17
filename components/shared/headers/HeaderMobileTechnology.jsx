@@ -20,7 +20,7 @@ class HeaderMobileTechnology extends Component {
                         <ul className="navigation__extra">
                             <li>
                                 <Link href="/vendor/become-a-vendor">
-                                    <a>Sell on Martfury</a>
+                                    <a>Sell on Nuvio</a>
                                 </Link>
                             </li>
                             <li>
@@ -28,12 +28,13 @@ class HeaderMobileTechnology extends Component {
                                     <a>Tract your order</a>
                                 </Link>
                             </li>
-                            <li>
+                           { /*<li>
                                 <CurrencyDropdown />
                             </li>
                             <li>
                                 <LanguageSwicher />
                             </li>
+                            */}
                         </ul>
                     </div>
                 </div>

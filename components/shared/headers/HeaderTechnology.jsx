@@ -64,7 +64,7 @@ const HeaderTechnology = () => {
                             SHOPPING CENTER
                             <strong className="ml-1">
                                 {' '}
-                                for all orders over $100
+                                for all orders over 100 rs
                             </strong>
                         </p>
                     </div>
@@ -80,12 +80,7 @@ const HeaderTechnology = () => {
                                     <a>Track Your Order</a>
                                 </Link>
                             </li>
-                            <li>
-                                <CurrencyDropdown />
-                            </li>
-                            <li>
-                                <LanguageSwicher />
-                            </li>
+                           
                         </ul>
                     </div>
                 </div>
