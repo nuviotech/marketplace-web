@@ -77,14 +77,14 @@ export default function useProduct() {
         },
         price: (payload) => {
             let view;
-            if (payload.sale_price) {
+            if (payload?.sale_price) {
                 view = (
                     <p className="ps-product__price sale">
                         <span>&#8377;</span>
-                        {formatCurrency(payload.sale_price)}
+                        {formatCurrency(payload?.sale_price)}
                         <del className="ml-2">
                             <span>&#8377;</span>
-                            {formatCurrency(payload.price)}
+                            {formatCurrency(payload?.price)}
                         </del>
                     </p>
                 );
@@ -92,7 +92,7 @@ export default function useProduct() {
                 view = (
                     <p className="ps-product__price">
                         <span>&#8377;</span>
-                        {formatCurrency(payload.price)}
+                        {formatCurrency(payload?.price)}
                     </p>
                 );
             }
@@ -100,7 +100,7 @@ export default function useProduct() {
         },
         badges: (payload) => {
             let view = null;
-            if (payload.badges && payload.badges.length > 0) {
+            if (payload?.badges && payload?.badges?.length > 0) {
                 const items = payload.badges.map((item) => {
                     if (item.value === 'hot') {
                         return (
@@ -136,8 +136,9 @@ export default function useProduct() {
         },
         badge: (payload) => {
             let view;
-            if (payload.badge && payload.badge !== null) {
-                view = payload.badge.map((badge) => {
+            
+            if (payload?.badge && payload?.badge !== null) {
+                view = payload?.badge.map((badge) => {
                     if (badge.type === 'sale') {
                         return (
                             <div className="ps-product__badge">
@@ -159,7 +160,7 @@ export default function useProduct() {
                     }
                 });
             }
-            if (payload.sale_price) {
+            if (payload?.sale_price) {
                 const discountPercent = (
                     ((payload.price - payload.sale_price) /
                         payload.sale_price) *
@@ -170,10 +171,11 @@ export default function useProduct() {
                 );
             }
             return view;
+        
         },
         brand: (payload) => {
             let view;
-            if (payload.brands && payload.brands.length > 0) {
+            if (payload?.brands && payload?.brands?.length > 0) {
                 view = (
                     <Link href="/shop">
                         <a className="text-capitalize">
@@ -192,8 +194,8 @@ export default function useProduct() {
         },
         title: (payload) => {
             let view = (
-                <Link href="/product/[pid]" as={`/product/${payload.id}`}>
-                    <a className="ps-product__title">{payload.title}</a>
+                <Link href="/product/[pid]" as={`/product/${payload?.id}`}>
+                    <a className="ps-product__title">{payload?.title}</a>
                 </Link>
             );
             return view;

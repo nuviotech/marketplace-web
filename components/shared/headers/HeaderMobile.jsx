@@ -12,7 +12,7 @@ class HeaderMobile extends Component {
     render() {
         return (
             <header className="header header--mobile">
-                <div className="header__top">
+                {/*<div className="header__top">
                     <div className="header__left">
                         <p>Welcome to Martfury Online Shopping Store !</p>
                     </div>
@@ -36,7 +36,7 @@ class HeaderMobile extends Component {
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>*/}
                 <div className="navigation--mobile">
                     <div className="navigation__left">
                         <Link href="/">

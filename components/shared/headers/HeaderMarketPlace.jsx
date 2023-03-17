@@ -36,12 +36,7 @@ const HeaderMarketPlace = () => {
                                     <a>Track Your Order</a>
                                 </Link>
                             </li>
-                            <li>
-                                <CurrencyDropdown />
-                            </li>
-                            <li>
-                                <LanguageSwicher />
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
