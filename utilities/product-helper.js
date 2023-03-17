@@ -59,9 +59,9 @@ export function StrapiProductPriceExpanded(product) {
     if (product.is_sale === true) {
         view = (
             <p className="ps-product__price sale">
-                ${formatCurrency(product.price)}
+                ₹{formatCurrency(product.price)}
                 <del className="ml-2">
-                    ${formatCurrency(product.sale_price)}
+                    ₹{formatCurrency(product.sale_price)}
                 </del>
                 <small>18% off</small>
             </p>
@@ -69,7 +69,7 @@ export function StrapiProductPriceExpanded(product) {
     } else {
         view = (
             <p className="ps-product__price">
-                ${formatCurrency(product.price)}
+                ₹{formatCurrency(product.price)}
             </p>
         );
     }
