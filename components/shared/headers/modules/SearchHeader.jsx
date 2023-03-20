@@ -115,7 +115,7 @@ const SearchHeader = () => {
         );
     }
 
-    selectOptionView = categoriesArray.map((option) => (
+    selectOptionView = categoriesArray?.map((option) => (
         <option value={option.name} key={option.categoryId}>
             {option.name}
         </option>
