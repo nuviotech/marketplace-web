@@ -5,64 +5,7 @@ import { Spin } from 'antd';
 import ProductRepository from '~/repositories/ProductRepository';
 import ProductSearchResult from '~/components/elements/products/ProductSearchResult';
 
-const exampleCategories = [
-    'All',
-    'Babies & Moms',
-    'Books & Office',
-    'Cars & Motocycles',
-    'Clothing & Apparel',
-    ' Accessories',
-    'Bags',
-    'Kid’s Fashion',
-    'Mens',
-    'Shoes',
-    'Sunglasses',
-    'Womens',
-    'Computers & Technologies',
-    'Desktop PC',
-    'Laptop',
-    'Smartphones',
-    'Consumer Electrics',
-    'Air Conditioners',
-    'Accessories',
-    'Type Hanging Cell',
-    'Audios & Theaters',
-    'Headphone',
-    'Home Theater System',
-    'Speakers',
-    'Car Electronics',
-    'Audio & Video',
-    'Car Security',
-    'Radar Detector',
-    'Vehicle GPS',
-    'Office Electronics',
-    'Printers',
-    'Projectors',
-    'Scanners',
-    'Store & Business',
-    'Refrigerators',
-    'TV Televisions',
-    '4K Ultra HD TVs',
-    'LED TVs',
-    'OLED TVs',
-    'Washing Machines',
-    'Type Drying Clothes',
-    'Type Horizontal',
-    'Type Vertical',
-    'Garden & Kitchen',
-    'Cookware',
-    'Decoration',
-    'Furniture',
-    'Garden Tools',
-    'Home Improvement',
-    'Powers And Hand Tools',
-    'Utensil & Gadget',
-    'Health & Beauty',
-    'Equipments',
-    'Hair Care',
-    'Perfumer',
-    'Wine Cabinets',
-];
+
 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -88,6 +31,9 @@ const SearchHeader = () => {
     const [loading, setLoading] = useState(false);
     const debouncedSearchTerm = useDebounce(keyword, 300);
 
+    const [categoriesArray,setCategoriesArray] =useState(['all']);
+    const [fetchCat,setfetchCat] = useState(true);
+
     function handleClearKeyword() {
         setKeyword('');
         setIsSearch(false);
@@ -99,7 +45,7 @@ const SearchHeader = () => {
         Router.push(`/search?keyword=${keyword}`);
     }
 
-    useEffect(() => {
+    useEffect(async() => {
         if (debouncedSearchTerm) {
             setLoading(true);
             if (keyword) {
@@ -123,6 +69,11 @@ const SearchHeader = () => {
         } else {
             setLoading(false);
             setIsSearch(false);
+        }
+    
+        if(fetchCat){
+            setCategoriesArray(await ProductRepository?.getProductCategories());
+            setfetchCat(false);
         }
     }, [debouncedSearchTerm]);
 
@@ -164,9 +115,9 @@ const SearchHeader = () => {
         );
     }
 
-    selectOptionView = exampleCategories.map((option) => (
-        <option value={option} key={option}>
-            {option}
+    selectOptionView = categoriesArray.map((option) => (
+        <option value={option.name} key={option.categoryId}>
+            {option.name}
         </option>
     ));
 

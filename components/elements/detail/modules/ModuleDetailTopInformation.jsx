@@ -31,7 +31,10 @@ const ModuleDetailTopInformation = ({ product }) => {
                     <span>(1 review)</span>
                 </div>
             </div>
-            {priceView}
+            <div> 
+                    {priceView}
+                M.R.P.: <del>&#8377;{product.price}</del> 
+            </div>
         </header>
     );
 };
