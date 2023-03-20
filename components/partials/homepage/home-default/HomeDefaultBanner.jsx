@@ -76,11 +76,11 @@ const HomeDefaultBanner = () => {
                 <div className="ps-section__left">{mainCarouselView}</div>
                 <div className="ps-section__right">
                     <Promotion
-                        link="/shop"
+                        link={promotion1?.link}
                         image={promotion1 ? promotion1.image : null}
                     />
                     <Promotion
-                        link="/shop"
+                        link={promotion2?.link}
                         image={promotion2 ? promotion2.image : null}
                     />
                 </div>

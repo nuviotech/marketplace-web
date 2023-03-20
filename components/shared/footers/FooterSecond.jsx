@@ -15,7 +15,7 @@ const FooterSecond = ({ classes }) => (
                                     </h4>
                                     <ul className="ps-list--link">
                                         <li>
-                                            <Link href="/page/blank">
+                                            <Link href="/page/policy">
                                                 <a>Policy</a>
                                             </Link>
                                         </li>

@@ -6,16 +6,15 @@ const ModuleDetailTopInformation = ({ product }) => {
     // Views
     let priceView;
 
-    if (product.is_sale) {
+    
+    
         priceView = (
             <h4 className="ps-product__price sale">
-                <del className="mr-2">&#8377;{product.sale_price}</del>&#8377;
-                {product.price}
+                <del className="mr-2">&#8377;{product.price}</del>&#8377;
+                {product.sale_price}
             </h4>
         );
-    } else {
-        priceView = <h4 className="ps-product__price">&#8377;{product.price}</h4>;
-    }
+    
     return (
         <header>
             <h1>{product.title}</h1>
@@ -32,8 +31,7 @@ const ModuleDetailTopInformation = ({ product }) => {
                 </div>
             </div>
             <div> 
-                    {priceView}
-                M.R.P.: <del>&#8377;{product.price}</del> 
+                    {priceView} 
             </div>
         </header>
     );
