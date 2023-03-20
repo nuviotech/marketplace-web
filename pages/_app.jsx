@@ -44,7 +44,7 @@ function App({ Component, pageProps }) {
                     <meta name="author" content="nouthemes" />
                     <meta
                         name="keywords"
-                        content="Martfury, React, eCommerce, Template"
+                        content="Nuvio,nuvio sellers , eCommerce, Template"
                     />
                     <meta
                         name="description"
