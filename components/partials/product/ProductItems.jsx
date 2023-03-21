@@ -52,6 +52,7 @@ const ProductItems = ({ products, columns = 4 }) => {
 
     // Views
     let productItemsView;
+    //console.warn("productItems : "+productItems)
     if (!loading) {
         if (productItems && productItems.length > 0) {
             if (listView) {

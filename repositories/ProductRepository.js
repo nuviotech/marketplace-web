@@ -2,7 +2,7 @@ import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl } f
 
 class ProductRepository {
     async getRecords(params) {
-       // alert(JSON.stringify(params));
+        alert(JSON.stringify(params));
         const reponse = await Repository.get(
             `${marketplaceUrl}/products?${serializeQuery(params)}`
         )
@@ -15,6 +15,7 @@ class ProductRepository {
     }
 
     async getProducts(params) {
+        console.log("param : "+JSON.stringify(params))
         const reponse = await Repository.get(
             `${marketplaceUrl}/products?${serializeQuery(params)}`
         )
@@ -30,7 +31,7 @@ class ProductRepository {
                 console.log(JSON.stringify(error));
                 return null;
             });
-        console.log(serializeQuery(params)+" *****get all products : "+JSON.stringify(reponse));    
+        //console.log(serializeQuery(params)+" *****get all products : "+JSON.stringify(reponse));    
         return reponse;
     }
 
@@ -52,7 +53,7 @@ class ProductRepository {
                 return response.data;
             })
             .catch((error) => ({ error: JSON.stringify(error) }));
-        console.log("get all categorys are call. : "+JSON.stringify(reponse));
+        //console.log("get all categorys are call. : "+JSON.stringify(reponse));
         return reponse;
     }
 
@@ -62,7 +63,7 @@ class ProductRepository {
                 return response.data;
             })
             .catch((error) => ({ error: JSON.stringify(error) }));
-        console.log("total record call "+JSON.stringify(reponse));    
+        //console.log("total record call "+JSON.stringify(reponse));    
         return reponse;
     }
     
@@ -73,7 +74,7 @@ class ProductRepository {
                 return response.data;
             })
             .catch((error) => ({ error: JSON.stringify(error) }));
-        console.log("get product by id : "+JSON.stringify(reponse));
+        //console.log("get product by id : "+JSON.stringify(reponse));
         return reponse;
     }
 
@@ -93,7 +94,7 @@ class ProductRepository {
             .catch(() => {
                 return null;
             });
-        console.log("getProductsByCategory "+JSON.stringify(reponse));
+        //console.log("getProductsByCategory "+JSON.stringify(reponse));
         return reponse;
     }
 
@@ -102,9 +103,11 @@ class ProductRepository {
             `${marketplaceUrl}/brands?slug=${payload}`
         )
             .then((response) => {
+                console.warn(JSON.stringify(response.data))
                 if (response.data) {
                     if (response.data.length > 0) {
-                        return response.data[0];
+                        console.log("brd;  "+response.data[0])
+                        return response.data;
                     }
                 } else {
                     return null;
@@ -113,7 +116,7 @@ class ProductRepository {
             .catch(() => {
                 return null;
             });
-        console.log("@@@@ get product by brands : "+JSON.stringify(reponse));    
+        console.log("@@@@ get product by brands : "+reponse);    
         return reponse;
     }
 
@@ -133,7 +136,7 @@ class ProductRepository {
                 return null;
             });
 
-        console.log("getproductByIds (payload): "+payload);
+       // console.log("getproductByIds (payload): "+payload);
         return reponse;
     }
 }
