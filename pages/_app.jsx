@@ -21,6 +21,8 @@ import '~/scss/electronic.scss';
 import Head from 'next/head';
 import { AuthContext, AuthContextProvider } from '~/context/loginContext';
 import { useContext } from 'react';
+import SEO from "@bradgarropy/next-seo"
+
 function App({ Component, pageProps }) {
     useEffect(() => {
         setTimeout(function () {
@@ -28,11 +30,11 @@ function App({ Component, pageProps }) {
         }, 100);
     });
 
-    
+
     return (
         <>
             <AuthContextProvider>
-                <Head>
+                {/*<Head>
                     <title>Nuvio Sellers</title>
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                     <meta
@@ -41,7 +43,7 @@ function App({ Component, pageProps }) {
                     />
                     <meta name="format-detection" content="telephone=no" />
                     <meta name="apple-mobile-web-app-capable" content="yes" />
-                    <meta name="author" content="nouthemes" />
+                   {/* <meta name="author" content="nuvio" />
                     <meta
                         name="keywords"
                         content="Nuvio,nuvio sellers , eCommerce, Template"
@@ -50,9 +52,20 @@ function App({ Component, pageProps }) {
                         name="description"
                         content="Nuvio sellers | eCommerce"
                     />
+    </Head>*/}
+                <Head>
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1.0"
+                    />
+                    <meta name="format-detection" content="telephone=no" />
+                    <meta name="apple-mobile-web-app-capable" content="yes" />
                 </Head>
+                <SEO title="Nuvio Sellers" description="Nuvio sellers | eCommerce" keywords={["Nuvio", "nuvio sellers", "ecommerce"]} />
                 <CookiesProvider>
                     <MasterLayout>
+                        
                         <Component {...pageProps} />
                     </MasterLayout>
                 </CookiesProvider>

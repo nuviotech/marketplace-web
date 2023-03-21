@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Link from 'next/link';
 import Rating from '~/components/elements/Rating';
+import SEO from "@bradgarropy/next-seo"
+import Head from 'next/head';
 
-const ModuleDetailTopInformation = ({ product }) => {
+const ModuleDetailTopInformation = ({props ,product }) => {
     // Views
     let priceView;
+    var description = "Nuvio Seller | "+product.title+" | price : "+product.sale_price;
 
-    
     
         priceView = (
             <h4 className="ps-product__price sale">
@@ -14,8 +16,16 @@ const ModuleDetailTopInformation = ({ product }) => {
                 {product.sale_price}
             </h4>
         );
+
     
     return (
+        <>
+
+        
+            <SEO title={product.title} description={description} icon={product.images[0].url} />
+            
+        
+
         <header>
             <h1>{product.title}</h1>
             <div className="ps-product__meta">
@@ -27,13 +37,14 @@ const ModuleDetailTopInformation = ({ product }) => {
                 </p>
                 <div className="ps-product__rating">
                     <Rating />
-                    <span>(1 review)</span>
+                    <span>(2 review)</span>
                 </div>
             </div>
             <div> 
                     {priceView} 
             </div>
         </header>
+        </>
     );
 };
 
