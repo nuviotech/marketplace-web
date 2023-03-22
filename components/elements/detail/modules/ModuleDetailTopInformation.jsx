@@ -20,12 +20,7 @@ const ModuleDetailTopInformation = ({props ,product }) => {
     
     return (
         <>
-
-        
             <SEO title={product.title} description={description} icon={product.images[0].url} />
-            
-        
-
         <header>
             <h1>{product.title}</h1>
             <div className="ps-product__meta">

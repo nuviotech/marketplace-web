@@ -20,8 +20,8 @@ const FooterSecond = ({ classes }) => (
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/page/blank">
-                                                <a>Term & Condition</a>
+                                            <Link href="/page/terms_of_service">
+                                                <a>Term Of Service</a>
                                             </Link>
                                         </li>
                                         <li>

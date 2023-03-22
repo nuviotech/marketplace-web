@@ -46,13 +46,13 @@ const FooterWidgets = () => (
                 </li>
 
                 <li>
-                    <Link href="/page/blank">
-                        <a>Term & Condition</a>
+                    <Link href="/page/terms_of_service">
+                        <a>Terms Of Service</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href="/page/blank">
-                        <a>Shipping</a>
+                    <Link href="/page/return_policy">
+                        <a>Return Policy</a>
                     </Link>
                 </li>
                 <li>
