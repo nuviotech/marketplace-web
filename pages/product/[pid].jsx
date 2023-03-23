@@ -12,16 +12,25 @@ import HeaderDefault from '~/components/shared/headers/HeaderDefault';
 import PageContainer from '~/components/layouts/PageContainer';
 import Newletters from '~/components/partials/commons/Newletters';
 import HeaderMobileProduct from '~/components/shared/header-mobile/HeaderMobileProduct';
+import SEO from "@bradgarropy/next-seo"
 
-const ProductDefaultPage = () => {
+const ProductDefaultPage = ({ responseData }) => {
     const router = useRouter();
     const { pid } = router.query;
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(false);
+    //alert(responseData.keyWords)
+    const title=responseData.title;
+    const keyWords=[];
+    responseData?.keywords?.split(",").map((item)=>keyWords.push(item))
+    console.warn(keyWords);
+    const description = responseData?.title+" | price : "+responseData?.sale_price;
+    
+
 
     async function getProduct(pid) {
         setLoading(true);
-        const responseData = await ProductRepository.getProductsById(pid);
+        //const responseData = await ProductRepository.getProductsById(pid);
         if (responseData) {
             setProduct(responseData);
             setTimeout(
@@ -74,29 +83,65 @@ const ProductDefaultPage = () => {
     }
 
     return (
-        <PageContainer
-            header={headerView}
-            title={product ? product.title : 'Loading...'}>
-            <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
-            <div className="ps-page--product">
-                <div className="ps-container">
-                    <div className="ps-page__container">
-                        <div className="ps-page__left">{productView}</div>
-                        <div className="ps-page__right">
-                            <ProductWidgets />
-                        </div>
-                    </div>
+        <>
+            <SEO title={title} description={description} keywords={keyWords} icon={responseData?.images[0].url} />
 
-                    <CustomerBought
-                        layout="fullwidth"
-                        collectionSlug="deal-of-the-day"
-                    />
-                    <RelatedProduct collectionSlug="shop-recommend-items" />
+            <PageContainer
+                header={headerView}
+                title={responseData ? responseData.title : 'Loading...'}>
+                <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
+
+                <div className="ps-page--product">
+                    <div className="ps-container">
+                        <div className="ps-page__container">
+                            <div className="ps-page__left">{productView}</div>
+                            <div className="ps-page__right">
+                                <ProductWidgets />
+                            </div>
+                        </div>
+
+                        <CustomerBought
+                            layout="fullwidth"
+                            collectionSlug="deal-of-the-day"
+                        />
+                        <RelatedProduct collectionSlug="shop-recommend-items" />
+                    </div>
                 </div>
-            </div>
-            <Newletters />
-        </PageContainer>
+                <Newletters />
+            </PageContainer>
+        </>
     );
 };
+
+
+export async function getStaticPaths() {
+    const responseData = await ProductRepository.getAllProducts();
+    const data = responseData;
+    console.log(data);
+    const paths = data.map((item) => {
+        console.log(item.id);
+        return {
+            params: {
+                pid: item.id.toString()
+            }
+        }
+    })
+    return {
+        paths,
+        fallback: false
+    }
+}
+
+export async function getStaticProps(context) {
+    const { params } = context;
+    const responseData = await ProductRepository.getProductsById(params.pid);
+
+    return {
+        props: {
+            responseData
+        }
+    }
+}
+
 
 export default ProductDefaultPage;

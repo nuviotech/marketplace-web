@@ -1,6 +1,19 @@
 import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl } from './Repository';
 
 class ProductRepository {
+
+    //this method helps of SSG (Static side generation) SSR
+    async getAllProducts() {
+        const reponse = await Repository.get(
+            `${marketplaceUrl}/getAllProducts`
+        )
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => ({ error: JSON.stringify(error) }));
+        return reponse;
+    }
+
     async getRecords(params) {
         alert(JSON.stringify(params));
         const reponse = await Repository.get(
