@@ -22,6 +22,7 @@ const ShopDefaultPage = () => {
         },
     ];
 
+    
     return (
         <PageContainer title="Shop">
             <div className="ps-page--shop">

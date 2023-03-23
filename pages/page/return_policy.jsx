@@ -4,6 +4,7 @@ import FooterDefault from '~/components/shared/footers/FooterDefault';
 import Newletters from '~/components/partials/commons/Newletters';
 import PageContainer from '~/components/layouts/PageContainer';
 import Return_policy from '~/components/partials/page/Return_policy';
+import SEO from "@bradgarropy/next-seo"
 
 
 const return_policy = () => {
@@ -18,7 +19,9 @@ const return_policy = () => {
     ];
 
     return (
-        <PageContainer footer={<FooterDefault />} title="Blank page">
+        <PageContainer footer={<FooterDefault />} title="Return Policy">
+            <SEO title="Return Policy" description="Return Policy" keywords={["Nuvio, nuvio seller, Return Policy"]} />
+
             <div className="ps-page--single">
                 <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
                 <Return_policy />
