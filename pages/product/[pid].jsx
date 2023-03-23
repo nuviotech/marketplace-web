@@ -13,6 +13,8 @@ import PageContainer from '~/components/layouts/PageContainer';
 import Newletters from '~/components/partials/commons/Newletters';
 import HeaderMobileProduct from '~/components/shared/header-mobile/HeaderMobileProduct';
 import SEO from "@bradgarropy/next-seo"
+import axios from 'axios';
+import { marketplaceUrl } from '~/repositories/Repository';
 
 const ProductDefaultPage = ({ responseData }) => {
     const router = useRouter();
@@ -20,12 +22,12 @@ const ProductDefaultPage = ({ responseData }) => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(false);
     //alert(responseData.keyWords)
-    const title=responseData.title;
-    const keyWords=[];
-    responseData?.keywords?.split(",").map((item)=>keyWords.push(item))
+    const title = responseData.title;
+    const keyWords = [];
+    responseData?.keywords?.split(",").map((item) => keyWords.push(item))
     console.warn(keyWords);
-    const description = responseData?.title+" | price : "+responseData?.sale_price;
-    
+    const description = responseData?.title + " | price : " + responseData?.sale_price;
+
 
 
     async function getProduct(pid) {
@@ -115,7 +117,15 @@ const ProductDefaultPage = ({ responseData }) => {
 
 
 export async function getStaticPaths() {
-    const responseData = await ProductRepository.getAllProducts();
+    // const responseData = await ProductRepository.getAllProducts();
+    const responseData = await axios.get(
+        `${marketplaceUrl}/getAllProducts`
+    )
+        .then((response) => {
+            return response.data;
+        })
+        .catch((error) => ({ error: JSON.stringify(error) }));
+
     const data = responseData;
     console.log(data);
     const paths = data.map((item) => {
