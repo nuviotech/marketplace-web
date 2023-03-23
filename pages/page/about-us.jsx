@@ -6,6 +6,7 @@ import AboutAwards from '~/components/partials/page/about-us/AboutAwards';
 import FooterDefault from '~/components/shared/footers/FooterDefault';
 import Newletters from '~/components/partials/commons/Newletters';
 import PageContainer from '~/components/layouts/PageContainer';
+import SEO from "@bradgarropy/next-seo"
 
 const AboutUsPage = () => {
     const breadCrumb = [
@@ -18,7 +19,10 @@ const AboutUsPage = () => {
         },
     ];
     return (
+
         <PageContainer footer={<FooterDefault />} title="About Us">
+        <SEO title="About Us" description="About Us" keywords={["Nuvio, nuvio seller, About us"]} />
+
             <div className="ps-page--single">
                 <img src="/static/img/bg/about-us.jpg" alt="" />
                 <BreadCrumb breacrumb={breadCrumb} />

@@ -6,6 +6,7 @@ import ContactMap from '~/components/partials/page/ContactMap';
 import FooterDefault from '~/components/shared/footers/FooterDefault';
 import PageContainer from '~/components/layouts/PageContainer';
 import Newletters from '~/components/partials/commons/Newletters';
+import SEO from "@bradgarropy/next-seo"
 
 const ContactUsPage = () => {
     const breadCrumb = [
@@ -20,6 +21,8 @@ const ContactUsPage = () => {
 
     return (
         <PageContainer footer={<FooterDefault />} title="Contact Us">
+            <SEO title="Contact Us" description="Contact Us" keywords={["Nuvio, nuvio seller,Contact us"]} />
+
             <div className="ps-page--single" id="contact-us">
                 <BreadCrumb breacrumb={breadCrumb} />
                 <ContactMap />
