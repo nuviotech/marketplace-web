@@ -56,8 +56,8 @@ const FooterWidgets = () => (
                     </Link>
                 </li>
                 <li>
-                    <Link href="/page/blank">
-                        <a>Return</a>
+                    <Link href="/page/privacy_policy">
+                        <a>Privacy Policy</a>
                     </Link>
                 </li>
                 <li>
