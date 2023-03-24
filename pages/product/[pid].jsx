@@ -16,6 +16,7 @@ import SEO from "@bradgarropy/next-seo"
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
 import ResponseCache from 'next/dist/server/response-cache';
+import Head from 'next/head';
 
 const ProductDefaultPage = ({ responseData }) => {
     const router = useRouter();
@@ -87,6 +88,19 @@ const ProductDefaultPage = ({ responseData }) => {
 
     return (
         <>
+            <Head>
+            <link rel="shortcut icon" href={responseData?.images[0].url} />
+                <link rel="icon" href={responseData?.images[0].url} sizes="32x32" />
+                <link
+                    rel="icon"
+                    href={responseData?.images[0].url}
+                    sizes="192x192"
+                />
+                <link
+                    rel="apple-touch-icon-precomposed"
+                    href={responseData?.images[0].url}
+                />
+            </Head>
             <SEO title={title} description={description} keywords={keyWords} icon={responseData?.images[0].url} />
 
             <PageContainer

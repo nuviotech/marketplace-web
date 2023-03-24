@@ -7,7 +7,7 @@ export default function Document() {
     return (
         <Html>
             <Head>
-                <link rel="shortcut icon" href={'/static/img/.png'} />
+                {/*<link rel="shortcut icon" href={'/static/img/.png'} />
                 <link rel="icon" href={'/static/img/nuvioseller.png'} sizes="32x32" />
                 <link
                     rel="icon"
@@ -18,7 +18,7 @@ export default function Document() {
                     rel="apple-touch-icon-precomposed"
                     href={'/static/img/nuvioseller.png'}
                 />
-
+    */}
                 <link
                     href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700&amp;amp;subset=latin-ext"
                     rel="stylesheet"
