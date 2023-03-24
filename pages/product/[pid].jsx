@@ -117,29 +117,40 @@ const ProductDefaultPage = ({ responseData }) => {
 
 
 export async function getStaticPaths() {
-    // const responseData = await ProductRepository.getAllProducts();
-    const responseData = await axios.get(
-        `${marketplaceUrl}/getAllProducts`
-    )
-        .then((response) => {
-            return response.data;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
+    try {
 
-    const data = responseData;
-    console.log(data);
-    const paths = data.map((item) => {
-        console.log(item);
-        return {
-            params: {
-                pid: item.toString()
-            }
+        const responseData = await axios.get(
+            `${marketplaceUrl}/getAllProducts`
+        )
+            .then((response) => {
+                return response.data;
+            })
+            .catch((error) => ({ error: JSON.stringify(error) }));
+
+        const data = responseData;
+        console.log("DATA :->: " + JSON.stringify(responseData));
+        var paths = [];
+        if (data.length !== 0) {
+            paths = data?.map((item) => {
+                console.log(item);
+                return {
+                    params: {
+                        pid: item.toString()
+                    }
+                }
+            })
+        } else {
+            console.log("empty array..............");
+
         }
-    })
-    return {
-        paths,
-        fallback: false
+        return {
+            paths,
+            fallback: false
+        }
+    }catch(error){
+        console.log("!!!! ERROR HAPPEN : "+error);
     }
+    
 }
 
 export async function getStaticProps(context) {
