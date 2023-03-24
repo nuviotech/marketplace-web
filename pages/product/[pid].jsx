@@ -129,10 +129,10 @@ export async function getStaticPaths() {
     const data = responseData;
     console.log(data);
     const paths = data.map((item) => {
-        console.log(item.id);
+        console.log(item);
         return {
             params: {
-                pid: item.id.toString()
+                pid: item.toString()
             }
         }
     })
