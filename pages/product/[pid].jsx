@@ -15,6 +15,7 @@ import HeaderMobileProduct from '~/components/shared/header-mobile/HeaderMobileP
 import SEO from "@bradgarropy/next-seo"
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
+import ResponseCache from 'next/dist/server/response-cache';
 
 const ProductDefaultPage = ({ responseData }) => {
     const router = useRouter();
@@ -127,10 +128,12 @@ export async function getStaticPaths() {
             })
             .catch((error) => ({ error: JSON.stringify(error) }));
 
-        const data = responseData;
+        const data =  responseData;
+            console.log("is Array : "+Array.isArray(data));
+            console.log("Length Of Array : "+data.length);
         console.log("DATA :->: " + JSON.stringify(responseData));
         var paths = [];
-        if (data.length !== 0) {
+        if (data!==null && data.length !== 0 ) {
             paths = data?.map((item) => {
                 console.log(item);
                 return {
