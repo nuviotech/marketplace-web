@@ -2,7 +2,7 @@ import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl } f
 
 class ProductRepository {
 
-    //this method helps of SSG (Static side generation) SSR
+  /*  //this method helps of SSG (Static side generation) SSR
     async getAllProducts() {
         const reponse = await Repository.get(
             `${marketplaceUrl}/getAllProducts`
@@ -13,7 +13,7 @@ class ProductRepository {
             .catch((error) => ({ error: JSON.stringify(error) }));
         return reponse;
     }
-
+*/
     async getRecords(params) {
         alert(JSON.stringify(params));
         const reponse = await Repository.get(
