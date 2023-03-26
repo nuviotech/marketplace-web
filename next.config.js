@@ -16,7 +16,7 @@ const nextSettings = {
     // Change your site title here
     env: {
         title: 'Nuvio Sellers',
-        titleDescription: 'Multipurpose marketplace',
+        titleDescription: 'Multipurpose marketplace | nuvio seller ecommerce website',
     },
 };
 

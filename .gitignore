@@ -27,3 +27,7 @@ yarn-error.log*
 package-lock.json
 
 .now
+
+
+/public/robot.txt
+/public/sitemap.xml
