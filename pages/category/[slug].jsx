@@ -10,20 +10,29 @@ import PageContainer from '~/components/layouts/PageContainer';
 import FooterDefault from '~/components/shared/footers/FooterDefault';
 import Newletters from '~/components/partials/commons/Newletters';
 
+
 const ProductCategoryScreen = () => {
     const Router = useRouter();
     const { slug } = Router.query;
+    
     const [category, setCategory] = useState(null);
     const [loading, setLoading] = useState(false);
-
     async function getCategry() {
         setLoading(true);
         if (slug) {
             const responseData = await ProductRepository.getProductsByCategory(
                 slug
             );
-            if (responseData) {
+            if (responseData!==null) {
                 setCategory(responseData);
+                setTimeout(
+                    function () {
+                        setLoading(false);
+                    }.bind(this),
+                    250
+                );
+            }else{
+                setCategory(null)
                 setTimeout(
                     function () {
                         setLoading(false);
@@ -35,7 +44,6 @@ const ProductCategoryScreen = () => {
             await Router.push('/shop');
         }
     }
-
     useEffect(() => {
         getCategry();
     }, [slug]);
@@ -58,9 +66,9 @@ const ProductCategoryScreen = () => {
     let productItemsViews;
 
     if (!loading) {
-        if (category && category.products.length > 0) {
+        if (category && category.length > 0 ) {
             productItemsViews = (
-                <ProductItems columns={4} products={category.products} />
+                <ProductItems columns={4} products={category} />
             );
         } else {
             productItemsViews = <p>No Product found</p>;

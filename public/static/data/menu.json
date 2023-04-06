@@ -47,20 +47,13 @@
                 "subMenu": [
                     
                             {
-                                "text": "Home and Decor",
-                                "url": "/blog/homeAndDecor"
+                                "text": "Books",
+                                "url": "/category/6"
                             },
+                            
                             {
-                                "text": "Kitchen Appliances",
-                                "url": "/blog/blog-small-thumbnail"
-                            },
-                            {
-                                "text": "Electronics",
-                                "url": "/blog/blog-left-sidebar"
-                            },
-                            {
-                                "text": "Clocks",
-                                "url": "/blog/blog-right-sidebar"
+                                "text": "Digital Music",
+                                "url": "/category/2"
                             },
                             {
                                 "text": "See All",

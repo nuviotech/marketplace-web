@@ -21,13 +21,14 @@ import Head from 'next/head';
 const ProductDefaultPage = ({ responseData }) => {
     const router = useRouter();
     const { pid } = router.query;
+    
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(false);
     //alert(responseData.keyWords)
     const title = responseData.title;
     const keyWords = [];
     responseData?.keywords?.split(",").map((item) => keyWords.push(item))
-    console.warn(keyWords);
+    //console.warn(pid);
     const description = responseData?.title + " | price : " + responseData?.sale_price;
 
 
@@ -90,7 +91,6 @@ const ProductDefaultPage = ({ responseData }) => {
         <>
             <Head>
             <link rel="shortcut icon" href={responseData?.images[0].url} />
-                <link rel="icon" href={responseData?.images[0].url} sizes="32x32" />
                 <link
                     rel="icon"
                     href={responseData?.images[0].url}
@@ -143,13 +143,13 @@ export async function getStaticPaths() {
             .catch((error) => ({ error: JSON.stringify(error) }));
 
         const data =  responseData;
-            console.log("is Array : "+Array.isArray(data));
-            console.log("Length Of Array : "+data.length);
+            //console.log("is Array : "+Array.isArray(data));
+            //console.log("Length Of Array : "+data.length);
         console.log("DATA :->: " + JSON.stringify(responseData));
-        var paths = [];
+        var paths;
         if (data!==null && data.length !== 0 ) {
             paths = data?.map((item) => {
-                console.log(item);
+                //console.log(item);
                 return {
                     params: {
                         pid: item.toString()
@@ -172,8 +172,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
     const { params } = context;
-    const responseData = await ProductRepository.getProductsById(params.pid);
-
+   // const responseData = await ProductRepository.getProductsById(params.pid);
+   const pid=params.pid.split("&pid=");
+   //console.log("!@#$ ::::: "+pid[1])
+   const responseData = await ProductRepository.getProductsById(pid[1]+"");
     return {
         props: {
             responseData
