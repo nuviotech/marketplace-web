@@ -98,7 +98,9 @@ class ProductRepository {
             .then((response) => {
                 if (response.data) {
                     if (response.data.length > 0) {
-                        return response.data[0];
+                        return response.data;
+                    }else{
+                        return null;
                     }
                 } else {
                     return null;
@@ -107,7 +109,7 @@ class ProductRepository {
             .catch(() => {
                 return null;
             });
-        //console.log("getProductsByCategory "+JSON.stringify(reponse));
+        console.log("@@@@@@@@@@@ getProductsByCategory "+JSON.stringify(reponse));
         return reponse;
     }
 

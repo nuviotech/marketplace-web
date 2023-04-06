@@ -91,7 +91,9 @@ const HeaderAutoPart = () => {
                                     <a>Tract your order</a>
                                 </Link>
                             </li>
-                           
+                            <li>
+                                <CurrencyDropdown />
+                            </li>
                             <li>
                                 <AccountQuickLinks isLoggedIn={false} />
                                 {/*  {auth.isLoggedIn &&

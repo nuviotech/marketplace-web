@@ -38,7 +38,7 @@ const PanelCartMobile = ({ ecomerce }) => {
                         <i className="icon-cross"></i>
                     </a>
                     {title(item)}
-                    <Link href="/product/[pid]" as={`/product/${item.id}`}>
+                    <Link href="/product/[pid]" as={`/product/${item.title.replace(" ","-")}&pid=${item.id}`}>
                         <a className="ps-product__title">{item.title}</a>
                     </Link>
                     <p>
