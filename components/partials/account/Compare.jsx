@@ -73,7 +73,7 @@ const Compare = ({ ecomerce }) => {
                                                         <div className="ps-product__thumbnail">
                                                             <Link
                                                                 href="/product/[pid]"
-                                                                as={`/product/${product.id}`}>
+                                                                as={`/product/${product.title.replaceAll(" ","-")}&pid=${product.id}`}>
                                                                 <a>
                                                                     {thumbnailImage(
                                                                         product
