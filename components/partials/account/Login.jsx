@@ -2,25 +2,27 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import axios from 'axios';
-import { login,loginSuccess,saveToken} from '../../../store/auth/action';
+import { login, loginSuccess, saveToken } from '../../../store/auth/action';
 import { marketplaceUrl } from '~/repositories/Repository';
 
-import { Form, Input, notification ,Modal} from 'antd';
+import { Form, Input, notification, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { AuthContextProvider } from '~/context/loginContext';
+import ReCAPTCHA from "react-google-recaptcha";
 
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email:null,
-            password:null,
-            login:false,
-            store:null,
+            email: null,
+            password: null,
+            login: false,
+            store: null,
+            cflag:null,
         };
+    
     }
 
-    
 
     static getDerivedStateFromProps(props) {
         if (props.isLoggedIn === true) {
@@ -37,54 +39,61 @@ class Login extends Component {
             duration: 500,
         });
     }
-
+    
+    onChange= value=>{
+        this.setState({cflag : value});
+    }
     
 
+
     handleLoginSubmit = e => {
-        console.log('test');
+        //console.log('test');
         //alert(this.state.email+" | "+this.state.password);
         const loginCredentials = {
-            email:this.state.email,
-            password:this.state.password,
+            email: this.state.email,
+            password: this.state.password,
         }
-
-
         
-        axios.post(`${marketplaceUrl}/login`,loginCredentials).then(
+        if(this.state.cflag!==null){
+        
+        axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
             async (response) => {
                 console.log(JSON.stringify(response));
-               var token=response.data.Token;
-                var status=response.data.status;
-                if(status==0){
+                var token = response.data.Token;
+                var status = response.data.status;
+                if (status == 0) {
                     saveToken(token);
                     //this.props.dispatch(login());
                     //this.props.dispatch(loginSuccess());
-                   // Router.push('/');
+                    // Router.push('/');
                     window.location.assign('/');
-                }else if(status==1){
+                } else if (status == 1) {
                     const modal = Modal.error({
                         centered: true,
                         title: 'Opps, something went wrong!!',
-                        content: ``+response.data.message,
-                        });
-                        modal.update;
+                        content: `` + response.data.message,
+                    });
+                    modal.update;
                 }
             },
-            (error)=>{
+            (error) => {
                 const modal = Modal.error({
                     centered: true,
                     title: 'Wrong credentials !!',
                     content: `Email or password is wrong, please enter correct one.. `,
                 });
                 modal.update;
-                console.error("error : "+error);
-                
+                console.error("error : " + error);
+
             }
         )
-        
+        }else{
+            alert("Fill the captcha...")
+        }
 
-       // this.props.dispatch(login());
-      //  Router.push('/');
+
+        // this.props.dispatch(login());
+        //  Router.push('/');
     };
 
     render() {
@@ -123,7 +132,7 @@ class Login extends Component {
                                             className="form-control"
                                             type="text"
                                             placeholder="enter email address"
-                                            onChange={(event)=> {this.setState({email:event.target.value})} }
+                                            onChange={(event) => { this.setState({ email: event.target.value }) }}
                                         />
                                     </Form.Item>
                                 </div>
@@ -141,24 +150,19 @@ class Login extends Component {
                                             className="form-control"
                                             type="password"
                                             placeholder="Password..."
-                                            onChange={(event)=>{this.setState({password:event.target.value})}}
+                                            onChange={(event) => { this.setState({ password: event.target.value }) }}
                                         />
                                     </Form.Item>
                                 </div>
-                                <div className="form-group">
-                                    <div className="ps-checkbox">
-                                        <input
-                                            className="form-control"
-                                            type="checkbox"
-                                            id="remember-me"
-                                            name="remember-me"
-                                        />
-                                        <label htmlFor="remember-me">
-                                            Rememeber me
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="form-group submit">
+
+
+                                <ReCAPTCHA
+                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                    onChange={this.onChange}
+                                
+                                />
+                                
+                                <div className="form-group submit mt-3">
                                     <button
                                         type="submit"
                                         className="ps-btn ps-btn--fullwidth">
