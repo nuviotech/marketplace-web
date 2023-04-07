@@ -19,7 +19,7 @@ const ProductDealHot = ({ product }) => {
                     <h3 className="ps-product__name">
                         <Link
                             href="/product/[pid]"
-                            as={`/product/${product.id}`}>
+                            as={`/product/${product.title.replaceAll(" ","-")}&pid=${product.id}`}>
                             <a>{product.title}</a>
                         </Link>
                     </h3>
