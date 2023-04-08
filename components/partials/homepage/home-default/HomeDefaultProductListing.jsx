@@ -5,7 +5,7 @@ import { generateTempArray } from '~/utilities/common-helpers';
 import { ProductGroupWithCarousel } from '~/components/partials/product/ProductGroupWithCarousel';
 import useGetProducts from '~/hooks/useGetProducts';
 
-const HomeDefaultProductListing = ({ collectionSlug, title }) => {
+const HomeDefaultProductListing = ({ collectionSlug, title ,bestSellerSlug, mostPopularSlug}) => {
     const [currentCollection, setCurrentCollection] = useState('new-arrivals');
     const { productItems, loading, getProductsByCollection } = useGetProducts();
     const sectionLinks = [
@@ -17,12 +17,12 @@ const HomeDefaultProductListing = ({ collectionSlug, title }) => {
         {
             title: 'Best seller',
             name: 'best-seller',
-            slug: 'fullwidth-clothing-best-sellers',
+            slug: bestSellerSlug,
         },
         {
             title: 'Most Popular',
             name: 'most-popular',
-            slug: 'fullwidth-clothing-most-popular',
+            slug: mostPopularSlug,
         },
     ];
 

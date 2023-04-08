@@ -4,13 +4,14 @@ import WidgetSaleOnSite from '~/components/shared/widgets/WidgetSaleOnSite';
 import WidgetProductSameBrands from '~/components/shared/widgets/WidgetProductSameBrands';
 import WidgetShopAds from '~/components/shared/widgets/WidgetShopAds';
 
-const ProductWidgets = () => {
+const ProductWidgets = ({brand}) => {
+    //alert("brand : "+brand);
     return (
         <section>
             <WidgetProductFeatures />
             <WidgetSaleOnSite />
             <WidgetShopAds />
-            <WidgetProductSameBrands collectionSlug="shop-same-brand" />
+            <WidgetProductSameBrands collectionSlug={brand} />
         </section>
     );
 };

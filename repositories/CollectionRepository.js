@@ -7,7 +7,7 @@ class CollectionRepository {
             `${baseUrl}/collections?slug_in=${slug}`
         )
             .then((response) => {
-                console.log("getProductByCollections :  "+slug)
+                console.warn("getProductByCollections :  "+slug)
                 if (response.data && response.data.length > 0) {
 
                     return { items: response.data[0].products };

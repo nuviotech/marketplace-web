@@ -3,18 +3,20 @@ import { getProductsByCollectionHelper } from '~/utilities/strapi-fetch-data-hel
 import Product from '~/components/elements/products/Product';
 import { generateTempArray } from '~/utilities/common-helpers';
 import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
+import ProductRepository from '~/repositories/ProductRepository';
+import { useRouter } from 'next/router';
 
 const WidgetProductSameBrands = ({ collectionSlug }) => {
     const [productItems, setProductItems] = useState(null);
     const [loading, setLoading] = useState(true);
+    const Router = useRouter();
 
     async function getProducts() {
         setLoading(true);
-        const responseData = await getProductsByCollectionHelper(
-            collectionSlug
-        );
+       
+        const responseData = await ProductRepository.getProductsByBrand(collectionSlug+"&limit=5");
         if (responseData) {
-            setProductItems(responseData.items);
+            setProductItems(responseData);
             setTimeout(
                 function () {
                     setLoading(false);
@@ -26,12 +28,12 @@ const WidgetProductSameBrands = ({ collectionSlug }) => {
 
     useEffect(() => {
         getProducts();
-    }, []);
+    },collectionSlug );
 
     // Views
     let productItemsView;
     if (!loading) {
-        if (productItems && productItems.length > 0) {
+        if (productItems && productItems?.length > 0) {
             productItemsView = productItems.map((item) => (
                 <Product product={item} key={item.id} />
             ));
@@ -44,10 +46,15 @@ const WidgetProductSameBrands = ({ collectionSlug }) => {
         ));
     }
 
+    function handleSelectBrand(e) {
+        Router.push(`/brand/${e}`);
+    }
+
     return (
         <aside className="widget widget_same-brand">
             <h3>Same Brand</h3>
             <div className="widget__content">{productItemsView}</div>
+            <div style={{cursor:"pointer"}} onClick={()=>{handleSelectBrand(collectionSlug)}} className='text-muted text-center'>All Records</div>
         </aside>
     );
 };

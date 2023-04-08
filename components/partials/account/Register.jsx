@@ -28,7 +28,7 @@ class Register extends Component {
     }
    
 
-    handleSubmit = e => {
+    handleSubmit = async (e) => {
        // e.preventDefault();
         console.log(JSON.stringify(this.state))
         if(this.state.firstName=='' || this.state.lastName==''){
@@ -59,7 +59,7 @@ class Register extends Component {
             });
             modal.update;
         }else{
-            axios.post(`${marketplaceUrl}/saveUser`, this.state).then(
+            await axios.post(`${marketplaceUrl}/saveUser`, this.state).then(
                 (response)=>{
                     var statusCode = response.data;
                     if(statusCode == '-1'){
@@ -101,6 +101,7 @@ class Register extends Component {
                     }
                 },
                 (error)=>{
+                    console.error("Register user (error) : "+error);
                     alert("Something went wrong on server!!");
                 }
             )

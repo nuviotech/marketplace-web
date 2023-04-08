@@ -6,72 +6,61 @@ import {
 } from '~/utilities/carousel-helpers';
 import Product from '~/components/elements/products/Product';
 import { getProductsByCollectionHelper } from '~/utilities/strapi-fetch-data-helpers';
+import useGetProducts from '~/hooks/useGetProducts';
+import Link from 'next/link';
+import { generateTempArray } from '~/utilities/common-helpers';
+import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
+import ProductDealOfDay from '~/components/elements/products/ProductDealOfDay';
 
 const CustomerBought = ({ collectionSlug, boxed, layout }) => {
-    const [productItems, setProductItems] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    async function getProducts() {
-        setLoading(true);
-        const responseData = await getProductsByCollectionHelper(collectionSlug);
-        if (responseData) {
-            setProductItems(responseData.items);
-            setTimeout(
-                function () {
-                    setLoading(false);
-                }.bind(this),
-                250
-            );
-        }
-    }
+    const { productItems, loading, getProductsByCollection } = useGetProducts();
 
     useEffect(() => {
-        getProducts();
+        getProductsByCollection(collectionSlug);
     }, [collectionSlug]);
 
     // Views
-    let carouselView;
+    let productItemsView;
     if (!loading) {
-        if (productItems) {
-            if ((layout = 'fullwidth')) {
-                carouselView = (
-                    <Slider {...carouselFullwidth} className="ps-carousel outside">
-                        {productItems.map((item, index) => {
-                            if (index < 8) {
-                                return <Product product={item} key={item.id} />;
-                            }
-                        })}
-                    </Slider>
-                );
-            } else {
-                carouselView = (
-                    <Slider {...carouselStandard} className="ps-carousel outside">
-                        {productItems.map((item, index) => {
-                            if (index < 8) {
-                                return <Product product={item} key={item.id} />;
-                            }
-                        })}
-                    </Slider>
-                );
-            }
+        if (productItems && productItems.length > 0) {
+            const slideItems = productItems.map((item) => {
+                if(item!==null)
+                    {return <ProductDealOfDay product={item} key={item?.product_ref_id} />}
+        });
+            productItemsView = (
+                <Slider {...carouselFullwidth} className="ps-carousel outside">
+                    {slideItems}
+                </Slider>
+            );
+         //   console.log("Slider : "+ JSON.stringify(productItemsView));
+        } else {
+            productItemsView = <p>No product(s) found.</p>;
         }
-        else {
-            carouselView = <p>No product found.</p>
-        }
-    }
-    else {
-        carouselView = <p>Loading...</p>
+    } else {
+        const skeletons = generateTempArray(6).map((item) => (
+            <div className="col-xl-2 col-lg-3 col-sm-3 col-6" key={item}>
+                <SkeletonProduct />
+            </div>
+        ));
+        productItemsView = <div className="row">{skeletons}</div>;
     }
 
     return (
-        <div
-            className={`ps-section--default ps-customer-bought ${
-                boxed === true ? 'boxed' : ''
-            }`}>
-            <div className="ps-section__header">
-                <h3>Customers who bought this item also bought</h3>
+        <div className="ps-deal-of-day">
+            <div className="ps-container">
+                <div className="ps-section__header">
+                    <div className="ps-block--countdown-deal">
+                        <div className="ps-block__left">
+                            <h3>Customers who bought this item also bought</h3>
+                        </div>
+                        
+                    </div>
+                    <Link href="/shop">
+                        <a>View all</a>
+                    </Link>
+                </div>
+                <div className="ps-section__content">{productItemsView}</div>
             </div>
-            <div className="ps-section__content">{carouselView}</div>
         </div>
     );
 };
