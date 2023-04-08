@@ -32,7 +32,7 @@ const NewArrivals = ({ collectionSlug }) => {
                 <div className="ps-section__header">
                     <h3>Hot New Arrivals</h3>
                     <ul className="ps-section__links">
-                        <li>
+                       {/* <li>
                             <Link href="/shop">
                                 <a>Technologies</a>
                             </Link>
@@ -56,7 +56,7 @@ const NewArrivals = ({ collectionSlug }) => {
                             <Link href="/shop?category=health-and-beauty">
                                 <a>Health & Beauty</a>
                             </Link>
-                        </li>
+                        </li>*/}
                         <li>
                             <Link href="/shop">
                                 <a>View All</a>

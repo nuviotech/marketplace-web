@@ -70,11 +70,11 @@ const SearchHeader = () => {
             setLoading(false);
             setIsSearch(false);
         }
-
+        /*
         if (fetchCat) {
             setCategoriesArray(await ProductRepository?.getProductCategories());
             setfetchCat(false);
-        }
+        }*/
     }, [debouncedSearchTerm]);
 
     // Views
@@ -88,9 +88,6 @@ const SearchHeader = () => {
             if (resultItems.length > 5) {
                 loadMoreView = (
                     <div className="ps-panel__footer text-center">
-                        <Link href="/search">
-                            <a>See all results</a>
-                        </Link>
                     </div>
                 );
             }
@@ -114,12 +111,12 @@ const SearchHeader = () => {
             </span>
         );
     }
-
+/*
     selectOptionView = categoriesArray?.map((option) => (
         <option value={option.name} key={option.categoryId}>
             {option.name}
         </option>
-    ));
+    ));*/
 
     return (
         <form
@@ -127,14 +124,14 @@ const SearchHeader = () => {
             method="get"
             action="/"
             onSubmit={handleSubmit}>
-            <div className="ps-form__categories">
+           {/* <div className="ps-form__categories">
                 <select className="form-control">
                     <option value="all" key="0">
                         All
                     </option>
                     {selectOptionView}
                 </select>
-            </div>
+                </div>*/}
             <div className="ps-form__input">
                 <input
                     ref={inputEl}

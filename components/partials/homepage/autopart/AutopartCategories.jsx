@@ -44,6 +44,7 @@ const AutopartCategories = () => {
             links: ['Headlight', 'Off-Road Light', 'WSingnal Light'],
         },
     ];
+    
     return (
         <section className="ps-top-categories">
             <div className="container">
