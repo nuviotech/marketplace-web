@@ -57,7 +57,6 @@ const ProductByBrandScreen = () => {
     //Views
     let productItemsViews;
     if (!loading) {
-        console.log("######## : "+JSON.stringify(brand));
         if (brand && brand.length > 0) {
             productItemsViews = (
                 //brand.products
