@@ -23,14 +23,20 @@ const HomepageDefaultPage = () => {
                 <HomeDefaultProductListing
                     collectionSlug="consumer-electronics"
                     title="Consumer Electronics"
+                    bestSellerSlug="fullwidth-consumer-electronic-best-seller"
+                    mostPopularSlug="fullwidth-consumer-electronic-most-popular"
                 />
                 <HomeDefaultProductListing
                     collectionSlug="clothings"
                     title="Clothings"
+                    bestSellerSlug="fullwidth-clothings-best-seller"
+                    mostPopularSlug="fullwidth-clothings-most-popular"
                 />
                 <HomeDefaultProductListing
                     collectionSlug="garden-and-kitchen"
                     title="Garden & Kitchen"
+                    bestSellerSlug="fullwidth-garden-and-kitchen-best-seller"
+                    mostPopularSlug="fullwidth-garden-and-kitchen-most-popular"
                 />
                 <HomeAds />
                 <DownLoadApp />

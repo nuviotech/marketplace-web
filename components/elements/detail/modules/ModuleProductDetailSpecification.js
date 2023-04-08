@@ -10,7 +10,7 @@ const ModuleProductDetailSpecification = ({product}) => (
         <p>
             <strong>SKU:</strong> {JSON.parse(product.stockDetails).sku}
         </p>
-        <p className="categories">
+        {/*<p className="categories">
             <strong> Categories:</strong>
             <Link href="/shop">
                 <a>Consumer Electronics</a>
@@ -33,7 +33,7 @@ const ModuleProductDetailSpecification = ({product}) => (
             <Link href="/shop">
                 <a>wireless</a>
             </Link>
-        </p>
+        </p>*/}
     </div>
 );
 

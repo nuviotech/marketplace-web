@@ -10,6 +10,7 @@ import ModuleDetailActionsMobile from '~/components/elements/detail/modules/Modu
 import DescriptionBox from '~/components/elements/detail/description/DescriptionBox';
 
 const ProductDetailBox = ({ product }) => (
+    
     <div className="ps-product--detail ps-product--box">
         <div className="ps-product__header ps-product__box">
             <ThumbnailDefault product={product} vertical={false} />
@@ -29,7 +30,7 @@ const ProductDetailBox = ({ product }) => (
                 </div>
                 <div className="col-xl-3">
                     <div className="ps-product__box">
-                        <WidgetProductSameBrands collectionSlug="shop-same-brand" />
+                        <WidgetProductSameBrands collectionSlug={product?.brand} />
                     </div>
                 </div>
             </div>

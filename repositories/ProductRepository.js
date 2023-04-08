@@ -15,9 +15,9 @@ class ProductRepository {
     }
 */
     async getRecords(params) {
-        alert(JSON.stringify(params));
+        //alert(JSON.stringify(params));
         const reponse = await Repository.get(
-            `${marketplaceUrl}/products?${serializeQuery(params)}`
+            `${marketplaceUrl}/searchRecords?keyword=${serializeQuery(params)}`
         )
             .then((response) => {
                 return response.data;
@@ -28,7 +28,7 @@ class ProductRepository {
     }
 
     async getProducts(params) {
-        console.log("param : "+JSON.stringify(params))
+       // alert("get product "+JSON.stringify(params));
         const reponse = await Repository.get(
             `${marketplaceUrl}/products?${serializeQuery(params)}`
         )
@@ -109,11 +109,12 @@ class ProductRepository {
             .catch(() => {
                 return null;
             });
-        console.log("@@@@@@@@@@@ getProductsByCategory "+JSON.stringify(reponse));
+        //console.log("@@@@@@@@@@@ getProductsByCategory "+JSON.stringify(reponse));
         return reponse;
     }
 
     async getProductsByBrand(payload) {
+       // alert("## "+payload)
         const reponse = await Repository.get(
             `${marketplaceUrl}/brands?slug=${payload}`
         )
@@ -131,7 +132,7 @@ class ProductRepository {
             .catch(() => {
                 return null;
             });
-        console.log("@@@@ get product by brands : "+reponse);    
+       // console.log("@@@@ get product by brands : "+reponse);    
         return reponse;
     }
 
