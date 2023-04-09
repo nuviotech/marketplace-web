@@ -113,7 +113,7 @@ const DescriptionFullContent = () => (
             in New York with implementation of best practices both online
         </p>
         <a href="#">More Products from gopro</a>
-        <PartialReview />
+        <PartialReview  />
         <h3 className="ps-product__heading">Questions and Answers</h3>
         <div className="ps-block--questions-answers">
             <h3>Questions and Answers</h3>

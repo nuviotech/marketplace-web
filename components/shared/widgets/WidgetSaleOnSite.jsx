@@ -5,8 +5,8 @@ const WidgetSaleOnSite = () => {
     return (
         <aside className="widget widget_sell-on-site">
             <p>
-                <i className="icon-store"></i> Sell on Martfury?
-                <Link href="/account/register">
+                <i className="icon-store"></i> Sell on Nuvio?
+                <Link href="https://nuviosellers.com/signUp">
                     <a> Register Now !</a>
                 </Link>
             </p>
