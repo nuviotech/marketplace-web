@@ -19,8 +19,8 @@ class CollectionRepository {
                 return response.data;
             })
             .catch((error) => {
-                alert("error : "+error);
-                console.log(JSON.stringify(error));
+                //alert("error : "+error);
+                console.error("collection error : "+JSON.stringify(error));
                 return null;
             });
         return reponse;
