@@ -54,6 +54,20 @@ function App({ Component, pageProps }) {
                     />
     </Head>*/}
                 <Head>
+
+
+		    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMKDBVDBY5"></script>
+                    <script>
+                        window.dataLayer = window.dataLayer || [];
+                        {function gtag(){
+                            dataLayer.push(arguments);
+                        }}
+                        gtag('js', new Date());
+
+                        gtag('config', 'G-LMKDBVDBY5');
+                    </script>
+
+		
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                     <meta
                         name="viewport"
