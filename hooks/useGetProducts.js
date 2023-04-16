@@ -22,6 +22,7 @@ export default function useGetProducts() {
         },
 
         getProductsByCollection: async (payload) => {
+
             setLoading(true);
             const responseData = await getProductsByCollectionHelper(payload);
             if (responseData) {

@@ -28,7 +28,6 @@ const HomeDefaultDealOfDay = ({ collectionSlug }) => {
                     {slideItems}
                 </Slider>
             );
-         //   console.log("Slider : "+ JSON.stringify(productItemsView));
         } else {
             productItemsView = <p>No product(s) found.</p>;
         }
