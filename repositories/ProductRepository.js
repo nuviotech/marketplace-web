@@ -1,7 +1,6 @@
-import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl } from './Repository';
+import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl, policyMakerKey } from './Repository';
 
 class ProductRepository {
-
   /*  //this method helps of SSG (Static side generation) SSR
     async getAllProducts() {
         const reponse = await Repository.get(
@@ -50,7 +49,11 @@ class ProductRepository {
 
     async getBrands() {
         //`${baseUrl}/brands`
-        const reponse = await Repository.get(`${policyMakerUrl}/brands`)
+        const reponse = await Repository.get(`${policyMakerUrl}/brands`,{ 
+            headers: {
+                apikey: policyMakerKey,
+            }
+        })
             .then((response) => {
                 return response.data;
             })
@@ -60,8 +63,13 @@ class ProductRepository {
     }
 
     async getProductCategories() {
+
         //${baseUrl}/product-categories
-        const reponse = await Repository.get(`${policyMakerUrl}/product-categories`)
+        const reponse = await Repository.get(`${policyMakerUrl}/product-categories`,{ 
+            headers: {
+                apikey: policyMakerKey,
+            }
+        })
             .then((response) => {
                 return response.data;
             })

@@ -15,7 +15,7 @@ const PartialReview = ({product}) => {
             name : name,
             msg : msg,
             email : email,
-            productId : product.id
+            productId : product?.id
         }
 
         alert(JSON.stringify(obj))
