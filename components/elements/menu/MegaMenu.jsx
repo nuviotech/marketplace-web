@@ -8,7 +8,7 @@ const MegaMenu = ({ source }) => {
             <div className="mega-menu__column" key={item.heading}>
                 <h4>{item.heading}</h4>
                 <ul className="mega-menu__list">
-                    {item.megaItems.map((subItem) => (
+                    {item.megaItems?.map((subItem) => (
                         <li key={subItem.text}>
                             <Link href={subItem.url} as={subItem.url}>
                                 <a>{subItem.text}</a>

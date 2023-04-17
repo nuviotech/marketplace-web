@@ -1,6 +1,14 @@
 import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl, policyMakerKey } from './Repository';
 
+
+
+
+
 class ProductRepository {
+    
+    
+
+
   /*  //this method helps of SSG (Static side generation) SSR
     async getAllProducts() {
         const reponse = await Repository.get(
@@ -63,7 +71,7 @@ class ProductRepository {
     }
 
     async getProductCategories() {
-
+        
         //${baseUrl}/product-categories
         const reponse = await Repository.get(`${policyMakerUrl}/product-categories`,{ 
             headers: {

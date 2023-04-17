@@ -71,7 +71,7 @@ class PanelMenu extends Component {
                                     <SubMenu
                                         key={megaItem.heading}
                                         title={<span>{megaItem.heading}</span>}>
-                                        {megaItem.megaItems.map(
+                                        {megaItem.megaItems?.map(
                                             (megaSubItem) => (
                                                 <Menu.Item
                                                     key={megaSubItem.text}>
