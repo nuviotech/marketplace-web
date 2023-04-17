@@ -24,11 +24,51 @@
                 "subMenu": [
                             {
                                 "text": "Best Seller",
-                                "url": "/page/bestSeller"
+                                "url": "",
+                                "extraClass": "menu-item-has-children has-mega-menu",
+                                "subClass": "sub-menu",
+                                "mega": "true",
+                                "subMenu":[
+                                    {
+                                        "text" : "Electronic Best Seller",
+                                        "url": "/page/Electronic_best_Seller"
+
+                                    },
+                                    {
+                                        "text" : "Clothings Best Seller",
+                                        "url": "/page/clothings_best_seller"
+
+                                    },
+                                    {
+                                        "text" : "Garden & Kitchen Best Seller",
+                                        "url": "/page/garden_and_kitchen_bestSeller"
+
+                                    }
+                                ]
                             },
                             {
                                 "text": "New Arrivals",
-                                "url": "/page/new_arrivals"
+                                "url": "/page/new_arrivals",
+                                "extraClass": "menu-item-has-children has-mega-menu",
+                                "subClass": "sub-menu",
+                                "mega": "true",
+                                "subMenu":[
+                                    {
+                                        "text" : "Electronic New Arrivals",
+                                        "url": "/page/Electronic_new_arrivals"
+
+                                    },
+                                    {
+                                        "text" : "Clothings New Arrivals",
+                                        "url": "/page/clothings_new_arrivals"
+
+                                    },
+                                    {
+                                        "text" : "Garden & Kitchen New Arrivals",
+                                        "url": "/page/garden_and_kitchen_new_arrivals"
+
+                                    }
+                                ]
                             },
                             {
                                 "text": "Hot Deals",

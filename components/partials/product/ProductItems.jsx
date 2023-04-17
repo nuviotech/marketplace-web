@@ -10,7 +10,10 @@ import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
  * This component just dipslay product items, not fetching data.
  * */
 
+
+
 const ProductItems = ({ products, columns = 4 }) => {
+    
     const [listView, setListView] = useState(true);
     const [productItems, setProductItems] = useState(null);
     const [total, setTotal] = useState(0);
@@ -48,6 +51,7 @@ const ProductItems = ({ products, columns = 4 }) => {
         handleSetColumns();
         setTotal(products.length);
         setProductItems(products);
+        
     }, [products]);
 
     // Views
