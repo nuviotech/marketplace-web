@@ -67,7 +67,7 @@
             },
             {
                 "text": "Categories",
-                "url": "/blog",
+                "url": "",
                 "current": "shop",
                 "extraClass": "menu-item-has-children has-mega-menu",
                 "subClass": "sub-menu",
@@ -89,7 +89,7 @@
             },
             {
                 "text": "Product And Feature",
-                "url": "/blog",
+                "url": "",
                 "current": "shop",
                 "extraClass": "menu-item-has-children has-mega-menu",
                 "subClass": "sub-menu",
