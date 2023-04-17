@@ -7,7 +7,9 @@ export const baseStoreURL = 'http://localhost:1337'; // API for vendor(store)
 export const policyMakerUrl = "http://localhost:9001";//change the name policy maker  url
 export const marketplaceUrl = "http://localhost:8089";//marketplace api url
 //export const policyMakerKey = myDecipher("343f4950613e646437735e6d3e4f2d645640703f4f564564");
-export const policyMakerKey = process.env.API_KEY;
+
+//export const policyMakerKey = process.env.API_KEY;
+export const policyMakerKey = process.env.NEXT_PUBLIC_PUBLICAPI_KEY;
 
 
 export const customHeaders = {

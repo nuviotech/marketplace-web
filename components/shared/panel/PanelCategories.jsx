@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import Link from 'next/link';
 import categories from '../../../public/static/data/static-categories.json';
+import ProductRepository from '~/repositories/ProductRepository';
 
 const { SubMenu } = Menu;
 
-class PanelCategories extends Component {
-    constructor(props) {
-        super(props);
-    }
+function PanelCategories() {
+    const [categories, setCategories] = useState(null);
+    const [loading, setLoading] = useState(false);
 
+/*
     rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
     state = {
@@ -26,24 +27,39 @@ class PanelCategories extends Component {
                 openKeys: latestOpenKey ? [latestOpenKey] : [],
             });
         }
-    };
+    };*/
 
-    render() {
+    const getCategories = async() => {
+        setLoading(true);
+        const responseData = await ProductRepository.getProductCategories();
+        if (responseData) {
+            setCategories(responseData);
+            setTimeout(
+                function () {
+                    setLoading(false);
+                }.bind(this),
+                250
+            );
+        }
+    }
+
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    
         return (
             <Menu
                 mode="inline"
-                openKeys={this.state.openKeys}
-                onOpenChange={this.onOpenChange}>
-                {categories.map(category => (
-                    <Menu.Item key={category.id}>
-                        <a href={`/shop?category=${category.slug}`}>
-                            {category.name}
-                        </a>
+                >
+                {categories?.map(category => (
+                    <Menu.Item key={category.categoryId}>
+                        <Link href={`/category/${category.categoryId}`} >{category.name}</Link>
                     </Menu.Item>
                 ))}
             </Menu>
         );
-    }
+    
 }
 
 export default PanelCategories;

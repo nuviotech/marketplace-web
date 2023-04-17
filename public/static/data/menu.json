@@ -6,14 +6,12 @@
                 "url": "/",
                 "extraClass": "menu-item-has-children",
                 "subClass": "sub-menu"
-                
             },
             {
                 "text": "Shop",
                 "url": "/shop",
                 "extraClass": "menu-item-has-children",
                 "subClass": "sub-menu"
-                
             },
             {
                 "text": "Trending",
@@ -21,62 +19,52 @@
                 "extraClass": "menu-item-has-children has-mega-menu",
                 "subClass": "sub-menu",
                 "mega": "true",
-                "subMenu": [
+                "megaContent": [
+                    {
+                        "heading": "Best Seller",
+                        "megaItems": [
                             {
-                                "text": "Best Seller",
-                                "url": "",
-                                "extraClass": "menu-item-has-children has-mega-menu",
-                                "subClass": "sub-menu",
-                                "mega": "true",
-                                "subMenu":[
-                                    {
-                                        "text" : "Electronic Best Seller",
-                                        "url": "/page/Electronic_best_Seller"
-
-                                    },
-                                    {
-                                        "text" : "Clothings Best Seller",
-                                        "url": "/page/clothings_best_seller"
-
-                                    },
-                                    {
-                                        "text" : "Garden & Kitchen Best Seller",
-                                        "url": "/page/garden_and_kitchen_bestSeller"
-
-                                    }
-                                ]
+                                "text": "Electronic Best Seller",
+                                "url": "/page/Electronic_best_Seller"
                             },
                             {
-                                "text": "New Arrivals",
-                                "url": "/page/new_arrivals",
-                                "extraClass": "menu-item-has-children has-mega-menu",
-                                "subClass": "sub-menu",
-                                "mega": "true",
-                                "subMenu":[
-                                    {
-                                        "text" : "Electronic New Arrivals",
-                                        "url": "/page/Electronic_new_arrivals"
-
-                                    },
-                                    {
-                                        "text" : "Clothings New Arrivals",
-                                        "url": "/page/clothings_new_arrivals"
-
-                                    },
-                                    {
-                                        "text" : "Garden & Kitchen New Arrivals",
-                                        "url": "/page/garden_and_kitchen_new_arrivals"
-
-                                    }
-                                ]
+                                "text": "Clothings Best Seller",
+                                "url": "/page/clothings_best_seller"
                             },
                             {
-                                "text": "Hot Deals",
+                                "text": "Garden & Kitchen Best Seller",
+                                "url": "/page/garden_and_kitchen_bestSeller"
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "New Arrivals",
+                        "megaItems": [
+                            {
+                                "text": "Electronic New Arrivals",
+                                "url": "/page/Electronic_new_arrivals"
+                            },
+                            {
+                                "text": "Clothings New Arrivals",
+                                "url": "/page/clothings_new_arrivals"
+                            },
+                            {
+                                "text": "Garden & Kitchen New Arrivals",
+                                "url": "/page/garden_and_kitchen_new_arrivals"
+                            }
+                        ]
+                    },
+                    {
+                        "heading": "Hot Deals",
+                        "megaItems": [
+                            {
+                                "text": "Hot Deals product",
                                 "url": "/page/HotDeals"
                             }
+                        ]
+                    }
                 ]
-            }, 
-            
+            },
             {
                 "text": "Categories",
                 "url": "/blog",
@@ -85,22 +73,19 @@
                 "subClass": "sub-menu",
                 "mega": "true",
                 "subMenu": [
-                    
-                            {
-                                "text": "Books",
-                                "url": "/category/6"
-                            },
-                            
-                            {
-                                "text": "Digital Music",
-                                "url": "/category/2"
-                            },
-                            {
-                                "text": "See All",
-                                "url": "/shop"
-                            }
-                        ]
-                   
+                    {
+                        "text": "Books",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Digital Music",
+                        "url": "/category/2"
+                    },
+                    {
+                        "text": "See All",
+                        "url": "/shop"
+                    }
+                ]
             },
             {
                 "text": "Product And Feature",
@@ -110,19 +95,16 @@
                 "subClass": "sub-menu",
                 "mega": "true",
                 "subMenu": [
-                    
-                            {
-                                "text": "Today's deals",
-                                "url": "/blog/deals"
-                            },
-                            {
-                                "text": "Became a seller",
-                                "url": "/vendor/become-a-vendor"
-                            }
-                        ]
-                   
+                    {
+                        "text": "Today's deals",
+                        "url": "/blog/deals"
+                    },
+                    {
+                        "text": "Became a seller",
+                        "url": "/vendor/become-a-vendor"
+                    }
+                ]
             }
-            
         ]
     },
     "product_categories": [
