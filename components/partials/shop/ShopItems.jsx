@@ -18,7 +18,7 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     const [classes, setClasses] = useState(
         'col-xl-4 col-lg-4 col-md-3 col-sm-6 col-6'
     );
-
+       // alert(JSON.stringify(query))
     const { productItems, loading, getProducts } = useGetProducts();
 
     function handleChangeViewMode(e) {
@@ -27,7 +27,7 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     }
 
     function handlePagination(page, pageSize) {
-        Router.push(`/shop?page=${page}`);
+        Router.push(`/shop?page=${page}&price_gt=${query.price_gt}&price_lt=${query.price_lt}`);
     }
 
     async function getTotalRecords(params) {
@@ -59,7 +59,21 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
 
     useEffect(() => {
         let params;
-        if (query) {
+        if(query.action){
+            params = {
+                _start: page * pageSize,
+                _limit: pageSize,
+                action: query.action
+            };
+        }else if(query.price_lt){
+           // alert(query.price_lt)
+           params = {
+                _start: page * pageSize,
+                _limit: pageSize,
+                price_lt:query.price_lt,
+                price_gt:query.price_gt
+            };
+        }else if (query) {
             if (query.page) {
                 params = {
                     _start: page * pageSize,
@@ -90,6 +104,7 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
                         <Product product={item} />
                     </div>
                 ));
+                
                 productItemsView = (
                     <div className="ps-shop-items">
                         <div className="row">{items}</div>

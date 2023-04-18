@@ -97,7 +97,7 @@
                 "subMenu": [
                     {
                         "text": "Today's deals",
-                        "url": "/blog/deals"
+                        "url": "/page/HotDeals"
                     },
                     {
                         "text": "Became a seller",
