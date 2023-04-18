@@ -7,6 +7,7 @@ const OurTeam = () => (
                 <div className='row'>               
                     <div className=" col-sm-10 offset-sm-1">
                         <div className="mx-4">
+                        <h1>About Us</h1>
                         <h3><span className='text-muted fw-500'>Nuvio.</span><span className="text-primary">in</span></h3>
                         <p className='text-justify'>- Nuvio Sellers is privately owned indian Ecommerce compony. The Basic function of the compony  is to provide a platform for sellers to sale best Selling Products of markeplaces from both domestic and overseas markets to your valuabe buyers.</p>
                         <p className="text-justify">- Sellers have right to choose the products and sell products which they don't own, by our smart marketplace tools, any person/business can sell and create their own marketplace without having physical inventory.</p>

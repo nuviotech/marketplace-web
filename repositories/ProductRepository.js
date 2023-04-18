@@ -35,7 +35,9 @@ class ProductRepository {
     }
 
     async getProducts(params) {
-       // alert("get product "+JSON.stringify(params));
+       //alert("get product "+JSON.stringify(params));
+      // alert("payload : "+params)
+
         const reponse = await Repository.get(
             `${marketplaceUrl}/products?${serializeQuery(params)}`
         )

@@ -5,116 +5,74 @@ const FaqsContent = () => (
         <table className="table ps-table--faqs">
             <tbody>
                 <tr>
-                    <td className="heading" rowSpan="3">
+                    <td className="heading" rowSpan="5">
                         <h4>SHIPPING</h4>
                     </td>
                     <td className="question">
-                        What Shipping Methods Are Available?
+                        What shipping options do you offer?         
                     </td>
                     <td>
-                        Ex Portland Pitchfork irure mustache. Eutra fap before
-                        they sold out literally. Aliquip ugh bicycle rights
-                        actually mlkshk, seitan squid craft beer tempor.
+                         We offer several shipping options, including standard, express, and international shipping. We also offer free shipping on orders over a certain amount.
                     </td>
                 </tr>
                 <tr>
-                    <td className="question">Do You Ship Internationally?</td>
+                    <td className="question">How long does it take to receive my order?</td>
                     <td>
-                        Hoodie tote bag mixtape tofu. Typewriter jean shorts
-                        wolf quinoa, messenger bag organic freegan cray.
+                        The delivery time varies depending on the shipping method you choose and your location. Standard shipping usually takes 3-5 business days, while express shipping takes 1-2 business days. International shipping can take up to 10 business days.
                     </td>
                 </tr>
                 <tr>
                     <td className="question">
-                        How Long Will It Take To Get My Package?
+                        How much does shipping cost?
                     </td>
                     <td>
-                        Swag slow-carb quinoa VHS typewriter pork belly brunch,
-                        paleo single-origin coffee Wes Anderson. Flexitarian
-                        Pitchfork forage, literally paleo fap pour-over. Wes
-                        Anderson Pinterest YOLO fanny pack meggings, deep v XOXO
-                        chambray sustainable slow-carb raw denim church-key fap
-                        chillwave Etsy. +1 typewriter kitsch, American Apparel
-                        tofu Banksy Vice.
+                        The shipping cost depends on the shipping method you choose, the weight and dimensions of the package, and your location. You can calculate the shipping cost at checkout before placing your order.
                     </td>
                 </tr>
                 <tr>
-                    <td className="heading" rowSpan="2">
-                        <h4>PAYMENT</h4>
-                    </td>
+                    
                     <td className="question">
-                        What Payment Methods Are Accepted?
+                        Do you ship internationally?
                     </td>
                     <td>
-                        Fashion axe DIY jean shorts, swag kale chips meh
-                        polaroid kogi butcher Wes Anderson chambray next level
-                        semiotics gentrify yr. Voluptate photo booth fugiat
-                        Vice. Austin sed Williamsburg, ea labore raw denim
-                        voluptate cred proident mixtape excepteur mustache. Twee
-                        chia photo booth readymade food truck, hoodie roof party
-                        swag keytar PBR DIY.
+                        Yes, we ship to most countries worldwide. However, shipping rates and delivery times may vary depending on the destination country.
                     </td>
                 </tr>
                 <tr>
-                    <td className="question">Is Buying On-Line Safe?</td>
+                    <td className="question">Can I track my order?</td>
                     <td>
-                        Art party authentic freegan semiotics jean shorts chia
-                        cred. Neutra Austin roof party Brooklyn, synth
-                        Thundercats swag 8-bit photo booth. Plaid letterpress
-                        leggings craft beer meh ethical Pinterest.
+                        Yes, you can track your order by logging into your account or using the tracking number provided in the shipping confirmation email.
                     </td>
                 </tr>
                 <tr>
                     <td className="heading" rowSpan="5">
                         <h4>Order & Retunrs</h4>
                     </td>
-                    <td className="question"> How do I place an Order?</td>
+                    <td className="question"> What is your return policy?</td>
                     <td>
-                        Keytar cray slow-carb, Godard banh mi salvia pour-over.
-                        Slow-carb Odd Future seitan normcore. Master cleanse
-                        American Apparel gentrify flexitarian beard slow-carb
-                        next level. Raw denim polaroid paleo farm-to-table, put
-                        a bird on it lo-fi tattooed Wes Anderson Pinterest
-                        letterpress. Fingerstache McSweeney’s pour-over,
-                        letterpress Schlitz photo booth master cleanse bespoke
-                        hashtag chillwave gentrify.
+                        Our return policy allows for returns within 7 days of delivery for a full refund or exchange for selective orders. Please see our return policy page for more details.
                     </td>
                 </tr>
                 <tr>
                     <td className="question">
-                        How Can I Cancel Or Change My Order?
+                        How do I change my shipping address? 
                     </td>
                     <td>
-                        Plaid letterpress leggings craft beer meh ethical
-                        Pinterest. Art party authentic freegan semiotics jean
-                        shorts chia cred. Neutra Austin roof party Brooklyn,
-                        synth Thundercats swag 8-bit photo booth.
+                        You can change your shipping address by logging into your account and updating your address information before your order ships. If your order has already shipped, please contact our customer service team for assistance.
                     </td>
                 </tr>
                 <tr>
                     <td className="question">
-                        Do I need an account to place an order?
+                        What happens if my package is lost or damaged during shipping?
                     </td>
                     <td>
-                        Thundercats swag 8-bit photo booth. Plaid letterpress
-                        leggings craft beer meh ethical Pinterest. Twee chia
-                        photo booth readymade food truck, hoodie roof party swag
-                        keytar PBR DIY. Cray ugh 3 wolf moon fap, fashion axe
-                        irony butcher cornhole typewriter chambray VHS banjo
-                        street art.
+                        If your package is lost or damaged during shipping, please contact our customer service team immediately so we can assist you with filing a claim with the shipping carrier.
                     </td>
                 </tr>
                 <tr>
-                    <td className="question">How Do I Track My Order?</td>
+                    <td className="question">Can I expedite my shipping for an additional fee?</td>
                     <td>
-                        Kale chips Truffaut Williamsburg, hashtag fixie
-                        Pinterest raw denim c hambray drinking vinegar Carles
-                        street art Bushwick gastropub. Wolf Tumblr paleo
-                        church-key. Plaid food truck Echo Park YOLO bitters
-                        hella, direct trade Thundercats leggings quinoa before
-                        they sold out. You probably haven’t heard of them
-                        wayfarers authentic umami drinking vinegar Pinterest
-                        Cosby sweater, fingerstache fap High Life.
+                        Yes, you can expedite your shipping for an additional fee. The cost and delivery time will vary depending on the shipping method you choose and your location. You can see the options and cost at checkout before placing your order.
                     </td>
                 </tr>
             </tbody>

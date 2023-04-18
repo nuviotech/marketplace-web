@@ -76,12 +76,7 @@ const FooterWidgets = () => (
                     </Link>
                 </li>
                 <li>
-                    <Link href="/page/blank">
-                        <a>Affilate</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/page/blank">
+                    <Link href="/page/career_nuvio">
                         <a>Career</a>
                     </Link>
                 </li>

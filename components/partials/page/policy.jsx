@@ -4,46 +4,30 @@ const PolicyContent = () => (
     <div className="ps-section--custom">
         <div className="container">
             <div className="ps-section__header">
-                <h1>Policy Heading</h1>
+                <h1>Policy Page</h1>
             </div>
             <div className="ps-section__content">
-                <h3>Page Content</h3>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Aenean commodo ligula eget dolor. Aenean massa. Cum sociis
-                    natoque penatibus et magnis dis parturient montes, nascetur
-                    ridiculus mus. Donec quam felis, ultricies nec, pellentesque
-                    eu, pretium quis, sem. Nulla consequat massa quis enim.
-                    Donec pede justo, fringilla vel, aliquet nec, vulputate
-                </p>
-                <p>
-                    Sed ut perspiciatis unde omnis iste natus error sit
-                    voluptatem accusantium doloremque laudantium, totam rem
-                    aperiam, eaque ipsa quae ab illo inventore veritatis et
-                    quasi architecto beatae vitae dicta sunt explicabo. Nemo
-                    enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-                    aut fugit, sed quia consequuntur magni dolores eos qui
-                </p>
-                <h4>He quick, brown fox jumps over a lazy dog.</h4>
-                <p>
-                    One morning, when Gregor Samsa woke from troubled dreams, he
-                    found himself transformed in his bed into a horrible vermin.
-                    He lay on his armour-like back, and if he lifted his head a
-                    little he could see his brown belly, slightly domed and
-                    divided by arches into stiff sections. The
-                </p>
-                <p>
-                    A wonderful serenity has taken possession of my entire soul,
-                    like these sweet mornings of spring which I enjoy with my
-                    whole heart. I am alone, and feel the charm of existence in
-                    this spot, which was created for the bliss of souls like
-                    mine. I am so happy, my dear friend, so absorbed in the
-                    exquisite sense of mere tranquil existence, that I neglect
-                    my talents. I should be incapable of drawing a single stroke
-                    at the present moment; and yet I feel that I never was a
-                    greater artist than now. When, while the lovely valley teems
-                    with
-                </p>
+                <h3>Nuvio eCommerce policies</h3>
+                <p>Welcome to Nuvio Sellers Pvt Ltd's eCommerce website, www.nuvio.in. We are committed to providing our customers with a seamless and secure online shopping experience. As such, we have established the following policies to ensure that we meet our customers' expectations and provide them with the best possible service.</p>
+
+                <h3>Privacy Policy:</h3>
+                <p>At Nuvio, we understand the importance of protecting our customers' personal information. Therefore, we have implemented stringent security measures to ensure that our customers' information is kept confidential and secure. We do not sell, rent, or trade our customers' personal information to any third-party organizations. All the information that we collect is solely used for the purpose of processing and fulfilling orders, providing customer support, and improving our services.</p>
+
+                <h3>Shipping Policy:</h3>
+                <p>We strive to ship all orders within 48-72 hours of receiving them, except for orders received on weekends or public holidays, which will be processed on the next business day. Our shipping partners are reliable and efficient, ensuring that our customers receive their orders in a timely and secure manner. Shipping costs are calculated based on the destination, weight, and dimensions of the package.</p>
+            
+                <h3>Return Policy:</h3>
+                <p>We want our customers to be completely satisfied with their purchases from Nuvio. Therefore, we offer a hassle-free return policy for products that are damaged, defective, or not as described on our website. If a customer wishes to return a product, they must initiate the return process within seven days of receiving the product. We will issue a refund or exchange the product, depending on the customer's preference and the availability of the product.</p>
+            
+                <h3>Payment Policy:</h3>
+                <p>We accept a variety of payment methods, including credit/debit cards, net banking, and UPI payments. Our payment gateway partners are PCI-DSS compliant, ensuring that our customers' financial information is safe and secure. We do not store any credit/debit card information on our servers.</p>
+
+                <h3>Security Policy:</h3>
+                <p>We use industry-standard security protocols to protect our customers' information from unauthorized access, alteration, or disclosure. Our website is SSL certified, which means that all data transmitted between our server and our customers' browsers is encrypted and secure. We also employ advanced security measures such as firewalls, intrusion detection, and prevention systems to ensure that our website is protected against cyber threats.</p>
+                
+                <h3>Terms and Conditions:</h3>
+                <p>By using our website, customers agree to abide by our terms and conditions, which are designed to protect both the customer and Nuvio Sellers Pvt Ltd. These terms and conditions cover various aspects such as pricing, product availability, warranty, and liability. We encourage our customers to read and understand our terms and conditions before making a purchase on our website.</p>
+                <p>At Nuvio Sellers Pvt Ltd, we are committed to providing our customers with the best possible service. If you have any questions or concerns regarding our policies, please feel free to contact our customer support team, and we will be happy to assist you.</p>
             </div>
         </div>
     </div>
