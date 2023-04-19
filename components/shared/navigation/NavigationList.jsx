@@ -5,6 +5,7 @@ import PanelMenu from '../panel/PanelMenu';
 import PanelCartMobile from '../panel/PanelCartMobile';
 import PanelSearch from '../panel/PanelSearch';
 import PanelCategories from '../panel/PanelCategories';
+import { Router, useRouter } from 'next/router';
 
 class NavigationList extends Component {
     constructor(props) {
@@ -14,10 +15,23 @@ class NavigationList extends Component {
             cartDrawer: false,
             searchDrawer: false,
             categoriesDrawer: false,
+            keyword:'',
+
         };
     }
 
-    handleDrawerClose = () => {
+   
+    
+    handleSubmit(e) {
+            e.preventDefault();
+            if (this.state.keyword !== '') {
+                //window.location.assign(`/search?keyword=${this.state.keyword}`)
+                //this.state.router.push(`/search?keyword=${this.state.keyword}`);
+            }
+        }
+
+     handleDrawerClose () {
+
         this.setState({
             menuDrawer: false,
             cartDrawer: false,
@@ -81,7 +95,7 @@ class NavigationList extends Component {
                             <h3>Menu</h3>
                             <span
                                 className="ps-panel__close"
-                                onClick={this.handleDrawerClose}>
+                                onClick={() => { this.handleDrawerClose() }}>
                                 <i className="icon-cross"></i>
                             </span>
                         </div>
@@ -101,7 +115,7 @@ class NavigationList extends Component {
                             <h3>Shopping Cart</h3>
                             <span
                                 className="ps-panel__close"
-                                onClick={this.handleDrawerClose}>
+                                onClick={() => { this.handleDrawerClose() }}>
                                 <i className="icon-cross"></i>
                             </span>
                         </div>
@@ -121,12 +135,33 @@ class NavigationList extends Component {
                             <h3>Search</h3>
                             <span
                                 className="ps-panel__close"
-                                onClick={this.handleDrawerClose}>
+                                onClick={() => { this.handleDrawerClose() }}>
                                 <i className="icon-cross"></i>
                             </span>
                         </div>
                         <div className="ps-panel__content">
-                            <PanelSearch />
+                            
+
+                            <div className="ps-panel__search-results">
+                                <form
+                                    className="ps-form--search-mobile"
+                                    action="/"
+                                    method="get"
+                                    onSubmit={(e) => this.handleSubmit(e)}>
+                                    <div className="form-group--nest">
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="Search something ..."
+                                            onChange={(e) => this.setState({keyword : e.target.value})}
+                                        />
+                                        <button onClick={() => { this.handleDrawerClose() }}>
+                                            <i className="icon-magnifier"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </Drawer>
@@ -141,7 +176,7 @@ class NavigationList extends Component {
                             <h3>Categories</h3>
                             <span
                                 className="ps-panel__close"
-                                onClick={this.handleDrawerClose}>
+                                onClick={() => { this.handleDrawerClose() }}>
                                 <i className="icon-cross"></i>
                             </span>
                         </div>
@@ -152,33 +187,29 @@ class NavigationList extends Component {
                 </Drawer>
                 <div className="navigation__content">
                     <a
-                        className={`navigation__item ${
-                            menuDrawer === true ? 'active' : ''
-                        }`}
+                        className={`navigation__item ${menuDrawer === true ? 'active' : ''
+                            }`}
                         onClick={this.handleShowMenuDrawer}>
                         <i className="icon-menu"></i>
                         <span> Menu</span>
                     </a>
                     <a
-                        className={`navigation__item ${
-                            categoriesDrawer === true ? 'active' : ''
-                        }`}
+                        className={`navigation__item ${categoriesDrawer === true ? 'active' : ''
+                            }`}
                         onClick={this.handleShowCategoriesDrawer}>
                         <i className="icon-list4"></i>
                         <span> Categories</span>
                     </a>
                     <a
-                        className={`navigation__item ${
-                            searchDrawer === true ? 'active' : ''
-                        }`}
+                        className={`navigation__item ${searchDrawer === true ? 'active' : ''
+                            }`}
                         onClick={this.handleShowSearchDrawer}>
                         <i className="icon-magnifier"></i>
                         <span> Search</span>
                     </a>
                     <a
-                        className={`navigation__item ${
-                            cartDrawer === true ? 'active' : ''
-                        }`}
+                        className={`navigation__item ${cartDrawer === true ? 'active' : ''
+                            }`}
                         onClick={this.handleShowCartDrawer}>
                         <i className="icon-bag2"></i>
                         <span> Cart</span>

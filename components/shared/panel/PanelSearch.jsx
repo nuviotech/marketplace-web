@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
+import NavigationList from '../navigation/NavigationList';
 
 const PanelSearch = () => {
     const [keyword, setKeyword] = useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
+
         if (keyword !== '') {
+            NavigationList.handleDrawerClose();
             Router.push(`/search?keyword=${keyword}`);
         }
     }
