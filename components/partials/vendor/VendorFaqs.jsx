@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const VendorFaqs = () => (
@@ -5,13 +6,13 @@ const VendorFaqs = () => (
         <div className="container">
             <div className="ps-section__header">
                 <p>FREQUENTLY ASKED QUESTIONS</p>
-                <h4>Here are some common questions about selling on Martfury</h4>
+                <h4>Here are some common questions about selling on Nuvio</h4>
             </div>
             <div className="ps-section__content">
                 <div className="row">
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ">
                         <figure>
-                            <figcaption>How do fees work on Martfury?</figcaption>
+                            <figcaption>How do fees work on Nuvio?</figcaption>
                             <p>
                                 Joining and starting a shop on Martfury is free. There are three
                                 basic selling fees: a listing fee, a transaction fee, and a payment
@@ -37,7 +38,7 @@ const VendorFaqs = () => (
                                 (if you don’t already have one), set your shop location and
                                 currency, choose a shop name, create a listing, set a payment method
                                 (how you want to be paid), and finally set a billing method (how you
-                                want to pay your Martfuryfees).
+                                want to pay your Nuvio fees).
                             </p>
                         </figure>
                     </div>
@@ -76,7 +77,7 @@ const VendorFaqs = () => (
                             </p>
                         </figure>
                         <figure>
-                            <figcaption>What can I sell on Martfury?</figcaption>
+                            <figcaption>What can I sell on Nuvio?</figcaption>
                         </figure>
                         <p>
                             Martfury provides a marketplace for crafters, artists and collectors to
@@ -88,9 +89,9 @@ const VendorFaqs = () => (
             </div>
             <div className="ps-section__footer">
                 <p>Still have more questions? Feel free to contact us.</p>
-                <a className="ps-btn" href="#">
-                    Contact Us
-                </a>
+                <Link  href="/page/contact-us">
+                    <span className="ps-btn">Contact Us</span>
+                </Link>
             </div>
         </div>
     </div>

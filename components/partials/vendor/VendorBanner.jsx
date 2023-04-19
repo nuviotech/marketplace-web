@@ -12,7 +12,7 @@ const VendorBanner = () => (
                     Store
                 </h2>
                 <Link href="/vendor/store-list">
-                    <a className="ps-btn ps-btn--lg" href="#">
+                    <a className="ps-btn ps-btn--lg" target='_blank' href="https://nuviosellers.com/signUp">
                         Start Selling
                     </a>
                 </Link>

@@ -1,7 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
-const FooterSecond = ({ classes }) => (
+const FooterSecond = ({ classes }) => {
+    
+    return(
     <footer className={`ps-footer ps-footer--2 ${classes}`}>
         <div className="container">
             <div className="ps-footer__content">
@@ -68,11 +71,7 @@ const FooterSecond = ({ classes }) => (
                                 <aside className="widget widget_footer">
                                     <h4 className="widget-title">Bussiness</h4>
                                     <ul className="ps-list--link">
-                                        <li>
-                                            <Link href="/blog">
-                                                <a>Our Press</a>
-                                            </Link>
-                                        </li>
+                                        
                                         <li>
                                             <Link href="/account/checkout">
                                                 <a>Checkout</a>
@@ -106,8 +105,9 @@ const FooterSecond = ({ classes }) => (
                                         className="form-control"
                                         type="text"
                                         placeholder="Email Address"
+                                        onChange={(e)=>{setEmail(e.target.value)}}
                                     />
-                                    <button className="ps-btn">
+                                    <button onClick={()=>{saveSubscriber()}} className="ps-btn">
                                         Subscribe
                                     </button>
                                 </div>
@@ -144,6 +144,7 @@ const FooterSecond = ({ classes }) => (
             </div>
         </div>
     </footer>
-);
+    );
+};
 
 export default FooterSecond;

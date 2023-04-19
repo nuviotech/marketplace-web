@@ -25,7 +25,7 @@ class NavigationList extends Component {
     handleSubmit(e) {
             e.preventDefault();
             if (this.state.keyword !== '') {
-                //window.location.assign(`/search?keyword=${this.state.keyword}`)
+                window.location.assign(`/search?keyword=${this.state.keyword}`)
                 //this.state.router.push(`/search?keyword=${this.state.keyword}`);
             }
         }
