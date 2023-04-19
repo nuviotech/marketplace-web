@@ -107,7 +107,7 @@ class Register extends Component {
             )
         }
 
-        this.props.form.validateFields((err, values) => {
+        this.props.form?.validateFields((err, values) => {
             if (!err) {
                 this.props.dispatch(login());
                 Router.push('/account/login');

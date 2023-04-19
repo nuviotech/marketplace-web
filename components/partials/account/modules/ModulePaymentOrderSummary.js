@@ -26,7 +26,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping}) => {
                         {item.title}
                         <span>x{item.quantity}</span>
                     </strong>
-                    <small>₹{item.quantity * item.price}</small>
+                    <small>{item.quantity * item.sale_price} <del>₹{item.quantity * item.price}</del></small>
                 </a>
             </Link>
         ));

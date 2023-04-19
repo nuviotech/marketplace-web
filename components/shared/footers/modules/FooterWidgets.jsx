@@ -7,7 +7,7 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Contact us</h4>
             <div className="widget_content">
                 <p>Call us 24/7</p>
-                <h3>+91 7718895734 | 7718852036</h3>
+                <h3>+91 8928268145</h3>
                 <p>
                 Shop No. 1, Shakti Dham, Plot No. 108 Ghansoli, Navi Mumbai - 400701, Maharashtra, India<br />
                     <a href="mailto:contact@martfury.co">support@nuvio.in</a>
@@ -90,11 +90,7 @@ const FooterWidgets = () => (
         <aside className="widget widget_footer">
             <h4 className="widget-title">Bussiness</h4>
             <ul className="ps-list--link">
-                <li>
-                    <Link href="/page/about-us">
-                        <a>Our Press</a>
-                    </Link>
-                </li>
+               
                 <li>
                     <Link href="/account/checkout">
                         <a>Checkout</a>
