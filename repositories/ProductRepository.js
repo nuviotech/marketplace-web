@@ -58,6 +58,7 @@ class ProductRepository {
     }
 
     async getBrands() {
+        
         //`${baseUrl}/brands`
         const reponse = await Repository.get(`${policyMakerUrl}/brands`,{ 
             headers: {

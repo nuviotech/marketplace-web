@@ -9,7 +9,6 @@ const PanelSearch = () => {
         e.preventDefault();
 
         if (keyword !== '') {
-            NavigationList.handleDrawerClose();
             Router.push(`/search?keyword=${keyword}`);
         }
     }
