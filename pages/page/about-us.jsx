@@ -27,7 +27,7 @@ const AboutUsPage = () => {
                 <img src="/static/img/bg/about-us.jpg" alt="" />
                 <BreadCrumb breacrumb={breadCrumb} />
                 <OurTeam />
-                <AboutAwards />
+                
             </div>
             <Newletters layout="container" />
         </PageContainer>

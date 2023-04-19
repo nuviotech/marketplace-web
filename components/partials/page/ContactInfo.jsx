@@ -16,17 +16,18 @@ const ContactInfo = () => (
                                 <a href="mailto:support@nuvio.in">
                                     support@nuvio.in
                                 </a>
-                                <span>+91 7718852036</span>
+                                <span>+91 8928268145</span>
                             </p>
                         </div>
                     </div>
                     <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 ">
                         <div className="ps-block--contact-info">
-                            <h4>Head Quater</h4>
+                            <h4>Registered Address</h4>
                             <p>
                                 <span>
                                     Shop No. 1, Shakti Dham, Plot No. 108 Ghansoli, Navi Mumbai - 400701, Maharashtra, India 
-                                </span>
+                                </span> || <br/>
+                                <span>905,The Crown, Nr. D-Mart, Gharkul, Sector 15, Kharghar, Navi Mumbai, Maharashtra 410210</span>
                             </p>
                         </div>
                     </div>
@@ -44,7 +45,7 @@ const ContactInfo = () => (
                             <h4>Customer Service</h4>
                             <p>
                                 <a href="#">support@nuvio.in</a>
-                                <span>+91 7718852036</span>
+                                <span>+91 8928268145</span>
                             </p>
                         </div>
                     </div>
@@ -53,7 +54,7 @@ const ContactInfo = () => (
                             <h4>Media Relations</h4>
                             <p>
                                 <a href="#">support@nuvio.in</a>
-                                <span>+91 7718852036</span>
+                                <span>+91 8928268145</span>
                             </p>
                         </div>
                     </div>
@@ -62,7 +63,7 @@ const ContactInfo = () => (
                             <h4>Vendor Support</h4>
                             <p>
                                 <a href="#">support@nuvio.in</a>
-                                <span>+91 7718852036</span>
+                                <span>+91 8928268145</span>
                             </p>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ import '~/public/static/fonts/Linearicons/Font/demo-files/demo.css';
 import '~/public/static/fonts/font-awesome/css/font-awesome.min.css';
 import '~/public/static/css/bootstrap.min.css';
 import '~/public/static/css/slick.min.css';
+import '~/public/static/css/style.css'
 import '~/scss/style.scss';
 import '~/scss/home-default.scss';
 import '~/scss/market-place-1.scss';
@@ -54,7 +55,8 @@ function App({ Component, pageProps }) {
                     />
     </Head>*/}
                 <Head>
-               
+                    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
                     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LMKDBVDBY5"></script>
                     <script>
                         window.dataLayer = window.dataLayer || [];
