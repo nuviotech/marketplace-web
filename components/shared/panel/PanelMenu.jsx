@@ -75,8 +75,8 @@ class PanelMenu extends Component {
                                             (megaSubItem) => (
                                                 <Menu.Item
                                                     key={megaSubItem.text}>
-                                                    <Link href={item.url}>
-                                                        <a>
+                                                    <Link href={megaSubItem.url}>
+                                                        <a  onClick={()=>{NavigationList.handleDrawerClose()}}>
                                                             {megaSubItem.text}
                                                         </a>
                                                     </Link>
@@ -94,7 +94,7 @@ class PanelMenu extends Component {
                                     <Link
                                         href={`${item.url}/[pid]`}
                                         as={`${item.url}/${item.endPoint}`}>
-                                        l<a>{item.text}</a>
+                                        <a>{item.text}</a>
                                     </Link>
                                 ) : (
                                     <Link href={item.url} as={item.alias}>
