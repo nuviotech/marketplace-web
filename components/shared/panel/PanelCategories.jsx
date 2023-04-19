@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import Link from 'next/link';
 import categories from '../../../public/static/data/static-categories.json';
 import ProductRepository from '~/repositories/ProductRepository';
+import NavigationList from '../navigation/NavigationList';
 
 const { SubMenu } = Menu;
 
@@ -28,6 +29,23 @@ function PanelCategories() {
             });
         }
     };*/
+/*
+    const handleClick = (e, path) => {
+        e.preventDefault()
+     
+         if (path === "/about") {
+           console.log("I clicked on the About Page");
+           // then you can: 
+           // router.push(path)
+         }
+         if (path === "/posts") {
+           console.log("I clicked on the Posts Page");
+           // then you can: 
+           // router.push(path)
+         }
+       };*/
+     
+     
 
     const getCategories = async() => {
         setLoading(true);
@@ -54,7 +72,9 @@ function PanelCategories() {
                 >
                 {categories?.map(category => (
                     <Menu.Item key={category.categoryId}>
-                        <Link href={`/category/${category.categoryId}`} >{category.name}</Link>
+                        <Link href={`/category/${category.categoryId}`}>
+                           {category.name}
+                        </Link>
                     </Menu.Item>
                 ))}
             </Menu>

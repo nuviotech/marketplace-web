@@ -35,7 +35,7 @@ const WidgetShopCategories = () => {
             const items = categories.map((item) => (
                 <li
                     key={item.slug}
-                    className={item.slug === slug ? 'active' : ''}>
+                    className={item.name === slug ? 'active' : ''}>
                     <Link href={`/category/${item.categoryId}`}>{item.name}</Link>
                 </li>
             ));
