@@ -54,7 +54,7 @@ class ProductRepository {
     }
 
     async getBrands() {
-        
+        console.warn("brand : #############"+policyMakerKey+"########");
         //`${baseUrl}/brands`
         const reponse = await Repository.get(`${policyMakerUrl}/brands`,{ 
             headers: {
@@ -70,7 +70,7 @@ class ProductRepository {
     }
 
     async getProductCategories() {
-        
+        console.warn("Cat : #############"+policyMakerKey+"########");
         //${baseUrl}/product-categories
         const reponse = await Repository.get(`${policyMakerUrl}/product-categories`,{ 
             headers: {
