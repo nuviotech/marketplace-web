@@ -32,7 +32,12 @@ const ContactInfo = () => (
                             <h4>Registered Address</h4>
                             <p>
                                 <span>
-                                    Shop No. 1, Shakti Dham, Plot No. 108 Ghansoli, Navi Mumbai - 400701, Maharashtra, India
+                                    Nuvio Sellers Private Limited,
+                                    Shop No 2, Shakti Dham,
+                                    Plot No 108, Navi Mumbai,
+                                    Maharashtra,India,400701,
+                                    CIN : U74999MH2018PTC314777
+                                    Telephone: 7718895734
                                 </span><br />
                                 <hr />
                                 <h5> Additional Address </h5>

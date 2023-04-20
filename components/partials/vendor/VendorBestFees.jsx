@@ -37,7 +37,7 @@ const VendorBestFrees = () => (
                         </ul>
                     </figure>
                 </div>
-                <div className="ps-section__highlight">
+                {/*<div className="ps-section__highlight">
                     <img src="/static/img/icons/vendor-4.png" alt="martfury" />
                     <figure>
                         <p>
@@ -53,7 +53,7 @@ const VendorBestFrees = () => (
                         Listing fees are billed for 0.20 USD, so if your bank’s currency is not USD,
                         the amount in your currency may vary based on changes in the exchange rate.
                     </p>
-                </div>
+                </div>*/}
             </div>
         </div>
     </div>

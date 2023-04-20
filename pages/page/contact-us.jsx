@@ -25,8 +25,9 @@ const ContactUsPage = () => {
 
             <div className="ps-page--single" id="contact-us">
                 <BreadCrumb breacrumb={breadCrumb} />
-                <ContactMap />
+                
                 <ContactInfo />
+                <ContactMap />
                 <ContactForm />
             </div>
             <Newletters layout="container" />
