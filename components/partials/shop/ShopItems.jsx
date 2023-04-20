@@ -31,7 +31,12 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     }
 
     async function getTotalRecords(params) {
-        const responseData = await ProductRepository.getTotalRecords();
+        var responseData;
+        if(params.price_gt){
+             responseData = await ProductRepository.getTotalRecords(params.price_gt,params.price_lt);
+        }else{
+            responseData = await ProductRepository.getTotalRecords();
+        }
         if (responseData) {
             setTotal(responseData);
         }
@@ -88,7 +93,7 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
                 _limit: pageSize,
             };
         }
-        getTotalRecords();
+        getTotalRecords(params);
         getProducts(params);
         handleSetColumns();
     }, [query]);
