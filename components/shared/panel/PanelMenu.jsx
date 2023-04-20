@@ -46,13 +46,13 @@ class PanelMenu extends Component {
                                 key={item.text}
                                 title={
                                     <Link href={item.url}>
-                                        <a>{item.text}</a>
+                                        <a>QQ{item.text}</a>
                                     </Link>
                                 }>
                                 {item.subMenu.map((subItem) => (
                                     <Menu.Item key={subItem.text}>
                                         <Link href={subItem.url}>
-                                            <a>{subItem.text}</a>
+                                            <a>SS{subItem.text}</a>
                                         </Link>
                                     </Menu.Item>
                                 ))}
@@ -64,7 +64,7 @@ class PanelMenu extends Component {
                                 key={item.text}
                                 title={
                                     <Link href={item.url}>
-                                        <a>{item.text}</a>
+                                        <a>AA{item.text}</a>
                                     </Link>
                                 }>
                                 {item.megaContent.map((megaItem) => (
@@ -94,11 +94,11 @@ class PanelMenu extends Component {
                                     <Link
                                         href={`${item.url}/[pid]`}
                                         as={`${item.url}/${item.endPoint}`}>
-                                        <a>{item.text}</a>
+                                        <a>RR{item.text}</a>
                                     </Link>
                                 ) : (
                                     <Link href={item.url} as={item.alias}>
-                                        <a>{item.text}</a>
+                                        <a>MM{item.text}</a>
                                     </Link>
                                 )}
                             </Menu.Item>

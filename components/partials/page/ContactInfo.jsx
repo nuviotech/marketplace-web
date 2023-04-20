@@ -16,7 +16,14 @@ const ContactInfo = () => (
                                 <a href="mailto:support@nuvio.in">
                                     support@nuvio.in
                                 </a>
-                                <span>+91 8928268145</span>
+                                <span><b>+91 8928268145</b></span>
+                                <a
+                                    href="https://wa.me/+918928268145"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <i class="fa fa-whatsapp whatsapp-icon fa-3x text-success"  ></i>
+                                </a>
                             </p>
                         </div>
                     </div>
@@ -25,8 +32,15 @@ const ContactInfo = () => (
                             <h4>Registered Address</h4>
                             <p>
                                 <span>
-                                    Shop No. 1, Shakti Dham, Plot No. 108 Ghansoli, Navi Mumbai - 400701, Maharashtra, India 
-                                </span> || <br/>
+                                    Nuvio Sellers Private Limited,
+                                    Shop No 2, Shakti Dham,
+                                    Plot No 108, Navi Mumbai,
+                                    Maharashtra,India,400701,
+                                    CIN : U74999MH2018PTC314777
+                                    Telephone: 7718895734
+                                </span><br />
+                                <hr />
+                                <h5> Additional Address </h5>
                                 <span>905,The Crown, Nr. D-Mart, Gharkul, Sector 15, Kharghar, Navi Mumbai, Maharashtra 410210</span>
                             </p>
                         </div>
@@ -36,7 +50,7 @@ const ContactInfo = () => (
                             <h4>Work With Us</h4>
                             <p>
                                 <span>Send your CV to our email:</span>
-                                <a href="#">support@nuvio.in</a>
+                                <a href="mailTo:support@nuvio.in"><b>support@nuvio.in</b></a>
                             </p>
                         </div>
                     </div>
@@ -45,7 +59,14 @@ const ContactInfo = () => (
                             <h4>Customer Service</h4>
                             <p>
                                 <a href="#">support@nuvio.in</a>
-                                <span>+91 8928268145</span>
+                                <span><b>+91 8928268145</b></span>
+                                <a
+                                    href="https://wa.me/+918928268145"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <i class="fa fa-whatsapp whatsapp-icon fa-3x text-success"  ></i>
+                                </a>
                             </p>
                         </div>
                     </div>

@@ -7,6 +7,14 @@ import PanelSearch from '../panel/PanelSearch';
 import PanelCategories from '../panel/PanelCategories';
 import { Router, useRouter } from 'next/router';
 
+
+
+import { Menu } from 'antd';
+import { menuPrimary } from '~/public/static/data/menu';
+import menu_data from '~/public/static/data/menu';
+import Link from 'next/link';
+const { SubMenu } = Menu;
+
 class NavigationList extends Component {
     constructor(props) {
         super(props);
@@ -22,13 +30,6 @@ class NavigationList extends Component {
 
    
     
-    handleSubmit(e) {
-            e.preventDefault();
-            if (this.state.keyword !== '') {
-                window.location.assign(`/search?keyword=${this.state.keyword}`)
-                //this.state.router.push(`/search?keyword=${this.state.keyword}`);
-            }
-        }
 
      handleDrawerClose () {
 
@@ -100,7 +101,81 @@ class NavigationList extends Component {
                             </span>
                         </div>
                         <div className="ps-panel__content">
-                            <PanelMenu />
+                            
+            <Menu
+                mode="inline"
+                openKeys={this.state.openKeys}
+                onOpenChange={this.onOpenChange}
+                className="menu--mobile-2">
+                {menu_data.menuPrimary.menu_1.map((item) => {
+                    if (item.subMenu) {
+                        return (
+                            <SubMenu
+                                key={item.text}
+                                title={
+                                    <Link href={item.url}>
+                                        <a>{item.text}</a>
+                                    </Link>
+                                }>
+                                {item.subMenu.map((subItem) => (
+                                    <Menu.Item key={subItem.text}>
+                                        <Link href={subItem.url}>
+                                            <a onClick={()=>{this.handleDrawerClose()}}>{subItem.text}</a>
+                                        </Link>
+                                    </Menu.Item>
+                                ))}
+                            </SubMenu>
+                        );
+                    } else if (item.megaContent) {
+                        return (
+                            <SubMenu
+                                key={item.text}
+                                title={
+                                    <Link href={item.url}>
+                                        <a>{item.text}</a>
+                                    </Link>
+                                }>
+                                {item.megaContent.map((megaItem) => (
+                                    <SubMenu
+                                        key={megaItem.heading}
+                                        title={<span>{megaItem.heading}</span>}>
+                                        {megaItem.megaItems?.map(
+                                            (megaSubItem) => (
+                                                <Menu.Item
+                                                    key={megaSubItem.text}>
+                                                    <Link href={megaSubItem.url}>
+                                                        <a  onClick={()=>{this.handleDrawerClose()}}>
+                                                            {megaSubItem.text}
+                                                        </a>
+                                                    </Link>
+                                                </Menu.Item>
+                                            )
+                                        )}
+                                    </SubMenu>
+                                ))}
+                            </SubMenu>
+                        );
+                    } else {
+                        return (
+                            <Menu.Item key={item.text}>
+                                {item.type === 'dynamic' ? (
+                                    <Link
+                                        href={`${item.url}/[pid]`}
+                                        as={`${item.url}/${item.endPoint}`}>
+                                        <a onClick={()=>{this.handleDrawerClose()}}>{item.text}</a>
+                                    </Link>
+                                ) : (
+                                    <Link href={item.url} as={item.alias}>
+                                        <a onClick={()=>{this.handleDrawerClose()}}>{item.text}</a>
+                                    </Link>
+                                )}
+                            </Menu.Item>
+                        );
+                    }
+                })}
+            </Menu>
+        
+
                         </div>
                     </div>
                 </Drawer>
@@ -143,11 +218,7 @@ class NavigationList extends Component {
                             
 
                             <div className="ps-panel__search-results">
-                                <form
-                                    className="ps-form--search-mobile"
-                                    action="/"
-                                    method="get"
-                                    onSubmit={(e) => this.handleSubmit(e)}>
+                                
                                     <div className="form-group--nest">
                                         <input
                                             className="form-control"
@@ -155,11 +226,15 @@ class NavigationList extends Component {
                                             placeholder="Search something ..."
                                             onChange={(e) => this.setState({keyword : e.target.value})}
                                         />
-                                        <button onClick={() => { this.handleDrawerClose() }}>
-                                            <i className="icon-magnifier"></i>
-                                        </button>
+                                        <Link href={`/search?keyword=${this.state.keyword}`}>
+                                            <button onClick={() => { this.handleDrawerClose() }}>
+                                                <i className="icon-magnifier"></i>
+                                            </button>
+                                        </Link>
+                                        
+                            
                                     </div>
-                                </form>
+                            
                             </div>
 
                         </div>

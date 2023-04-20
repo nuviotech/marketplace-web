@@ -29,8 +29,8 @@ const BecomeAVendorPage = () => {
                 <VendorAbout />
                 <VendorMileStone />
                 <VendorBestFees />
-                <VendorTestimonials />
-                <VendorFaqs />
+        
+                
                 <VendorBanner />
             </div>
             <Newsletters layout="container" />

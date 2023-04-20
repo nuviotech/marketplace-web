@@ -1,9 +1,5 @@
 import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl, policyMakerKey } from './Repository';
 
-
-
-
-
 class ProductRepository {
     
     
@@ -58,6 +54,7 @@ class ProductRepository {
     }
 
     async getBrands() {
+        
         //`${baseUrl}/brands`
         const reponse = await Repository.get(`${policyMakerUrl}/brands`,{ 
             headers: {
@@ -88,8 +85,8 @@ class ProductRepository {
         return reponse;
     }
 
-    async getTotalRecords() {
-        const reponse = await Repository.get(`${marketplaceUrl}/products/count`)
+    async getTotalRecords(price_gt,price_lt) {
+        const reponse = await Repository.get(`${marketplaceUrl}/products/count?price_gt=${price_gt}&price_lt=${price_lt}`)
             .then((response) => {
                 return response.data;
             })
