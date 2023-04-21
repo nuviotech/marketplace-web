@@ -5,6 +5,7 @@ import FooterDefault from '~/components/shared/footers/FooterDefault';
 import Newletters from '~/components/partials/commons/Newletters';
 import PageContainer from '~/components/layouts/PageContainer';
 import Shipping_And_Delivery from '~/components/partials/page/shipping_and_delivery';
+import SEO from "@bradgarropy/next-seo"
 
 const Shipping_Delivery = () => {
     const breadCrumb = [
