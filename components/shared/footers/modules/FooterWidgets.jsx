@@ -66,6 +66,16 @@ const FooterWidgets = () => (
                     </Link>
                 </li>
                 <li>
+                    <Link href="/page/Cancellation_And_Refund_Policy">
+                        <a>Cancellation & Refund Policy</a>
+                    </Link>
+                </li>
+                <li>
+                    <Link href="/page/shipping_and_delivery">
+                        <a>Shipping And Delivery</a>
+                    </Link>
+                </li>
+                <li>
                     <Link href="/page/privacy_policy">
                         <a>Privacy Policy</a>
                     </Link>
