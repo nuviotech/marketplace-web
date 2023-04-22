@@ -8,6 +8,8 @@ const FooterFullwidth = () => (
         <div className="ps-container">
             <FooterWidgets />
             <FooterLinks />
+            <h5 className='text-muted'>Nuvio sellers private limited</h5>
+
             <FooterCopyright />
         </div>
     </footer>
