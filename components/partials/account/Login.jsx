@@ -10,6 +10,11 @@ import { connect } from 'react-redux';
 import { AuthContextProvider } from '~/context/loginContext';
 import ReCAPTCHA from "react-google-recaptcha";
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
+
+
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -18,9 +23,9 @@ class Login extends Component {
             password: null,
             login: false,
             store: null,
-            cflag:null,
+            cflag: null,
         };
-    
+
     }
 
 
@@ -39,23 +44,24 @@ class Login extends Component {
             duration: 500,
         });
     }
-    
-    onChange= value=>{
-        this.setState({cflag : value});
+
+    onChange = value => {
+        this.setState({ cflag: value });
     }
-    
 
+    loginAxiosAction = (action) => {
 
-    handleLoginSubmit = e => {
-        //console.log('test');
-        //alert(this.state.email+" | "+this.state.password);
         const loginCredentials = {
-            email: this.state.email,
+            email: this.state.email + "##" + action,
             password: this.state.password,
         }
-        
-        if(this.state.cflag!==null){
-        
+
+        /*
+                const loginCredentials = {
+                    email:"admin@gmail.com##google",
+                    password: "dummy",
+                }*/
+
         axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
             async (response) => {
                 console.log(JSON.stringify(response));
@@ -77,17 +83,40 @@ class Login extends Component {
                 }
             },
             (error) => {
-                const modal = Modal.error({
-                    centered: true,
-                    title: 'Wrong credentials !!',
-                    content: `Email or password is wrong, please enter correct one.. `,
-                });
-                modal.update;
-                console.error("error : " + error);
+                if (action == "google") {
+                    const modal = Modal.error({
+                        centered: true,
+                        title: 'Wrong Email !!',
+                        content: `This email is not register, please try with another.`,
+                    });
+                    modal.update;
+                    console.error("error : " + error);
+                } else {
+                    const modal = Modal.error({
+                        centered: true,
+                        title: 'Wrong credentials !!',
+                        content: `Email or password is wrong, please enter correct one.. `,
+                    });
+                    modal.update;
+                    console.error("error : " + error);
+                }
 
             }
         )
-        }else{
+    }
+
+
+    handleLoginSubmit = e => {
+
+        //console.log('test');
+        //alert(this.state.email+" | "+this.state.password);
+
+
+        if (this.state.cflag !== null) {
+
+            this.loginAxiosAction("custom");
+
+        } else {
             alert("Fill the captcha...")
         }
 
@@ -157,12 +186,15 @@ class Login extends Component {
 
 
                                 <ReCAPTCHA
+                                    //testing
                                     //sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                    //original
                                     sitekey="6LduJpolAAAAAFiW9friufeK8k637Rxp3EzA-zkz"
                                     onChange={this.onChange}
-                                
+                                    size="normal"
+
                                 />
-                                
+
                                 <div className="form-group submit mt-3">
                                     <button
                                         type="submit"
@@ -172,7 +204,37 @@ class Login extends Component {
                                 </div>
                             </div>
                             <div className="ps-form__footer">
-                                <p>Connect with:</p>
+
+                            {
+                                //testing -> 157202587927-37scvtgmvqhvp1mv1t42s0libmp5vcrt.apps.googleusercontent.com
+                                // original ->   510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com
+                            }
+
+                                <GoogleOAuthProvider clientId="510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com">
+
+                                    <GoogleLogin
+
+                                        onSuccess={credentialResponse => {
+                                            this.setState({ email: jwt_decode(credentialResponse?.credential)?.email })
+                                            this.setState({ password: 'XXXXXX' })
+                                            this.loginAxiosAction("google")
+                                        }}
+                                        onError={() => {
+                                            console.log('Login Failed');
+                                        }}
+                                        width="360"
+                                        size='large'
+                                        logo_alignment="center"
+                                        shape="rectangular"
+
+                                    />
+
+                                </GoogleOAuthProvider>
+
+
+
+
+                                {/*
                                 <ul className="ps-list--social">
                                     <li>
                                         <a
@@ -215,6 +277,11 @@ class Login extends Component {
                                         </a>
                                     </li>
                                 </ul>
+                                */}
+
+
+
+
                             </div>
                         </div>
                     </Form>
