@@ -31,8 +31,6 @@ const ProductDefaultPage = ({ responseData }) => {
     //console.warn(pid);
     const description = responseData?.title + " | price : " + responseData?.sale_price;
 
-
-
     async function getProduct(pid) {
         setLoading(true);
         //const responseData = await ProductRepository.getProductsById(pid);
@@ -101,7 +99,23 @@ const ProductDefaultPage = ({ responseData }) => {
                     href={responseData?.images[0].url}
                 />
             </Head>
-            <SEO title={title} description={description} keywords={keyWords} icon={responseData?.images[0].url} />
+            <SEO 
+            title={title} 
+            description={description} 
+            keywords={keyWords} 
+            icon={responseData?.images[0].url}
+            facebook={{
+                image: responseData?.images[0].url,
+                url: "https://nuvio.in/product/"+pid,
+                type: "website",
+            }}
+            twitter={{
+                image: responseData?.images[0].url,
+                site: "nuvio.in",
+                card: "summary",
+            }}
+        
+            />
 
             <PageContainer
                 header={headerView}

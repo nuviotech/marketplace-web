@@ -50,17 +50,11 @@ class Login extends Component {
     }
 
     loginAxiosAction = (action) => {
-
         const loginCredentials = {
-            email: this.state.email + "##" + action,
+            email: this.state.email,
+            loginGateway: action,
             password: this.state.password,
         }
-
-        /*
-                const loginCredentials = {
-                    email:"admin@gmail.com##google",
-                    password: "dummy",
-                }*/
 
         axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
             async (response) => {
@@ -210,7 +204,7 @@ class Login extends Component {
                                 // original ->   510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com
                             }
 
-                                <GoogleOAuthProvider clientId="510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com">
+                                <GoogleOAuthProvider clientId="157202587927-37scvtgmvqhvp1mv1t42s0libmp5vcrt.apps.googleusercontent.com">
 
                                     <GoogleLogin
 
