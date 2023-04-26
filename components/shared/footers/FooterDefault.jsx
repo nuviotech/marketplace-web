@@ -8,7 +8,6 @@ const FooterDefault = () => (
         <div className="container">
             <FooterWidgets />
             <FooterLinks />
-            <>Nuvio sellers private limited</>
             <FooterCopyright />
         </div>
     </footer>
