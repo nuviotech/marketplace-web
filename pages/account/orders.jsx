@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BreadCrumb from '~/components/elements/BreadCrumb';
-import Invoices from '~/components/partials/account/Invoices';
+import Invoices from '~/components/partials/account/orders';
 import FooterDefault from '~/components/shared/footers/FooterDefault';
 import Newletters from '~/components/partials/commons/Newletters';
 import PageContainer from '~/components/layouts/PageContainer';
@@ -13,12 +13,12 @@ const InvoicePage = () => {
             url: '/',
         },
         {
-            text: 'Invoices',
+            text: 'Orders',
         },
     ];
     return (
         <>
-            <PageContainer footer={<FooterDefault />} title="Invoices">
+            <PageContainer footer={<FooterDefault />} title="orders">
                 <div className="ps-page--my-account">
                     <BreadCrumb breacrumb={breadCrumb} />
                     <Invoices />

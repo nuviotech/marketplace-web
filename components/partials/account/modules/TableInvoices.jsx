@@ -10,18 +10,21 @@ import { returnPolicyByUser } from '~/repositories/UserDeatils';
 class TableInvoices extends Component {
     constructor(props) {
         super(props);
-        // alert(JSON.stringify(props.data.userId))
+         //alert(JSON.stringify(props.data.orders))
 
         this.state = {
             action: 'N',
             open: false,
             email: this.props.data.email,
             reason: 'none',
-            orderId: 0,
+            orderProductId: '',
             categoryId: 0,
             paymentId: 0,
             amount: 0,
+            productName:''
         };
+
+
     }
     render() {
         /*
@@ -32,25 +35,28 @@ class TableInvoices extends Component {
         this.props.data.orders?.map((data) => {
             //  var r=data.razorpayOrderDetails?.replace("\\","");
             //console.log(data.paymentDetails.rzPaymentId);
-            var obj = {
-                id: data.orderId,
-                categoryId: data.products[0].categoryId,
-                paymentId: data.paymentDetails?.rzPaymentId,
-                invoiceId: data.orderId,
-                razorpayId: JSON.parse(data.razorpayOrderDetails)?.id,
-                title: data.productNames,
-                dateCreate: "" + new Date(data.orderDate).toISOString().split('T')[0],
-                amount: data.totalBill,
-                paymentStatus: data.paymentStatus,
-                status: data.orderStatus,
-                under_return_policy:data.underReturnPolicy
-            }
-            tableData.push(obj);
+            data.products.map((item)=>{
+                var obj = {
+                    id: item.orderProductId,
+                    categoryId: item.categoryId,
+                    paymentId: data.paymentDetails?.rzPaymentId,
+                    invoiceId: item.orderProductId,
+                    razorpayId: JSON.parse(data.razorpayOrderDetails)?.id,
+                    title: item.product_name,
+                    dateCreate: "" + new Date(data.orderDate).toISOString().split('T')[0],
+                    amount: item.sole_price,
+                    paymentStatus: data.paymentStatus,
+                    status: data.orderStatus,
+                    under_return_policy:item.underReturnPolicy
+                }
+                tableData.push(obj);
+            })
+            
         })
 
         //main returnOrder function
         const returnOrder = async () => {
-            if (this.state.orderId == 0 || this.state.categoryId == 0 || this.state.paymentId == 0 || this.state.amount == 0) {
+            if (this.state.orderProductId == '' || this.state.categoryId == 0 || this.state.paymentId == 0 || this.state.amount == 0) {
                 alert("something went wrong !!");
                 this.setState({ open: false });
                 return;
@@ -61,13 +67,13 @@ class TableInvoices extends Component {
                 reason: this.state.reason,
                 paymentId: this.state.paymentId,
                 amt: this.state.amount,
-                orderId: this.state.orderId,
+                orderProductId: this.state.orderProductId,
                 categoryId: this.state.categoryId,
                 userId: this.props.data.userId,
+                productName:this.state.productName
             }
-
-
-            this.setState({ action: await returnPolicyByUser(data) });
+           // alert(JSON.stringify(data))
+            //this.setState({ action: await returnPolicyByUser(data) });
 
             if (this.state.action == '0') {
                 Modal.success({
@@ -93,11 +99,12 @@ class TableInvoices extends Component {
             }
         }
 
-        const openModel = (oid, catId, payId, amt) => {
-            this.setState({ orderId: oid });
+        const openModel = (oid, catId, payId, amt,title) => {
+            this.setState({ orderProductId: oid });
             this.setState({ categoryId: catId });
             this.setState({ paymentId: payId });
             this.setState({ amount: amt });
+            this.setState({productName: title})
             this.setState({ open: true });
         }
 
@@ -266,10 +273,10 @@ class TableInvoices extends Component {
                                                            
                             record.paymentStatus == "unpaid" ?
                                 <button onClick={() => { removeOrder(record.id) }} className="btn btn-outline-danger">Remove</button>
-                                : (record.under_return_policy===0) ?
-                                    <button onClick={() => { openModel(record.id, record.categoryId, record.paymentId, record.amount) }} className="btn btn-outline-warning">Return</button>
+                                : (record.under_return_policy==="0") ?
+                                    <button onClick={() => { openModel(record.id, record.categoryId, record.paymentId, record.amount, record.title) }} className="btn btn-outline-warning">Return</button>
                                     :
-                                    <button className='btn btn-outline-info'>under return policy</button>
+                                    <button className='btn btn-outline-info'>view staus</button>
                         }
                     </span>
                 ),
