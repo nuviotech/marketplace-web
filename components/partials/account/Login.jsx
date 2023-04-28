@@ -14,6 +14,9 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 
+import FacebookLogin from 'react-facebook-login';
+
+
 
 class Login extends Component {
     constructor(props) {
@@ -49,6 +52,11 @@ class Login extends Component {
         this.setState({ cflag: value });
     }
 
+    responseFacebook = (response) => {
+        alert(JSON.stringify(response.email));
+       // loginAxiosAction("facebook");
+      }
+      
     loginAxiosAction = (action) => {
         const loginCredentials = {
             email: this.state.email,
@@ -199,10 +207,10 @@ class Login extends Component {
                             </div>
                             <div className="ps-form__footer">
 
-                            {
-                                //testing -> 157202587927-37scvtgmvqhvp1mv1t42s0libmp5vcrt.apps.googleusercontent.com
-                                // original ->   510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com
-                            }
+                                {
+                                    //testing -> 157202587927-37scvtgmvqhvp1mv1t42s0libmp5vcrt.apps.googleusercontent.com
+                                    // original ->   510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com
+                                }
 
                                 <GoogleOAuthProvider clientId="157202587927-37scvtgmvqhvp1mv1t42s0libmp5vcrt.apps.googleusercontent.com">
 
@@ -226,6 +234,16 @@ class Login extends Component {
                                 </GoogleOAuthProvider>
 
 
+                                <FacebookLogin
+                                    appId="1029697068000890"
+                                    autoLoad={false}
+                                    fields="name,email,picture"
+                                    callback={this.responseFacebook} 
+                                    icon="fa-facebook"
+                                    cssClass="my-facebook-button-class"
+
+                                    
+                                />
 
 
                                 {/*
