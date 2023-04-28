@@ -27,8 +27,8 @@ function Invoices() {
                 icon: 'icon-alarm-ringing',
             },
             {
-                text: 'Invoices',
-                url: '/account/invoices',
+                text: 'Orders',
+                url: '/account/orders',
                 icon: 'icon-papers',
                 active: true,
             },
@@ -110,7 +110,7 @@ function Invoices() {
                             <div className="ps-page__content">
                                 <div className="ps-section--account-setting">
                                     <div className="ps-section__header">
-                                        <h3>Invoices</h3>
+                                        <h3>Orders</h3>
                                     </div>
                                     <div className="ps-section__content">
                                         <TableInvoices data={currentUser} />

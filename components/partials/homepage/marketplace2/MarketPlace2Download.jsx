@@ -32,11 +32,9 @@ const MarketPlace2Download = () => (
                             </form>
                             <p className="download-link">
                                 <a href="#">
-                                    <img src="/static/img/google-play.png" alt="martfury" />
+                                    <img src="/static/img/google-play.png" alt="nuvio-google" />
                                 </a>
-                                <a href="#">
-                                    <img src="/static/img/app-store.png" alt="martfury" />
-                                </a>
+                               
                             </p>
                         </div>
                     </div>

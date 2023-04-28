@@ -17,8 +17,25 @@
     margin-top: 16px;
 }
 
+.my-facebook-button-class{
+    width:100%;
+    border: 1px solid gray;
+    background-color: blue;
+    color:white;
+    border-radius: 2px;
+    height:40px;
+    margin-top: 10px;
+}
+.fa-facebook{
+    padding-right: 20px;
+}
+
 /* for mobile */
 @media screen and (max-width: 767px) {
+    .fa-facebook{
+        padding-right: 10px;
+    }
+
     .whatsapp-icon {
         margin-top: 16px;
     }
