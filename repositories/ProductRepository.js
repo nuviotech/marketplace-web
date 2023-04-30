@@ -135,7 +135,7 @@ class ProductRepository {
                 console.warn(JSON.stringify(response.data))
                 if (response.data) {
                     if (response.data.length > 0) {
-                        console.log("brd;  "+response.data[0])
+                        //console.log("brd;  "+response.data[0])
                         return response.data;
                     }
                 } else {

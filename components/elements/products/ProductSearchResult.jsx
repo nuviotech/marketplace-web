@@ -9,7 +9,7 @@ const ProductSearchResult = ({ product }) => {
     return (
         <div className="ps-product ps-product--wide ps-product--search-result">
             <div className="ps-product__thumbnail">
-                <Link href="/product/[pid]" as={`/product/${product.title.replaceAll(" ","-")}&pid=${product.id}`}>
+                <Link href="/product/[pid]" as={`/product/${product.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product.id}`}>
                     <a>{thumbnailImage(product)}</a>
                 </Link>
             </div>
