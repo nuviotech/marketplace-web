@@ -10,7 +10,7 @@ import { userIsLogin , getToken} from '~/store/auth/action';
 
 const FormCheckoutInformation = ({ ecomerce }) => {
     var userLoginStatus = userIsLogin();
-    console.log("userloginstatus : "+userLoginStatus);
+    //console.log("userloginstatus : "+userLoginStatus);
     //console.log("eccomerce : " + JSON.stringify(ecomerce.cartItems));
     let totalAmount = 0;
     const [review, setReview] = useState({});
@@ -78,10 +78,10 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                     return;
                 }
                 const amt = totalAmount;
-                console.log("amt " + JSON.stringify(response.data));
+               // console.log("amt " + JSON.stringify(response.data));
                 const Razorpay_payment = response.data.RZ_order;
                 const order_ref_id = response.data.order_id;
-                console.log("order id : "+Razorpay_payment.id);
+                //console.log("order id : "+Razorpay_payment.id);
                 const options = {
                     key: response.data.rzKey,
                     currency: "INR",

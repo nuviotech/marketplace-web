@@ -37,10 +37,11 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
         }else{
             responseData = await ProductRepository.getTotalRecords();
         }
-        if (responseData) {
+        
             setTotal(responseData);
-        }
+        
     }
+
 
     function handleSetColumns() {
         switch (columns) {
@@ -63,6 +64,7 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     }
 
     useEffect(() => {
+
         let params;
         if(query.action){
             params = {

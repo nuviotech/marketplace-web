@@ -30,11 +30,15 @@ const ModuleDetailTopInformation = ({props ,product }) => {
                         <a className="ml-2 text-capitalize">{product.brand}</a>
                     </Link>
                 </p>
+                {/*                 
                 <div className="ps-product__rating">
                     <Rating />
                     <span>(2 review)</span>
                 </div>
+                */}
+
             </div>
+
             <div> 
                     {priceView} 
             </div>

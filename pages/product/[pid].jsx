@@ -159,7 +159,7 @@ export async function getStaticPaths() {
         const data =  responseData;
             //console.log("is Array : "+Array.isArray(data));
             //console.log("Length Of Array : "+data.length);
-        console.log("DATA :->: " + JSON.stringify(responseData));
+       // console.log("DATA :->: " + JSON.stringify(responseData));
         var paths;
         if (data!==null && data.length !== 0 ) {
             paths = data?.map((item) => {

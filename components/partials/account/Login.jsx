@@ -66,7 +66,7 @@ class Login extends Component {
 
         axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
             async (response) => {
-                console.log(JSON.stringify(response));
+               // console.log(JSON.stringify(response));
                 var token = response.data.Token;
                 var status = response.data.status;
                 if (status == 0) {

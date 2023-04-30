@@ -30,7 +30,7 @@ class Register extends Component {
 
     handleSubmit = async (e) => {
        // e.preventDefault();
-        console.log(JSON.stringify(this.state))
+      //  console.log(JSON.stringify(this.state))
         if(this.state.firstName=='' || this.state.lastName==''){
             const modal = Modal.error({
                 centered: true,
