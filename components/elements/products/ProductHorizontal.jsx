@@ -14,9 +14,11 @@ const ProductHorizontal = ({ product }) => {
             </div>
             <div className="ps-product__content">
                 {title(product)}
+                {/*
                 <div className="ps-product__rating">
                     <Rating />
                 </div>
+                */}
                 {price(product)}
             </div>
         </div>
