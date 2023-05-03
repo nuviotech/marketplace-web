@@ -52,8 +52,8 @@ const WidgetShopFilterByPriceRange = () => {
                 <span style={{cursor:"pointer"}} onClick={()=>{underPriceProduct(20000)}}>Under ₹20000</span><br />
 
                 <div className='mt-5'>
-                    <input placeholder='MIN IN ₹' style={{width:"35%",border:"1px solid #ffc107",borderRadius:"5px",height:'35px'}} type="text" />
-                    <input placeholder='MAX IN ₹' style={{width:"35%",border:"1px solid #ffc107",borderRadius:"5px",margin:"0 2% ",height:'35px'}}type="text" />
+                    <input className='text-center' placeholder='₹ MIN' style={{width:"35%",border:"1px solid #ffc107",borderRadius:"5px",height:'35px'}} type="text" />
+                    <input className='text-center' placeholder='₹ MAX' style={{width:"35%",border:"1px solid #ffc107",borderRadius:"5px",margin:"0 2% ",height:'35px'}}type="text" />
                     <button style={{width:"25%",border:"1px solid #ffc107",borderRadius:"5px",height:'35px'}}>GO</button>
                 </div>
             </figure>

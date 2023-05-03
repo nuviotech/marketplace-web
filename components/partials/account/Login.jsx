@@ -34,14 +34,10 @@ class Login extends Component {
     
 
     static getDerivedStateFromProps(props) {
-        var action =window.sessionStorage.getItem("action")
-       // console.warn("action : "+action);
+        var action =sessionStorage.getItem("action")
+        console.warn("action : "+action);
 
         if (props.isLoggedIn === true) {
-            if(action == "checkout"){
-                window.sessionStorage.removeItem("action");
-                Router.push('/account/checkout');
-            }else
                 Router.push('/');
         }
         return false;
@@ -82,10 +78,10 @@ class Login extends Component {
                     //this.props.dispatch(login());
                     //this.props.dispatch(loginSuccess());
                     // Router.push('/');
-                    var action =window.sessionStorage.getItem("action")
+                    var action =sessionStorage.getItem("action")
                     if(action== "checkout"){
                         Router.push('/account/checkout')
-                        window.sessionStorage.removeItem("action");
+                        sessionStorage.removeItem("action");
                     }else
                         window.location.assign('/');
                 } else if (status == 1) {
@@ -203,9 +199,9 @@ class Login extends Component {
 
                                 <ReCAPTCHA
                                     //testing
-                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                    //sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                                     //original
-                                   // sitekey="6LduJpolAAAAAFiW9friufeK8k637Rxp3EzA-zkz"
+                                    sitekey="6LduJpolAAAAAFiW9friufeK8k637Rxp3EzA-zkz"
                                     onChange={this.onChange}
                                     size="normal"
 
