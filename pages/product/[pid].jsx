@@ -135,7 +135,7 @@ const ProductDefaultPage = ({ responseData }) => {
                             layout="fullwidth"
                             collectionSlug="deal-of-the-day"
                         />
-                        <RelatedProduct collectionSlug="shop-recommend-items" />
+                        <RelatedProduct keywords={keyWords} collectionSlug="shop-recommend-items" />
                     </div>
                 </div>
                 <Newletters />

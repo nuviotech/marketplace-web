@@ -193,7 +193,7 @@ export default function useProduct() {
         },
         title: (payload) => {
             let view = (
-                <Link href="/product/[pid]" as={`/product/${payload?.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${payload.id}`}>
+                <Link href="/product/[pid]" as={`/product/${payload?.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${payload?.id}`}>
                     <a className="ps-product__title">{payload?.title}</a>
                 </Link>
             );

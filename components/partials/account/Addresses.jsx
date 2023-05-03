@@ -23,8 +23,8 @@ function Addresses() {
                 icon: 'icon-alarm-ringing',
             },
             {
-                text: 'Invoices',
-                url: '/account/invoices',
+                text: 'Orders',
+                url: '/account/order',
                 icon: 'icon-papers',
             },
             {

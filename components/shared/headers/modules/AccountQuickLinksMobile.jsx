@@ -24,8 +24,8 @@ class AccountQuickLinks extends Component {
                 url: '/account/notifications',
             },
             {
-                text: 'Invoices',
-                url: '/account/invoices',
+                text: 'Orders',
+                url: '/account/orders',
             },
             {
                 text: 'Address',
