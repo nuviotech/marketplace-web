@@ -30,8 +30,8 @@ function EditAddress() {
                 icon: 'icon-alarm-ringing',
             },
             {
-                text: 'Invoices',
-                url: '/account/invoices',
+                text: 'Orders',
+                url: '/account/orders',
                 icon: 'icon-papers',
             },
             {

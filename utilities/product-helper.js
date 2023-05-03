@@ -69,7 +69,7 @@ export function StrapiProductPriceExpanded(product) {
     } else {
         view = (
             <p className="ps-product__price">
-                ₹{formatCurrency(product.price)}
+                ₹{formatCurrency(product.sale_price)}
             </p>
         );
     }

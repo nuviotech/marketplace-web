@@ -6,18 +6,18 @@ import Product from '~/components/elements/products/Product';
 import { carouselStandard } from '~/utilities/carousel-helpers';
 import NextArrow from '~/components/elements/carousel/NextArrow';
 import PrevArrow from '~/components/elements/carousel/PrevArrow';
+import ProductRepository from '~/repositories/ProductRepository';
 
-const RelatedProduct = ({ collectionSlug, boxed, layout }) => {
+const RelatedProduct = ({ collectionSlug, boxed, layout , keywords}) => {
     const [productItems, setProductItems] = useState(null);
     const [loading, setLoading] = useState(true);
-
     async function getProducts() {
         setLoading(true);
-        const responseData = await getProductsByCollectionHelper(
-            collectionSlug
+        const responseData = await ProductRepository.getRelatedProducts(
+            keywords
         );
         if (responseData) {
-            setProductItems(responseData.items);
+            setProductItems(responseData);
             setTimeout(
                 function () {
                     setLoading(false);
@@ -29,7 +29,7 @@ const RelatedProduct = ({ collectionSlug, boxed, layout }) => {
 
     useEffect(() => {
         getProducts();
-    }, [collectionSlug]);
+    }, [keywords]);
 
     const carouselFullwidth = {
         dots: false,
@@ -103,13 +103,13 @@ const RelatedProduct = ({ collectionSlug, boxed, layout }) => {
     // Views
     let carouselView;
     if (!loading) {
-        if (productItems) {
+        if (productItems.length>1) {
             if ((layout = 'fullwidth')) {
                 carouselView = (
                     <Slider
                         {...carouselFullwidth}
                         className="ps-carousel outside">
-                        {productItems.map((item, index) => {
+                        {productItems?.map((item, index) => {
                             if (index < 8) {
                                 return <Product product={item} key={item.id} />;
                             }
@@ -121,7 +121,7 @@ const RelatedProduct = ({ collectionSlug, boxed, layout }) => {
                     <Slider
                         {...carouselStandard}
                         className="ps-carousel outside">
-                        {productItems.map((item, index) => {
+                        {productItems?.map((item, index) => {
                             if (index < 8) {
                                 return <Product product={item} key={item.id} />;
                             }
@@ -142,7 +142,7 @@ const RelatedProduct = ({ collectionSlug, boxed, layout }) => {
                 boxed === true ? 'boxed' : ''
             }`}>
             <div className="ps-section__header">
-                <h3>Related products</h3>
+                <h3>Related product</h3>
             </div>
             <div className="ps-section__content">{carouselView}</div>
         </div>
