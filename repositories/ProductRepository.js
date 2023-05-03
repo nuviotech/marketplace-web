@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Repository, { baseUrl, serializeQuery, marketplaceUrl, policyMakerUrl, policyMakerKey } from './Repository';
 
 class ProductRepository {
@@ -17,6 +18,22 @@ class ProductRepository {
         return reponse;
     }
 */
+
+    async getRelatedProducts(keywords){
+        const result = await axios.get(`${marketplaceUrl}/getRelatedProduct?keywords=${keywords}`)
+        .then(
+            (response)=>{
+                alert(response.data.length)
+                return response.data;
+            },
+            (error)=>{
+                console.error("Related product(error) : "+error);
+                return null;
+            }
+        )
+        return result;
+    }
+
     async getRecords(params) {
         //alert(JSON.stringify(params));
         const reponse = await Repository.get(

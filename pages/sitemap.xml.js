@@ -10,7 +10,7 @@ function generateSiteMap(items) {
 <url><loc>https://nuvio.in/account/checkout</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://nuvio.in/account/compare</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://nuvio.in/account/edit-address</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://nuvio.in/account/invoices</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://nuvio.in/account/orders</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://nuvio.in/account/login</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://nuvio.in/account/my-account</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://nuvio.in/account/my-account-2</loc><lastmod>2023-03-25T13:31:56.849Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>

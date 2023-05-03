@@ -4,7 +4,6 @@ import Router from 'next/router';
 import axios from 'axios';
 import { login, loginSuccess, saveToken } from '../../../store/auth/action';
 import { marketplaceUrl } from '~/repositories/Repository';
-
 import { Form, Input, notification, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { AuthContextProvider } from '~/context/loginContext';
@@ -29,12 +28,21 @@ class Login extends Component {
             cflag: null,
         };
 
+
     }
 
+    
 
     static getDerivedStateFromProps(props) {
+        var action =window.sessionStorage.getItem("action")
+       // console.warn("action : "+action);
+
         if (props.isLoggedIn === true) {
-            Router.push('/');
+            if(action == "checkout"){
+                window.sessionStorage.removeItem("action");
+                Router.push('/account/checkout');
+            }else
+                Router.push('/');
         }
         return false;
     }
@@ -42,7 +50,7 @@ class Login extends Component {
     handleFeatureWillUpdate(e) {
         e.preventDefault();
         notification.open({
-            message: 'Opp! Something went wrong.',
+            message: 'Opps! Something went wrong.',
             description: 'This feature has been updated later!',
             duration: 500,
         });
@@ -74,7 +82,12 @@ class Login extends Component {
                     //this.props.dispatch(login());
                     //this.props.dispatch(loginSuccess());
                     // Router.push('/');
-                    window.location.assign('/');
+                    var action =window.sessionStorage.getItem("action")
+                    if(action== "checkout"){
+                        Router.push('/account/checkout')
+                        window.sessionStorage.removeItem("action");
+                    }else
+                        window.location.assign('/');
                 } else if (status == 1) {
                     const modal = Modal.error({
                         centered: true,
@@ -128,6 +141,7 @@ class Login extends Component {
     };
 
     render() {
+        
         return (
             <div className="ps-my-account">
                 <div className="container">
@@ -189,9 +203,9 @@ class Login extends Component {
 
                                 <ReCAPTCHA
                                     //testing
-                                    //sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                                     //original
-                                    sitekey="6LduJpolAAAAAFiW9friufeK8k637Rxp3EzA-zkz"
+                                   // sitekey="6LduJpolAAAAAFiW9friufeK8k637Rxp3EzA-zkz"
                                     onChange={this.onChange}
                                     size="normal"
 

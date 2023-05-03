@@ -7,6 +7,7 @@ import { Form, Input, Modal } from 'antd';
 import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '~/utilities/ecomerce-helpers';
 import { userIsLogin , getToken} from '~/store/auth/action';
+import { useRouter } from 'next/router';
 
 const FormCheckoutInformation = ({ ecomerce }) => {
     var userLoginStatus = userIsLogin();
@@ -15,6 +16,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
     let totalAmount = 0;
     const [review, setReview] = useState({});
     const { products, getProducts } = useEcomerce();
+    const router=useRouter();
     useEffect(() => {
         if (ecomerce.cartItems) {
             getProducts(ecomerce.cartItems, 'cart');
@@ -61,11 +63,13 @@ const FormCheckoutInformation = ({ ecomerce }) => {
         })
     }
 
-
+    const goToLogin=()=>{
+        sessionStorage.setItem("action","checkout");
+        router.push("/account/login");
+    }
 
     const placeOrder = (data) => {
-
-        axios.post(`${marketplaceUrl}/saveOrderDetails`, data, {
+           axios.post(`${marketplaceUrl}/saveOrderDetails`, data, {
             headers: {
                 Authorization: "Bearer "+getToken(),
             }
@@ -149,7 +153,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
             },
             (error) => {
                 //order details is not save to database
-                alert("Something went wrong! ");
+                //alert("Something went wrong! ");
                 console.log("error !!!!!!!!!!" + JSON.stringify(error));
             }
         )
@@ -158,12 +162,9 @@ const FormCheckoutInformation = ({ ecomerce }) => {
 
     //const{fname}=this.state;
     return (
-
         <Form
-
-
             className="ps-form__billing-info"
-            onFinish={handleLoginSubmit}>
+            onFinish={()=>{handleLoginSubmit()}}>
             { userLoginStatus?
             <div>
                 
@@ -362,9 +363,9 @@ const FormCheckoutInformation = ({ ecomerce }) => {
 
             </div>
             :
-            <div>
+            <div className='text-center'>
                 <h3 class="" className="">Please Login First, For Place The Order...</h3>
-                <a class="ps-btn" href="/account/login" >Go To Login</a>
+                <button class="ps-btn" onClick={()=>{goToLogin()}}>Go To Login</button>
             </div>
             }
         </Form>
