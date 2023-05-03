@@ -23,7 +23,6 @@ class ProductRepository {
         const result = await axios.get(`${marketplaceUrl}/getRelatedProduct?keywords=${keywords}`)
         .then(
             (response)=>{
-                alert(response.data.length)
                 return response.data;
             },
             (error)=>{
