@@ -34,7 +34,7 @@ class Login extends Component {
     
 
     static getDerivedStateFromProps(props) {
-        var action =sessionStorage.getItem("action")
+        var action =window.sessionStorage.getItem("action")
         console.warn("action : "+action);
 
         if (props.isLoggedIn === true) {
@@ -78,10 +78,10 @@ class Login extends Component {
                     //this.props.dispatch(login());
                     //this.props.dispatch(loginSuccess());
                     // Router.push('/');
-                    var action =sessionStorage.getItem("action")
+                    var action =window.sessionStorage.getItem("action")
                     if(action== "checkout"){
                         Router.push('/account/checkout')
-                        sessionStorage.removeItem("action");
+                       window.sessionStorage.removeItem("action");
                     }else
                         window.location.assign('/');
                 } else if (status == 1) {
