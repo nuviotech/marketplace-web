@@ -218,10 +218,9 @@ class Login extends Component {
                                     // original ->   510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com
                                 }
 
-                                <GoogleOAuthProvider clientId="157202587927-37scvtgmvqhvp1mv1t42s0libmp5vcrt.apps.googleusercontent.com">
+                                <GoogleOAuthProvider clientId="510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com">
 
                                     <GoogleLogin
-
                                         onSuccess={credentialResponse => {
                                             this.setState({ email: jwt_decode(credentialResponse?.credential)?.email })
                                             this.setState({ password: 'XXXXXX' })
