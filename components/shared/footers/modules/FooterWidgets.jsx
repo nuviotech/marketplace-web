@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+ 
 
 const FooterWidgets = () => (
     <div className="ps-footer__widgets">
@@ -24,22 +25,22 @@ const FooterWidgets = () => (
                 </p>
                 <ul className="ps-list--social">
                     <li>
-                        <a className="facebook" href="#">
+                        <a className="facebook" target='_blank' href="https://www.facebook.com/Nuvio.in">
                             <i className="fa fa-facebook"></i>
                         </a>
                     </li>
                     <li>
-                        <a className="twitter" href="#">
+                        <a className="twitter" target='_blank' href="https://twitter.com/Nuvio_Sellers">
                             <i className="fa fa-twitter"></i>
                         </a>
                     </li>
                     <li>
-                        <a className="google-plus" href="#">
-                            <i className="fa fa-google-plus"></i>
+                        <a  target='_blank' href="https://in.linkedin.com/company/nuvio-technologies-pvt-ltd">
+                            <i className="fa fa-linkedin" style={{color:"#2e5fb2"}}></i>
                         </a>
                     </li>
                     <li>
-                        <a className="instagram" href="#">
+                        <a target='_blank' className="instagram" href="https://www.instagram.com/nuvio.in/">
                             <i className="fa fa-instagram"></i>
                         </a>
                     </li>
