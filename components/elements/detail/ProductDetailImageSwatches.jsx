@@ -260,19 +260,17 @@ class ProductDetailImageSwatches extends Component {
                             </p>
                         </div>
                         <div className="ps-product__sharing">
-                            <a className="facebook" href="#">
+                            <a className="facebook" target='_blank' href="https://www.facebook.com/Nuvio.in">
                                 <i className="fa fa-facebook"></i>
                             </a>
-                            <a className="twitter" href="#">
+                            <a className="twitter" target='_blank' href="https://twitter.com/Nuvio_Sellers">
                                 <i className="fa fa-twitter"></i>
                             </a>
-                            <a className="google" href="#">
-                                <i className="fa fa-google-plus"></i>
-                            </a>
-                            <a className="linkedin" href="#">
+
+                            <a className="linkedin" target='_blank' href="https://in.linkedin.com/company/nuvio-technologies-pvt-ltd">
                                 <i className="fa fa-linkedin"></i>
                             </a>
-                            <a className="instagram" href="#">
+                            <a className="bg-warning" target='_blank' href="https://www.instagram.com/nuvio.in/">
                                 <i className="fa fa-instagram"></i>
                             </a>
                         </div>
