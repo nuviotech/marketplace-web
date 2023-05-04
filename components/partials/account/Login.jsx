@@ -27,16 +27,9 @@ class Login extends Component {
             store: null,
             cflag: null,
         };
-
-
     }
-
     
-
     static getDerivedStateFromProps(props) {
-        var action =sessionStorage.getItem("action")
-        console.warn("action : "+action);
-
         if (props.isLoggedIn === true) {
                 Router.push('/');
         }
@@ -78,7 +71,10 @@ class Login extends Component {
                     //this.props.dispatch(login());
                     //this.props.dispatch(loginSuccess());
                     // Router.push('/');
-                    var action =sessionStorage.getItem("action")
+                    var action;
+                    if(typeof window !== 'undefined'){
+                        action =sessionStorage.getItem("action")
+                    }
                     if(action== "checkout"){
                         Router.push('/account/checkout')
                         sessionStorage.removeItem("action");
