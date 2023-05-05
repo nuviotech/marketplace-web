@@ -126,35 +126,35 @@
                     "megaItems": [
                         {
                             "text": "Home Audio & Theathers",
-                            "url": "/shop"
+                            "url": "/category/106"
                         },
                         {
                             "text": "TV & Videos",
-                            "url": "/shop"
+                            "url": "/category/107"
                         },
                         {
                             "text": "Camera, Photos & Videos",
-                            "url": "/shop"
+                            "url": "/category/108"
                         },
                         {
                             "text": "Cellphones & Accessories",
-                            "url": "/shop"
+                            "url": "/category/109"
                         },
                         {
                             "text": "Headphones",
-                            "url": "/shop"
+                            "url": "/category/110"
                         },
                         {
                             "text": "Videosgames",
-                            "url": "/shop"
+                            "url": "/category/111"
                         },
                         {
                             "text": "Wireless Speakers",
-                            "url": "/shop"
+                            "url": "/category/112"
                         },
                         {
                             "text": "Office Electronic",
-                            "url": "/shop"
+                            "url": "/category/113"
                         }
                     ]
                 },
@@ -163,15 +163,15 @@
                     "megaItems": [
                         {
                             "text": "Digital Cables",
-                            "url": "/shop"
+                            "url": "/category/114"
                         },
                         {
                             "text": "Audio & Video Cables",
-                            "url": "/shop"
+                            "url": "/category/115"
                         },
                         {
                             "text": "Batteries",
-                            "url": "/shop"
+                            "url": "/category/116"
                         }
                     ]
                 }
@@ -180,27 +180,27 @@
         {
             "icon": "icon-shirt",
             "text": "Clothing & Apparel",
-            "url": "/shop"
+            "url": "/category/117"
         },
         {
             "icon": "icon-lampshade",
             "text": "Home, Garden & Kitchen",
-            "url": "/shop"
+            "url": "/category/118"
         },
         {
             "icon": "icon-heart-pulse",
             "text": "Health & Beauty",
-            "url": "/shop"
+            "url": "/category/119"
         },
         {
             "icon": "icon-diamond2",
             "text": "Yewelry & Watches",
-            "url": "/shop"
+            "url": "/category/120"
         },
         {
             "icon": "icon-desktop",
             "text": "Computer & Technology",
-            "url": "/shop",
+            "url": "",
             "extraClass": "menu-item-has-children has-mega-menu",
             "subClass": "sub-menu",
             "megaContent": [
@@ -209,39 +209,39 @@
                     "megaItems": [
                         {
                             "text": "Computer & Tablets",
-                            "url": "/shop"
+                            "url": "/category/121"
                         },
                         {
                             "text": "Laptop",
-                            "url": "/shop"
+                            "url": "/category/122"
                         },
                         {
                             "text": "Monitors",
-                            "url": "/shop"
+                            "url": "/category/123"
                         },
                         {
                             "text": "Networking",
-                            "url": "/shop"
+                            "url": "/category/124"
                         },
                         {
                             "text": "Drive & Storages",
-                            "url": "/shop"
+                            "url": "/category/125"
                         },
                         {
                             "text": "Computer Components",
-                            "url": "/shop"
+                            "url": "/category/125"
                         },
                         {
                             "text": "Security & Protection",
-                            "url": "/shop"
+                            "url": "/category/126"
                         },
                         {
                             "text": "Gaming Laptop",
-                            "url": "/shop"
+                            "url": "/category/127"
                         },
                         {
                             "text": "Accessories",
-                            "url": "/shop"
+                            "url": "/category/128"
                         }
                     ]
                 }
@@ -250,37 +250,37 @@
         {
             "icon": "icon-baby-bottle",
             "text": "Babies & Moms",
-            "url": "/shop"
+            "url": "/category/129"
         },
         {
             "icon": "icon-baseball",
             "text": "Sport & Outdoor",
-            "url": "/shop"
+            "url": "/category/130"
         },
         {
             "icon": "icon-smartphone",
             "text": "Phones & Accessories",
-            "url": "/shop"
+            "url": "/category/131"
         },
         {
             "icon": "icon-book2",
             "text": "Books & Office",
-            "url": "/shop"
+            "url": "/category/132"
         },
         {
             "icon": "icon-car-siren",
             "text": "Cars & Motocycles",
-            "url": "/shop"
+            "url": "/category/133"
         },
         {
             "icon": "icon-wrench",
             "text": "Home Improments",
-            "url": "/shop"
+            "url": "/category/134"
         },
         {
             "icon": "icon-tag",
             "text": "Vouchers & Services",
-            "url": "/shop"
+            "url": "/category/135"
         }
     ]
 }
