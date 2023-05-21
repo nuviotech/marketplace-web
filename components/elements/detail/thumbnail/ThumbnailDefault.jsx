@@ -29,6 +29,7 @@ const ThumbnailDefault = ({ product, vertical = true }) => {
                // images.push(`${baseUrl}${item.url}`);
                images.push(`${item.url}`);
             });
+            console.log("Images array -> "+images);
             setProductImages(images);
         }
         setGallery(galleryCarousel.current);
@@ -84,6 +85,7 @@ const ThumbnailDefault = ({ product, vertical = true }) => {
     if (productImages.length > 0) {
         imagesView = productImages.map((item) => (
             <div className="item" key={item}>
+                {console.log("Images path : "+item)}
                 <img src={item} alt={item} />
             </div>
         ));
