@@ -31,7 +31,7 @@ class NavigationList extends Component {
    
     
 
-     handleDrawerClose () {
+    handleDrawerClose() {
 
         this.setState({
             menuDrawer: false,
@@ -120,7 +120,7 @@ class NavigationList extends Component {
                                 {item.subMenu.map((subItem) => (
                                     <Menu.Item key={subItem.text}>
                                         <Link href={subItem.url}>
-                                            <a onClick={()=>{this.handleDrawerClose()}}>{subItem.text}</a>
+                                            <h6 style={{fontSize:"14px",fontWeight:"100",padding:"12px 0px"}} onClick={()=>{this.handleDrawerClose()}}>{subItem.text}</h6>
                                         </Link>
                                     </Menu.Item>
                                 ))}
@@ -144,9 +144,9 @@ class NavigationList extends Component {
                                                 <Menu.Item
                                                     key={megaSubItem.text}>
                                                     <Link href={megaSubItem.url}>
-                                                        <a  onClick={()=>{this.handleDrawerClose()}}>
+                                                        <h6 style={{fontSize:"14px",fontWeight:"100",padding:"12px 0px"}}  onClick={()=>{this.handleDrawerClose()}}>
                                                             {megaSubItem.text}
-                                                        </a>
+                                                        </h6>
                                                     </Link>
                                                 </Menu.Item>
                                             )
@@ -166,7 +166,7 @@ class NavigationList extends Component {
                                     </Link>
                                 ) : (
                                     <Link href={item.url} as={item.alias}>
-                                        <a onClick={()=>{this.handleDrawerClose()}}>{item.text}</a>
+                                        <h5 style={{fontSize:"17px",fontWeight:"100",padding:"20px 0px"}} onClick={()=>{this.handleDrawerClose()}}>{item.text}</h5>
                                     </Link>
                                 )}
                             </Menu.Item>
@@ -241,8 +241,9 @@ class NavigationList extends Component {
                     </div>
                 </Drawer>
                 <Drawer
+                    style={{width:"60%"}}
                     className="ps-panel--mobile"
-                    placement="right"
+                    placement="left"
                     closable={false}
                     onClose={this.handleDrawerClose}
                     visible={this.state.categoriesDrawer}>
@@ -256,7 +257,7 @@ class NavigationList extends Component {
                             </span>
                         </div>
                         <div className="ps-panel__content">
-                            <PanelCategories />
+                            <PanelCategories  />
                         </div>
                     </div>
                 </Drawer>
