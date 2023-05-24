@@ -1,15 +1,16 @@
 import React, { Component, useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import Link from 'next/link';
-import categories from '../../../public/static/data/static-categories.json';
 import ProductRepository from '~/repositories/ProductRepository';
 import NavigationList from '../navigation/NavigationList';
 
 const { SubMenu } = Menu;
 
 function PanelCategories() {
+    
     const [categories, setCategories] = useState(null);
     const [loading, setLoading] = useState(false);
+    
 
 /*
     rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
@@ -67,13 +68,15 @@ function PanelCategories() {
 
     
         return (
+
+            
             <Menu
                 mode="inline"
                 >
                 {categories?.map(category => (
                     <Menu.Item key={category.categoryId}>
                         <Link href={`/category/${category.categoryId}`}>
-                           {category.name}
+                            {category.name}
                         </Link>
                     </Menu.Item>
                 ))}

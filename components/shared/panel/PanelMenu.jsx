@@ -42,17 +42,17 @@ class PanelMenu extends Component {
                 {menu_data.menuPrimary.menu_1.map((item) => {
                     if (item.subMenu) {
                         return (
-                            <SubMenu
+                            <SubMenu 
                                 key={item.text}
                                 title={
                                     <Link href={item.url}>
-                                        <a>QQ{item.text}</a>
+                                        <a>{item.text}</a>
                                     </Link>
                                 }>
                                 {item.subMenu.map((subItem) => (
                                     <Menu.Item key={subItem.text}>
                                         <Link href={subItem.url}>
-                                            <a>SS{subItem.text}</a>
+                                            <a>{subItem.text}</a>
                                         </Link>
                                     </Menu.Item>
                                 ))}
@@ -64,7 +64,7 @@ class PanelMenu extends Component {
                                 key={item.text}
                                 title={
                                     <Link href={item.url}>
-                                        <a>AA{item.text}</a>
+                                        <a>{item.text}</a>
                                     </Link>
                                 }>
                                 {item.megaContent.map((megaItem) => (
@@ -94,11 +94,11 @@ class PanelMenu extends Component {
                                     <Link
                                         href={`${item.url}/[pid]`}
                                         as={`${item.url}/${item.endPoint}`}>
-                                        <a>RR{item.text}</a>
+                                        <a>{item.text}</a>
                                     </Link>
                                 ) : (
                                     <Link href={item.url} as={item.alias}>
-                                        <a>MM{item.text}</a>
+                                        <a>{item.text}</a>
                                     </Link>
                                 )}
                             </Menu.Item>
