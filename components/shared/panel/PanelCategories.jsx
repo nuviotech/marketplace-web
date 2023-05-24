@@ -76,7 +76,7 @@ function PanelCategories() {
                 {categories?.map(category => (
                     <Menu.Item key={category.categoryId}>
                         <Link href={`/category/${category.categoryId}`}>
-                            {category.name}
+                           <h6 style={{fontWeight:"100"}}>{category.name}</h6> 
                         </Link>
                     </Menu.Item>
                 ))}
