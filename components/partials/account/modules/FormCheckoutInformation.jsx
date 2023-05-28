@@ -175,6 +175,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                         rules={[
                             {
                                 required: true,
+                                pattern:"[7-9]{1}[0-9]{9}$",
                                 message:
                                     'Enter your contact number!!',
                             },
@@ -190,7 +191,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                         />
                     </Form.Item>
                 </div>
-                <div className="form-group">
+                {/*<div className="form-group">
                     <div className="ps-checkbox">
                         <input
                             className="form-control"
@@ -202,7 +203,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                             Keep me up to date on news and exclusive offers?
                         </label>
                     </div>
-                </div>
+                </div>*/}
                 <h3 className="ps-form__heading">Shipping address</h3>
                 <div className="row">
                     <div className="col-sm-6">
@@ -320,6 +321,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                 rules={[
                                     {
                                         required: true,
+                                        pattern:"[0-9]{6}",
                                         message: 'Enter a postal code!',
                                     },
                                 ]}>
@@ -336,6 +338,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                         </div>
                     </div>
                 </div>
+                {/*
                 <div className="form-group">
                     <div className="ps-checkbox">
                         <input
@@ -347,9 +350,9 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                             Save this information for next time
                         </label>
                     </div>
-                </div>
+                </div>*/}
                 <div className="ps-form__submit">
-                    <Link href="/account/cart">
+                    <Link href="/shop">
                         <a>
                             <i className="icon-arrow-left mr-2"></i>
                             Return to shopping cart
@@ -363,9 +366,9 @@ const FormCheckoutInformation = ({ ecomerce }) => {
 
             </div>
             :
-            <div className='text-center'>
+            <div className='mb-5'>
                 <h3 class="" className="">Please Login First, For Place The Order...</h3>
-                <button class="ps-btn" onClick={()=>{goToLogin()}}>Go To Login</button>
+                <button class="ps-btn" onClick={()=>{goToLogin()}}><i className="icon-arrow-left mr-2"></i> Go To Login</button>
             </div>
             }
         </Form>

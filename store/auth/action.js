@@ -19,9 +19,8 @@ export function loginSuccess() {
 export function logOut() {
    // localStorage.clear();
     localStorage.removeItem("token");
-    //window.location.assign("/account/login");
     modalWarning2("success");
-    return { type: actionTypes.LOGOUT };
+    return { type: actionTypes.LOGOUT};
 }
 
 export function logOutSuccess() {
