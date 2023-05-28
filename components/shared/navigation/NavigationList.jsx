@@ -144,7 +144,7 @@ class NavigationList extends Component {
                                                 <Menu.Item
                                                     key={megaSubItem.text}>
                                                     <Link href={megaSubItem.url}>
-                                                        <h6 style={{fontSize:"14px",fontWeight:"100",padding:"12px 0px"}}  onClick={()=>{this.handleDrawerClose()}}>
+                                                        <h6 style={{fontSize:"14px",padding:"12px 0px"}}  onClick={()=>{this.handleDrawerClose()}}>
                                                             {megaSubItem.text}
                                                         </h6>
                                                     </Link>
@@ -166,7 +166,7 @@ class NavigationList extends Component {
                                     </Link>
                                 ) : (
                                     <Link href={item.url} as={item.alias}>
-                                        <h5 style={{fontSize:"17px",fontWeight:"100",padding:"20px 0px"}} onClick={()=>{this.handleDrawerClose()}}>{item.text}</h5>
+                                        <h5 style={{fontSize:"17px",padding:"20px 0px"}} onClick={()=>{this.handleDrawerClose()}}>{item.text}</h5>
                                     </Link>
                                 )}
                             </Menu.Item>

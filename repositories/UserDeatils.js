@@ -4,10 +4,11 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getToken, logOut, userIsLogin, } from "~/store/auth/action";
 import { marketplaceUrl } from "./Repository";
+import { useRouter } from "next/router";
 
 
 export const userData = async () => {
-
+    
     if (userIsLogin()) {
 
         const data = await axios.get(`${marketplaceUrl}/getUserDetails`, {
@@ -22,6 +23,7 @@ export const userData = async () => {
                 logOut();
                 //dis(logOut());
                 //window.location.assign("/account/login")
+            
                 return error;
             }
         ).catch(err => {

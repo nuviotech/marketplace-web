@@ -10,7 +10,7 @@ const AccountQuickLinks = (props) => {
    // alert(JSON.stringify(props))
     const dispatch = useDispatch();
     const Router = useRouter();
-
+    
     const handleLogout = (e) => {
         e.preventDefault();
         dispatch(logOut());
