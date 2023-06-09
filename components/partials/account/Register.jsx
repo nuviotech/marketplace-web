@@ -90,6 +90,20 @@ class Register extends Component {
                             content: `Please enter valid first name or last name.`,
                         });
                         modal.update;
+                    }else if(statusCode=='-5'){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Email already exists!!',
+                            content: `Please try with another email id, this email already present.`,
+                        });
+                        modal.update;
+                    }else if(statusCode=='1'){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Server Error!!',
+                            content: `Something went wrong on server.`,
+                        });
+                        modal.update;
                     }else if(statusCode=='0'){
                         const modal = Modal.success({
                             centered: true,
