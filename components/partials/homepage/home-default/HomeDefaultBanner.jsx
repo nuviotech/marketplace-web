@@ -12,6 +12,7 @@ const HomeDefaultBanner = () => {
     const [bannerItems, setBannerItems] = useState(null);
     const [promotion1, setPromotion1] = useState(null);
     const [promotion2, setPromotion2] = useState(null);
+    const[slider,setSlider] = useState(null);
 
     async function getBannerItems() {
         const responseData = await MediaRepository.getBannersBySlug(
@@ -20,8 +21,8 @@ const HomeDefaultBanner = () => {
         if (responseData) {
             setBannerItems(responseData);
         }
+       
     }
-
     async function getPromotions() {
         const responseData = await MediaRepository.getPromotionsBySlug(
             'home_fullwidth_promotions'
@@ -31,16 +32,17 @@ const HomeDefaultBanner = () => {
             setPromotion2(getItemBySlug(responseData, 'main_2'));
         }
     }
+    
 
     useEffect(() => {
         getBannerItems();
         getPromotions();
     }, []);
-
+    
     const carouselSetting = {
         dots: false,
         infinite: true,
-        speed: 750,
+        speed: 500,
         fade: true,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -64,14 +66,20 @@ const HomeDefaultBanner = () => {
             </div>
         ));
         mainCarouselView = (
-            <Slider {...carouselSetting} className="ps-carousel">
+            <Slider ref={slider => ( setSlider(slider))}  {...carouselSetting} className="ps-carousel">
                 {carouseItems}
             </Slider>
+           
         );
+        
+        slider?.slickPlay();
+
     }
-    
+
     return (
+        
         <div className="ps-home-banner ps-home-banner--1">
+            
             <div className="ps-container">
                 <div className="ps-section__left">{mainCarouselView}</div>
                 <div className="ps-section__right">
@@ -83,9 +91,11 @@ const HomeDefaultBanner = () => {
                         link={promotion2?.link}
                         image={promotion2 ? promotion2.image : null}
                     />
+                    
                 </div>
             </div>
         </div>
+        
     );
 };
 

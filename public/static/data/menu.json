@@ -74,13 +74,54 @@
                 "mega": "true",
                 "subMenu": [
                     {
-                        "text": "Books",
+                        "text": "Hot Promotions",
                         "url": "/category/6"
                     },
                     {
-                        "text": "Digital Music",
-                        "url": "/category/2"
+                        "text": "Electronics Gadgets",
+                        "url": "/category/6"
                     },
+                    {
+                        "text": "Clothing & Apparel",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Home, Garden & Kitchen",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Wall Clocks & Watches",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Jewellery",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Babies & Moms",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Sport & Outdoor",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Mobile Accessories",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Office Accessories",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Cars/Motocycles Accessories",
+                        "url": "/category/6"
+                    },
+                    {
+                        "text": "Home Improments",
+                        "url": "/category/6"
+                    },
+                    
                     {
                         "text": "See All",
                         "url": "/shop"
@@ -104,6 +145,12 @@
                         "url": "/vendor/become-a-vendor"
                     }
                 ]
+            },
+            {
+                "text": "Became a seller",
+                "url": "/vendor/become-a-vendor",
+                "extraClass": "menu-item-has-children",
+                "subClass": "sub-menu"
             }
         ]
     },
@@ -115,14 +162,14 @@
         },
         {
             "icon": "icon-laundry",
-            "text": "Consumer Electronic",
+            "text": "Electronics Gadgets",
             "url": "/shop",
             "extraClass": "menu-item-has-children has-mega-menu",
             "subClass": "sub-menu",
             "mega": true,
             "megaContent": [
                 {
-                    "heading": "Electronic",
+                    "heading": "Electronic Gadgets",
                     "megaItems": [
                         {
                             "text": "Home Audio & Theathers",
@@ -188,65 +235,16 @@
             "url": "/category/118"
         },
         {
-            "icon": "icon-heart-pulse",
-            "text": "Health & Beauty",
-            "url": "/category/119"
-        },
-        {
             "icon": "icon-diamond2",
-            "text": "Yewelry & Watches",
+            "text": "Wall Clocks & Watches",
             "url": "/category/120"
         },
         {
-            "icon": "icon-desktop",
-            "text": "Computer & Technology",
-            "url": "",
-            "extraClass": "menu-item-has-children has-mega-menu",
-            "subClass": "sub-menu",
-            "megaContent": [
-                {
-                    "heading": "Computer & Technologies",
-                    "megaItems": [
-                        {
-                            "text": "Computer & Tablets",
-                            "url": "/category/121"
-                        },
-                        {
-                            "text": "Laptop",
-                            "url": "/category/122"
-                        },
-                        {
-                            "text": "Monitors",
-                            "url": "/category/123"
-                        },
-                        {
-                            "text": "Networking",
-                            "url": "/category/124"
-                        },
-                        {
-                            "text": "Drive & Storages",
-                            "url": "/category/125"
-                        },
-                        {
-                            "text": "Computer Components",
-                            "url": "/category/125"
-                        },
-                        {
-                            "text": "Security & Protection",
-                            "url": "/category/126"
-                        },
-                        {
-                            "text": "Gaming Laptop",
-                            "url": "/category/127"
-                        },
-                        {
-                            "text": "Accessories",
-                            "url": "/category/128"
-                        }
-                    ]
-                }
-            ]
+            "icon": "icon-diamond2",
+            "text": "Jewellery",
+            "url": "/category/120"
         },
+       
         {
             "icon": "icon-baby-bottle",
             "text": "Babies & Moms",
@@ -259,28 +257,24 @@
         },
         {
             "icon": "icon-smartphone",
-            "text": "Phones & Accessories",
+            "text": "Mobile Accessories",
             "url": "/category/131"
         },
         {
             "icon": "icon-book2",
-            "text": "Books & Office",
+            "text": "Office Accessories",
             "url": "/category/132"
         },
         {
             "icon": "icon-car-siren",
-            "text": "Cars & Motocycles",
+            "text": "Cars/Motocycles Accessories",
             "url": "/category/133"
         },
         {
             "icon": "icon-wrench",
             "text": "Home Improments",
             "url": "/category/134"
-        },
-        {
-            "icon": "icon-tag",
-            "text": "Vouchers & Services",
-            "url": "/category/135"
         }
+       
     ]
 }
