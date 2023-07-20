@@ -77,6 +77,18 @@ const FormCheckoutInformation = ({ ecomerce }) => {
         }).then(
             async (response) => {
 
+               
+               // console.warn(JSON.stringify(response));
+
+                if(response.data.success){
+                    //var merchantId = response.data.data.merchantId;
+                   // var transactionId = response.data.data.merchantTransactionId
+                    router.push(response.data.data.instrumentResponse.redirectInfo.url+"");
+            
+                }else{
+                    alert("Something went wrong !!!");
+                }
+
                 //razorpay payment integration
                 /*
                 const result = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
@@ -155,88 +167,91 @@ const FormCheckoutInformation = ({ ecomerce }) => {
             */
 
 
-                //Paytm payment integration
-                const result = await loadScript("https://securegw.paytm.in/merchantpgpui/checkoutjs/merchants/NhwQUF41773981847093.js");
-                if (!result) {
-                    alert("network issue...");
-                    return;
-                }
-                console.log("Res : " + response);
-                var config = {
-                    "root": "",
-                    "flow": "DEFAULT",
-                    "data": {
-                        "orderId": response.paytm_orderId, /* update order id */
-                        "token": "", /* update token value */
-                        "tokenType": "TXN_TOKEN",
-                        "amount": response.amount /* update amount */
-                    },
-                    "merchant": {
-                        mid: "NhwQUF41773981847093"
-                    },
-                    "handler": {
-                        "notifyMerchant": function (eventName, data) {
-                            console.log("notifyMerchant handler function called");
-                            console.log("eventName => ", eventName);
-                            console.log("data => ", data);
+
+
+                /*
+                    //Paytm payment integration
+                    const result = await loadScript("https://securegw.paytm.in/merchantpgpui/checkoutjs/merchants/NhwQUF41773981847093.js");
+                    if (!result) {
+                        alert("network issue...");
+                        return;
+                    }
+                    console.log("Res : " + response);
+                    var config = {
+                        "root": "",
+                        "flow": "DEFAULT",
+                        "data": {
+                            "orderId": response.paytm_orderId, // update order id 
+                            "token": "", // update token value 
+                            "tokenType": "TXN_TOKEN",
+                            "amount": response.amount // update amount 
                         },
-                        "transactionStatus": function (data) {
-                            console.log("transaction complete")
-                            console.log(data);
-
-                            if (data.STATUS = "TXN_FAILURE") {
-                                alert("transaction fail");
-                            } else if (data.STATUS = "TXN_SUCCESS") {
-                                alert("transaction success");
-                                const paytm_order_id = data.paytm_orderId;
-                                const order_ref_id = data.order_id;
-
-                                //update the states of order payment
-                                const paymentObject = {
-                                    "rzPaymentId": paytm_order_id,
-                                    "orderID": order_ref_id
+                        "merchant": {
+                            mid: "NhwQUF41773981847093"
+                        },
+                        "handler": {
+                            "notifyMerchant": function (eventName, data) {
+                                console.log("notifyMerchant handler function called");
+                                console.log("eventName => ", eventName);
+                                console.log("data => ", data);
+                            },
+                            "transactionStatus": function (data) {
+                                console.log("transaction complete")
+                                console.log(data);
+    
+                                if (data.STATUS = "TXN_FAILURE") {
+                                    alert("transaction fail");
+                                } else if (data.STATUS = "TXN_SUCCESS") {
+                                    alert("transaction success");
+                                    const paytm_order_id = data.paytm_orderId;
+                                    const order_ref_id = data.order_id;
+    
+                                    //update the states of order payment
+                                    const paymentObject = {
+                                        "rzPaymentId": paytm_order_id,
+                                        "orderID": order_ref_id
+                                    }
+                                    axios.post(`${marketplaceUrl}/updateOrder`, paymentObject, {
+                                        headers: {
+                                            Authorization: "Bearer " + getToken(),
+                                        }
+                                    }).then(
+                                        (response) => {
+                                            // alert("payment is success full");
+                                            const modal = Modal.success({
+                                                centered: true,
+                                                title: 'Payment Success!',
+                                                content: `Thank you! Your order is ` + order_ref_id,
+                                            });
+                                            modal.update;
+                                            review.fname = "";
+                                        },
+                                        (error) => {
+                                            alert("error happning in update payment status...")
+                                        }
+                                    )
+    
+    
+    
+                                } else {
+                                    alert("something wrong");
                                 }
-                                axios.post(`${marketplaceUrl}/updateOrder`, paymentObject, {
-                                    headers: {
-                                        Authorization: "Bearer " + getToken(),
-                                    }
-                                }).then(
-                                    (response) => {
-                                        // alert("payment is success full");
-                                        const modal = Modal.success({
-                                            centered: true,
-                                            title: 'Payment Success!',
-                                            content: `Thank you! Your order is ` + order_ref_id,
-                                        });
-                                        modal.update;
-                                        review.fname = "";
-                                    },
-                                    (error) => {
-                                        alert("error happning in update payment status...")
-                                    }
-                                )
-
-
-
-                            } else {
-                                alert("something wrong");
                             }
                         }
-                    }
-                };
-                if (window.Paytm && window.Paytm.CheckoutJS) {
-                    window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
-                        // initialze configuration using init method
-                        window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-                            // after successfully updating configuration, invoke JS Checkout
-                            window.Paytm.CheckoutJS.invoke();
-                        }).catch(function onError(error) {
-                            console.log("error => ", error);
+                    };
+                    if (window.Paytm && window.Paytm.CheckoutJS) {
+                        window.Paytm.CheckoutJS.onLoad(function excecuteAfterCompleteLoad() {
+                            // initialze configuration using init method
+                            window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                                // after successfully updating configuration, invoke JS Checkout
+                                window.Paytm.CheckoutJS.invoke();
+                            }).catch(function onError(error) {
+                                console.log("error => ", error);
+                            });
                         });
-                    });
-                }
-                //paytm
-
+                    }
+                    //paytm
+                    */
 
 
             },
