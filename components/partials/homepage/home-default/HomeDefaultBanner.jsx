@@ -37,7 +37,7 @@ const HomeDefaultBanner = () => {
     useEffect(() => {
         getBannerItems();
         getPromotions();
-    }, []);
+    }, slider);
     
     const carouselSetting = {
         dots: false,
