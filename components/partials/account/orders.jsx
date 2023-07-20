@@ -2,11 +2,14 @@ import React, { Component, useContext, useEffect, useState } from 'react';
 import AccountMenuSidebar from './modules/AccountMenuSidebar';
 import TableInvoices from './modules/TableInvoices';
 import Link from 'next/link';
-import { logOut, userIsLogin } from '../../../store/auth/action';
+import { getToken, logOut, userIsLogin } from '../../../store/auth/action';
 import { userData } from '~/repositories/UserDeatils';
 import { AuthContext } from '~/context/loginContext';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import { marketplaceUrl } from '~/repositories/Repository';
+import { Modal } from 'antd';
 
 function Invoices() {
     /* constructor(props) {
@@ -17,7 +20,38 @@ function Invoices() {
      }
  */
     const dispatch = useDispatch();
-    const Router = useRouter();
+
+    const router = useRouter();
+    const { flag } = router.query;
+    const { actionType } = router.query;
+    const { txid } = router.query;
+    console.warn(JSON.stringify(router.query));
+    if (flag == 1) {
+        const data={
+            "txid" : txid
+        }
+        axios.post(`${marketplaceUrl}/updateOrder`,data,{
+            headers: {
+                Authorization: "Bearer " + getToken(),
+            }
+        }).then(
+            async (response) => {
+                if(response.data==0){
+                    const modal = Modal.success({
+                        centered: true,
+                        title: 'Order ID : '+txid,
+                        content: `You'r order place successfully, thanks for order the product.`,
+                    });
+                    modal.update;
+                }
+            },
+            (error) => {
+                //order details is not save to database
+                alert("Something went wrong! "+JSON.stringify(error));
+                console.log("error : " + JSON.stringify(error));
+            }
+        )
+    }
 
     //render() {
     const accountLinks = [
