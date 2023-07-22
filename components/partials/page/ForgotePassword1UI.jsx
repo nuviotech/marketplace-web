@@ -19,11 +19,18 @@ const ForgotePassword1UI = () => {
                 async (response) => {
                     setLoader(false);
 
-                    if(response.status==200){
+                    if(response.data=="done"){
                         const modal = Modal.success({
                             centered: true,
                             title: 'Success',
                             content: `Email send on your email id please use that link for reset the password..`,
+                        });
+                        modal.update;
+                    }else if(response.data=="wrong_input"){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Wrong email',
+                            content: email+` this email not registered.`,
                         });
                         modal.update;
                     }
