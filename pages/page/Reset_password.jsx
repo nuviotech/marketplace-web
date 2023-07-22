@@ -19,7 +19,7 @@ const ResetPassword = () => {
     ];
 
     return (
-        <PageContainer footer={<FooterDefault />} title="FAQ page">
+        <PageContainer footer={<FooterDefault />} title="Reset password page">
             <div className="ps-page--single">
                 <BreadCrumb breacrumb={breadCrumb} />
                 <div className="container">

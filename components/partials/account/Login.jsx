@@ -210,8 +210,8 @@ class Login extends Component {
                                     </button>
 
                                 </div>
-                                <div className='text-right'>
-                                        <a href='http://localhost:3000/page/Forgote_password'>forgote password</a>
+                                <div className='text-left'>
+                                        <a href='https://nuvio.in/page/Forgote_password'>forgote password</a>
 
                                 </div>
                             </div>
