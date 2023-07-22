@@ -195,7 +195,7 @@ class Login extends Component {
 
                                 <ReCAPTCHA
                                     //testing
-                                   // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                    //sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                                     //original
                                     sitekey="6LduJpolAAAAAFiW9friufeK8k637Rxp3EzA-zkz"
                                     onChange={this.onChange}
@@ -208,6 +208,11 @@ class Login extends Component {
                                         className="ps-btn ps-btn--fullwidth">
                                         Login
                                     </button>
+
+                                </div>
+                                <div className='text-right'>
+                                        <a href='http://localhost:3000/page/Forgote_password'>forgote password</a>
+
                                 </div>
                             </div>
                             <div className="ps-form__footer">
