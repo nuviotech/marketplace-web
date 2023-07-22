@@ -18,7 +18,7 @@ const ForgotePassword = () => {
     ];
 
     return (
-        <PageContainer footer={<FooterDefault />} title="FAQ page">
+        <PageContainer footer={<FooterDefault />} title="Forgote password page">
             <div className="ps-page--single">
                 <BreadCrumb breacrumb={breadCrumb} />
                 <div className="container">
