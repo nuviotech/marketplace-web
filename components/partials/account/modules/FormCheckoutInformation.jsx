@@ -308,7 +308,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                         </label>
                     </div>
                 </div>*/}
-                    <h3 className="ps-form__heading">Shipping address</h3>
+                    <h3 className="ps-form__heading">Fill The Information</h3>
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="form-group">
