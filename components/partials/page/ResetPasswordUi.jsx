@@ -29,7 +29,7 @@ export default function ResetPasswordUi() {
                         const modal = Modal.success({
                             centered: true,
                             title: 'Success',
-                            content: `Your password successfully change please, login with new credentials.`,
+                            content: `Your password has been set successfully!`,
                         });
                         modal.update;
                         setPassword1(null);
@@ -59,7 +59,7 @@ export default function ResetPasswordUi() {
             <div className='container text-center'>
                 <div className='col-12 col-md-6 offset-md-3 my-5'>
                     <div className="card p-4 mb-5">
-                        <label className='text-left'>Set password </label>
+                        <label className='text-left'>Reset Password </label>
                         <Form.Item
                             name="Email id"
                             rules={[
@@ -103,7 +103,7 @@ export default function ResetPasswordUi() {
                                 )
                                 :
                                 (
-                                    <button onClick={() => { resetThePassword() }} className='btn btn-lg btn-warning'>Change Password</button>
+                                    <button onClick={() => { resetThePassword() }} className='btn btn-lg btn-warning'>Save New Password</button>
                                 )
                             }
                         </div>
