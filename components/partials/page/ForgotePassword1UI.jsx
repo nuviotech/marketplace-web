@@ -23,7 +23,7 @@ const ForgotePassword1UI = () => {
                         const modal = Modal.success({
                             centered: true,
                             title: 'Success',
-                            content: `Email send on your email id please use that link for reset the password..`,
+                            content: `A link has been sent to your email , you can now set a new password through it`,
                         });
                         modal.update;
                     }else if(response.data=="wrong_input"){
@@ -81,7 +81,7 @@ const ForgotePassword1UI = () => {
                         {loader ? (
                             <i className='fa fa-tv fa-spin fa-2x'>please wait ...</i >
                         ) : (
-                            <button onClick={()=>{sendEmailToResetPassword()}} className='btn btn-lg btn-warning'>Send</button>
+                            <button onClick={()=>{sendEmailToResetPassword()}} className='btn btn-lg btn-warning'>Get Reset Link</button>
                         ) 
                         }
                         
