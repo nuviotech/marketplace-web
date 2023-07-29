@@ -222,7 +222,7 @@ class Login extends Component {
                                     // original ->   510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com
                                 }
 
-                                <GoogleOAuthProvider clientId="510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com">
+                               {/*} <GoogleOAuthProvider clientId="510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com">
 
                                     <GoogleLogin
                                         onSuccess={credentialResponse => {
@@ -240,7 +240,7 @@ class Login extends Component {
 
                                     />
 
-                                </GoogleOAuthProvider>
+                                </GoogleOAuthProvider>*/}
 
 
                                 <FacebookLogin
