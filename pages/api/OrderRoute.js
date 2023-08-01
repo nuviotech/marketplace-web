@@ -13,6 +13,11 @@ export default function handler(req,res){
        //res.status(200).json({ message: 'This is a POST request' });
         res.writeHead(302, { Location: '/account/orders' });
          res.end();
-    }
+    }else {
+    // For any other method, return a 405 Method Not Allowed status code
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
+    
     
 }
