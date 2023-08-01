@@ -10,8 +10,9 @@ export default function handler(req,res){
         const transactionId = req.query.txid;
        // return res.redirect(307,`http://localhost:3000/account/orders?flag=${flag}&txid=${transactionId}`);
       // return res.redirect(307,`https://nuvio.in/account/orders?flag=${flag}&txid=${transactionId}`);
-       res.status(200).json({ message: 'This is a POST request' });
+       //res.status(200).json({ message: 'This is a POST request' });
         res.writeHead(302, { Location: '/account/orders' });
+         res.end();
     }
     
 }
