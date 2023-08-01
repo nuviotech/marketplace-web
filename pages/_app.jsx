@@ -61,7 +61,6 @@ function App({ Component, pageProps }) {
 
 
                         gtag('config', 'G-LMKDBVDBY5');
-                    </script>
 
                     
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
