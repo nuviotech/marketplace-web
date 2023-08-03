@@ -221,7 +221,7 @@ class TableInvoices extends Component {
                 dataIndex: 'invoiceId',
                 rowKey: 'invoiceId',
                 key: 'invoiceId',
-                width: '90px',
+                width: '30px',
                 render: (text, record) => (
                     <Link href="/account/invoice-detail">
                         {record.invoiceId}
@@ -232,6 +232,7 @@ class TableInvoices extends Component {
                 title: 'Title',
                 dataIndex: 'title',
                 rowKey: 'title',
+                width:'80px',
                 key: 'title',
             },
             {

@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
 import { Modal } from 'antd';
+import useEcomerce from '~/hooks/useEcomerce';
 
 function Invoices() {
     /* constructor(props) {
@@ -20,6 +21,7 @@ function Invoices() {
      }
  */
     const dispatch = useDispatch();
+    const { removeItems } = useEcomerce();
 
     const router = useRouter();
     const { flag } = router.query;
@@ -43,6 +45,7 @@ function Invoices() {
                         title: 'Order ID : '+txid,
                         content: `You'r order place successfully, thanks for order the product.`,
                     });
+                    removeItems("cart")
                     modal.update;
                 }
             },
@@ -155,6 +158,7 @@ function Invoices() {
                                         </div>
                                         <div className="ps-section__content">
                                             <TableInvoices data={currentUser} />
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +169,8 @@ function Invoices() {
                     <div className='text-center'>
                         <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
                         <a onClick={() => {
-                            Router.push('/account/login');
+                           // Router.push('/account/login');
+                           window.location.assign("/account/login")
                         }} className='btn btn-lg btn-warning text-center'>Login Here !!</a>
                     </div>
             }

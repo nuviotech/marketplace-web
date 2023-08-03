@@ -94,7 +94,8 @@ class MyAccount extends Component {
                         <div className='text-center'>
                             <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
                             <a onClick={() => {
-                                Router.push('/account/login');
+                               // Router.push('/account/login');
+                               window.location.assign("/account/login")
                             }} className='btn btn-lg btn-warning text-center'>Login Here !!</a>
                         </div>
                 }
