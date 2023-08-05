@@ -8,6 +8,7 @@ class TableNotifications extends Component {
             example: https://ant.design/components/table/
         */
         const tableData = [
+            {/*
             {
                 key: '1',
                 title:
@@ -34,7 +35,7 @@ class TableNotifications extends Component {
                     'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet',
                 dateCreate: '21-1-2020',
                 tags: ['sale'],
-            },
+            },*/}
         ];
         const tableColumn = [
             {
