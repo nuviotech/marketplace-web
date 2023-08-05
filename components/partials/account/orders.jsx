@@ -29,8 +29,11 @@ function Invoices() {
     const { flag } = router.query;
     const { actionType } = router.query;
     const { txid } = router.query;
+    console.warn("flag = "+flag+" txid = "+txid);
+    alert(flag);
     console.warn(JSON.stringify(router.query));
-    if (flag == 1) {
+    if (flag == 1 || flag === 1) {
+        console.log("inside flag condition.........")
         const data={
             "txid" : txid
         }
@@ -41,7 +44,7 @@ function Invoices() {
             }
         }).then(
             async (response) => {
-                setUser(await userData())
+                
                 if(response.data==0){
                     const modal = Modal.success({
                         centered: true,
@@ -49,6 +52,7 @@ function Invoices() {
                         content: `You'r order place successfully, thanks for order the product.`,
                     });
                     removeItems("cart")
+                    router.push("/account/orders")
                     modal.update;
                 }
             },
