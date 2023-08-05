@@ -20,6 +20,8 @@ function Invoices() {
          };
      }
  */
+    const [currentUser, setUser] = useState([]);
+
     const dispatch = useDispatch();
     const { removeItems } = useEcomerce();
 
@@ -39,6 +41,7 @@ function Invoices() {
             }
         }).then(
             async (response) => {
+                setUser(await userData())
                 if(response.data==0){
                     const modal = Modal.success({
                         centered: true,
@@ -95,7 +98,6 @@ function Invoices() {
     // const {currentUser}= useContext(AuthContext);
 
     //getUserDetails();
-    const [currentUser, setUser] = useState([]);
     useEffect(async () => {
         setUser(await userData())
     }, []);

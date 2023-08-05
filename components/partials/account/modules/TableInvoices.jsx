@@ -11,7 +11,7 @@ class TableInvoices extends Component {
     constructor(props) {
         super(props);
          //alert(JSON.stringify(props.data.orders))
-
+        /*
         this.state = {
             action: 'N',
             open: false,
@@ -22,7 +22,7 @@ class TableInvoices extends Component {
             paymentId: 0,
             amount: 0,
             productName:''
-        };
+        };*/
 
 
     }
@@ -35,7 +35,7 @@ class TableInvoices extends Component {
         this.props.data.orders?.map((data) => {
             //  var r=data.razorpayOrderDetails?.replace("\\","");
             //console.log(data.paymentDetails.rzPaymentId);
-            data.products.map((item)=>{
+           /* data.products.map((item)=>{
                 var obj = {
                     id: item.orderProductId,
                     categoryId: item.categoryId,
@@ -51,9 +51,18 @@ class TableInvoices extends Component {
                 }
                 tableData.push(obj);
             })
-            
+            */
+            var obj = {
+                id: data.orderId,
+                razorpayId: JSON.parse(data.razorpayOrderDetails)?.id,
+                dateCreate: "" + new Date(data.orderDate).toISOString().split('T')[0],
+                amount: data.totalBill,
+                paymentStatus: data.paymentStatus,
+                status: data.paymentStatus,
+            }
+            tableData.push(obj);
         })
-
+/*
         //main returnOrder function
         const returnOrder = async () => {
             if (this.state.orderProductId == '' || this.state.categoryId == 0 || this.state.paymentId == 0 || this.state.amount == 0) {
@@ -107,7 +116,7 @@ class TableInvoices extends Component {
             this.setState({productName: title})
             this.setState({ open: true });
         }
-
+*/
         /*
             //payment code here
             const loadScript = (src) => {
@@ -218,23 +227,24 @@ class TableInvoices extends Component {
         const tableColumn = [
             {
                 title: 'Id',
-                dataIndex: 'invoiceId',
-                rowKey: 'invoiceId',
-                key: 'invoiceId',
+                dataIndex: 'id',
+                rowKey: 'id',
+                key: 'id',
                 width: '30px',
                 render: (text, record) => (
-                    <Link href="/account/invoice-detail">
-                        {record.invoiceId}
+                    <Link href={`/account/orderDetails?odId=${record.id}`}>
+                        {record.id}
                     </Link>
+                    
                 ),
             },
-            {
+            /*{
                 title: 'Title',
                 dataIndex: 'title',
                 rowKey: 'title',
                 width:'80px',
                 key: 'title',
-            },
+            },*/
             {
                 title: 'Date',
                 rowKey: 'dateCreate',
@@ -259,7 +269,11 @@ class TableInvoices extends Component {
                 rowKey: 'status',
                 width: '60px',
                 render: (text, record) => (
-                    <span className="text-right">{record.status}</span>
+                    record.status=='PAYMENT_SUCCESS'?
+                        <span className='alert-success px-4 py-2'>PAID</span>
+                    :
+                        <span className='alert-danger p-2'>UNPAID</span>
+                    
                 ),
             },
             {
@@ -277,7 +291,7 @@ class TableInvoices extends Component {
                                 : (record.under_return_policy==="0") ?
                                     <button onClick={() => { openModel(record.id, record.categoryId, record.paymentId, record.amount, record.title) }} className="btn btn-outline-warning">Return</button>
                                     :
-                                    <button className='btn btn-outline-info'>view staus</button>
+                                    <button className='btn btn-outline-info'>view status</button>
                         }
                     </span>
                 ),
@@ -286,7 +300,7 @@ class TableInvoices extends Component {
         ];
         return (
             <>
-                <Modal
+               {/* <Modal
                     open={this.state.open}
                     title="Return policy"
 
@@ -327,7 +341,7 @@ class TableInvoices extends Component {
                     </Form>
 
                 </Modal>
-
+                */}
                 <Table
 
                     columns={tableColumn}
