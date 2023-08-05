@@ -2,8 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import Rating from '~/components/elements/Rating';
 import useProduct from '~/hooks/useProduct';
-
-const ProductSearchResult = ({ product }) => {
+//priviously it use by searchheader
+//this is not use yet.......
+const ProductSearchResult = ({product}) => {
     const { thumbnailImage, price, title } = useProduct();
 
     return (
