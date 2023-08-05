@@ -1,5 +1,3 @@
-//author : Rohit Kawade
-
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getToken, logOut, userIsLogin, } from "~/store/auth/action";

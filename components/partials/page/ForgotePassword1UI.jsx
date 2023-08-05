@@ -79,7 +79,7 @@ const ForgotePassword1UI = () => {
                     </Form.Item>
                     <div className="text-right">
                         {loader ? (
-                            <i className='fa fa-tv fa-spin fa-2x'>please wait ...</i >
+                              <i>please wait <span className='spinner-border'></span> </i>
                         ) : (
                             <button onClick={()=>{sendEmailToResetPassword()}} className='btn btn-lg btn-warning'>Get Reset Link</button>
                         ) 
