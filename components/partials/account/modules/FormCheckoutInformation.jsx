@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
@@ -8,21 +8,37 @@ import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '~/utilities/ecomerce-helpers';
 import { userIsLogin, getToken } from '~/store/auth/action';
 import { useRouter } from 'next/router';
+import { AuthContext } from '~/context/loginContext';
 
 const FormCheckoutInformation = ({ ecomerce }) => {
     var userLoginStatus = userIsLogin();
+    const { currentUser } = useContext(AuthContext);
+    const [loader, setLoader] = useState(false)
+
     //console.log("userloginstatus : "+userLoginStatus);
     //console.log("eccomerce : " + JSON.stringify(ecomerce.cartItems));
     let totalAmount = 0;
     const [review, setReview] = useState({});
+
+    const setDefaultValues = () => {
+        setReview({
+            fname: currentUser.firstName,
+            last_name: currentUser.lastName,
+            address: currentUser.shippingAddress,
+            city: currentUser.city,
+            contact: currentUser.phone,
+
+        })
+    }
+
     const { products, getProducts } = useEcomerce();
     const router = useRouter();
     useEffect(() => {
         if (ecomerce.cartItems) {
             getProducts(ecomerce.cartItems, 'cart');
-
+            setDefaultValues();
         }
-    }, [ecomerce]);
+    }, [ecomerce, currentUser]);
 
     if (products && products.length > 0) {
         totalAmount = calculateAmount(products);
@@ -43,12 +59,11 @@ const FormCheckoutInformation = ({ ecomerce }) => {
         }
 
         //  console.log(orderInformation);
-
+        setLoader(true);
         placeOrder(orderInformation);
         //  Router.push('/account/shipping');
 
     };
-
     const loadScript = (src) => {
         return new Promise((resolve) => {
             const script = document.createElement('script')
@@ -77,15 +92,15 @@ const FormCheckoutInformation = ({ ecomerce }) => {
         }).then(
             async (response) => {
 
-               
-               // console.warn(JSON.stringify(response));
 
-                if(response.data.success){
+                // console.warn(JSON.stringify(response));
+                
+                if (response.data.success) {
                     //var merchantId = response.data.data.merchantId;
-                   // var transactionId = response.data.data.merchantTransactionId
-                    router.push(response.data.data.instrumentResponse.redirectInfo.url+"");
-            
-                }else{
+                    // var transactionId = response.data.data.merchantTransactionId
+                    router.push(response.data.data.instrumentResponse.redirectInfo.url + "");
+                } else {
+                    setLoader(false);
                     alert("Something went wrong !!!");
                 }
 
@@ -258,6 +273,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
             (error) => {
                 //order details is not save to database
                 //alert("Something went wrong! ");
+                setLoader(false)
                 console.log("error : " + JSON.stringify(error));
             }
         )
@@ -266,6 +282,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
 
     //const{fname}=this.state;
     return (
+
         <Form
             className="ps-form__billing-info"
             onFinish={() => { handleLoginSubmit() }}>
@@ -274,7 +291,17 @@ const FormCheckoutInformation = ({ ecomerce }) => {
 
                     <h3 className="ps-form__heading">Contact information</h3>
                     <div className="form-group">
-                        <Form.Item
+                        <input type="text"
+                            className="form-control"
+                            value={review.contact}
+                            placeholder='Enter the contact...'
+                            required="true"
+                            pattern="[7-9]{1}[0-9]{9}"
+                            onChange={(e) => {
+                                setReview({ ...review, contact: e.target.value })
+                            }}
+                        />
+                        {/*<Form.Item
                             name="name"
                             rules={[
                                 {
@@ -282,18 +309,22 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                     pattern: "[7-9]{1}[0-9]{9}$",
                                     message:
                                         'Enter your contact number!!',
+                                    
                                 },
                             ]}>
+                        
+
                             <Input
                                 className="form-control"
                                 type="text"
-                                placeholder="phone number"
+                                placeholder={review.contact}
                                 name="contact"
+                                value={review.contact}
                                 onChange={(e) => {
                                     setReview({ ...review, contact: e.target.value })
                                 }}
                             />
-                        </Form.Item>
+                        </Form.Item>*/}
                     </div>
                     {/*<div className="form-group">
                     <div className="ps-checkbox">
@@ -312,6 +343,16 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="form-group">
+                                <input type="text"
+                                    className="form-control"
+                                    value={review.fname}
+                                    placeholder='First Name'
+                                    required="true"
+                                    onChange={(e) => {
+                                        setReview({ ...review, fname: e.target.value })
+                                    }}
+                                />
+                                {/*
                                 <Form.Item
                                     name="firstName"
                                     rules={[
@@ -330,10 +371,21 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                         }}
                                     />
                                 </Form.Item>
+                                    */}
                             </div>
                         </div>
                         <div className="col-sm-6">
                             <div className="form-group">
+                                <input type="text"
+                                    className="form-control"
+                                    value={review.last_name}
+                                    placeholder='First Name'
+                                    required="true"
+                                    onChange={(e) => {
+                                        setReview({ ...review, last_name: e.target.value })
+                                    }}
+                                />
+                                {/*
                                 <Form.Item
                                     name="lastName"
                                     rules={[
@@ -345,6 +397,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                     <Input
                                         className="form-control"
                                         type="text"
+                                        value={currentUser.lastName}
                                         placeholder="Last Name"
                                         name="last_name"
                                         onChange={(e) => {
@@ -352,11 +405,21 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                         }}
                                     />
                                 </Form.Item>
+                                    */}
                             </div>
                         </div>
                     </div>
                     <div className="form-group">
-                        <Form.Item
+                        <input type="text"
+                            className="form-control"
+                            value={review.address}
+                            placeholder='Address'
+                            required="true"
+                            onChange={(e) => {
+                                setReview({ ...review, address: e.target.value })
+                            }}
+                        />
+                        {/* <Form.Item
                             name="address"
                             rules={[
                                 {
@@ -374,9 +437,17 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                 }}
                             />
                         </Form.Item>
+                            */}
                     </div>
                     <div className="form-group">
-                        <Form.Item
+                        <input type="text"
+                            className="form-control"
+                            placeholder='Apartment, suite, etc. (optional)'
+                            onChange={(e) => {
+                                setReview({ ...review, apprtment_name: e.target.value })
+                            }}
+                        />
+                        {/*<Form.Item
                             name="apartment"
                             rules={[
                                 {
@@ -394,10 +465,21 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                 }}
                             />
                         </Form.Item>
+                            */}
                     </div>
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="form-group">
+                                <input type="text"
+                                    className="form-control"
+                                    value={review.city}
+                                    required="true"
+                                    placeholder='City '
+                                    onChange={(e) => {
+                                        setReview({ ...review, city: e.target.value })
+                                    }}
+                                />
+                                {/*
                                 <Form.Item
                                     name="city"
                                     rules={[
@@ -416,11 +498,22 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                         }}
                                     />
                                 </Form.Item>
+                                    */}
                             </div>
                         </div>
                         <div className="col-sm-6">
                             <div className="form-group">
-                                <Form.Item
+                                <input type="text"
+                                    className="form-control"
+                                    value={review.postal_code}
+                                    placeholder='Postal Code '
+                                    required="true"
+                                    pattern='[0-9]{6}'
+                                    onChange={(e) => {
+                                        setReview({ ...review, postal_code: e.target.value })
+                                    }}
+                                />
+                                {/*<Form.Item
                                     name="postalCode"
                                     rules={[
                                         {
@@ -439,6 +532,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                         }}
                                     />
                                 </Form.Item>
+                                    */}
                             </div>
                         </div>
                     </div>
@@ -463,8 +557,15 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                             </a>
                         </Link>
                         <div className="ps-block__footer">
+                        
 
-                            <button className="ps-btn">Continue to shipping</button>
+                            {loader ? (
+                                <i>please wait <span className='spinner-border'></span> </i>
+                            ) : (
+                                
+                                <button className="ps-btn">Continue to shipping</button>
+                            )
+                            }
                         </div>
                     </div>
 
