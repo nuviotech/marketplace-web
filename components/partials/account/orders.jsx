@@ -30,7 +30,7 @@ function Invoices() {
     const { actionType } = router.query;
     const { txid } = router.query;
     console.warn("flag = "+flag+" txid = "+txid);
-    alert(flag);
+    
     console.warn(JSON.stringify(router.query));
     if (flag == 1 || flag === 1) {
         console.log("inside flag condition.........")
