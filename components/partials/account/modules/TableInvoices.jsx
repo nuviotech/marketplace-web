@@ -32,7 +32,13 @@ class TableInvoices extends Component {
             example: https://ant.design/components/table/
         */
         const tableData = [];
-        this.props.data.orders?.map((data) => {
+        const d=[];
+        
+        console.warn("data "+d);
+        const strAscending = this.props.data.orders?.sort((a, b) =>
+        a.orderDate < b.orderDate ? 1 : -1,
+      );    
+      strAscending?.map((data) => {
             //  var r=data.razorpayOrderDetails?.replace("\\","");
             //console.log(data.paymentDetails.rzPaymentId);
            /* data.products.map((item)=>{

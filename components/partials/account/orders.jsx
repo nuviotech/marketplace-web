@@ -24,13 +24,14 @@ function Invoices() {
 
     const dispatch = useDispatch();
     const { removeItems } = useEcomerce();
+    const [reset,setReset] =useState(false);
 
     const router = useRouter();
     const { flag } = router.query;
     const { actionType } = router.query;
     const { txid } = router.query;
     console.warn("flag = "+flag+" txid = "+txid);
-    alert(flag);
+
     console.warn(JSON.stringify(router.query));
     if (flag == 1 || flag === 1) {
         console.log("inside flag condition.........")
@@ -52,7 +53,8 @@ function Invoices() {
                         content: `You'r order place successfully, thanks for order the product.`,
                     });
                     removeItems("cart")
-                    router.push("/account/orders")
+                    //window.location.assign("/account/orders")
+                    setReset(true);
                     modal.update;
                 }
             },
@@ -104,7 +106,7 @@ function Invoices() {
     //getUserDetails();
     useEffect(async () => {
         setUser(await userData())
-    }, []);
+    }, [reset]);
 
 
     return (
