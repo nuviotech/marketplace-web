@@ -4,6 +4,7 @@ import Router from 'next/router';
 import { Spin } from 'antd';
 import ProductRepository from '~/repositories/ProductRepository';
 import ProductSearchResult from '~/components/elements/products/ProductSearchResult';
+import useProduct from '~/hooks/useProduct';
 
 
 
@@ -59,6 +60,7 @@ const SearchHeader = () => {
                     setResultItems(result);
                     setIsSearch(true);
                 });
+
             } else {
                 setIsSearch(false);
                 setKeyword('');
@@ -91,9 +93,33 @@ const SearchHeader = () => {
                     </div>
                 );
             }
+            const { thumbnailImage, price, title } = useProduct();
             productItemsView = resultItems.map((product) => (
-                <ProductSearchResult product={product} key={product.id} />
-            ));
+                <div className="ps-product ps-product--wide ps-product--search-result">
+                    <div className="ps-product__thumbnail">
+                        <Link href="/product/[pid]" as={`/product/${product.title.replaceAll("/", " | ").replaceAll(" ", "-")}&pid=${product.id}`}>
+                            <a>{thumbnailImage(product)}</a>
+                        </Link>
+                    </div>
+                    <div className="ps-product__content">
+                        {title(product)}
+                        <div className="ps-product__rating">
+
+                            <span>{product.ratingCount}</span>
+                        </div>
+                        {price(product)}
+                    </div>
+                </div>
+            ))
+
+            //<ProductSearchResult product={product} />
+
+
+
+
+
+
+
         } else {
             productItemsView = <p>No product found.</p>;
         }
@@ -111,12 +137,12 @@ const SearchHeader = () => {
             </span>
         );
     }
-/*
-    selectOptionView = categoriesArray?.map((option) => (
-        <option value={option.name} key={option.categoryId}>
-            {option.name}
-        </option>
-    ));*/
+    /*
+        selectOptionView = categoriesArray?.map((option) => (
+            <option value={option.name} key={option.categoryId}>
+                {option.name}
+            </option>
+        ));*/
 
     return (
         <form
@@ -124,7 +150,7 @@ const SearchHeader = () => {
             method="get"
             action="/"
             onSubmit={handleSubmit}>
-           {/* <div className="ps-form__categories">
+            {/* <div className="ps-form__categories">
                 <select className="form-control">
                     <option value="all" key="0">
                         All
