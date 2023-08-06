@@ -46,7 +46,7 @@ function Invoices() {
         }).then(
             async (response) => {
                 
-                if(response.data==0){
+                if(response.data==0 || response.data===0){
                     const modal = Modal.success({
                         centered: true,
                         title: 'Order ID : '+txid,
@@ -56,7 +56,16 @@ function Invoices() {
                     //window.location.assign("/account/orders")
                     setReset(true);
                     modal.update;
+                }else if(response.data==1 || response.data===1){
+                    const modal = Modal.error({
+                        centered: true,
+                        title: 'Order ID : '+txid,
+                        content: `Opps, payment not successfully done....`,
+                    });
+                    //window.location.assign("/account/orders")
+                    modal.update;
                 }
+
             },
             (error) => {
                 //order details is not save to database
