@@ -8,7 +8,6 @@ export default function Document() {
         <Html>
             <Head>
             <link rel="preload" as='icon' href={'/static/img/nuvioseller.png'} sizes="32x32" />
-            <link rel="shortcut icon" href={'/static/img/.png'} />
                 
                 <link
                     rel="icon"

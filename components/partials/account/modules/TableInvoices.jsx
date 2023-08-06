@@ -32,9 +32,8 @@ class TableInvoices extends Component {
             example: https://ant.design/components/table/
         */
         const tableData = [];
-        const d=[];
-        
-        console.warn("data "+d);
+
+       
         const strAscending = this.props.data.orders?.sort((a, b) =>
         a.orderDate < b.orderDate ? 1 : -1,
       );    
