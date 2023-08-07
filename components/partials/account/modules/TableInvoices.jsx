@@ -274,7 +274,7 @@ class TableInvoices extends Component {
                 rowKey: 'status',
                 width: '60px',
                 render: (text, record) => (
-                    record.status=='PAYMENT_SUCCESS'?
+                    record.status=='success'?
                         <span className='alert-success px-4 py-2'>PAID</span>
                     :
                         <span className='alert-danger p-2'>UNPAID</span>
@@ -296,7 +296,7 @@ class TableInvoices extends Component {
                                 : (record.under_return_policy==="0") ?
                                     <button onClick={() => { openModel(record.id, record.categoryId, record.paymentId, record.amount, record.title) }} className="btn btn-outline-warning">Return</button>
                                     :
-                                    <button className='btn btn-outline-info'>view status</button>
+                                    <Link href={`/account/orderDetails?odId=${record.id}`} ><button className='btn btn-outline-info'>View Details</button></Link>
                         }
                     </span>
                 ),

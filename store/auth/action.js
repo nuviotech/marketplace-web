@@ -44,7 +44,7 @@ export function getToken(){
 
 export function userIsLogin(){
     var token=getToken();
-    console.log("token  : "+token)
+    //console.log("token  : "+token)
     if(token===null || token==='')
         return false;
     else 
