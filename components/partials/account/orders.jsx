@@ -30,6 +30,7 @@ function Invoices() {
     const { flag } = router.query;
     const { actionType } = router.query;
     const { txid } = router.query;
+    
     console.warn("flag = "+flag+" txid = "+txid);
   
     console.warn(JSON.stringify(router.query));
@@ -45,8 +46,7 @@ function Invoices() {
             }
         }).then(
             async (response) => {
-                
-                if(response.data==0 || response.data===0){
+                if(response.data==0){
                     const modal = Modal.success({
                         centered: true,
                         title: 'Order ID : '+txid,
@@ -56,11 +56,11 @@ function Invoices() {
                     //window.location.assign("/account/orders")
                     setReset(true);
                     modal.update;
-                }else if(response.data==1 || response.data===1){
+                }else if(response.data==1){
                     const modal = Modal.error({
                         centered: true,
                         title: 'Order ID : '+txid,
-                        content: `Opps, payment not successfully done....`,
+                        content: `payment failed`,
                     });
                     //window.location.assign("/account/orders")
                     modal.update;
@@ -156,7 +156,7 @@ function Invoices() {
                                                 <li>
                                                     <a onClick={() => {
                                                         dispatch(logOut());
-                                                        Router.push('/account/login');
+                                                        router.push('/account/login');
                                                     }}>
                                                         <i className="icon-power-switch"></i>
                                                         Logout
