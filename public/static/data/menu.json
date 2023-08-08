@@ -141,13 +141,13 @@
                         "url": "/page/HotDeals"
                     },
                     {
-                        "text": "Became a seller",
+                        "text": "Become a seller",
                         "url": "/vendor/become-a-vendor"
                     }
                 ]
             },
             {
-                "text": "Became a seller",
+                "text": "Become a seller",
                 "url": "/vendor/become-a-vendor",
                 "extraClass": "menu-item-has-children",
                 "subClass": "sub-menu"

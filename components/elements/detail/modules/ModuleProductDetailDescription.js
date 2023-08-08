@@ -8,7 +8,7 @@ const ModuleProductDetailDescription = ({ product }) => (
             Sold By :
             <Link href="/shop">
                 <a>
-                    <strong> {product.userId.companyname}</strong>
+                    <strong> {product?.companyName[0]}</strong>
                 </a>
             </Link>
         </p>

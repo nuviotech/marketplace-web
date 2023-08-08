@@ -8,7 +8,8 @@ import ModuleProductDetailSharing from '~/components/elements/detail/modules/Mod
 import ModuleDetailActionsMobile from '~/components/elements/detail/modules/ModuleDetailActionsMobile';
 import ModuleDetailTopInformation from '~/components/elements/detail/modules/ModuleDetailTopInformation';
 
-const ProductDetailFullwidth = ({ product }) => {
+const ProductDetailFullwidth = ({ product,pid }) => {
+    
     return (
         <div className="ps-product--detail ps-product--fullwidth">
             <div className="ps-product__header">
@@ -18,7 +19,7 @@ const ProductDetailFullwidth = ({ product }) => {
                     <ModuleProductDetailDescription product={product} />
                     <ModuleDetailShoppingActions product={product} />
                     <ModuleProductDetailSpecification product={product} />
-                    <ModuleProductDetailSharing />
+                    <ModuleProductDetailSharing pid={pid} />
                     <ModuleDetailActionsMobile product={product} />
                 </div>
             </div>
