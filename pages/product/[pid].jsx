@@ -25,11 +25,12 @@ const ProductDefaultPage = ({ responseData }) => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(false);
     //alert(responseData.keyWords)
-    const title = responseData.title;
+    const title = responseData?.title;
     const keyWords = [];
     responseData?.keywords?.split(",").map((item) => keyWords.push(item))
     //console.warn(pid);
-    const description = responseData?.title + " | price : " + responseData?.sale_price;
+   // const description = responseData?.title + " | price : " + responseData?.sale_price;
+   const description = "price : "+responseData?.sale_price;
 
     async function getProduct(pid) {
         setLoading(true);
@@ -63,10 +64,11 @@ const ProductDefaultPage = ({ responseData }) => {
         },
     ];
     // Views
+   // alert(pid)
     let productView, headerView;
     if (!loading) {
         if (product) {
-            productView = <ProductDetailFullwidth product={product} />;
+            productView = <ProductDetailFullwidth pid={pid} product={product} />;
             headerView = (
                 <>
                     <HeaderProduct product={product} />
