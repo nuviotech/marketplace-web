@@ -56,6 +56,7 @@ const FormChangeUserInformation = (data) => {
             <div className="ps-form__content">
                 <div className="form-group">
                     <input
+                        disabled="true"
                         className="form-control"
                         type="text"
                         placeholder="email address"
