@@ -149,7 +149,7 @@ const ProductDefaultPage = ({ responseData }) => {
 
 export async function getStaticPaths() {
     try {
-
+        //getting urls
         const responseData = await axios.get(
             `${marketplaceUrl}/getAllProducts`
         )
@@ -163,10 +163,10 @@ export async function getStaticPaths() {
             //console.log("Length Of Array : "+data.length);
        // console.log("DATA :->: " + JSON.stringify(responseData));
         var paths;
-       // console.log("**********************************************");
+        console.log("**********************************************");
         if (data!==null && data.length !== 0 ) {
             paths = data?.map((item) => {
-               // console.log("URL : "+item);
+                console.log("URL : "+item);
                 return {
                     params: {
                         pid: item.toString()

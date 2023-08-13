@@ -9,32 +9,40 @@ import { calculateAmount } from '~/utilities/ecomerce-helpers';
 import { userIsLogin, getToken } from '~/store/auth/action';
 import { useRouter } from 'next/router';
 import { AuthContext } from '~/context/loginContext';
+import { userData } from '~/repositories/UserDeatils';
 
 const FormCheckoutInformation = ({ ecomerce }) => {
     var userLoginStatus = userIsLogin();
     const { currentUser } = useContext(AuthContext);
+    console.warn(currentUser);
+    //const [currentUser, setCurrentUser] = useState();
     const [loader, setLoader] = useState(false)
 
     //console.log("userloginstatus : "+userLoginStatus);
     //console.log("eccomerce : " + JSON.stringify(ecomerce.cartItems));
     let totalAmount = 0;
-    const [review, setReview] = useState({});
+    const [review, setReview] = useState({state:"select state"});
 
     const setDefaultValues = () => {
-        setReview({
-            fname: currentUser.firstName,
-            last_name: currentUser.lastName,
-            address: currentUser.shippingAddress,
-            city: currentUser.city,
-            contact: currentUser.phone,
-
-        })
+        if (currentUser?.shippingAddress) {
+            setReview({
+                fname: currentUser?.shippingAddress?.firstName,
+                last_name: currentUser?.shippingAddress?.lastName,
+                address: currentUser?.shippingAddress?.streetAddress,
+                city: currentUser?.shippingAddress?.city,
+                contact: currentUser?.phone,
+                state: currentUser?.shippingAddress?.state,
+                postal_code:currentUser?.shippingAddress?.pincode,
+            })
+        }
     }
 
     const { products, getProducts } = useEcomerce();
     const router = useRouter();
-    useEffect(() => {
+    useEffect(async () => {
         if (ecomerce.cartItems) {
+           // setCurrentUser(await userData())
+
             getProducts(ecomerce.cartItems, 'cart');
             setDefaultValues();
         }
@@ -45,6 +53,10 @@ const FormCheckoutInformation = ({ ecomerce }) => {
     }
 
     const handleLoginSubmit = () => {
+        if(review.state==="select state"){
+            alert("select state!!");
+            return;
+        }
         const orderInformation = {
             "fname": review.fname,
             "lname": review.last_name,
@@ -56,8 +68,9 @@ const FormCheckoutInformation = ({ ecomerce }) => {
             "contactNumber": review.contact,
             "totalBill": totalAmount,
             "token": getToken(),
+            "state": review.state,
         }
-
+        
         //  console.log(orderInformation);
         setLoader(true);
         placeOrder(orderInformation);
@@ -94,7 +107,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
 
 
                 // console.warn(JSON.stringify(response));
-                
+
                 if (response.data.success) {
                     //var merchantId = response.data.data.merchantId;
                     // var transactionId = response.data.data.merchantTransactionId
@@ -468,7 +481,7 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                             */}
                     </div>
                     <div className="row">
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
                             <div className="form-group">
                                 <input type="text"
                                     className="form-control"
@@ -501,7 +514,51 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                                     */}
                             </div>
                         </div>
-                        <div className="col-sm-6">
+                        <div className="col-sm-4">
+                            <div className="form-group">
+                                <select onChange={(event) => { setReview({ ...review, state: event.target.value }) }} className='form-control'>
+                                    <option>{review.state}</option>
+                                    <option>Andhra Pradesh</option>
+                                    <option>Arunachal Pradesh</option>
+                                    <option>Assam</option>
+                                    <option>Bihar</option>
+                                    <option>Chhattisgarh</option>
+                                    <option>Goa</option>
+                                    <option>Gujarat</option>
+                                    <option>Haryana</option>
+                                    <option>Himachal Pradesh</option>
+                                    <option>Jammu and Kashmir</option>
+                                    <option>Jharkhand</option>
+                                    <option>Karnataka</option>
+                                    <option>Kerala</option>
+                                    <option>Madhya Pradesh</option>
+                                    <option>Maharashtra</option>
+                                    <option>Manipur</option>
+                                    <option>Meghalaya</option>
+                                    <option>Mizoram</option>
+                                    <option>Nagaland</option>
+                                    <option>Orissa</option>
+                                    <option>Punjab</option>
+                                    <option>Rajasthan</option>
+                                    <option>Sikkim</option>
+                                    <option>Tamil Nadu</option>
+                                    <option>Tripura</option>
+                                    <option>Uttarakhand</option>
+                                    <option>Uttar Pradesh</option>
+                                    <option>West Bengal</option>
+                                    <option>Tamil Nadu</option>
+                                    <option>Tripura</option>
+                                    <option>Andaman and Nicobar Islands</option>
+                                    <option>Chandigarh</option>
+                                    <option>Dadra and Nagar Haveli</option>
+                                    <option>Daman and Diu</option>
+                                    <option>Delhi</option>
+                                    <option>Lakshadweep</option>
+                                    <option>Pondicherry</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="col-sm-4">
                             <div className="form-group">
                                 <input type="text"
                                     className="form-control"
@@ -557,12 +614,12 @@ const FormCheckoutInformation = ({ ecomerce }) => {
                             </a>
                         </Link>
                         <div className="ps-block__footer">
-                        
+
 
                             {loader ? (
                                 <i>please wait <span className='spinner-border'></span> </i>
                             ) : (
-                                
+
                                 <button className="ps-btn">Continue to shipping</button>
                             )
                             }
