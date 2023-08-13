@@ -20,7 +20,7 @@ function EditAddress() {
 
     const dispatch = useDispatch();
     const Router = useRouter();
-
+    const {action} = Router.query;
 
     //   render() {
     const accountLinks = [
@@ -121,7 +121,7 @@ function EditAddress() {
                             </div>
                             <div className="col-lg-8">
                                 <div className="ps-page__content">
-                                    <FormEditAddress />
+                                    <FormEditAddress type={action} />
                                 </div>
                             </div>
                         </div>

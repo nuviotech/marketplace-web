@@ -1,25 +1,34 @@
 import React from 'react';
 import Link from 'next/link';
- 
+import ReactWhatsapp from 'react-whatsapp';
+import { WhatsappIcon } from 'react-share';
+
 
 const FooterWidgets = () => (
     <div className="ps-footer__widgets">
         <aside className="widget widget_footer widget_contact-us">
-            <h4 className="widget-title">Contact us<br/>
-            <a
-                href="https://wa.me/+918928268145"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                <i class="fa fa-whatsapp whatsapp-icon fa-3x text-success"  ></i>
-            </a>
-            
+            <h4 className="widget-title">Contact us<br />
+                <a
+                    href="https://wa.me/+918928268145"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa fa-whatsapp whatsapp-icon fa-3x text-success"  ></i>
+                </a>
+
             </h4>
-            
+
             <div className="widget_content">
-           
+
                 <p>Whatsapp us 24/7</p>
-                <h3 style={{fontSize:"19px"}}>+91 8928268145</h3>
+                <div className='mb-3'>
+                <ReactWhatsapp number="8928268145" message="Hi" element={"div"} >
+                    <WhatsappIcon size={35} round="true"></WhatsappIcon>
+                </ReactWhatsapp>
+
+                </div>
+
+                <h3 style={{ fontSize: "19px" }}>+91 8928268145</h3>
                 <p>
                     <a href="mailto:support@nuvio.in">support@nuvio.in</a>
                 </p>
@@ -35,8 +44,8 @@ const FooterWidgets = () => (
                         </a>
                     </li>
                     <li>
-                        <a  target='_blank' href="https://in.linkedin.com/company/nuvio-technologies-pvt-ltd">
-                            <i className="fa fa-linkedin" style={{color:"#2e5fb2"}}></i>
+                        <a target='_blank' href="https://in.linkedin.com/company/nuvio-technologies-pvt-ltd">
+                            <i className="fa fa-linkedin" style={{ color: "#2e5fb2" }}></i>
                         </a>
                     </li>
                     <li>

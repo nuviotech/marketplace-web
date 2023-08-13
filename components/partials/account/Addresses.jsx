@@ -11,6 +11,8 @@ function Addresses() {
          super(props);
          this.state = {};
      }*/
+    const [currentUser, setCurrentUser] = useState();
+
     const dispatch = useDispatch();
     const Router = useRouter();
     // render() {
@@ -27,7 +29,7 @@ function Addresses() {
         },
         {
             text: 'Orders',
-            url: '/account/order',
+            url: '/account/orders',
             icon: 'icon-papers',
         },
         {
@@ -48,15 +50,15 @@ function Addresses() {
         },
     ];
 
-    const { currentUser } = useContext(AuthContext);
+    // const { currentUser } = useContext(AuthContext);
 
-    /*
+
     //getUserDetails();
-    const [user,setUser]=useState([]);
-    useEffect(async()=>{
-        setUser(await userData())
-    },[]);
-    */
+    // const [user,setUser]=useState([]);
+    useEffect(async () => {
+        setCurrentUser(await userData())
+    }, []);
+    console.warn(currentUser);
     return (
         <section className="ps-my-account ps-page--account">
 
@@ -70,8 +72,8 @@ function Addresses() {
                                         <div className="ps-widget__header">
                                             <img src="/static/img/users/3.jpg" />
                                             <figure>
-                                                <figcaption>Hello, <span className='text-capitalize'>{currentUser.firstName}</span></figcaption>
-                                                <p>{currentUser.email}</p>
+                                                <figcaption>Hello, <span className='text-capitalize'>{currentUser?.firstName}</span></figcaption>
+                                                <p>{currentUser?.email}</p>
                                             </figure>
                                         </div>
                                         <div className="ps-widget__content">
@@ -122,10 +124,22 @@ function Addresses() {
                                                     </figcaption>
                                                     <div className="ps-block__content">
                                                         <p>
-                                                            {currentUser.billingAddress == '' ? "None !!" : currentUser.billingAddress}
+                                                            {
+                                                                currentUser?.billingAddress ?
+                                                                <>
+                                                                    {currentUser?.billingAddress?.firstName} {currentUser?.billingAddress?.lastName} <br />
+                                                                    {currentUser?.billingAddress?.streetAddress}<br />
+                                                                    {currentUser?.billingAddress?.city}, {currentUser?.billingAddress?.state} {currentUser?.billingAddress?.country}<br />
+                                                                    {currentUser?.billingAddress?.pincode}
+                                                                </>
+                                                                :
+                                                                <>
+                                                                    <p>Add billing address !!</p>
+                                                                </>
+                                                            }
 
                                                         </p>
-                                                        <Link href="/account/edit-address">
+                                                        <Link href="/account/edit-address?action=billing-address">
                                                             <a>Edit</a>
                                                         </Link>
                                                     </div>
@@ -138,9 +152,21 @@ function Addresses() {
                                                     </figcaption>
                                                     <div className="ps-block__content">
                                                         <p>
-                                                            {currentUser.shippingAddress}
+                                                            {
+                                                                currentUser?.shippingAddress ?
+                                                                <>
+                                                                    {currentUser?.shippingAddress?.firstName} {currentUser?.shippingAddress?.lastName} <br />
+                                                                    {currentUser?.shippingAddress?.streetAddress}<br />
+                                                                    {currentUser?.shippingAddress?.city}, {currentUser?.shippingAddress?.state} {currentUser?.shippingAddress?.country}<br />
+                                                                    {currentUser?.shippingAddress?.pincode}
+                                                                </>
+                                                                :
+                                                                <>
+                                                                    <p>Add shipping address !!</p>
+                                                                </>
+                                                            }
                                                         </p>
-                                                        <Link href="/account/edit-address">
+                                                        <Link href="/account/edit-address?action=shipping-address">
                                                             <a>Edit</a>
                                                         </Link>
                                                     </div>
