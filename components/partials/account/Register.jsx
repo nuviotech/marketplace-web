@@ -5,7 +5,7 @@ import { login } from '../../../store/auth/action';
 import { marketplaceUrl } from '~/repositories/Repository';
 import axios from 'axios';
 
-import { Form, Input,Modal } from 'antd';
+import { Form, Input, Modal, Select } from 'antd';
 import { connect } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
 
@@ -13,98 +13,105 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName:null,
-            lastName:null,
-            email:null,
-            password:null,
-            password2:null,
-            phone:null,
-            city:null,
-            country:null,
-            shippingAddress:null
-
-
+            firstName: null,
+            lastName: null,
+            email: null,
+            password: null,
+            password2: null,
+            phone: null,
+           // city: null,
+            //state: "Nan",
+            //country: null,
+            //shippingAddress: null
         };
     }
-   
+
 
     handleSubmit = async (e) => {
-       // e.preventDefault();
-      //  console.log(JSON.stringify(this.state))
-        if(this.state.firstName=='' || this.state.lastName==''){
+        // e.preventDefault();
+        //  console.log(JSON.stringify(this.state))
+
+        if (this.state.firstName == '' || this.state.lastName == '') {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid input!',
                 content: `Please enter first name or last name.`,
             });
             modal.update;
-        }else if(this.state.phone.length < 10 ){
+        } else if (this.state.phone.length < 10) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid input!',
                 content: `Please enter correct phone number.`,
             });
-        }else if(this.state.password.length <4 || this.state.password.length >20){
+        } else if (this.state.password.length < 4 || this.state.password.length > 20) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid password!',
                 content: `password must be greter than 4 character or less than 20 character.`,
             });
             modal.update;
-        } else if(this.state.password!=this.state.password2){
+        } else if (this.state.password != this.state.password2) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Wrong confirm password!',
                 content: `enter the same password in password field or confirm password field.`,
             });
             modal.update;
-        }else{
+        } else {
             await axios.post(`${marketplaceUrl}/saveUser`, this.state).then(
-                (response)=>{
+                (response) => {
                     var statusCode = response.data;
-                    if(statusCode == '-1'){
+                    if (statusCode == '-1') {
                         const modal = Modal.error({
                             centered: true,
                             title: 'Invalid input!',
                             content: `Please enter valid first name or last name.`,
                         });
                         modal.update;
-                    }else if(statusCode == '-2'){
+                    } else if (statusCode == '-2') {
                         const modal = Modal.error({
                             centered: true,
                             title: 'Invalid input!',
                             content: `Please enter valid first name or last name.`,
                         });
                         modal.update;
-                    }else if(statusCode == '-3'){
+                    } else if (statusCode == '-3') {
                         const modal = Modal.error({
                             centered: true,
                             title: 'Invalid input!',
                             content: `Please enter valid first name or last name.`,
                         });
                         modal.update;
-                    }else if(statusCode == '-4'){
+                    } else if (statusCode == '-4') {
                         const modal = Modal.error({
                             centered: true,
                             title: 'Invalid input!',
                             content: `Please enter valid first name or last name.`,
                         });
                         modal.update;
-                    }else if(statusCode=='-5'){
+                    } else if (statusCode == '-5') {
                         const modal = Modal.error({
                             centered: true,
                             title: 'Email already exists!!',
                             content: `Please try with another email id, this email already present.`,
                         });
                         modal.update;
-                    }else if(statusCode=='1'){
+                    }else if(statusCode=='-6'){
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Invalid state!!',
+                            content: `please select the state.`,
+                        });
+                        modal.update;
+                    } else if (statusCode == '1') {
                         const modal = Modal.error({
                             centered: true,
                             title: 'Server Error!!',
                             content: `Something went wrong on server.`,
                         });
                         modal.update;
-                    }else if(statusCode=='0'){
+                    } else if (statusCode == '0') {
                         const modal = Modal.success({
                             centered: true,
                             title: 'Successfully Registered !',
@@ -114,8 +121,8 @@ class Register extends Component {
                         Router.push('/account/login');
                     }
                 },
-                (error)=>{
-                    console.error("Register user (error) : "+error);
+                (error) => {
+                    console.error("Register user (error) : " + error);
                     alert("Something went wrong on server!!");
                 }
             )
@@ -132,7 +139,7 @@ class Register extends Component {
 
     render() {
         return (
-            
+
             <div className="ps-my-account">
                 <div className="container">
                     <Form
@@ -170,7 +177,7 @@ class Register extends Component {
                                                     type="text"
                                                     placeholder="First Name"
                                                     name="fname"
-                                                    onChange={(event)=> {this.setState({firstName:event.target.value})} }
+                                                    onChange={(event) => { this.setState({ firstName: event.target.value }) }}
 
                                                 />
                                             </Form.Item>
@@ -191,7 +198,7 @@ class Register extends Component {
                                                     type="text"
                                                     placeholder="Last Name"
                                                     name="last_name"
-                                                    onChange={(event)=> {this.setState({lastName:event.target.value})} }
+                                                    onChange={(event) => { this.setState({ lastName: event.target.value }) }}
 
                                                 />
                                             </Form.Item>
@@ -213,8 +220,8 @@ class Register extends Component {
                                         <Input
                                             className="form-control"
                                             type="email"
-                                            placeholder="Email address"
-                                            onChange={(event)=> {this.setState({email:event.target.value})} }
+                                            placeholder="Email id"
+                                            onChange={(event) => { this.setState({ email: event.target.value }) }}
 
                                         />
                                     </Form.Item>
@@ -233,13 +240,13 @@ class Register extends Component {
                                             className="form-control"
                                             type="text"
                                             placeholder="Enter contact"
-                                            onChange={(event)=> {this.setState({phone:event.target.value})} }
+                                            onChange={(event) => { this.setState({ phone: event.target.value }) }}
 
                                         />
                                     </Form.Item>
                                 </div>
 
-                                <div className="row">
+                               {/* <div className="row">
                                     <div className="col-sm-6">
                                         <div className="form-group">
                                             <Form.Item
@@ -255,7 +262,7 @@ class Register extends Component {
                                                     type="text"
                                                     placeholder="Enter the city"
                                                     name="fname"
-                                                    onChange={(event)=> {this.setState({city:event.target.value})} }
+                                                    onChange={(event) => { this.setState({ city: event.target.value }) }}
 
                                                 />
                                             </Form.Item>
@@ -263,7 +270,7 @@ class Register extends Component {
                                     </div>
                                     <div className="col-sm-6">
                                         <div className="form-group">
-                                            <Form.Item
+                                            {/*<Form.Item
                                                 name="country"
                                                 rules={[
                                                     {
@@ -280,10 +287,14 @@ class Register extends Component {
 
                                                 />
                                             </Form.Item>
+                                            *}
+                                            
+
                                         </div>
                                     </div>
                                 </div>
-
+                                */}
+                                {/*
                                 <div className="form-group">
                                     <Form.Item
                                         name="shippingAddress"
@@ -299,12 +310,12 @@ class Register extends Component {
                                             className="form-control"
                                             type="text"
                                             placeholder="Enter address"
-                                            onChange={(event)=> {this.setState({shippingAddress:event.target.value})} }
+                                            onChange={(event) => { this.setState({ shippingAddress: event.target.value }) }}
 
                                         />
                                     </Form.Item>
                                 </div>
-
+                                    */}
                                 <div className="form-group form-forgot">
                                     <Form.Item
                                         name="password"
@@ -319,7 +330,7 @@ class Register extends Component {
                                             className="form-control"
                                             type="password"
                                             placeholder="Password..."
-                                            onChange={(event)=> {this.setState({password:event.target.value})} }
+                                            onChange={(event) => { this.setState({ password: event.target.value }) }}
 
                                         />
                                     </Form.Item>
@@ -339,7 +350,7 @@ class Register extends Component {
                                             type="password"
                                             placeholder="repeat password.."
                                             id='password2'
-                                            onChange={(event)=> {this.setState({password2:event.target.value})} }
+                                            onChange={(event) => { this.setState({ password2: event.target.value }) }}
 
                                         />
                                     </Form.Item>

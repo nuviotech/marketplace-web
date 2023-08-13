@@ -103,7 +103,8 @@ const InvoiceDetail = () => {
                     setOrderDetails(data);
                 }
             })
-            console.warn( orderDetails)
+            console.warn("__________________________");
+            console.warn(orderDetails.invoices)
         }
     }
 
@@ -259,42 +260,51 @@ const InvoiceDetail = () => {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {orderDetails.products?.map(
-                                                    product => (
-                                                        <tr
-                                                            key={
-                                                                product?.orderProductId
-                                                            }>
-                                                            <td>
-                                                                {
-                                                                    product?.product_name?.length > 83 ?
-                                                                        product?.product_name?.substring(0, 83) + "..." :
-                                                                        product?.product_name
+                                                {orderDetails?.invoices?.map((invoice)=> (
 
-                                                                }
-                                                            </td>
-                                                            <td className="price">
-                                                                ₹
-                                                                {
-                                                                    product?.sole_price
-                                                                }
-                                                            </td>
 
-                                                            <td>{product?.quantity}</td>
-                                                            <td className="status">
+                                                    
+                                                        invoice?.items?.map(
+                                                            product => (
+                                                                <tr
+                                                                    key={
+                                                                        product?.orderProductId
+                                                                    }>
+                                                                    <td>
+                                                                        {
+                                                                            product?.product_name?.length > 83 ?
+                                                                                product?.product_name?.substring(0, 83) + "..." :
+                                                                                product?.product_name
 
-                                                                {
-                                                                    product?.status
-                                                                }
-                                                            </td>
-                                                            <td className='text-center'>
-                                                                {
+                                                                        }
+                                                                    </td>
+                                                                    <td className="price">
+                                                                        ₹
+                                                                        {
+                                                                            product?.sole_price
+                                                                        }
+                                                                    </td>
 
-                                                                }
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                )}
+                                                                    <td>{product?.quantity}</td>
+                                                                    <td className="status">
+
+                                                                        {
+                                                                            product?.status
+                                                                        }
+                                                                    </td>
+                                                                    <td className='text-center'>
+                                                                        {
+
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                            )
+                                                        )
+                                                    
+
+
+                                                ))}
+
                                             </tbody>
                                         </table>
                                     </div>
