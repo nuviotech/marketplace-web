@@ -163,10 +163,10 @@ export async function getStaticPaths() {
             //console.log("Length Of Array : "+data.length);
        // console.log("DATA :->: " + JSON.stringify(responseData));
         var paths;
-        console.log("**********************************************");
+       // console.log("**********************************************");
         if (data!==null && data.length !== 0 ) {
             paths = data?.map((item) => {
-                console.log("URL : "+item);
+                console.log();
                 return {
                     params: {
                         pid: item.toString()
