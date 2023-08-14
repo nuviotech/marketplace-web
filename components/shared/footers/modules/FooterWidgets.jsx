@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import ReactWhatsapp from 'react-whatsapp';
 import { WhatsappIcon } from 'react-share';
+import { FloatingWhatsApp } from 'react-floating-whatsapp';
 
 
 const FooterWidgets = () => (
@@ -22,7 +23,9 @@ const FooterWidgets = () => (
 
                 <p>Whatsapp us 24/7</p>
                 <div className='mb-3'>
-                <ReactWhatsapp number="8928268145" message="Hi" element={"div"} >
+                <FloatingWhatsApp phoneNumber="918928268145" accountName="nuvio sellers" />
+                
+                <ReactWhatsapp number="918928268145" message="Hi" element={"div"} >
                     <WhatsappIcon size={35} round="true"></WhatsappIcon>
                 </ReactWhatsapp>
 
