@@ -19,20 +19,21 @@ import ResponseCache from 'next/dist/server/response-cache';
 import Head from 'next/head';
 
 const ProductDefaultPage = ({ responseData }) => {
+
     const router = useRouter();
     const { pid } = router.query;
-    
+
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(false);
-    //alert(responseData.keyWords)
+
     const title = responseData?.title;
     const keyWords = [];
     responseData?.keywords?.split(",").map((item) => keyWords.push(item))
     //console.warn(pid);
-   // const description = responseData?.title + " | price : " + responseData?.sale_price;
-   const description = "price : "+responseData?.sale_price;
+    // const description = responseData?.title + " | price : " + responseData?.sale_price;
+    const description = "price : " + responseData?.sale_price;
 
-    async function getProduct(pid) {
+    async function getProduct() {
         setLoading(true);
         //const responseData = await ProductRepository.getProductsById(pid);
         if (responseData) {
@@ -47,8 +48,8 @@ const ProductDefaultPage = ({ responseData }) => {
     }
 
     useEffect(() => {
-        getProduct(pid);
-    }, [pid]);
+        getProduct();
+    }, [responseData]);
 
     const breadCrumb = [
         {
@@ -64,7 +65,7 @@ const ProductDefaultPage = ({ responseData }) => {
         },
     ];
     // Views
-   // alert(pid)
+    // alert(pid)
     let productView, headerView;
     if (!loading) {
         if (product) {
@@ -90,7 +91,7 @@ const ProductDefaultPage = ({ responseData }) => {
     return (
         <>
             <Head>
-            <link rel="shortcut icon" href={responseData?.images[0].url} />
+                <link rel="shortcut icon" href={responseData?.images[0].url} />
                 <link
                     rel="icon"
                     href={responseData?.images[0].url}
@@ -101,22 +102,22 @@ const ProductDefaultPage = ({ responseData }) => {
                     href={responseData?.images[0].url}
                 />
             </Head>
-            <SEO 
-            title={title} 
-            description={description} 
-            keywords={keyWords} 
-            icon={responseData?.images[0].url}
-            facebook={{
-                image: responseData?.images[0].url,
-                url: "https://nuvio.in/product/"+pid,
-                type: "website",
-            }}
-            twitter={{
-                image: responseData?.images[0].url,
-                site: "nuvio.in",
-                card: "summary",
-            }}
-        
+            <SEO
+                title={title}
+                description={description}
+                keywords={keyWords}
+                icon={responseData?.images[0].url}
+                facebook={{
+                    image: responseData?.images[0].url,
+                    url: `https://nuvio.in/product/${pid}`,
+                    type: "website",
+                }}
+                twitter={{
+                    image: responseData?.images[0].url,
+                    site: "nuvio.in",
+                    card: "summary",
+                }}
+
             />
 
             <PageContainer
@@ -129,7 +130,7 @@ const ProductDefaultPage = ({ responseData }) => {
                         <div className="ps-page__container">
                             <div className="ps-page__left">{productView}</div>
                             <div className="ps-page__right">
-                                <ProductWidgets  brand={product?.brand}/>
+                                <ProductWidgets brand={product?.brand} />
                             </div>
                         </div>
 
@@ -158,47 +159,54 @@ export async function getStaticPaths() {
             })
             .catch((error) => ({ error: JSON.stringify(error) }));
 
-        const data =  responseData;
-            //console.log("is Array : "+Array.isArray(data));
-            //console.log("Length Of Array : "+data.length);
-       // console.log("DATA :->: " + JSON.stringify(responseData));
+        const data = responseData;
+        //console.log("is Array : "+Array.isArray(data));
+        //console.log("Length Of Array : "+data.length);
+        // console.log("DATA :->: " + JSON.stringify(responseData));
         var paths;
-       // console.log("**********************************************");
-        if (data!==null && data.length !== 0 ) {
-            paths = data?.map((item) => {
-                console.log();
-                return {
-                    params: {
-                        pid: item.toString()
-                    }
-                }
-            })
+        //console.log("**********************************************");
+        if (data == null || data.length == 0) {
+            console.info("empty product array !!!");
+            paths =[]
         } else {
-            console.log("empty array..............");
-
+            if (data.error) {
+                console.warn("ERROR ::=> "+data.error);
+                paths = []
+            } else {
+                paths = data?.map((item) => {
+                    console.log("******");
+                    return {
+                        params: {
+                            pid: item.toString()
+                        }
+                    }
+                })
+                console.log(paths);
+            }
         }
         return {
             paths,
             fallback: false
         }
-    }catch(error){
-        console.log("!!!! ERROR HAPPEN : "+error);
+    } catch (error) {
+        console.log("!!!! ERROR HAPPEN : " + error);
     }
-    
+
 }
 
 export async function getStaticProps(context) {
     const { params } = context;
-   // const responseData = await ProductRepository.getProductsById(params.pid);
-   const pid=params.pid.split("&pid=");
-   //console.log("!@#$ ::::: "+pid[1])
-   const responseData = await ProductRepository.getProductsById(pid[1]+"");
+    // const responseData = await ProductRepository.getProductsById(params.pid);
+    const pid = params.pid.split("&pid=");
+    //console.log("!@#$ ::::: "+pid[1])
+    const responseData = await ProductRepository.getProductsById(pid[1] + "");
     return {
         props: {
             responseData
         }
     }
 }
+
 
 
 export default ProductDefaultPage;
