@@ -36,7 +36,7 @@ function getImageURL(source, size) {
             image = source.url;
         }
         imageURL = `${baseUrl}${image}`;
-        
+
     } else {
         imageURL = `/static/img/undefined-product-thumbnail.jpg`;
     }
@@ -47,21 +47,21 @@ export default function useProduct() {
     return {
         thumbnailImage: (payload) => {
             if (payload) {
-               /* if (payload.thumbnail) {
-                    return (
-                        <>
-                            <LazyLoad>
-                                <img
-                                    src={getImageURL(payload.thumbnail)}
-                                    alt={getImageURL(payload.thumbnail)}
-                                />
-                            </LazyLoad>
-                        </>
-                    );
-                }*/
-               
-               
-                if (payload.images?.length>0) {
+                /* if (payload.thumbnail) {
+                     return (
+                         <>
+                             <LazyLoad>
+                                 <img
+                                     src={getImageURL(payload.thumbnail)}
+                                     alt={getImageURL(payload.thumbnail)}
+                                 />
+                             </LazyLoad>
+                         </>
+                     );
+                 }*/
+
+
+                if (payload.images?.length > 0) {
                     return (
                         <>
                             <LazyLoad>
@@ -136,7 +136,7 @@ export default function useProduct() {
         },
         badge: (payload) => {
             let view;
-            
+
             if (payload?.badge && payload?.badge !== null) {
                 view = payload?.badge.map((badge) => {
                     if (badge.type === 'sale') {
@@ -171,7 +171,7 @@ export default function useProduct() {
                 );
             }
             return view;
-        
+
         },
         brand: (payload) => {
             let view;
@@ -194,7 +194,7 @@ export default function useProduct() {
         },
         title: (payload) => {
             let view = (
-                <Link href="/product/[pid]" as={`/product/${payload?.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${payload?.id}`}>
+                <Link href="/product/[pid]" as={`/product/${payload?.title.replaceAll("/", " | ").replaceAll(" ", "-")}&pid=${payload?.id}`}>
                     <a className="ps-product__title">{payload?.title}</a>
                 </Link>
             );

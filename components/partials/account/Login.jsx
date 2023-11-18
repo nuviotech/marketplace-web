@@ -50,7 +50,7 @@ class Login extends Component {
     }
 
     responseFacebook = (response) => {
-        alert(JSON.stringify(response.email));
+        //alert(JSON.stringify(response.email));
        // loginAxiosAction("facebook");
       }
       
@@ -192,12 +192,8 @@ class Login extends Component {
                                     </Form.Item>
                                 </div>
 
-
                                 <ReCAPTCHA
-                                    //testing
-                                   // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                                    //original
-                                    sitekey="6LduJpolAAAAAFiW9friufeK8k637Rxp3EzA-zkz"
+                                    sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
                                     onChange={this.onChange}
                                     size="normal"
                                 />

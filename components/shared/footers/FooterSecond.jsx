@@ -139,7 +139,7 @@ const FooterSecond = ({ classes }) => {
                 </div>
             </div>
             <div className="ps-footer__copyright">
-                <p className='text-center'>&copy; 2023 For Nuvio.in (Nuvio Sellers Private Limited) All Rights Reserved</p>
+                <p className='text-center'>&copy; {new Date().getFullYear()} {process.env.NEXT_} All Rights Reserved</p>
                
             </div>
         </div>

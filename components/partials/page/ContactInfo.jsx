@@ -13,12 +13,12 @@ const ContactInfo = () => (
                         <div className="ps-block--contact-info">
                             <h4>Contact Directly</h4>
                             <p>
-                                <a href="mailto:support@nuvio.in">
-                                    support@nuvio.in
+                                <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}>
+                                    {process.env.NEXT_PUBLIC_EMAIL}
                                 </a>
-                                <span><b>+91 8928268145</b></span>
+                                <span><b>{process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}</b></span>
                                 <a
-                                    href="https://wa.me/+918928268145"
+                                    href={`https://wa.me/+91${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -32,16 +32,8 @@ const ContactInfo = () => (
                             <h4>Registered Address</h4>
                             <p>
                                 <span>
-                                    Nuvio Sellers Private Limited,
-                                    Shop No 2, Shakti Dham,
-                                    Plot No 108, Navi Mumbai,
-                                    Maharashtra,India,400701,
-                                    CIN : U74999MH2018PTC314777
-                                    Telephone: 7718895734
+                                   {process?.env?.NEXT_PUBLIC_ADDRESS}
                                 </span><br />
-                                <hr />
-                                <h5> Additional Address </h5>
-                                <span>905,The Crown, Nr. D-Mart, Gharkul, Sector 15, Kharghar, Navi Mumbai, Maharashtra 410210</span>
                             </p>
                         </div>
                     </div>
@@ -50,7 +42,7 @@ const ContactInfo = () => (
                             <h4>Work With Us</h4>
                             <p>
                                 <span>Send your CV to our email:</span>
-                                <a href="mailTo:support@nuvio.in"><b>support@nuvio.in</b></a>
+                                <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}><b>{process.env.NEXT_PUBLIC_EMAIL}</b></a>
                             </p>
                         </div>
                     </div>
@@ -58,10 +50,10 @@ const ContactInfo = () => (
                         <div className="ps-block--contact-info">
                             <h4>Customer Service</h4>
                             <p>
-                                <a href="#">support@nuvio.in</a>
-                                <span><b>+91 8928268145</b></span>
+                                <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}>{process.env.NEXT_PUBLIC_EMAIL}</a>
+                                <span><b>+91 {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}</b></span>
                                 <a
-                                    href="https://wa.me/+918928268145"
+                                    href={`https://wa.me/+91${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -74,8 +66,8 @@ const ContactInfo = () => (
                         <div className="ps-block--contact-info">
                             <h4>Media Relations</h4>
                             <p>
-                                <a href="#">support@nuvio.in</a>
-                                <span>+91 8928268145</span>
+                                <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}>support@nuvio.in</a>
+                                <span>+91 {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}</span>
                             </p>
                         </div>
                     </div>
@@ -83,8 +75,8 @@ const ContactInfo = () => (
                         <div className="ps-block--contact-info">
                             <h4>Vendor Support</h4>
                             <p>
-                                <a href="#">support@nuvio.in</a>
-                                <span>+91 8928268145</span>
+                                <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}> {process.env.NEXT_PUBLIC_EMAIL}</a>
+                                <span>+91 {process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}</span>
                             </p>
                         </div>
                     </div>

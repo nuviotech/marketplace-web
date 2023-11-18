@@ -8,9 +8,11 @@ const ModuleProductDetailSharing = ({pid}) => (
 
             </FacebookIcon>
         </FacebookShareButton>
+        
         <WhatsappShareButton url={`https://nuvio.in/product/${pid}`}>
             <WhatsappIcon size={50} logoFillColor='white'></WhatsappIcon>
         </WhatsappShareButton>
+
         <TelegramShareButton url={`https://nuvio.in/product/${pid}`}>
             <TelegramIcon size={50} logoFillColor='white'>
             </TelegramIcon>
