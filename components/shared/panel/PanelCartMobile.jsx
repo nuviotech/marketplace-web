@@ -38,6 +38,9 @@ const PanelCartMobile = ({ ecomerce }) => {
                         <i className="icon-cross"></i>
                     </a>
                     {title(item)}
+                    {/*<Link href="/product/[pid]" as={`/product/${item.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${item.id}`}>
+                        <a className="ps-product__title">{item.title}</a>
+                    </Link>*/}
                     <Link href="/product/[pid]" as={`/product/${item.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${item.id}`}>
                         <a className="ps-product__title">{item.title}</a>
                     </Link>

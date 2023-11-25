@@ -4,7 +4,7 @@ import React from 'react';
  const whatsapp = () =>{
     return(
         <a
-        href="https://wa.me/+918928268145"
+        href={`https://wa.me/+91${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
         class="whatsapp_float"
         target="_blank"
         rel="noopener noreferrer"

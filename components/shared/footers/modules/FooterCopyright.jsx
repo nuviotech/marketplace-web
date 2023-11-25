@@ -2,8 +2,8 @@ import React from 'react';
 
 const FooterCopyright = () => (
     <div className=" text-center">
-        <p>&copy; 2023 For Nuvio.in (Nuvio Sellers Private Limited) All Rights Reserved</p>
-        
+        {console.log(process)}
+        <p>&copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_FOOTER_WEBSITE_NAME } All Rights Reserved</p>
     </div>
 );
 

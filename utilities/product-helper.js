@@ -80,8 +80,10 @@ export function StrapiProductThumbnail(product) {
     let view;
 
     if (product.thumbnail) {
+
+        {/* href="/product/[pid]" as={`/product/${product.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product.id}`} */}
         view = (
-            <Link href="/product/[pid]" as={`/product/${product.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product.id}`}>
+            <Link href="/product/[pid]" as={`/product/${product.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product.id}`} >
                 <a>
                     <LazyLoad>
                         <img
