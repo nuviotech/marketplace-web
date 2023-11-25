@@ -3,6 +3,7 @@ import Link from 'next/link';
 import ReactWhatsapp from 'react-whatsapp';
 import { WhatsappIcon } from 'react-share';
 import { FloatingWhatsApp } from 'react-floating-whatsapp';
+import { relative } from 'path';
 
 
 const FooterWidgets = () => (
@@ -10,7 +11,7 @@ const FooterWidgets = () => (
         <aside className="widget widget_footer widget_contact-us">
             <h4 className="widget-title">Contact us<br />
                 <a
-                    href="https://wa.me/+918928268145"
+                    href={`https://wa.me/+91${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
                     target="_blank"
                     rel="noopener noreferrer"
                 >
@@ -22,40 +23,53 @@ const FooterWidgets = () => (
             <div className="widget_content">
 
                 <p>Whatsapp us 24/7</p>
-                <div className='mb-3'>
-                <FloatingWhatsApp phoneNumber="918928268145" accountName="nuvio sellers" />
+                <div className='mb-5'>
+                <FloatingWhatsApp phoneNumber={`91${process?.env?.NEXT_PUBLIC_WHATSAPP_NUMBER}`} accountName={`${process?.env?.NEXT_PUBLIC_FOOTER_WEBSITE_NAME} seller`} />
                 
-                <ReactWhatsapp number="918928268145" message="Hi" element={"div"} >
+                <ReactWhatsapp number={`91${process?.env?.NEXT_PUBLIC_WHATSAPP_NUMBER}`} message="Hi" element={"div"} >
                     <WhatsappIcon size={35} round="true"></WhatsappIcon>
                 </ReactWhatsapp>
 
                 </div>
 
-                <h3 style={{ fontSize: "19px" }}>+91 8928268145</h3>
+                <h3 style={{ fontSize: "19px" }}>+91 {process?.env?.NEXT_PUBLIC_WHATSAPP_NUMBER}</h3>
                 <p>
-                    <a href="mailto:support@nuvio.in">support@nuvio.in</a>
+                    <a href={`mailto:${process?.env?.NEXT_PUBLIC_EMAIL}`}>{process?.env?.NEXT_PUBLIC_EMAIL}</a>
                 </p>
                 <ul className="ps-list--social">
+                    { 
+                    process?.env?.NEXT_PUBLIC_FACEBOOK_LINK!='NA' &&
                     <li>
-                        <a className="facebook" target='_blank' href="https://www.facebook.com/Nuvio.in">
+                        <a className="facebook" target='_blank' href={process?.env?.NEXT_PUBLIC_FACEBOOK_LINK}>
                             <i className="fa fa-facebook"></i>
                         </a>
                     </li>
+                    }
+                    {
+                    process?.env?.NEXT_PUBLIC_TWITTER_LINK!='NA' &&
                     <li>
-                        <a className="twitter" target='_blank' href="https://twitter.com/Nuvio_Sellers">
+                        <a className="twitter" target='_blank' href={process?.env?.NEXT_PUBLIC_TWITTER_LINK}>
                             <i className="fa fa-twitter"></i>
                         </a>
                     </li>
+                    }
+                    {
+                    process?.env?.NEXT_PUBLIC_LINKEDIN_LINK!='NA' &&
                     <li>
-                        <a target='_blank' href="https://in.linkedin.com/company/nuvio-technologies-pvt-ltd">
+                        <a target='_blank' href={process?.env?.NEXT_PUBLIC_LINKEDIN_LINK}>
                             <i className="fa fa-linkedin" style={{ color: "#2e5fb2" }}></i>
                         </a>
                     </li>
+                    }
+
+                    {
+                    process?.env?.NEXT_PUBLIC_INSTAGRAM_LINK!='NA' &&
                     <li>
-                        <a target='_blank' className="instagram" href="https://www.instagram.com/nuvio.in/">
+                        <a target='_blank' className="instagram" href={process?.env?.NEXT_PUBLIC_INSTAGRAM_LINK}>
                             <i className="fa fa-instagram"></i>
                         </a>
                     </li>
+                    }
                 </ul>
             </div>
         </aside>

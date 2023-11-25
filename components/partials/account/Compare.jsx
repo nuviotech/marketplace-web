@@ -72,8 +72,7 @@ const Compare = ({ ecomerce }) => {
                                                     <div className="ps-product--compare">
                                                         <div className="ps-product__thumbnail">
                                                             <Link
-                                                                href="/product/[pid]"
-                                                                as={`/product/${product.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product.id}`}>
+                                                               href="/product/[pid]" as={`/product/${product?.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product?.id}`}>
                                                                 <a>
                                                                     {thumbnailImage(
                                                                         product
@@ -83,8 +82,7 @@ const Compare = ({ ecomerce }) => {
                                                         </div>
                                                         <div className="ps-product__content">
                                                             <Link
-                                                                href="/product/[pid]"
-                                                                as={`/product/${product.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product.id}`}>
+                                                                href="/product/[pid]" as={`/product/${product?.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product?.id}`}>
                                                                 <a className="ps-product__title">
                                                                     {
                                                                         product.title

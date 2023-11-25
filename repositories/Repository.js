@@ -1,17 +1,16 @@
 import axios from 'axios';
 
-import { myDecipher } from './RepoSequrity';
-//export const policyMakerKey = myDecipher("343f4950613e646437735e6d3e4f2d645640703f4f564564");
+
+const baseDomain = process.env.NEXT_PUBLIC_STRAPI_PANEL_URL // API for products
+export const basePostUrl =  process.env.NEXT_PUBLIC_STRAPI_PANEL_URL; // API for post
+export const baseStoreURL =  process.env.NEXT_PUBLIC_STRAPI_PANEL_URL; // API for vendor(store)
+
+export const policyMakerUrl = "http://localhost:9001";//change the name policy maker  url
+export const marketplaceUrl = process.env.NEXT_PUBLIC_MARKETPLACE_API_BASE_URL;//marketplace api url
+
 
 //export const policyMakerKey = process.env.API_KEY;
 export const policyMakerKey = process.env.NEXT_PUBLIC_PUBLICAPI_KEY;
-
-
-const baseDomain = 'https://nuvio.in:8443'; // API for products
-export const basePostUrl = 'https://nuvio.in:8443'; // API for post
-export const baseStoreURL = 'https://nuvio.in:8443'; // API for vendor(store)
-export const policyMakerUrl = "https://nuviosellers.com:8003";//change the name policy maker  url
-export const marketplaceUrl = "https://nuvio.in:8004";//marketplace api url
 
 
 export const customHeaders = {
