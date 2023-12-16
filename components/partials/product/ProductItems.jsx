@@ -60,8 +60,8 @@ const ProductItems = ({ products, columns = 4 }) => {
     if (!loading) {
         if (productItems && productItems.length > 0) {
             if (listView) {
-                const items = productItems.map((item) => (
-                    <div className={classes} key={item.id}>
+                const items = productItems?.map((item) => (
+                    <div className={classes} key={item?.id}>
                         <Product product={item} />
                     </div>
                 ));
