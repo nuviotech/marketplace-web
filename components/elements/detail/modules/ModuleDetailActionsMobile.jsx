@@ -8,13 +8,13 @@ const ModuleDetailActionsMobile = ({ ecomerce, product }) => {
     const Router = useRouter();
     const handleAddItemToCart = (e) => {
         e.preventDefault();
-        addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
+        addItem({ id: product?.id, quantity: 1 }, ecomerce?.cartItems, 'cart');
         Router.push('/account/shopping-cart');
     };
 
     const handleBuyNow = (e) => {
         e.preventDefault();
-        addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
+        addItem({ id: product?.id, quantity: 1 }, ecomerce?.cartItems, 'cart');
         Router.push('/account/checkout');
     };
 

@@ -8,7 +8,7 @@ const ProductOnCart = ({ product, children }) => {
     return (
         <div className="ps-product--cart-mobile">
             <div className="ps-product__thumbnail">
-                <Link href="/product/[pid]" as={`/product/${product.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product.id}`}>
+                <Link href="/product/[pid]" as={`/product/${product?.title.replaceAll("/"," | ").replaceAll(" ","-")}&pid=${product?.id}`}>
                     <a>{thumbnailImage(product)}</a>
                 </Link>
             </div>
@@ -16,7 +16,7 @@ const ProductOnCart = ({ product, children }) => {
                 {title(product)}
                 <p>
                     <small>
-                    ₹{product.price} x {product.quantity}
+                    ₹{product?.price} x {product?.quantity}
                     </small>
                 </p>{' '}
                 {children}
