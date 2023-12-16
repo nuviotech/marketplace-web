@@ -15,7 +15,7 @@ const ModuleDetailShoppingActions = ({
     function handleAddItemToCart(e) {
         e.preventDefault();
         addItem(
-            { id: product.id, quantity: quantity },
+            { id: product?.id, quantity: quantity },
             ecomerce.cartItems,
             'cart'
         );
@@ -24,7 +24,7 @@ const ModuleDetailShoppingActions = ({
     function handleBuynow(e) {
         e.preventDefault();
         addItem(
-            { id: product.id, quantity: quantity },
+            { id: product?.id, quantity: quantity },
             ecomerce.cartItems,
             'cart'
         );
@@ -36,7 +36,7 @@ const ModuleDetailShoppingActions = ({
     const handleAddItemToCompare = (e) => {
         e.preventDefault();
         e.preventDefault();
-        addItem({ id: product.id }, ecomerce.compareItems, 'compare');
+        addItem({ id: product?.id }, ecomerce.compareItems, 'compare');
         const modal = Modal.success({
             centered: true,
             title: 'Success!',
@@ -47,7 +47,7 @@ const ModuleDetailShoppingActions = ({
 
     const handleAddItemToWishlist = (e) => {
         e.preventDefault();
-        addItem({ id: product.id }, ecomerce.wishlistItems, 'wishlist');
+        addItem({ id: product?.id }, ecomerce.wishlistItems, 'wishlist');
         const modal = Modal.success({
             centered: true,
             title: 'Success!',

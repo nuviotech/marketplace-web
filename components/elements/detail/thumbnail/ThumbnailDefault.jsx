@@ -25,11 +25,10 @@ const ThumbnailDefault = ({ product, vertical = true }) => {
     useEffect(() => {
         let images = [];
         if (product && product.images.length > 0) {
-            product.images.map((item) => {
+            product?.images?.map((item) => {
                // images.push(`${baseUrl}${item.url}`);
-               images.push(`${item.url}`);
+               images?.push(`${item.url}`);
             });
-            console.log("Images array -> "+images);
             setProductImages(images);
         }
         setGallery(galleryCarousel.current);
@@ -83,13 +82,13 @@ const ThumbnailDefault = ({ product, vertical = true }) => {
     //Views
     let lightboxView, variantCarouselView, imagesView, galleryImagesView;
     if (productImages.length > 0) {
-        imagesView = productImages.map((item) => (
+        imagesView = productImages?.map((item) => (
             <div className="item" key={item}>
                 {console.log("Images path : "+item)}
                 <img src={item} alt={item} />
             </div>
         ));
-        galleryImagesView = productImages.map((item, index) => (
+        galleryImagesView = productImages?.map((item, index) => (
             <div className="item" key={item}>
                 <a href="#" onClick={(e) => handleOpenLightbox(e, index)}>
                     <img src={item} alt={item} />

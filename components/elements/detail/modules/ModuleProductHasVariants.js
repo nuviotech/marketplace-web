@@ -130,7 +130,7 @@ const ModuleProductHasVariants = ({ ecomerce, currency, product }) => {
 
     if (product) {
         if (product.variants.length > 0) {
-            let colorSelectionArea = product.variants.map((item) => {
+            let colorSelectionArea = product?.variants?.map((item) => {
                 return (
                     <div
                         className={`ps-variant ps-variant--image ${
@@ -154,7 +154,7 @@ const ModuleProductHasVariants = ({ ecomerce, currency, product }) => {
                 );
             });
             if (sizeItems !== null) {
-                sizeSelectionArea = sizeItems.map((item) => {
+                sizeSelectionArea = sizeItems?.map((item) => {
                     return (
                         <div
                             className={`ps-variant ps-variant--size ${
