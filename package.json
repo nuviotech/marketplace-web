@@ -8,7 +8,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start -p 3003",
-        "sitemap": "next-sitemap --config next-sitemap.config.js"
+        "sitemap": "next-sitemap --config next-sitemap.config.js",
+		"start": "cd /app/marketplace-main/marketplace-web && node _app.jsx"
     },
     "dependencies": {
         "@bradgarropy/next-seo": "^1.2.0",
