@@ -11,8 +11,8 @@ const ProductDealOfDay = ({ product }) => {
     const { thumbnailImage, badge, title } = useProduct();
     return (
         <div className="ps-product ps-product--inner">
-            <div className="ps-product__thumbnail">
-                <Link href="/product/[pid]" as={`/product/${product.title.replaceAll("/", " | ").replaceAll(" ", "-")}&pid=${product.id}`}>
+            <div className="ps-product__thumbnail" style={{maxWidth: "100%",height:"200px",overflow:"hidden"}}>
+                <Link href="/product/[pid]" as={`/product/${product?.title.replaceAll("/", " | ").replaceAll(" ", "-")}&pid=${product?.id}`}>
                     <a>{thumbnailImage(product)}</a>
                 </Link>
                 {badge(product)}
@@ -20,7 +20,7 @@ const ProductDealOfDay = ({ product }) => {
             </div>
             <div className="ps-product__container">
                 <Link href="/shop">
-                    <a className="ps-product__vendor">Nuvio Sellers</a>
+                    <a className="ps-product__vendor">{product?.brand}</a>
                 </Link>
                 <div className="ps-product__content">
                     {StrapiProductPriceExpanded(product)}
