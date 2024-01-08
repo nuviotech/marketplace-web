@@ -29,7 +29,7 @@ const InvoiceDetail = () => {
     const { odId } = router.query;
 
 
-    console.warn(currentUser)
+    
     //main returnOrder function
     const returnOrder = async () => {
         if (state.orderProductId == '' || state.categoryId == 0 || state.paymentId == 0 || state.amount == 0) {
@@ -103,8 +103,7 @@ const InvoiceDetail = () => {
                     setOrderDetails(data);
                 }
             })
-            console.warn("__________________________");
-            console.warn(orderDetails.invoices)
+          
         }
     }
 

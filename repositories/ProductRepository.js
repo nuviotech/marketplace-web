@@ -138,7 +138,6 @@ class ProductRepository {
             .catch(() => {
                 return null;
             });
-        //console.log("@@@@@@@@@@@ getProductsByCategory "+JSON.stringify(reponse));
         return reponse;
     }
 
@@ -148,7 +147,7 @@ class ProductRepository {
             `${marketplaceUrl}/brands?slug=${payload}`
         )
             .then((response) => {
-                console.warn(JSON.stringify(response.data))
+               // console.warn(JSON.stringify(response.data))
                 if (response.data) {
                     if (response.data.length > 0) {
                         //console.log("brd;  "+response.data[0])

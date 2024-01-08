@@ -58,7 +58,7 @@ function Addresses() {
     useEffect(async () => {
         setCurrentUser(await userData())
     }, []);
-    console.warn(currentUser);
+   
     return (
         <section className="ps-my-account ps-page--account">
 
