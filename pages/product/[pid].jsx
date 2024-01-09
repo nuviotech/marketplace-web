@@ -147,8 +147,23 @@ const ProductDefaultPage = ({ responseData }) => {
     );
 };
 
+export const getServerSideProps = async (context) => {
+    const { params } = context;
+    // const responseData = await ProductRepository.getProductsById(params.pid);
+    const pid = params.pid.split("&pid=");
+    //console.log("!@#$ ::::: "+pid[1])
+    const responseData = await ProductRepository.getProductsById(pid[1] + "");
+    return {
+        props: {
+            responseData
+        }
+    }
+  };
+  
 
-export async function getStaticPaths() {
+
+/*
+export async function  getStaticPaths() {
     try {
         //getting urls
         const responseData = await axios.get(
@@ -193,7 +208,7 @@ export async function getStaticPaths() {
     }
 
 }
-
+z
 export async function getStaticProps(context) {
     const { params } = context;
     // const responseData = await ProductRepository.getProductsById(params.pid);
@@ -207,6 +222,6 @@ export async function getStaticProps(context) {
     }
 }
 
-
+*/
 
 export default ProductDefaultPage;
