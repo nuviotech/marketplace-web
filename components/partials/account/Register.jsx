@@ -19,13 +19,42 @@ class Register extends Component {
             password: null,
             password2: null,
             phone: null,
-           // city: null,
+            reportingAccountId:0,
+            // city: null,
             //state: "Nan",
             //country: null,
             //shippingAddress: null
+            reportingAccntDetails:[]
         };
+        this.fetchData = this.fetchData.bind(this);
+    }
+  
+    fetchData() {
+     fetch(marketplaceUrl + '/getReportingAccountDetails')
+      .then(response => response.json())
+      .then(data => this.setState({ reportingAccntDetails:data }));
+    }
+  
+    componentDidMount() {
+      this.fetchData();
     }
 
+    
+    getData=()=>{
+        var reportingAccountDetails=[];
+        this.state?.reportingAccntDetails?.map(data=>{
+            var obj ={
+                value: data?.reportingAccountId,
+                label: data?.reportingAccountName,
+              }
+              reportingAccountDetails.push(obj);
+        })
+        return reportingAccountDetails;
+    }
+    onChange = (value) => {
+        this.setState({reportingAccountId:value});
+    };
+      
 
     handleSubmit = async (e) => {
         // e.preventDefault();
@@ -97,7 +126,7 @@ class Register extends Component {
                             content: `Please try with another email id, this email already present.`,
                         });
                         modal.update;
-                    }else if(statusCode=='-6'){
+                    } else if (statusCode == '-6') {
                         const modal = Modal.error({
                             centered: true,
                             title: 'Invalid state!!',
@@ -160,7 +189,7 @@ class Register extends Component {
                         <div className="ps-tab active" id="register">
                             <div className="ps-form__content">
                                 <h5>Register An Account</h5>
-
+                        
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="form-group">
@@ -245,77 +274,8 @@ class Register extends Component {
                                         />
                                     </Form.Item>
                                 </div>
+                                
 
-                               {/* <div className="row">
-                                    <div className="col-sm-6">
-                                        <div className="form-group">
-                                            <Form.Item
-                                                name="city"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Enter your city!',
-                                                    },
-                                                ]}>
-                                                <Input
-                                                    className="form-control"
-                                                    type="text"
-                                                    placeholder="Enter the city"
-                                                    name="fname"
-                                                    onChange={(event) => { this.setState({ city: event.target.value }) }}
-
-                                                />
-                                            </Form.Item>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <div className="form-group">
-                                            {/*<Form.Item
-                                                name="country"
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'Enter your country !!',
-                                                    },
-                                                ]}>
-                                                <Input
-                                                    className="form-control"
-                                                    type="text"
-                                                    placeholder="Enter the country"
-                                                    name="last_name"
-                                                    onChange={(event)=> {this.setState({country:event.target.value})} }
-
-                                                />
-                                            </Form.Item>
-                                            *}
-                                            
-
-                                        </div>
-                                    </div>
-                                </div>
-                                */}
-                                {/*
-                                <div className="form-group">
-                                    <Form.Item
-                                        name="shippingAddress"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please enter your address!',
-                                            },
-                                        ]}>
-                                        <TextArea
-                                            rows='5'
-                                            className="form-control"
-                                            type="text"
-                                            placeholder="Enter address"
-                                            onChange={(event) => { this.setState({ shippingAddress: event.target.value }) }}
-
-                                        />
-                                    </Form.Item>
-                                </div>
-                                    */}
                                 <div className="form-group form-forgot">
                                     <Form.Item
                                         name="password"
@@ -354,6 +314,16 @@ class Register extends Component {
 
                                         />
                                     </Form.Item>
+                                </div>
+                                <div className="form-group">
+                                    <Select
+                                        showSearch
+                                        placeholder="select reporting accounts"
+                                        optionFilterProp="children"
+                                        style={{ width: "100%" }}
+                                        onChange={this.onChange}
+                                        options={this.getData()}
+                                    />
                                 </div>
                                 <div className="form-group submit">
                                     <button
