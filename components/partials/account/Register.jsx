@@ -5,7 +5,7 @@ import { login } from '../../../store/auth/action';
 import { marketplaceUrl } from '~/repositories/Repository';
 import axios from 'axios';
 
-import { Form, Input, Modal, Select } from 'antd';
+import { Checkbox, Form, Input, Modal, Select } from 'antd';
 import { connect } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
 
@@ -20,6 +20,7 @@ class Register extends Component {
             password2: null,
             phone: null,
             reportingAccountId:0,
+            isCheckTermAndConditions:false,
             // city: null,
             //state: "Nan",
             //country: null,
@@ -55,6 +56,9 @@ class Register extends Component {
         this.setState({reportingAccountId:value});
     };
       
+    onCheckBoxChange = (e) => {
+        this.setState({isCheckTermAndConditions:e.target.checked})
+    };
 
     handleSubmit = async (e) => {
         // e.preventDefault();
@@ -85,6 +89,13 @@ class Register extends Component {
                 centered: true,
                 title: 'Wrong confirm password!',
                 content: `enter the same password in password field or confirm password field.`,
+            });
+            modal.update;
+        }else if(!this.state.isCheckTermAndConditions){
+            const modal = Modal.error({
+                centered: true,
+                title: 'Accept terms and conditions',
+                content: `Accept the terms and condtions .`,
             });
             modal.update;
         } else {
@@ -325,6 +336,13 @@ class Register extends Component {
                                         options={this.getData()}
                                     />
                                 </div>
+                                <Checkbox onChange={this.onCheckBoxChange}>
+                                    Accept Terms And Conditions
+                                    <Link href="/page/terms_and_conditions">
+                                        <span style={{color:"blue"}}> Read</span>
+                                    </Link>
+                                </Checkbox>
+
                                 <div className="form-group submit">
                                     <button
                                         type="submit"
