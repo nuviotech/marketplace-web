@@ -71,7 +71,7 @@ class Register extends Component {
                 content: `Please enter first name or last name.`,
             });
             modal.update;
-        } else if (this.state.phone.length < 10) {
+        } else if (this.state.phone.length < 10 || this.state.phone.length>10) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid input!',
@@ -209,7 +209,8 @@ class Register extends Component {
                                                 rules={[
                                                     {
                                                         required: true,
-                                                        message: 'Enter your first name!',
+                                                        message: 'first name is not valid !!',
+                                                        pattern: new RegExp(/^[a-zA-Z '.-]*$/)
                                                     },
                                                 ]}>
                                                 <Input
@@ -230,7 +231,8 @@ class Register extends Component {
                                                 rules={[
                                                     {
                                                         required: true,
-                                                        message: 'Enter your last name!!',
+                                                        message: 'last name is not valid !!',
+                                                        pattern: new RegExp(/^[a-zA-Z '.-]*$/)
                                                     },
                                                 ]}>
                                                 <Input
@@ -253,8 +255,8 @@ class Register extends Component {
                                         rules={[
                                             {
                                                 required: true,
-                                                message:
-                                                    'Please input your email!',
+                                                message:'email address is not valid !!',
+                                                pattern: new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
                                             },
                                         ]}>
                                         <Input
@@ -273,7 +275,9 @@ class Register extends Component {
                                             {
                                                 required: true,
                                                 message:
-                                                    'Please input your contact!',
+                                                    'invalid contact number !!',
+                                                pattern: new RegExp("^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$")
+
                                             },
                                         ]}>
                                         <Input
@@ -302,7 +306,6 @@ class Register extends Component {
                                             type="password"
                                             placeholder="Password..."
                                             onChange={(event) => { this.setState({ password: event.target.value }) }}
-
                                         />
                                     </Form.Item>
                                 </div>
