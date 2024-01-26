@@ -5,7 +5,7 @@ import { login } from '../../../store/auth/action';
 import { marketplaceUrl } from '~/repositories/Repository';
 import axios from 'axios';
 
-import { Form, Input, Modal, Select } from 'antd';
+import { Checkbox, Form, Input, Modal, Select } from 'antd';
 import { connect } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
 
@@ -20,6 +20,7 @@ class Register extends Component {
             password2: null,
             phone: null,
             reportingAccountId:0,
+            isCheckTermAndConditions:false,
             // city: null,
             //state: "Nan",
             //country: null,
@@ -55,6 +56,9 @@ class Register extends Component {
         this.setState({reportingAccountId:value});
     };
       
+    onCheckBoxChange = (e) => {
+        this.setState({isCheckTermAndConditions:e.target.checked})
+    };
 
     handleSubmit = async (e) => {
         // e.preventDefault();
@@ -67,7 +71,7 @@ class Register extends Component {
                 content: `Please enter first name or last name.`,
             });
             modal.update;
-        } else if (this.state.phone.length < 10) {
+        } else if (this.state.phone.length < 10 || this.state.phone.length>10) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid input!',
@@ -85,6 +89,13 @@ class Register extends Component {
                 centered: true,
                 title: 'Wrong confirm password!',
                 content: `enter the same password in password field or confirm password field.`,
+            });
+            modal.update;
+        }else if(!this.state.isCheckTermAndConditions){
+            const modal = Modal.error({
+                centered: true,
+                title: 'Accept terms and conditions',
+                content: `Accept the terms and condtions .`,
             });
             modal.update;
         } else {
@@ -198,7 +209,8 @@ class Register extends Component {
                                                 rules={[
                                                     {
                                                         required: true,
-                                                        message: 'Enter your first name!',
+                                                        message: 'first name is not valid !!',
+                                                        pattern: new RegExp(/^[a-zA-Z '.-]*$/)
                                                     },
                                                 ]}>
                                                 <Input
@@ -219,7 +231,8 @@ class Register extends Component {
                                                 rules={[
                                                     {
                                                         required: true,
-                                                        message: 'Enter your last name!!',
+                                                        message: 'last name is not valid !!',
+                                                        pattern: new RegExp(/^[a-zA-Z '.-]*$/)
                                                     },
                                                 ]}>
                                                 <Input
@@ -242,8 +255,8 @@ class Register extends Component {
                                         rules={[
                                             {
                                                 required: true,
-                                                message:
-                                                    'Please input your email!',
+                                                message:'email address is not valid !!',
+                                                pattern: new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
                                             },
                                         ]}>
                                         <Input
@@ -262,7 +275,9 @@ class Register extends Component {
                                             {
                                                 required: true,
                                                 message:
-                                                    'Please input your contact!',
+                                                    'invalid contact number !!',
+                                                pattern: new RegExp("^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$")
+
                                             },
                                         ]}>
                                         <Input
@@ -291,7 +306,6 @@ class Register extends Component {
                                             type="password"
                                             placeholder="Password..."
                                             onChange={(event) => { this.setState({ password: event.target.value }) }}
-
                                         />
                                     </Form.Item>
                                 </div>
@@ -325,6 +339,13 @@ class Register extends Component {
                                         options={this.getData()}
                                     />
                                 </div>
+                                <Checkbox onChange={this.onCheckBoxChange}>
+                                    Accept Terms And Conditions
+                                    <Link href="/page/terms_and_conditions">
+                                        <span style={{color:"blue"}}> Read</span>
+                                    </Link>
+                                </Checkbox>
+
                                 <div className="form-group submit">
                                     <button
                                         type="submit"

@@ -19,8 +19,8 @@ export function loginSuccess() {
 export function logOut() {
    // localStorage.clear();
     localStorage.removeItem("token");
-    modalWarning2("success");
-    return { type: actionTypes.LOGOUT};
+    window.location.href="/account/login";
+  //  return { type: actionTypes.LOGOUT};
 }
 
 export function logOutSuccess() {
@@ -45,7 +45,7 @@ export function getToken(){
 export function userIsLogin(){
     var token=getToken();
     //console.log("token  : "+token)
-    if(token===null || token==='')
+    if(token===null || token==='' || token==null)
         return false;
     else 
         return true;    
