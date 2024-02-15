@@ -60,7 +60,7 @@ const UserInformation = () => {
 
 
     const { currentUser } = useContext(AuthContext);
-    //console.log("Login user is : "+JSON.stringify( currentUser))
+    console.log("Login user is : "+JSON.stringify( currentUser))
     //alert("current user is :"+JSON.stringify(currentUser));
     /*
      //getUserDetails();
@@ -75,9 +75,10 @@ const UserInformation = () => {
     return (
         <section className="ps-my-account ps-page--account">
             {
+                
                 userIsLogin() ?
                     <div className="container">
-
+               
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="ps-section__left">

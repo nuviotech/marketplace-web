@@ -28,6 +28,7 @@ export function logOutSuccess() {
 }
 
 export function saveToken(token){
+    console.log("SAVE TOKEN : "+token)
     modalSuccess2("success");
     localStorage.setItem("token",token); 
     return true;
@@ -38,7 +39,8 @@ export function getToken(){
    // token= localStorage.getItem("token");
    if (typeof window !== 'undefined') {
     token=localStorage.getItem("token");
-}
+    }
+    console.log("Token "+token);
     return token;
 }
 
