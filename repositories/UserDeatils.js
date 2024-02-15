@@ -8,16 +8,18 @@ import { useRouter } from "next/router";
 export const userData = async () => {
     
     if (userIsLogin()) {
-
+     
         const data = await axios.get(`${marketplaceUrl}/getUserDetails`, {
             headers: {
                 Authorization: "Bearer " + getToken(),
             }
         }).then(
             (response) => {
+                alert(JSON.stringify(response.data))
                 return response.data;
             },
             (error) => {
+                console.log(error)
                 logOut();
                 //dis(logOut());
                 //window.location.assign("/account/login")
