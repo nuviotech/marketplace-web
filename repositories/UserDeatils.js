@@ -15,7 +15,6 @@ export const userData = async () => {
             }
         }).then(
             (response) => {
-                alert(JSON.stringify(response.data))
                 return response.data;
             },
             (error) => {
