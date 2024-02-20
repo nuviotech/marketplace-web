@@ -3,6 +3,7 @@ import Link from 'next/link';
 import ModuleProductActions from '~/components/elements/products/modules/ModuleProductActions';
 import useProduct from '~/hooks/useProduct';
 import Rating from '~/components/elements/Rating';
+import { Rate } from 'antd';
 
 const Product = ({ product }) => {
     const { thumbnailImage, price, badge, title } = useProduct();
@@ -19,17 +20,16 @@ const Product = ({ product }) => {
                         <ModuleProductActions product={product} />
                     </div>
                     <div className="ps-product__container">
-                        <Link href="/shop">
+                        {/* <Link href="/shop">
                             <a className="ps-product__vendor">shopper</a>
-                        </Link>
+                        </Link> */}
                         <div className="ps-product__content">
                             {title(product)}
-                            {/*
-                    <div className="ps-product__rating">
-                        <Rating />
-                        <span>02</span>
-                    </div>
-                     */}
+                            {
+                                (product?.totalRatingRation != null && product?.totalRatingRation?.split(":")[0] > 0) &&
+                                <Rate allowHalf defaultValue={product?.totalRatingRation?.split(":")[0]} disabled />
+                            }
+                            
                             {price(product)}
                         </div>
                         <div className="ps-product__content hover">

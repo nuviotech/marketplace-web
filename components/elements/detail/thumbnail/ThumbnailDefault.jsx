@@ -84,7 +84,6 @@ const ThumbnailDefault = ({ product, vertical = true }) => {
     if (productImages.length > 0) {
         imagesView = productImages?.map((item) => (
             <div className="item" key={item}>
-                {console.log("Images path : "+item)}
                 <img src={item} alt={item} />
             </div>
         ));

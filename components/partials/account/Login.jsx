@@ -9,9 +9,6 @@ import { connect } from 'react-redux';
 import { AuthContextProvider } from '~/context/loginContext';
 import ReCAPTCHA from "react-google-recaptcha";
 
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
 
 import FacebookLogin from 'react-facebook-login';
 
@@ -77,7 +74,10 @@ class Login extends Component {
                     }
                     if(action== "checkout"){
                         Router.push('/account/checkout')
-                       window.sessionStorage.removeItem("action");
+                        sessionStorage.removeItem("action");
+                    }else if(action!=null || action.length>0){
+                        Router.push(action);
+                        sessionStorage.removeItem("action");
                     }else
                         window.location.assign('/');
                 } else if (status == 1) {

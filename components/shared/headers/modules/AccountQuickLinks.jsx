@@ -13,7 +13,6 @@ const AccountQuickLinks = (props) => {
     
     const handleLogout = (e) => {
         e.preventDefault();
-        alert("logout init 1")
         dispatch(logOut());
         Router.push('/account/login');
 
