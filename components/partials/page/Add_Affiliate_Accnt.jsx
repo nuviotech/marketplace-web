@@ -162,7 +162,7 @@ const Add_Affilate_Accnt = () => {
                         </form>
                     </div>
                     <div className="col-md-6 col-12">
-                    <h3 className="ps-form__heading pb-2">Affiliate Program Steps</h3>
+                    <h3 className="ps-form__heading pb-2">How affiliate program works?</h3>
                         <Steps
                             direction="vertical"
 
