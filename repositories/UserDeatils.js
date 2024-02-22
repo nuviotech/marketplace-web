@@ -6,9 +6,8 @@ import { useRouter } from "next/router";
 
 
 export const userData = async () => {
-    
+
     if (userIsLogin()) {
-     
         const data = await axios.get(`${marketplaceUrl}/getUserDetails`, {
             headers: {
                 Authorization: "Bearer " + getToken(),

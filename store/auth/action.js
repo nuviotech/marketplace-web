@@ -19,7 +19,14 @@ export function loginSuccess() {
 export function logOut() {
    // localStorage.clear();
     localStorage.removeItem("token");
-    window.location.href="/account/login";
+    var lt=localStorage.getItem("_loginType_");
+    localStorage.removeItem("_loginType_");
+    localStorage.removeItem("name");
+    localStorage.removeItem("action");
+    if(lt=="affiliate_account")
+        window.location.href="/page/add_affiliate_accnt";
+    else
+        window.location.href="/account/login";
   //  return { type: actionTypes.LOGOUT};
 }
 
@@ -27,11 +34,18 @@ export function logOutSuccess() {
     return { type: actionTypes.LOGOUT_SUCCESS };
 }
 
-export function saveToken(token){
-    console.log("SAVE TOKEN : "+token)
+export function saveToken(token,loginType){
     modalSuccess2("success");
     localStorage.setItem("token",token); 
+    localStorage.setItem("_loginType_",loginType);
     return true;
+}
+
+export function getLoginType(){
+    var lt=null
+    if (typeof window !== 'undefined') 
+    lt= localStorage.getItem("_loginType_");
+    return lt;
 }
 
 export function getToken(){

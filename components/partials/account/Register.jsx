@@ -10,6 +10,8 @@ import { connect } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
 
 class Register extends Component {
+ 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,7 +21,7 @@ class Register extends Component {
             password: null,
             password2: null,
             phone: null,
-            reportingAccountId:0,
+            reportingAccountId:this?.props?.affiliate_account_id,
             isCheckTermAndConditions:false,
             // city: null,
             //state: "Nan",
@@ -28,8 +30,15 @@ class Register extends Component {
             reportingAccntDetails:[]
         };
         this.fetchData = this.fetchData.bind(this);
+       
+
     }
+
+   
+
   
+   
+
     fetchData() {
      fetch(marketplaceUrl + '/getReportingAccountDetails')
       .then(response => response.json())
@@ -99,6 +108,9 @@ class Register extends Component {
             });
             modal.update;
         } else {
+            if(this?.props?.affiliate_account_id)
+                this.setState({reportingAccountId:this?.props?.affiliate_account_id});
+
             await axios.post(`${marketplaceUrl}/saveUser`, this.state).then(
                 (response) => {
                     var statusCode = response.data;
@@ -178,6 +190,7 @@ class Register extends Component {
     };
 
     render() {
+     
         return (
 
             <div className="ps-my-account">
@@ -334,9 +347,11 @@ class Register extends Component {
                                         showSearch
                                         placeholder="select reporting accounts"
                                         optionFilterProp="children"
+                                        value={this.props.affiliate_account_id}
                                         style={{ width: "100%" }}
                                         onChange={this.onChange}
                                         options={this.getData()}
+                                        
                                     />
                                 </div>
                                 <Checkbox onChange={this.onCheckBoxChange}>
