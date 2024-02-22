@@ -69,7 +69,7 @@ const Affiliate_Terms_and_conditions = () => (
 
                 <h3>Governing Law</h3>
                 <ul>
-                    <li><p>These Terms shall be governed by and construed in accordance with the laws of [Your Jurisdiction], without regard to its conflict of laws principles.</p></li>
+                    <li><p>These Terms shall be governed by and construed in accordance with the laws of Navi Mumbai Maharashtra, without regard to its conflict of laws principles.</p></li>
                 </ul>
 
                 <h3>Entire Agreement</h3>
