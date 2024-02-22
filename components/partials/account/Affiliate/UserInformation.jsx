@@ -51,7 +51,7 @@ const UserInformation = () => {
     */
 
     const copyToClipboard = () => {
-        const textToCopy = `http://localhost:3000/account/register?affiliate_account_id=${user?.reportingAccountId}`;
+        const textToCopy = `https://nuvio.in/account/register?affiliate_account_id=${user?.reportingAccountId}`;
         navigator.clipboard.writeText(textToCopy)
             .then(() => {
                 notification["success"]({
@@ -65,17 +65,17 @@ const UserInformation = () => {
 
 
     const share = <>
-        <FacebookShareButton url={`http://localhost:3000/account/register?affiliate_account_id=${user?.reportingAccountId}`}>
+        <FacebookShareButton url={`https://nuvio.in/account/register?affiliate_account_id=${user?.reportingAccountId}`}>
             <FacebookIcon size={33} logoFillColor='white' >
 
             </FacebookIcon>
         </FacebookShareButton>
 
-        <WhatsappShareButton url={`http://localhost:3000/account/register?affiliate_account_id=${user?.reportingAccountId}`}>
+        <WhatsappShareButton url={`https://nuvio.in/account/register?affiliate_account_id=${user?.reportingAccountId}`}>
             <WhatsappIcon size={33} logoFillColor='white'></WhatsappIcon>
         </WhatsappShareButton>
 
-        <TelegramShareButton url={`http://localhost:3000/account/register?affiliate_account_id=${user?.reportingAccountId}`}>
+        <TelegramShareButton url={`https://nuvio.in/account/register?affiliate_account_id=${user?.reportingAccountId}`}>
             <TelegramIcon size={33} logoFillColor='white'>
             </TelegramIcon>
         </TelegramShareButton>
