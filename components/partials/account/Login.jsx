@@ -54,7 +54,7 @@ class Login extends Component {
     loginAxiosAction = (action) => {
         const loginCredentials = {
             email: this.state.email,
-            loginGateway: action,
+            loginGateway: "normal_account",
             password: this.state.password,
         }
 
@@ -64,7 +64,7 @@ class Login extends Component {
                 var token = response.data.Token;
                 var status = response.data.status;
                 if (status == 0) {
-                    saveToken(token);
+                    saveToken(token,"normal_account");
                     //this.props.dispatch(login());
                     //this.props.dispatch(loginSuccess());
                     // Router.push('/');
@@ -75,7 +75,7 @@ class Login extends Component {
                     if(action== "checkout"){
                         Router.push('/account/checkout')
                         sessionStorage.removeItem("action");
-                    }else if(action!=null || action.length>0){
+                    }else if(action!=null && action.length>0){
                         Router.push(action);
                         sessionStorage.removeItem("action");
                     }else

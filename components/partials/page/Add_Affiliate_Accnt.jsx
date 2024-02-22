@@ -1,7 +1,9 @@
-import { Checkbox, Form, Modal, Steps } from 'antd';
+import { Checkbox, Form, Modal, Steps, Tabs } from 'antd';
 import Axios from 'axios';
+import { Router, useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { marketplaceUrl } from '~/repositories/Repository';
+import { saveToken } from '~/store/auth/action';
 
 const Add_Affilate_Accnt = () => {
     const [checkBox, setCheckBox] = useState(false);
@@ -10,14 +12,59 @@ const Add_Affilate_Accnt = () => {
         setCheckBox(e.target.checked);
     };
 
-    const handleLoginSubmit = (event) => {
+    const loginAxiosAction = (event) => {
+        event.preventDefault();
+        const dt = new FormData(event.currentTarget);
+        const loginCredentials = {
+            email: dt.get("accountEmail"),
+            loginGateway: "affiliate_account",
+            password: dt.get("password"),
+        }
+
+        Axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
+            async (response) => {
+                // console.log(JSON.stringify(response));
+                var token = response.data.Token;
+                var status = response.data.status;
+                if (status == 0) {
+                    saveToken(token, "affiliate_account");
+                    //this.props.dispatch(login());
+                    //this.props.dispatch(loginSuccess());
+                    // Router.push('/');
+
+                    window.location.assign('/');
+                } else if (status == 1) {
+                    const modal = Modal.error({
+                        centered: true,
+                        title: 'Opps, something went wrong!!',
+                        content: `` + response.data.message,
+                    });
+                    modal.update;
+                }
+            },
+            (error) => {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Wrong credentials !!',
+                    content: `Email or password is wrong, please enter correct one.. `,
+                });
+                modal.update;
+                console.error("error : " + error);
+
+            }
+        )
+    }
+
+
+    const handleAddAffiliateAccntSubmit = (event) => {
         event.preventDefault();
         const fd = new FormData(event.currentTarget);
         var obj = {
             reportingAccountName: fd.get("accountName"),
             phone: fd.get("accountPhone"),
             email: fd.get("accountEmail"),
-            address: fd.get("accountAddress")
+            address: fd.get("accountAddress"),
+            password: fd.get("pass")
         }
         if (obj?.phone.length < 10 || obj?.phone.length < 10) {
             Modal.info({
@@ -29,19 +76,24 @@ const Add_Affilate_Accnt = () => {
                 centered: true,
                 title: 'Accept terms and conditions...',
             });
+        } else if (fd.get("pass") != fd.get("cpass")) {
+            Modal.error({
+                centered: true,
+                title: 'Password and confirm password not match..',
+            });
         } else {
             Axios.post(`${marketplaceUrl}/saveAffilateAccountDatails`, obj, {
 
             }).then(
                 async (response) => {
-
                     if (response?.data?.status == 0) {
                         const modal = Modal.success({
                             centered: true,
                             title: 'Success!',
                             content: `Affilate account created successfully.`,
                         });
-                        setRefresh(!refresh);
+                        
+                        window.location.assign("/page/add_affiliate_accnt");
                     } else {
                         const modal = Modal.error({
                             centered: true,
@@ -68,12 +120,7 @@ const Add_Affilate_Accnt = () => {
         </>,
         <>
             <ul className='text-dark'>
-                <li>After submitting the registration form, the affiliate contact person may need to verify their email address or phone number through a verification link or code sent to them.</li>
-            </ul>
-        </>,
-        <>
-            <ul className='text-dark'>
-                <li>Once the registration is complete and verified, the affiliate contact person can log in to their affiliate account using the username and password they created during registration.</li>
+                <li>Once the registration is complete and verified, the affiliate contact person can log in to their affiliate account using the username(email) and password they created during registration.</li>
             </ul>
         </>,
         <>
@@ -109,60 +156,122 @@ const Add_Affilate_Accnt = () => {
         </>
     ]
 
+
+    const affiliateRegistrationForm = <form
+        className="ps-form__billing-info"
+        onSubmit={(event) => { handleAddAffiliateAccntSubmit(event) }}>
+        <div>
+            <h3 className="ps-form__heading pb-2">Create Affiliate Account</h3>
+            <div className="form-group">
+                <input type="text"
+                    className="form-control"
+                    placeholder='Enter Account/Society Name'
+                    required="true"
+                    name="accountName"
+                />
+            </div>
+            <div className="form-group">
+                <input type="email"
+                    className="form-control"
+                    placeholder='Enter Account/Society email'
+                    required="true"
+                    name="accountEmail"
+                />
+            </div>
+            <div className="form-group">
+                <input type="text"
+                    className="form-control"
+                    placeholder='Enter Account/Society phone number'
+                    required="true"
+                    name="accountPhone"
+                />
+            </div>
+            <div className="form-group">
+                <input type="password"
+                    className="form-control"
+                    placeholder='Password'
+                    required="true"
+                    name="pass"
+                />
+            </div>
+            <div className="form-group">
+                <input type="password"
+                    className="form-control"
+                    placeholder='Confirm password'
+                    required="true"
+                    name="cpass"
+                />
+            </div>
+            <div className="form-group">
+                <input type="text"
+                    className="form-control"
+                    placeholder='Enter Address'
+                    required="true"
+                    name="accountAddress"
+                />
+            </div>
+            <div className="form-group">
+                <Checkbox onChange={onChangeCheckBox}>Accept Term Conditions <a href="/page/affiliate_marketing_terms_and_conditions"><u>read all</u></a></Checkbox>
+            </div>
+        </div>
+        <div>
+            <button type="submit" className="ps-btn">Create Account</button>
+        </div>
+    </form>
+
+
+    const affiliateLogin = <form
+        className="ps-form__billing-info"
+        onSubmit={(event) => { loginAxiosAction(event) }}>
+        <div>
+            <h3 className="ps-form__heading pb-2">Login Affiliate Account</h3>
+            <div className="form-group">
+                <input type="email"
+                    className="form-control"
+                    placeholder='Enter Account/Society Email'
+                    required="true"
+                    name="accountEmail"
+                />
+            </div>
+            <div className="form-group">
+                <input type="password"
+                    className="form-control"
+                    placeholder='Enter Account/Society password'
+                    required="true"
+                    name="password"
+                />
+            </div>
+        </div>
+        <div>
+            <button type="submit" className="ps-btn">Login</button>
+        </div>
+    </form>
+
+    const items = [
+        {
+            key: '1',
+            label: 'Login',
+            children: affiliateLogin,
+        },
+        {
+            key: '2',
+            label: 'Register',
+            children: affiliateRegistrationForm,
+        }
+    ];
+
+
     return (
         <div className="ps-section--custom">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-6 col-12">
-                        <form
-                            className="ps-form__billing-info"
-                            onSubmit={(event) => { handleLoginSubmit(event) }}>
-                            <div>
 
-                                <h3 className="ps-form__heading pb-2">Create Affiliate Account</h3>
-                                <div className="form-group">
-                                    <input type="text"
-                                        className="form-control"
-                                        placeholder='Enter Account Name'
-                                        required="true"
-                                        name="accountName"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input type="email"
-                                        className="form-control"
-                                        placeholder='Enter Account email'
-                                        required="true"
-                                        name="accountEmail"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input type="text"
-                                        className="form-control"
-                                        placeholder='Enter Account phone number'
-                                        required="true"
-                                        name="accountPhone"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <input type="text"
-                                        className="form-control"
-                                        placeholder='Enter Address'
-                                        required="true"
-                                        name="accountAddress"
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <Checkbox onChange={onChangeCheckBox}>Accept Term Conditions</Checkbox>
-                                </div>
-                            </div>
-                            <div>
-                                <button type="submit" className="ps-btn">Create Account</button>
-                            </div>
-                        </form>
+                    <div className="col-md-6 col-12">
+                        <Tabs defaultActiveKey="1" items={items} />
+
                     </div>
                     <div className="col-md-6 col-12">
-                    <h3 className="ps-form__heading pb-2">How affiliate program works?</h3>
+                        <h3 className="ps-form__heading pb-2">How affiliate program works?</h3>
                         <Steps
                             direction="vertical"
 
@@ -172,36 +281,32 @@ const Add_Affilate_Accnt = () => {
                                     description: desc[0],
                                 },
                                 {
-                                    title: 'Verification',
+                                    title: 'Login',
                                     description: desc[1],
                                 },
                                 {
-                                    title: 'Login',
+                                    title: 'Dashboard Access',
                                     description: desc[2],
                                 },
                                 {
-                                    title: 'Dashboard Access',
+                                    title: 'Generate Affiliate Link',
                                     description: desc[3],
                                 },
                                 {
-                                    title: 'Generate Affiliate Link',
+                                    title: 'Share Affiliate Link with Society Members',
                                     description: desc[4],
                                 },
                                 {
-                                    title: 'Share Affiliate Link with Society Members',
+                                    title: 'Track Referrals and Purchases',
                                     description: desc[5],
                                 },
                                 {
-                                    title: 'Track Referrals and Purchases',
+                                    title: 'Cashback Distribution',
                                     description: desc[6],
                                 },
                                 {
-                                    title: 'Cashback Distribution',
-                                    description: desc[7],
-                                },
-                                {
                                     title: 'Account Management',
-                                    description: desc[8],
+                                    description: desc[7],
                                 },
                             ]}
                         />

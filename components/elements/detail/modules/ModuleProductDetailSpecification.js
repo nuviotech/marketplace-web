@@ -8,7 +8,7 @@ const ModuleProductDetailSpecification = ({product}) => (
             <a className="report">Report Abuse</a>
         </Link>
         <p>
-            <strong>SKU:</strong> {JSON.parse(product.stockDetails)?.sku}
+            <strong>SKU:</strong> {JSON.parse(product?.stockDetails)?.sku}
         </p>
         {/*<p className="categories">
             <strong> Categories:</strong>

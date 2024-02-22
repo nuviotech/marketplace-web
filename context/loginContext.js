@@ -10,7 +10,8 @@ export const AuthContextProvider =({children})=>{
     const [currentUser,setCurrentUser]=useState({});
     const unsub=useEffect(async()=>{
         if(userIsLogin()){
-            setCurrentUser(await userData())
+            if(window.localStorage.getItem("_loginType_")==="normal_account")
+                setCurrentUser(await userData())
         }
         return()=>{
             unsub();
