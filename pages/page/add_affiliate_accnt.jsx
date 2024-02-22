@@ -21,7 +21,6 @@ const return_policy = () => {
     return (
         <PageContainer footer={<FooterDefault />} title="Nuvio Associates affiliate marketing program.">
             <SEO  description="The Nuvio affiliate program gives partners an opportunity to earn commissions by promoting Nuvio through affiliate links. Affiliate Program Steps." keywords={["Nuvio, nuvio seller, affiliate,Affiliate Program Steps,Affiliate Program, affiliate marketing"]} />
-
             <div className="ps-page--single">
                 <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
                 <Add_Affilate_Accnt />

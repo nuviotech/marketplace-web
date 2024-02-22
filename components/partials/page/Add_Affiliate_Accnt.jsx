@@ -267,7 +267,7 @@ const Add_Affilate_Accnt = () => {
                 <div className="row">
 
                     <div className="col-md-6 col-12">
-                        <Tabs defaultActiveKey="1" items={items} />
+                        <Tabs defaultActiveKey="2" items={items} />
 
                     </div>
                     <div className="col-md-6 col-12">
