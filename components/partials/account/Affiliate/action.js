@@ -1,7 +1,7 @@
 import { Modal } from "antd";
 import Axios from "axios";
 import { marketplaceUrl } from "~/repositories/Repository";
-import { getToken } from "~/store/auth/action";
+import { getToken, logOut } from "~/store/auth/action";
 
 export const getAffiliateAccountDetails = async () => {
    const data= Axios.get(`${marketplaceUrl}/getAffiliateAccountDetails`, {
@@ -23,8 +23,8 @@ export const getAffiliateAccountDetails = async () => {
             return null;
         },
         (error) => {
-            alert("Some thing wrong, try later.")
-            window.location.assign("page/add_affiliate_accnt");
+           console.error("(7475) Some thing wrong.")
+           logOut();
             console.log(error)
             return null;
         }

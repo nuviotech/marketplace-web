@@ -46,7 +46,6 @@ const Affiliate_Terms_and_conditions = () => (
                     <li><p>Upon termination, you will forfeit any unpaid commissions earned through the Affiliate Program.</p></li>
                 </ul>
 
-
                 <h3>Intellectual Property</h3>
                 <ul>
                     <li><p>You acknowledge that Company owns all intellectual property rights in its products, services, trademarks, and marketing materials.</p></li>

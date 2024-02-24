@@ -92,7 +92,7 @@ const UserInformation = () => {
                 userIsLogin() ?
                     <div className="container">
 
-                        <div className="row">
+                        <div className="row text-left">
                             <div className="col-lg-3">
                                 <div className="ps-section__left">
                                     <aside className="ps-widget--account-dashboard">
