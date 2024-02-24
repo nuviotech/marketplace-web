@@ -1,12 +1,16 @@
 import { Checkbox, Form, Modal, Steps, Tabs } from 'antd';
 import Axios from 'axios';
 import { Router, useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { marketplaceUrl } from '~/repositories/Repository';
 import { saveToken } from '~/store/auth/action';
 
 const Add_Affilate_Accnt = () => {
     const [checkBox, setCheckBox] = useState(false);
+    const router = useRouter();
+    const { tab } = router.query;
+
+
 
     const onChangeCheckBox = (e) => {
         setCheckBox(e.target.checked);
@@ -32,7 +36,7 @@ const Add_Affilate_Accnt = () => {
                     //this.props.dispatch(loginSuccess());
                     // Router.push('/');
 
-                    window.location.assign('/');
+                    window.location.assign('/account/Affiliate_marketing/user-information');
                 } else if (status == 1) {
                     const modal = Modal.error({
                         centered: true,
@@ -92,7 +96,7 @@ const Add_Affilate_Accnt = () => {
                             title: 'Success!',
                             content: `Affilate account created successfully.`,
                         });
-                        
+
                         window.location.assign("/page/add_affiliate_accnt");
                     } else {
                         const modal = Modal.error({
@@ -246,29 +250,46 @@ const Add_Affilate_Accnt = () => {
             <button type="submit" className="ps-btn">Login</button>
         </div>
     </form>
-
-    const items = [
-        {
-            key: '1',
-            label: 'Login',
-            children: affiliateLogin,
-        },
-        {
-            key: '2',
-            label: 'Register',
-            children: affiliateRegistrationForm,
-        }
-    ];
+    var items = []
+    if (Number(tab) == 2) {
+        items = [
+            {
+                key: '1',
+                label: 'Login',
+                children: affiliateLogin,
 
 
+            },
+            {
+                key: '2',
+                label: 'Register',
+                children: affiliateRegistrationForm,
+            }
+        ];
+    } else {
+        items = [
+            {
+                key: '1',
+                label: 'Register',
+                children: affiliateRegistrationForm,
+
+            },
+            {
+                key: '2',
+                label: 'Login',
+                children: affiliateLogin,
+
+            }
+        ];
+    }
+
+    //<Tabs defaultActiveKey={2} items={items} />
     return (
         <div className="ps-section--custom">
             <div className="container">
                 <div className="row">
-
                     <div className="col-md-6 col-12">
-                        <Tabs defaultActiveKey="2" items={items} />
-
+                        <Tabs defaultActiveKey={1} items={items} />
                     </div>
                     <div className="col-md-6 col-12">
                         <h3 className="ps-form__heading pb-2">How affiliate program works?</h3>

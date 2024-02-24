@@ -24,7 +24,7 @@ export function logOut() {
     localStorage.removeItem("name");
     localStorage.removeItem("action");
     if(lt=="affiliate_account")
-        window.location.href="/page/add_affiliate_accnt";
+        window.location.href="/page/add_affiliate_accnt?tab=2";
     else
         window.location.href="/account/login";
   //  return { type: actionTypes.LOGOUT};
