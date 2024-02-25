@@ -19,7 +19,7 @@ const DefaultDescription = ({product}) => {
                     <PartialDescription product={product} />
                 </TabPane>
                 <TabPane tab="Specification" key="2">
-                    <PartialSpecification />
+                    <PartialSpecification product={product} />
                 </TabPane>
                
                 
@@ -27,10 +27,10 @@ const DefaultDescription = ({product}) => {
                     <PartialReview  product={product}/>
                 </TabPane>
                 <TabPane tab="Vendor" key="4">
-                    <PartialVendor />
+                    <PartialVendor product={product} />
                 </TabPane>
                 <TabPane tab="Questions and Answers" key="5">
-                    Content of Tab Pane 3
+                    no data available.
                 </TabPane>
                 <TabPane tab="More Offers" key="6">
                     <PartialOffer />

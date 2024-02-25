@@ -12,7 +12,7 @@ const ProductDealOfDay = ({ product }) => {
     const { thumbnailImage, badge, title } = useProduct();
     return (
         <div className="ps-product ps-product--inner">
-            <div className="ps-product__thumbnail" style={{ maxWidth: "100%", height: "200px", overflow: "hidden" }}>
+            <div className="ps-product__thumbnail" style={{ maxWidth: "100%", height: "205px", overflow: "hidden" }}>
                 <Link href="/product/[pid]" as={`/product/${product?.title.replaceAll("/", " | ").replaceAll(" ", "-")}&pid=${product?.id}`}>
                     <a>{thumbnailImage(product)}</a>
                 </Link>
@@ -25,7 +25,7 @@ const ProductDealOfDay = ({ product }) => {
                 </Link>
                 <div className="ps-product__content">
                     {StrapiProductPriceExpanded(product)}
-                    {title(product)}
+                    
                     {
                         (product?.totalRatingRation != null && product?.totalRatingRation?.split(":")[0] > 0) &&
                         <Rate allowHalf defaultValue={product?.totalRatingRation?.split(":")[0]} disabled />
@@ -36,6 +36,7 @@ const ProductDealOfDay = ({ product }) => {
                         <span>{product.ratingCount}</span>
                     </div>
                     */}
+                    {title(product)}
                     <ModuleProductProgressbar product={product} />
                 </div>
             </div>
