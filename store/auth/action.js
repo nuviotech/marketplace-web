@@ -54,7 +54,7 @@ export function getToken(){
    if (typeof window !== 'undefined') {
     token=localStorage.getItem("token");
     }
-    console.log("Token "+token);
+    //console.log("Token "+token);
     return token;
 }
 

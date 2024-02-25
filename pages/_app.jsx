@@ -57,11 +57,9 @@ function App({ Component, pageProps }) {
                         content="Nuvio sellers | eCommerce"
                     />
     </Head>*/}
-                <Head>
-
-
-                    
+                <Head>                    
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                    <meta name="author" content="nuvio" />
                     <meta
                         name="viewport"
                         content="width=device-width, initial-scale=1.0"

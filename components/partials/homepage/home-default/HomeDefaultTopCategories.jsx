@@ -6,17 +6,17 @@ const HomeDefaultTopCategories = () => (
         <div className="ps-container">
             <h3>Top categories</h3>
             <div className="row">
-                <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                <div  className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>
-                        <img style={{width:"170px",height:"170px"}} src="/static/img/categories/7.jpg" alt="nuvio" />
+                        <img style={{height:"170px"}} src="/static/img/categories/7.jpg" alt="nuvio" />
                         <p>Electronics Gadgets</p>
                     </div>
                 </div>
-                <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                <div  className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>
@@ -25,7 +25,7 @@ const HomeDefaultTopCategories = () => (
                     </div>
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>
@@ -34,7 +34,7 @@ const HomeDefaultTopCategories = () => (
                     </div>
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>
@@ -52,7 +52,7 @@ const HomeDefaultTopCategories = () => (
                     </div>
                 </div>*/}
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>
@@ -61,7 +61,7 @@ const HomeDefaultTopCategories = () => (
                     </div>
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>
@@ -70,7 +70,7 @@ const HomeDefaultTopCategories = () => (
                     </div>
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>
@@ -79,7 +79,7 @@ const HomeDefaultTopCategories = () => (
                     </div>
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 ">
-                    <div className="ps-block--category">
+                    <div style={{height:"252px"}} className="ps-block--category">
                         <Link href="/shop">
                             <a className="ps-block__overlay"></a>
                         </Link>

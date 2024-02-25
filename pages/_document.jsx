@@ -7,14 +7,14 @@ export default function Document() {
     return (
         <Html>
             <Head>
-            <link rel="preload" as='icon' href={'/static/img/nuvioseller.png'} sizes="32x32" />
+            <link rel="preload" as='icon' href={'/static/img/nuvio2.png'} sizes="32x32" />
                 
                 <link
                     rel="icon"
-                    href={'/static/img/nuvioseller.png'}
+                    href={'/static/img/nuvio2.png'}
                     sizes="192x192"
                 />
-            <link rel="icon" href={'/static/img/nuvioseller.png'} sizes="32x32" />
+            <link rel="icon" href={'/static/img/nuvio2.png'} sizes="32x32" />
                 {/*<link rel="shortcut icon" href={'/static/img/.png'} />
                 
                 <link

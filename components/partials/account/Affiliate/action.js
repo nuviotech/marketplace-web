@@ -11,7 +11,7 @@ export const getAffiliateAccountDetails = async () => {
     }).then(
         async (response) => {
             if (response.data.status == 0) {
-                console.log(response?.data?.affiliate_account);
+                //console.log(response?.data?.affiliate_account);
                return response?.data?.affiliate_account;
             } else {
                 const modal = Modal.error({
