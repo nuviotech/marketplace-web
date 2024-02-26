@@ -14,7 +14,6 @@ import Newletters from '~/components/partials/commons/Newletters';
 const ProductCategoryScreen = () => {
     const Router = useRouter();
     const { slug } = Router.query;
-    
     const [category, setCategory] = useState(null);
     const [loading, setLoading] = useState(false);
     async function getCategry() {

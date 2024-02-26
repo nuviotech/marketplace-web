@@ -241,7 +241,7 @@ class NavigationList extends Component {
                     </div>
                 </Drawer>
                 <Drawer
-                    style={{width:"60%"}}
+                    style={{width:"50%"}}
                     className="ps-panel--mobile"
                     placement="left"
                     closable={false}

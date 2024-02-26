@@ -120,6 +120,7 @@ class ProductRepository {
         return reponse;
     }
 
+
     async getProductsByCategory(payload) {
         const reponse = await Repository.get(
             `${marketplaceUrl}/product-categories?slug=${payload}`
@@ -141,6 +142,7 @@ class ProductRepository {
         return reponse;
     }
 
+    
     async getProductsByBrand(payload) {
        // alert("## "+payload)
         const reponse = await Repository.get(
