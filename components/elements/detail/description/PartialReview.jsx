@@ -62,6 +62,7 @@ const PartialReview = ({ product }) => {
         <div className="row">
             <div className="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 ">
                 <div className="ps-block--average-rating">
+                    
                     {(product?.totalRatingRation != null && product?.totalRatingRation?.split(":")[0] > 0) &&
                         <>
                             <div className="ps-block__header">

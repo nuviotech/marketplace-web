@@ -8,9 +8,10 @@ import axios from 'axios';
 import { Checkbox, Form, Input, Modal, Select } from 'antd';
 import { connect } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 class Register extends Component {
- 
+
 
     constructor(props) {
         super(props);
@@ -21,72 +22,73 @@ class Register extends Component {
             password: null,
             password2: null,
             phone: null,
-            reportingAccountId:this?.props?.affiliate_account_id,
-            isCheckTermAndConditions:false,
+            reportingAccountId: this?.props?.affiliate_account_id,
+            isCheckTermAndConditions: false,
+            cflag: null,
             // city: null,
             //state: "Nan",
             //country: null,
             //shippingAddress: null
-            reportingAccntDetails:[]
+            reportingAccntDetails: []
         };
         this.fetchData = this.fetchData.bind(this);
-       
+
 
     }
 
-   
-
-  
-   
+    onChangeCatcha = value => {
+        this.setState({ cflag: value });
+    }
 
     fetchData() {
-     fetch(marketplaceUrl + '/getReportingAccountDetails')
-      .then(response => response.json())
-      .then(data => this.setState({ reportingAccntDetails:data }));
-    }
-  
-    componentDidMount() {
-      this.fetchData();
+        fetch(marketplaceUrl + '/getReportingAccountDetails')
+            .then(response => response.json())
+            .then(data => this.setState({ reportingAccntDetails: data }));
     }
 
-    
-    getData=()=>{
-        var reportingAccountDetails=[];
-        this.state?.reportingAccntDetails?.map(data=>{
-            var obj ={
+    componentDidMount() {
+        this.fetchData();
+    }
+
+
+    getData = () => {
+        var reportingAccountDetails = [];
+        this.state?.reportingAccntDetails?.map(data => {
+            var obj = {
                 value: data?.reportingAccountId,
                 label: data?.reportingAccountName,
-              }
-              reportingAccountDetails.push(obj);
+            }
+            reportingAccountDetails.push(obj);
         })
         return reportingAccountDetails;
     }
     onChange = (value) => {
-        this.setState({reportingAccountId:value});
+        this.setState({ reportingAccountId: value });
     };
-      
+
     onCheckBoxChange = (e) => {
-        this.setState({isCheckTermAndConditions:e.target.checked})
+        this.setState({ isCheckTermAndConditions: e.target.checked })
     };
 
     handleSubmit = async (e) => {
         // e.preventDefault();
         //  console.log(JSON.stringify(this.state))
+        const urlRegex = /(https?:\/\/[^\s]+)/gi;
 
-        if (this.state.firstName == '' || this.state.lastName == '') {
+        if (this.state.firstName == '' || this.state.lastName == '' || urlRegex.test(this.state.firstName)) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid input!',
                 content: `Please enter first name or last name.`,
             });
             modal.update;
-        } else if (this.state.phone.length < 10 || this.state.phone.length>10) {
+        } else if (this.state.phone.length < 10 || this.state.phone.length > 10 || urlRegex.test(this.state.phone)) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid input!',
                 content: `Please enter correct phone number.`,
             });
-        } else if (this.state.password.length < 4 || this.state.password.length > 20) {
+        } else if (this.state.password.length < 4 || this.state.password.length > 20 || urlRegex.test(this.state.password)) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Invalid password!',
@@ -100,17 +102,24 @@ class Register extends Component {
                 content: `enter the same password in password field or confirm password field.`,
             });
             modal.update;
-        }else if(!this.state.isCheckTermAndConditions){
+        } else if (!this.state.isCheckTermAndConditions) {
             const modal = Modal.error({
                 centered: true,
                 title: 'Accept terms and conditions',
                 content: `Accept the terms and condtions .`,
             });
             modal.update;
+        }else if(this.state.cflag==null){
+            const modal = Modal.error({
+                centered: true,
+                title: 'Check the captcha !!',
+                content: `verify the captcha first..`,
+            });
+            modal.update;
         } else {
-            if(this?.props?.affiliate_account_id)
-                this.setState({reportingAccountId:this?.props?.affiliate_account_id});
-
+            if (this?.props?.affiliate_account_id)
+                this.setState({ reportingAccountId: this?.props?.affiliate_account_id });
+    
             await axios.post(`${marketplaceUrl}/saveUser`, this.state).then(
                 (response) => {
                     var statusCode = response.data;
@@ -190,7 +199,7 @@ class Register extends Component {
     };
 
     render() {
-     
+
         return (
 
             <div className="ps-my-account">
@@ -213,7 +222,7 @@ class Register extends Component {
                         <div className="ps-tab active" id="register">
                             <div className="ps-form__content">
                                 <h5>Register An Account</h5>
-                        
+
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <div className="form-group">
@@ -268,7 +277,7 @@ class Register extends Component {
                                         rules={[
                                             {
                                                 required: true,
-                                                message:'email address is not valid !!',
+                                                message: 'email address is not valid !!',
                                                 pattern: new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
                                             },
                                         ]}>
@@ -302,7 +311,7 @@ class Register extends Component {
                                         />
                                     </Form.Item>
                                 </div>
-                                
+
 
                                 <div className="form-group form-forgot">
                                     <Form.Item
@@ -351,13 +360,21 @@ class Register extends Component {
                                         style={{ width: "100%" }}
                                         onChange={this.onChange}
                                         options={this.getData()}
-                                        
+
                                     />
                                 </div>
-                                <Checkbox onChange={this.onCheckBoxChange}>
+
+
+                                <ReCAPTCHA
+                                    sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
+                                    onChange={this.onChangeCatcha}
+                                    size="normal"
+                                />
+
+                                <Checkbox className='my-2' onChange={this.onCheckBoxChange}>
                                     Accept Terms And Conditions
                                     <Link href="/page/terms_and_conditions">
-                                        <span style={{color:"blue"}}> Read</span>
+                                        <span style={{ color: "blue" }}> Read</span>
                                     </Link>
                                 </Checkbox>
 

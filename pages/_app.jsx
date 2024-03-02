@@ -58,7 +58,7 @@ function App({ Component, pageProps }) {
                     />
     </Head>*/}
 
-                <Head>                    
+                <Head>
 
                     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                     <meta name="author" content="nuvio" />
@@ -79,15 +79,14 @@ function App({ Component, pageProps }) {
             </AuthContextProvider>
 
             <script src="https://smtpjs.com/v3/smtp.js"></script>
-            <link rel='preload' as="script" href="https://www.googletagmanager.com/gtag/js?id=G-LMKDBVDBY5"></link>
+                   
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-B7SC7YX3EL"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
-                {function gtag() {
-                    dataLayer.push(arguments);
-                }}
+                function gtag(){dataLayer.push(arguments)}
                 gtag('js', new Date());
 
-                gtag('config', 'G-LMKDBVDBY5');
+                gtag('config', 'G-B7SC7YX3EL');
             </script>
         </>
     );
