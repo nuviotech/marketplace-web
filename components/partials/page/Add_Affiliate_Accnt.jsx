@@ -2,15 +2,20 @@ import { Checkbox, Form, Modal, Steps, Tabs } from 'antd';
 import Axios from 'axios';
 import { Router, useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { marketplaceUrl } from '~/repositories/Repository';
 import { saveToken } from '~/store/auth/action';
 
 const Add_Affilate_Accnt = () => {
     const [checkBox, setCheckBox] = useState(false);
     const router = useRouter();
+    const [cflag, setCflag] = useState(null);
     const { tab } = router.query;
 
 
+    const onChangeCatcha = (value) => {
+        setCflag(value);
+    }
 
     const onChangeCheckBox = (e) => {
         setCheckBox(e.target.checked);
@@ -25,38 +30,52 @@ const Add_Affilate_Accnt = () => {
             password: dt.get("password"),
         }
 
-        Axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
-            async (response) => {
-                // console.log(JSON.stringify(response));
-                var token = response.data.Token;
-                var status = response.data.status;
-                if (status == 0) {
-                    saveToken(token, "affiliate_account");
-                    //this.props.dispatch(login());
-                    //this.props.dispatch(loginSuccess());
-                    // Router.push('/');
+        const urlRegex = /(https?:\/\/[^\s]+)/gi;
+        if (urlRegex.test(loginCredentials.email)) {
+            alert("link not allow!!");
+        } else if (urlRegex.test(loginCredentials.password)) {
+            alert("link not allow!!");
+        } else if (cflag == null) {
+            const modal = Modal.error({
+                centered: true,
+                title: 'Check the captcha !!',
+                content: `verify the captcha first..`,
+            });
+            modal.update;
+        } else {
+            Axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
+                async (response) => {
+                    // console.log(JSON.stringify(response));
+                    var token = response.data.Token;
+                    var status = response.data.status;
+                    if (status == 0) {
+                        saveToken(token, "affiliate_account");
+                        //this.props.dispatch(login());
+                        //this.props.dispatch(loginSuccess());
+                        // Router.push('/');
 
-                    window.location.assign('/account/Affiliate_marketing/user-information');
-                } else if (status == 1) {
+                        window.location.assign('/account/Affiliate_marketing/user-information');
+                    } else if (status == 1) {
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Opps, something went wrong!!',
+                            content: `` + response.data.message,
+                        });
+                        modal.update;
+                    }
+                },
+                (error) => {
                     const modal = Modal.error({
                         centered: true,
-                        title: 'Opps, something went wrong!!',
-                        content: `` + response.data.message,
+                        title: 'Wrong credentials !!',
+                        content: `Email or password is wrong, please enter correct one.. `,
                     });
                     modal.update;
-                }
-            },
-            (error) => {
-                const modal = Modal.error({
-                    centered: true,
-                    title: 'Wrong credentials !!',
-                    content: `Email or password is wrong, please enter correct one.. `,
-                });
-                modal.update;
-                console.error("error : " + error);
+                    console.error("error : " + error);
 
-            }
-        )
+                }
+            )
+        }
     }
 
 
@@ -70,7 +89,20 @@ const Add_Affilate_Accnt = () => {
             address: fd.get("accountAddress"),
             password: fd.get("pass")
         }
-        if (obj?.phone.length < 10 || obj?.phone.length < 10) {
+
+        const urlRegex = /(https?:\/\/[^\s]+)/gi;
+
+        if (urlRegex.test(obj.reportingAccountName)) {
+            alert("link not allow !!");
+        } else if (urlRegex.test(obj.phone)) {
+            alert("link not allow !!");
+        } else if (urlRegex.test(obj.email)) {
+            alert("link not allow !!");
+        } else if (urlRegex.test(obj.address)) {
+            alert("link not allow !!");
+        } else if (urlRegex.test(obj.password)) {
+            alert("link not allow !!");
+        } else if (obj?.phone.length < 10 || obj?.phone.length < 10) {
             Modal.info({
                 centered: true,
                 title: 'invalid mobile number, 10 digit required!!',
@@ -85,6 +117,13 @@ const Add_Affilate_Accnt = () => {
                 centered: true,
                 title: 'Password and confirm password not match..',
             });
+        } else if (cflag == null) {
+            const modal = Modal.error({
+                centered: true,
+                title: 'Check the captcha !!',
+                content: `verify the captcha first..`,
+            });
+            modal.update;
         } else {
             Axios.post(`${marketplaceUrl}/saveAffilateAccountDatails`, obj, {
 
@@ -214,7 +253,14 @@ const Add_Affilate_Accnt = () => {
                     name="accountAddress"
                 />
             </div>
-            <div className="form-group">
+
+            <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
+                onChange={(e)=>{onChangeCatcha(e)}}
+                size="normal"
+            />
+
+            <div className="form-group my-2">
                 <Checkbox onChange={onChangeCheckBox}>Accept Term Conditions <a href="/page/affiliate_marketing_terms_and_conditions"><u>read all</u></a></Checkbox>
             </div>
         </div>
@@ -246,6 +292,12 @@ const Add_Affilate_Accnt = () => {
                 />
             </div>
         </div>
+
+        <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
+            onChange={(e)=>{onChangeCatcha(e)}}
+            size="normal"
+        />
         <div>
             <button type="submit" className="ps-btn">Login</button>
         </div>

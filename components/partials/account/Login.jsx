@@ -25,10 +25,10 @@ class Login extends Component {
             cflag: null,
         };
     }
-    
+
     static getDerivedStateFromProps(props) {
         if (props.isLoggedIn === true) {
-                Router.push('/');
+            Router.push('/');
         }
         return false;
     }
@@ -48,9 +48,9 @@ class Login extends Component {
 
     responseFacebook = (response) => {
         //alert(JSON.stringify(response.email));
-       // loginAxiosAction("facebook");
-      }
-      
+        // loginAxiosAction("facebook");
+    }
+
     loginAxiosAction = (action) => {
         const loginCredentials = {
             email: this.state.email,
@@ -58,58 +58,65 @@ class Login extends Component {
             password: this.state.password,
         }
 
-        axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
-            async (response) => {
-               // console.log(JSON.stringify(response));
-                var token = response.data.Token;
-                var status = response.data.status;
-                if (status == 0) {
-                    saveToken(token,"normal_account");
-                    //this.props.dispatch(login());
-                    //this.props.dispatch(loginSuccess());
-                    // Router.push('/');
-                    var action;
-                    if(typeof window !== 'undefined'){
-                        action =sessionStorage.getItem("action")
+        const urlRegex = /(https?:\/\/[^\s]+)/gi;
+        if (urlRegex.test(this.state.email)) {
+            alert("link not allow!!");
+        } else if (urlRegex.test(this.state.password)) {
+            alert("link not allow!!");
+        } else {
+            axios.post(`${marketplaceUrl}/login`, loginCredentials).then(
+                async (response) => {
+                    // console.log(JSON.stringify(response));
+                    var token = response.data.Token;
+                    var status = response.data.status;
+                    if (status == 0) {
+                        saveToken(token, "normal_account");
+                        //this.props.dispatch(login());
+                        //this.props.dispatch(loginSuccess());
+                        // Router.push('/');
+                        var action;
+                        if (typeof window !== 'undefined') {
+                            action = sessionStorage.getItem("action")
+                        }
+                        if (action == "checkout") {
+                            Router.push('/account/checkout')
+                            sessionStorage.removeItem("action");
+                        } else if (action != null && action.length > 0) {
+                            Router.push(action);
+                            sessionStorage.removeItem("action");
+                        } else
+                            window.location.assign('/');
+                    } else if (status == 1) {
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Opps, something went wrong!!',
+                            content: `` + response.data.message,
+                        });
+                        modal.update;
                     }
-                    if(action== "checkout"){
-                        Router.push('/account/checkout')
-                        sessionStorage.removeItem("action");
-                    }else if(action!=null && action.length>0){
-                        Router.push(action);
-                        sessionStorage.removeItem("action");
-                    }else
-                        window.location.assign('/');
-                } else if (status == 1) {
-                    const modal = Modal.error({
-                        centered: true,
-                        title: 'Opps, something went wrong!!',
-                        content: `` + response.data.message,
-                    });
-                    modal.update;
-                }
-            },
-            (error) => {
-                if (action == "google") {
-                    const modal = Modal.error({
-                        centered: true,
-                        title: 'Wrong Email !!',
-                        content: `This email is not register, please try with another.`,
-                    });
-                    modal.update;
-                    console.error("error : " + error);
-                } else {
-                    const modal = Modal.error({
-                        centered: true,
-                        title: 'Wrong credentials !!',
-                        content: `Email or password is wrong, please enter correct one.. `,
-                    });
-                    modal.update;
-                    console.error("error : " + error);
-                }
+                },
+                (error) => {
+                    if (action == "google") {
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Wrong Email !!',
+                            content: `This email is not register, please try with another.`,
+                        });
+                        modal.update;
+                        console.error("error : " + error);
+                    } else {
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Wrong credentials !!',
+                            content: `Email or password is wrong, please enter correct one.. `,
+                        });
+                        modal.update;
+                        console.error("error : " + error);
+                    }
 
-            }
-        )
+                }
+            )
+        }
     }
 
 
@@ -124,7 +131,7 @@ class Login extends Component {
             this.loginAxiosAction("custom");
 
         } else {
-            alert("Fill the captcha...")
+            alert("check the captcha first...")
         }
 
 
@@ -133,7 +140,7 @@ class Login extends Component {
     };
 
     render() {
-        
+
         return (
             <div className="ps-my-account">
                 <div className="container">
@@ -207,7 +214,7 @@ class Login extends Component {
 
                                 </div>
                                 <div className='text-left'>
-                                        <a href='https://nuvio.in/page/Forgote_password'>forgot password ?</a>
+                                    <a href='https://nuvio.in/page/Forgote_password'>forgot password ?</a>
 
                                 </div>
                             </div>
@@ -218,7 +225,7 @@ class Login extends Component {
                                     // original ->   510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com
                                 }
 
-                               {/*} <GoogleOAuthProvider clientId="510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com">
+                                {/*} <GoogleOAuthProvider clientId="510757732144-045oln81q77tci87bkrb9mgrr1n31drh.apps.googleusercontent.com">
 
                                     <GoogleLogin
                                         onSuccess={credentialResponse => {
@@ -243,11 +250,11 @@ class Login extends Component {
                                     appId="1029697068000890"
                                     autoLoad={false}
                                     fields="name,email,picture"
-                                    callback={this.responseFacebook} 
+                                    callback={this.responseFacebook}
                                     icon="fa-facebook"
                                     cssClass="my-facebook-button-class"
 
-                                    
+
                                 />
 
 
