@@ -79,11 +79,14 @@ function App({ Component, pageProps }) {
             </AuthContextProvider>
 
             <script src="https://smtpjs.com/v3/smtp.js"></script>
-                   
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-B7SC7YX3EL"></script>
+
+            <link rel='preload' as="script" href="https://www.googletagmanager.com/gtag/js?id=G-B7SC7YX3EL"></link>
             <script>
                 window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments)}
+                {function gtag() {
+                    dataLayer.push(arguments);
+                }}
+
                 gtag('js', new Date());
 
                 gtag('config', 'G-B7SC7YX3EL');
