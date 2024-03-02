@@ -9,20 +9,24 @@ import ProductItems from '~/components/partials/product/ProductItems';
 import PageContainer from '~/components/layouts/PageContainer';
 import FooterDefault from '~/components/shared/footers/FooterDefault';
 import Newletters from '~/components/partials/commons/Newletters';
+import { Pagination } from 'antd';
 
 
 const ProductCategoryScreen = () => {
     const Router = useRouter();
-    const { slug } = Router.query;
+    const { slug, page } = Router.query;
+    const { query } = Router;
+    const [pageSize] = useState(20);
+    const [total, setTotal] = useState(0);
     const [category, setCategory] = useState(null);
     const [loading, setLoading] = useState(false);
-    async function getCategry() {
+
+    async function getCategry(queries) {
+        alert(JSON.stringify(query));
         setLoading(true);
         if (slug) {
-            const responseData = await ProductRepository.getProductsByCategory(
-                slug
-            );
-            if (responseData!==null) {
+            const responseData = await ProductRepository.getProductsByCategory(queries);
+            if (responseData !== null) {
                 setCategory(responseData);
                 setTimeout(
                     function () {
@@ -30,7 +34,7 @@ const ProductCategoryScreen = () => {
                     }.bind(this),
                     250
                 );
-            }else{
+            } else {
                 setCategory(null)
                 setTimeout(
                     function () {
@@ -39,13 +43,45 @@ const ProductCategoryScreen = () => {
                     250
                 );
             }
-        } else {
-            await Router.push('/shop');
         }
     }
+
+    function handlePagination(page, pageSize) {
+        Router.push(`?page=${page}&price_lt=${query?.price_lt}&price_gt=${query?.price_gt}&slug=${query?.slug}`);
+    }
+
+    async function getTotalRecords(params) {
+        var responseData;
+        if (params) {
+            responseData = await ProductRepository.getTotalRecords(params);
+        } else {
+            responseData = await ProductRepository.getTotalRecords();
+        }
+        alert(responseData)
+        setTotal(responseData);
+    }
+
     useEffect(() => {
-        getCategry();
-    }, [slug]);
+        if (query && query.slug) {
+            var params = {
+                key: 'categories',
+                value: query.slug,
+                price_lt: query.price_lt,
+                price_gt: query.price_gt
+            };
+
+            const queries = {
+                _start: page,
+                _limit: pageSize,
+                slug: query.slug,
+                price_lt: query.price_lt,
+                price_gt: query.price_gt
+            };
+            
+            getTotalRecords(params);
+            getCategry(queries);
+        }
+    }, [query]);
 
     const breadCrumb = [
         {
@@ -57,7 +93,7 @@ const ProductCategoryScreen = () => {
             url: '/',
         },
         {
-            text: category ? category.name : 'Product category',
+            text: category ? category.name : 'Product categories',
         },
     ];
 
@@ -65,9 +101,9 @@ const ProductCategoryScreen = () => {
     let productItemsViews;
 
     if (!loading) {
-        if (category && category.length > 0 ) {
+        if (category && category.length > 0) {
             productItemsViews = (
-                <ProductItems columns={4} products={category} />
+                <ProductItems columns={4} products={category} total={total} />
             );
         } else {
             productItemsViews = <p>No Product found</p>;
@@ -95,6 +131,16 @@ const ProductCategoryScreen = () => {
                                 {category && category.name}
                             </h3>
                             {productItemsViews}
+                            <div className="ps-pagination my-3">
+                                <Pagination
+                                    total={total}
+                                    pageSize={pageSize}
+                                    responsive={true}
+                                    showSizeChanger={false}
+                                    current={page !== undefined ? parseInt(page) : 1}
+                                    onChange={(e) => handlePagination(e)}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
