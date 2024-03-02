@@ -31,9 +31,7 @@ function Invoices() {
     const { actionType } = router.query;
     const { txid } = router.query;
     
-    
 
-   
     if (flag == 1 || flag === 1) {
        // console.log("inside flag condition.........")
         const data={
