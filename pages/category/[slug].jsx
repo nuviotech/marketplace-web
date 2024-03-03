@@ -22,7 +22,6 @@ const ProductCategoryScreen = () => {
     const [loading, setLoading] = useState(false);
 
     async function getCategry(queries) {
-        alert(JSON.stringify(query));
         setLoading(true);
         if (slug) {
             const responseData = await ProductRepository.getProductsByCategory(queries);
@@ -57,7 +56,6 @@ const ProductCategoryScreen = () => {
         } else {
             responseData = await ProductRepository.getTotalRecords();
         }
-        alert(responseData)
         setTotal(responseData);
     }
 
