@@ -4,7 +4,7 @@ import Link from 'next/link';
 const ModuleProductDetailSpecification = ({product}) => (
 
     <div className="ps-product__specification">
-        <Link href="/page/blank">
+        <Link href="/page/report_abuse">
             <a className="report">Report Abuse</a>
         </Link>
         <p>

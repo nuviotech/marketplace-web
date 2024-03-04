@@ -84,7 +84,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                             {item.title}
                             <span>x{item.quantity}</span>
                         </strong>
-                        <small>{item.quantity * item.sale_price} <del>₹{item.quantity * item.price}</del></small>
+                        <small>₹{item.quantity * item.sale_price}.00 <del>₹{item.quantity * item.price}.00</del></small>
                     </a>
                 </Link>
             );
@@ -94,12 +94,12 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
     } else {
         listItemsView = <p>No Product.</p>;
     }
-    if (shipping === true) {
+    if (true) {
         shippingView = (
             <figure>
                 <figcaption>
                     <strong>Shipping Fee</strong>
-                    <small>₹20.00</small>
+                    <small>₹50.00</small>
                 </figcaption>
             </figure>
         );
@@ -107,7 +107,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>₹{parseInt(amount) + 20}.00</strong>
+                    <strong>₹{parseInt(amount) + 50}.00</strong>
                 </h3>
             </figure>
         );

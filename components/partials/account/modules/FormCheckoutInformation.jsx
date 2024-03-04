@@ -38,7 +38,6 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
     useEffect(async () => {
         if (ecomerce.cartItems) {
            // setCurrentUser(await userData())
-
             getProducts(ecomerce.cartItems, 'cart');
             setDefaultValues();
         }
@@ -50,7 +49,6 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
 
     const handleLoginSubmit = () => {
         if(review.state==="select state"){
-            alert("select state!!");
             return;
         }
         const orderInformation = {
@@ -278,8 +276,6 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                     }
                     //paytm
                     */
-
-
             },
             (error) => {
                 //order details is not save to database
@@ -305,7 +301,7 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                         <input type="text"
                             className="form-control"
                             value={review.contact}
-                            placeholder='Enter the contact...'
+                            placeholder='Enter the contact number...'
                             required="true"
                             pattern="[7-9]{1}[0-9]{9}"
                             onChange={(e) => {
@@ -458,7 +454,7 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                                 <i>please wait <span className='spinner-border'></span> </i>
                             ) : (
 
-                                <button className="ps-btn">Continue to shipping</button>
+                                <button className="ps-btn">Place order</button>
                             )
                             }
                         </div>
