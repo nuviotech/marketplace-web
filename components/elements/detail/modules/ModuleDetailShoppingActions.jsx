@@ -76,12 +76,12 @@ const ModuleDetailShoppingActions = ({
                         <button
                             className="up"
                             onClick={(e) => handleIncreaseItemQty(e)}>
-                            <i className="fa fa-plus"></i>
+                            +
                         </button>
                         <button
                             className="down"
                             onClick={(e) => handleDecreaseItemQty(e)}>
-                            <i className="fa fa-minus"></i>
+                            -
                         </button>
                         <input
                             className="form-control"

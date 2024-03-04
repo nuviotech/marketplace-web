@@ -97,7 +97,7 @@ const SearchPage = () => {
                 statusView = (
                     <p>
                         <strong style={{ color: '#000' }}>
-                            {productItems.length}
+                            {total}
                         </strong>{' '}
                         record(s) found.
                     </p>
