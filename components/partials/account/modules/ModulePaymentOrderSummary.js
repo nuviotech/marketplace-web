@@ -107,7 +107,13 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>₹{parseInt(amount) + 50}.00</strong>
+                    {
+                        parseInt(amount)>0 ?
+                            <strong>₹{parseInt(amount) + 50}.00</strong>
+                            :
+                            <strong>₹ 00.00</strong>
+                    }
+                    
                 </h3>
             </figure>
         );
@@ -154,8 +160,8 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                         couponDiscount.isValid &&
                         <div className='card p-3'>
                             <h5>Coupon code : <strong>{couponDiscount.coupon}</strong> </h5>
-                            <h5>Before Coupon Applied Price :  <strong>₹{parseInt(amount)}</strong></h5>
-                            <h5>After Coupon Applied Price :  <strong>₹{couponDiscount.discountAmt}</strong></h5>
+                            <h5>Before Coupon Applied Price :  <strong>₹{parseInt(amount)+50}.00 </strong></h5>
+                            <h5>After Coupon Applied Price :  <strong>₹{couponDiscount.discountAmt+50}.00</strong></h5>
                         </div>
 
 
