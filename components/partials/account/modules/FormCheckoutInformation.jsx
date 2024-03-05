@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
 import Link from 'next/link';
-import { Form } from 'antd';
+import { Form, Modal } from 'antd';
 import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '~/utilities/ecomerce-helpers';
 import { userIsLogin, getToken } from '~/store/auth/action';
@@ -106,7 +106,15 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                 } else {
                     setLoader(false);
                     if(response.data==='InvalidCouponCode'){
-                        alert("invalid coupon code");
+                        Modal.error({
+                            centered: true,
+                            title: 'Sorry, Invalid coupon code',
+                        });
+                    }else if(response.data==='user_alredy_use_coupon'){
+                        Modal.error({
+                            centered: true,
+                            title: 'Sorry, This Token Has Already Been Used !!',
+                        });
                     }else{
                         alert("Something went wrong on payment !!!");
                     }

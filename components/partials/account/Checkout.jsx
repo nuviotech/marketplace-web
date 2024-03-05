@@ -28,8 +28,6 @@ const Checkout = () => {
                                         <ModulePaymentOrderSummary handleSetCoupon={handleSetCoupon}/>
                                     </div>
 
-                                    
-
                                 </div>
                             </div>
                         </div>
