@@ -1,8 +1,7 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { getToken, logOut, userIsLogin, } from "~/store/auth/action";
+import { getToken, logOut, saveToken, userIsLogin, } from "~/store/auth/action";
 import { marketplaceUrl } from "./Repository";
-import { useRouter } from "next/router";
+import { Modal } from "antd";
 
 
 export const userData = async () => {
@@ -71,6 +70,86 @@ export const returnPolicyByUser = async (info) => {
     });
     //alert(data);
     return data;
+}
+
+export const saveUserDetails=async (state,pathValue,router)=>{
+    await axios.post(`${marketplaceUrl}/saveUser`, state).then(
+        (response) => {
+            var res = response.data;
+            if (res.status == -1) {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Invalid input!',
+                    content: `Please enter valid first name or last name.`,
+                });
+                modal.update;
+            } else if (res.status == -2) {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Invalid input!',
+                    content: `Please enter valid first name or last name.`,
+                });
+                modal.update;
+            } else if (res.status == -3) {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Invalid input!',
+                    content: `Please enter valid first name or last name.`,
+                });
+                modal.update;
+            } else if (res.status == -4) {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Invalid input!',
+                    content: `Please enter valid first name or last name.`,
+                });
+                modal.update;
+            } else if (res.status == -5) {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Email Already Registered !!',
+                    content: `We're sorry, but it seems like the email address you entered is already registered with us. If you're having trouble accessing your account, please click on the 'Login' and use the 'Forgot Password' option.`,
+                });
+                modal.update;
+            } else if (res.status == -6) {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Invalid state!!',
+                    content: `please select the state.`,
+                });
+                modal.update;
+            } else if (res.status == 1) {
+                const modal = Modal.error({
+                    centered: true,
+                    title: 'Server Error!!',
+                    content: `Something went wrong on server.`,
+                });
+                modal.update;
+            } else if (res.status == '0') {
+                const modal = Modal.success({
+                    centered: true,
+                    title: `All Set!`,
+                    content: `Your account is ready to go. Dive into Nuvio and discover our exclusive offers and latest arrivals.`,
+                });
+                modal.update;
+                saveToken(res.token, "normal_account");
+                if(pathValue=='checkout' || pathValue==='checkout'){
+                    router.push('/account/checkout')
+                }else{
+                    router.push('/shop');
+                }
+            }
+        },
+        (error) => {
+            console.error("Register user (error) : " + error);
+            const modal = Modal.error({
+                centered: true,
+                title: 'Something went wrong on server!!',
+                content: `Oops! It seems that something unexpected occurred on our end. We apologize for any inconvenience this may have caused. Our team has been notified and is working diligently to fix the issue. Please try again later, or feel free to contact our support team if you need immediate assistance. Thank you for your understanding.`,
+            });
+            modal.update;
+        }
+    )
 }
 
 

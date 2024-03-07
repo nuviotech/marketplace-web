@@ -9,6 +9,7 @@ import { Checkbox, Form, Input, Modal, Select } from 'antd';
 import { connect } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { saveUserDetails } from '~/repositories/UserDeatils';
 
 class Register extends Component {
 
@@ -113,80 +114,13 @@ class Register extends Component {
             const modal = Modal.error({
                 centered: true,
                 title: 'Check the captcha !!',
-                content: `verify the captcha first..`,
+                content: `Before proceeding, please complete the CAPTCHA.`,
             });
             modal.update;
         } else {
             if (this?.props?.affiliate_account_id)
                 this.setState({ reportingAccountId: this?.props?.affiliate_account_id });
-    
-            await axios.post(`${marketplaceUrl}/saveUser`, this.state).then(
-                (response) => {
-                    var statusCode = response.data;
-                    if (statusCode == '-1') {
-                        const modal = Modal.error({
-                            centered: true,
-                            title: 'Invalid input!',
-                            content: `Please enter valid first name or last name.`,
-                        });
-                        modal.update;
-                    } else if (statusCode == '-2') {
-                        const modal = Modal.error({
-                            centered: true,
-                            title: 'Invalid input!',
-                            content: `Please enter valid first name or last name.`,
-                        });
-                        modal.update;
-                    } else if (statusCode == '-3') {
-                        const modal = Modal.error({
-                            centered: true,
-                            title: 'Invalid input!',
-                            content: `Please enter valid first name or last name.`,
-                        });
-                        modal.update;
-                    } else if (statusCode == '-4') {
-                        const modal = Modal.error({
-                            centered: true,
-                            title: 'Invalid input!',
-                            content: `Please enter valid first name or last name.`,
-                        });
-                        modal.update;
-                    } else if (statusCode == '-5') {
-                        const modal = Modal.error({
-                            centered: true,
-                            title: 'Email already exists!!',
-                            content: `Please try with another email id, this email already present.`,
-                        });
-                        modal.update;
-                    } else if (statusCode == '-6') {
-                        const modal = Modal.error({
-                            centered: true,
-                            title: 'Invalid state!!',
-                            content: `please select the state.`,
-                        });
-                        modal.update;
-                    } else if (statusCode == '1') {
-                        const modal = Modal.error({
-                            centered: true,
-                            title: 'Server Error!!',
-                            content: `Something went wrong on server.`,
-                        });
-                        modal.update;
-                    } else if (statusCode == '0') {
-                        const modal = Modal.success({
-                            centered: true,
-                            title: 'Successfully Registered !',
-                            content: `You'r Information is successfully saved on server, please login with credentials..`,
-                        });
-                        modal.update;
-                        Router.push('/account/login');
-                    }
-                },
-                (error) => {
-                    console.error("Register user (error) : " + error);
-                    alert("Something went wrong on server!!");
-                }
-            )
+                saveUserDetails(this.state,"",Router);
         }
 
         this.props.form?.validateFields((err, values) => {
@@ -351,6 +285,7 @@ class Register extends Component {
                                         />
                                     </Form.Item>
                                 </div>
+
                                 <div className="form-group">
                                     <Select
                                         showSearch
