@@ -10,14 +10,29 @@ import { userIsLogin, getToken } from '~/store/auth/action';
 import { useRouter } from 'next/router';
 import { AuthContext } from '~/context/loginContext';
 import { userData } from '~/repositories/UserDeatils';
+import GuestUserForm from './GuestUserForm';
 
-const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
+const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     var userLoginStatus = userIsLogin();
-    const { currentUser } = useContext(AuthContext);
+    //const { currentUser } = useContext(AuthContext);
+    const [currentUser,setCurrentUser]=useState({});
     const [loader, setLoader] = useState(false)
+    const [state, setState] = useState({});
+    const [review, setReview] = useState({ state: "select state" });
+
+    const guestUserData = (data) => {
+        setReview({
+            fname: data?.firstName,
+            last_name: data?.lastName,
+            contact: data?.phone,
+            state: "select state",
+            address: '',
+            city: '',
+            postal_code:''
+        })
+    }
 
     let totalAmount = 0;
-    const [review, setReview] = useState({state:"select state"});
 
     const setDefaultValues = () => {
         if (currentUser?.shippingAddress) {
@@ -28,7 +43,17 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                 city: currentUser?.shippingAddress?.city,
                 contact: currentUser?.phone,
                 state: currentUser?.shippingAddress?.state,
-                postal_code:currentUser?.shippingAddress?.pincode,
+                postal_code: currentUser?.shippingAddress?.pincode,
+            })
+        } else {
+            setReview({
+                fname: currentUser?.firstName,
+                last_name: currentUser?.lastName,
+                contact: currentUser?.phone,
+                state: "select state",
+                address: '',
+                city: '',
+                postal_code:''
             })
         }
     }
@@ -37,7 +62,7 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
     const router = useRouter();
     useEffect(async () => {
         if (ecomerce.cartItems) {
-           // setCurrentUser(await userData())
+            setCurrentUser(await userData())
             getProducts(ecomerce.cartItems, 'cart');
             setDefaultValues();
         }
@@ -47,28 +72,60 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
         totalAmount = calculateAmount(products);
     }
 
-    const handleLoginSubmit = () => {
-        if(review.state==="select state"){
-            return;
-        }
+    const handleLoginSubmit = (event) => {
+        event.preventDefault();
+        const dt = new FormData(event.currentTarget);
+
         const orderInformation = {
-            "fname": review.fname,
-            "lname": review.last_name,
-            "shippingAddressPrimary": review.address,
-            "landmark": review.apprtment_name,
-            "city": review.city,
-            "postalCode": review.postal_code,
+            "fname": dt.get("firstName"),
+            "lname": dt.get("lastName"),
+            "shippingAddressPrimary": dt.get("address"),
+            "landmark": dt.get("apprt"),
+            "city": dt.get("city"),
+            "postalCode": dt.get("pincode"),
             "products": ecomerce.cartItems,
-            "contactNumber": review.contact,
+            "contactNumber": dt.get("phone"),
             "totalBill": totalAmount,
             "token": getToken(),
-            "state": review.state,
-            "couponCode":coupon,
-            "orderTotalAmtBeforeApplyingCoupon":orderTotalAmt,
+            "state": dt.get("state"),
+            "couponCode": coupon,
+            "orderTotalAmtBeforeApplyingCoupon": orderTotalAmt,
         }
-        
-        setLoader(true);
-        placeOrder(orderInformation);
+
+        if (orderInformation.products.length == 0) {
+            Modal.error({
+                centered: true,
+                title: 'your shopping cart is empty!!',
+            });
+        } else if (orderInformation.fname.length == 0 || orderInformation.lname.length == 0) {
+            Modal.error({
+                centered: true,
+                title: 'first name or last name is required!!',
+            });
+        } else if (orderInformation.shippingAddressPrimary.length == 0) {
+            Modal.error({
+                centered: true,
+                title: 'address is required!!',
+            });
+        } else if (orderInformation.city.length == 0) {
+            Modal.error({
+                centered: true,
+                title: 'city is required!!',
+            });
+        } else if (orderInformation.state.length == 0 || orderInformation.state == "select state" || orderInformation.state === "select state") {
+            Modal.error({
+                centered: true,
+                title: 'select the state !!',
+            });
+        } else if (orderInformation.postalCode.length == 0) {
+            Modal.error({
+                centered: true,
+                title: 'pincode is required!!',
+            });
+        } else {
+            setLoader(true);
+            placeOrder(orderInformation);
+        }
         //  Router.push('/account/shipping');
 
     };
@@ -105,20 +162,25 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                     router.push(response.data.data.instrumentResponse.redirectInfo.url + "");
                 } else {
                     setLoader(false);
-                    if(response.data==='InvalidCouponCode'){
+                    if (response.data === 'InvalidCouponCode') {
                         Modal.error({
                             centered: true,
-                            title: 'Sorry, Invalid coupon code',
+                            title: 'Sorry, Invalid coupon code !!',
                         });
-                    }else if(response.data==='user_alredy_use_coupon'){
+                    } else if (response.data === 'user_alredy_use_coupon') {
                         Modal.error({
                             centered: true,
                             title: 'Sorry, This Token Has Already Been Used !!',
                         });
-                    }else{
-                        alert("Something went wrong on payment !!!");
+                    } else {
+                        const modal = Modal.error({
+                            centered: true,
+                            title: 'Something went wrong on server!!',
+                            content: `Oops! It seems that something unexpected occurred on our end. We apologize for any inconvenience this may have caused. Our team has been notified and is working diligently to fix the issue. Please try again later, or feel free to contact our support team if you need immediate assistance. Thank you for your understanding.`,
+                        });
+                        modal.update;
                     }
-                    
+
                 }
 
                 //razorpay payment integration
@@ -298,98 +360,110 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
     //const{fname}=this.state;
     return (
 
-        <Form
+        <form
             className="ps-form__billing-info"
-            onFinish={() => { handleLoginSubmit() }}>
+            onSubmit={(e) => { handleLoginSubmit(e) }}>
             {userLoginStatus ?
                 <div>
 
-                    <h3 className="ps-form__heading">Contact information</h3>
-                    <div className="form-group">
-                        <input type="text"
-                            className="form-control"
-                            value={review.contact}
-                            placeholder='Enter the contact number...'
-                            required="true"
-                            pattern="[7-9]{1}[0-9]{9}"
-                            onChange={(e) => {
-                                setReview({ ...review, contact: e.target.value })
-                            }}
-                        />
-                        
-                    </div>
-                   
-                    <h3 className="ps-form__heading">Fill The Information</h3>
+                    <h3 className="ps-form__heading">Self information</h3>
+
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="form-group">
                                 <input type="text"
+                                    name="firstName"
                                     className="form-control"
-                                    value={review.fname}
+                                    defaultValue={review?.fname}
                                     placeholder='First Name'
                                     required="true"
-                                    onChange={(e) => {
-                                        setReview({ ...review, fname: e.target.value })
-                                    }}
+                                    // onChange={(e) => {
+                                    //     setReview({ ...review, fname: e.target.value })
+                                    // }}
                                 />
-                                
+
                             </div>
                         </div>
+
                         <div className="col-sm-6">
                             <div className="form-group">
                                 <input type="text"
+                                name="lastName"
                                     className="form-control"
-                                    value={review.last_name}
+                                    defaultValue={review?.last_name}
                                     placeholder='Last Name'
                                     required="true"
-                                    onChange={(e) => {
-                                        setReview({ ...review, last_name: e.target.value })
-                                    }}
+                                    // onChange={(e) => {
+                                    //     setReview({ ...review, last_name: e.target.value })
+                                    // }}
                                 />
-                                
+
                             </div>
                         </div>
                     </div>
+
+
+
                     <div className="form-group">
                         <input type="text"
                             className="form-control"
-                            value={review.address}
-                            placeholder='Address'
+                            defaultValue={review?.contact}
+                            placeholder='Enter the contact number...'
                             required="true"
-                            onChange={(e) => {
-                                setReview({ ...review, address: e.target.value })
-                            }}
+                            name="phone"
+                            pattern="[7-9]{1}[0-9]{9}"
+                            // onChange={(e) => {
+                            //     setReview({ ...review, contact: e.target.value })
+                            // }}
                         />
-                        
+
+
+                    </div>
+                    <h3 className="ps-form__heading">Address Information</h3>
+
+                    <div className="form-group">
+                        <input type="text"
+                            className="form-control"
+                            defaultValue={review?.address}
+                            placeholder='Address'
+                            name="address"
+                            required="true"
+                            // onChange={(e) => {
+                            //     setReview({ ...review, address: e.target.value })
+                            // }}
+                        />
+
                     </div>
                     <div className="form-group">
                         <input type="text"
                             className="form-control"
+                            name="apprt"
                             placeholder='Apartment, suite, etc. (optional)'
-                            onChange={(e) => {
-                                setReview({ ...review, apprtment_name: e.target.value })
-                            }}
+                            // onChange={(e) => {
+                            //     setReview({ ...review, apprtment_name: e.target.value })
+                            // }}
                         />
-                        
+
                     </div>
                     <div className="row">
                         <div className="col-sm-4">
                             <div className="form-group">
                                 <input type="text"
                                     className="form-control"
-                                    value={review.city}
+                                    defaultValue={review?.city}
                                     required="true"
                                     placeholder='City '
-                                    onChange={(e) => {
-                                        setReview({ ...review, city: e.target.value })
-                                    }}
+                                    name="city"
+                                    // onChange={(e) => {
+                                    //     setReview({ ...review, city: e.target.value })
+                                    // }}
                                 />
-                                
+
                             </div>
                         </div>
                         <div className="col-sm-4">
                             <div className="form-group">
-                                <select onChange={(event) => { setReview({ ...review, state: event.target.value }) }} className='form-control'>
+                                <select name="state" onChange={(event) => { setReview({ ...review, state: event.target.value }) }} className='form-control'>
                                     <option>{review.state}</option>
                                     <option>Andhra Pradesh</option>
                                     <option>Arunachal Pradesh</option>
@@ -435,19 +509,20 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                             <div className="form-group">
                                 <input type="text"
                                     className="form-control"
-                                    value={review.postal_code}
+                                    defaultValue={review.postal_code}
                                     placeholder='Postal Code '
                                     required="true"
+                                    name="pincode"
                                     pattern='[0-9]{6}'
-                                    onChange={(e) => {
-                                        setReview({ ...review, postal_code: e.target.value })
-                                    }}
+                                    // onChange={(e) => {
+                                    //     setReview({ ...review, postal_code: e.target.value })
+                                    // }}
                                 />
-                                
+
                             </div>
                         </div>
                     </div>
-                   
+
                     <div className="ps-form__submit">
                         <Link href="/shop">
                             <a>
@@ -471,12 +546,12 @@ const FormCheckoutInformation = ({ ecomerce,coupon,orderTotalAmt }) => {
                 </div>
                 :
                 <div className='mb-5'>
-                    <h3 class="" className="">Please Login First, For Place The Order...</h3>
-                    <button class="ps-btn" onClick={() => { goToLogin() }}><i className="icon-arrow-left mr-2"></i> Go To Login</button>
+                    <GuestUserForm guestUserData={guestUserData} />
+                    <h4 class="" className="">Already Registered? <span onClick={() => { goToLogin() }} style={{ cursor: "pointer" }}><u>Login Here</u></span></h4>
                 </div>
             }
-           
-        </Form>
+
+        </form>
 
     );
 }

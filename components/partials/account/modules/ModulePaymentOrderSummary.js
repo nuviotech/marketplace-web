@@ -34,9 +34,9 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
         }
 
         await Axios.post(`${marketplaceUrl}/applyCoupon`, obj, {
-            headers: {
-                Authorization: "Bearer " + getToken(),
-            }
+            // headers: {
+            //     Authorization: "Bearer " + getToken(),
+            // }
         }).then(
             (response) => {
                 if (response.data.status == 0) {
@@ -50,6 +50,8 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                     modal.update;
                 }
                 if (response.data.status == 1) {
+                    handleSetCoupon(null,0);
+                    setCouponDiscount({ isValid: false, discountAmt: 0, msg: null })
                     const modal = Modal.error({
                         centered: true,
                         title: 'Invalid Coupon Code.',

@@ -227,7 +227,7 @@ const InvoiceDetail = () => {
                                                 </figcaption>
                                                 <div className="ps-block__content">
                                                     <p>
-                                                        Shipping Fee: Free
+                                                        Shipping Fee: ₹50
                                                     </p>
                                                 </div>
                                             </figure>
