@@ -74,10 +74,10 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                 setDefaultValues();
             }
         };
-    
+
         fetchData(); // Call the async function
-    
-    }, [ecomerce]); 
+
+    }, [ecomerce]);
 
 
     // useEffect(async () => {
@@ -395,8 +395,11 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
             onSubmit={(e) => { handleLoginSubmit(e) }}>
             {userLoginStatus ?
                 <div>
-
-                    <h3 className="ps-form__heading">Self information</h3>
+                    <div className="mx-2">
+                        <h2>Delivery Information</h2>
+                    </div>
+                    <p className='mt-4'><b>✅ Your account is ready to go. please fill below delivery information to complete your order !! </b></p>
+                    <h4 className="ps-form__heading">Self Information</h4>
 
                     <div className="row">
                         <div className="col-sm-6">
@@ -449,7 +452,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
 
 
                     </div>
-                    <h3 className="ps-form__heading">Address Information</h3>
+                    <h4 className="ps-form__heading">Address Information</h4>
 
                     <div className="form-group">
                         <input type="text"
@@ -552,7 +555,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                             </div>
                         </div>
                     </div>
-                    <h3 className="ps-form__heading">Payment Modes</h3>
+                    <h4 className="ps-form__heading">Payment Modes</h4>
                     <div className="w-100">
                         <div className="form-group">
                             <select placeholder='select payment mode' name="paymentType" onChange={(event) => { setReview({ ...review, paymentType: event.target.value }) }} className='form-control'>
@@ -578,7 +581,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                                 <i>please wait <span className='spinner-border'></span> </i>
                             ) : (
 
-                                <button className="ps-btn">Place order</button>
+                                <button className="ps-btn">Place Order</button>
                             )
                             }
                         </div>
