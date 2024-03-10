@@ -32,6 +32,7 @@ function Invoices() {
     const { txid } = router.query;
     const {cod} = router.query;
     
+
     if(cod){
         const modal =Modal.success({
             centered: true,
@@ -42,7 +43,7 @@ function Invoices() {
     }
     
 
-   
+
     if (flag == 1 || flag === 1) {
        // console.log("inside flag condition.........")
         const data={
