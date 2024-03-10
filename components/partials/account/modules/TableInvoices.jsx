@@ -291,7 +291,7 @@ class TableInvoices extends Component {
                     <span className="text-right">
                         {
                                                            
-                            record.paymentStatus == "unpaid" ?
+                           (record.paymentStatus == "unpaid" && record.paymentType=='Online Payment') ?
                                 <button onClick={() => {removeOrder(record.id) }} className="btn btn-outline-danger">Remove</button>
                                 : (record.under_return_policy==="0") ?
                                     <button onClick={() => { openModel(record.id, record.categoryId, record.paymentId, record.amount, record.title) }} className="btn btn-outline-warning">Return</button>
