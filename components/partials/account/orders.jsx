@@ -30,7 +30,19 @@ function Invoices() {
     const { flag } = router.query;
     const { actionType } = router.query;
     const { txid } = router.query;
+    const {cod} = router.query;
     
+
+    if(cod){
+        const modal =Modal.success({
+            centered: true,
+            title: 'Your Order Is Successfully Placed! 🎉',
+            content:`Congratulations, ${currentUser?.firstName}! Your order has been successfully placed. `
+        });
+        modal.update;
+    }
+    
+
 
     if (flag == 1 || flag === 1) {
        // console.log("inside flag condition.........")

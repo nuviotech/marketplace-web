@@ -240,7 +240,8 @@ const InvoiceDetail = () => {
                                                 <div className="ps-block__content">
                                                     <p>
                                                         Total Bill : {orderDetails?.totalBill}<br />
-                                                        Payment Method: -
+                                                        Payment Method: {orderDetails?.paymentType}<br/>
+                                                        Payment Status : {orderDetails?.paymentStatus}<br/>
                                                     </p>
                                                 </div>
                                             </figure>

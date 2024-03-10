@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect, useState } from 'react';
+import React, { Component, useCallback, useContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
@@ -7,19 +7,21 @@ import { Form, Modal } from 'antd';
 import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '~/utilities/ecomerce-helpers';
 import { userIsLogin, getToken } from '~/store/auth/action';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { AuthContext } from '~/context/loginContext';
-import { userData } from '~/repositories/UserDeatils';
+import { identifyCodStatus, userData } from '~/repositories/UserDeatils';
 import GuestUserForm from './GuestUserForm';
 
 const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     var userLoginStatus = userIsLogin();
     //const { currentUser } = useContext(AuthContext);
-    const [currentUser,setCurrentUser]=useState({});
+    const [currentUser, setCurrentUser] = useState({});
     const [loader, setLoader] = useState(false)
+    const [codIsEnabled, setCodIsEnabled] = useState(false);
     const [state, setState] = useState({});
     const [review, setReview] = useState({ state: "select state" });
-
+    const { removeItems } = useEcomerce();
+    var flag = ecomerce + currentUser;
     const guestUserData = (data) => {
         setReview({
             fname: data?.firstName,
@@ -28,7 +30,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
             state: "select state",
             address: '',
             city: '',
-            postal_code:''
+            postal_code: '',
         })
     }
 
@@ -53,21 +55,40 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                 state: "select state",
                 address: '',
                 city: '',
-                postal_code:''
+                postal_code: ''
             })
         }
     }
 
     const { products, getProducts } = useEcomerce();
     const router = useRouter();
-    useEffect(async () => {
-        if (ecomerce.cartItems) {
-            setCurrentUser(await userData())
-            getProducts(ecomerce.cartItems, 'cart');
-            setDefaultValues();
-        }
-    }, [ecomerce, currentUser]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            if (ecomerce.cartItems) {
+                const user = await userData();
+                setCurrentUser(user);
+                const codStatus = await identifyCodStatus();
+                setCodIsEnabled(codStatus);
+                getProducts(ecomerce.cartItems, 'cart');
+                setDefaultValues();
+            }
+        };
+    
+        fetchData(); // Call the async function
+    
+    }, [ecomerce]); 
+
+
+    // useEffect(async () => {
+    //     if (ecomerce.cartItems) {
+    //         setCurrentUser(await userData())
+    //         setCodIsEnabled(await identifyCodStatus());
+    //         getProducts(ecomerce.cartItems, 'cart');
+    //         setDefaultValues();
+    //     }
+    // }, [ecomerce, currentUser]);
+    //, currentUser
     if (products && products.length > 0) {
         totalAmount = calculateAmount(products);
     }
@@ -90,8 +111,8 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
             "state": dt.get("state"),
             "couponCode": coupon,
             "orderTotalAmtBeforeApplyingCoupon": orderTotalAmt,
+            "paymentType": dt.get("paymentType")
         }
-
         if (orderInformation.products.length == 0) {
             Modal.error({
                 centered: true,
@@ -171,6 +192,15 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                         Modal.error({
                             centered: true,
                             title: 'Sorry, This Token Has Already Been Used !!',
+                        });
+                    } else if (response.data === 'cod_order_save') {
+                        removeItems('cart');
+
+                        window.location.assign("/account/orders?orId=OD-nuvio-2024&cod=true");
+                    } else if (response.data === 'cash_on_delivery_not_available') {
+                        Modal.error({
+                            centered: true,
+                            title: 'Sorry, Cash on Delivery not available!!',
                         });
                     } else {
                         const modal = Modal.error({
@@ -374,12 +404,12 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                                 <input type="text"
                                     name="firstName"
                                     className="form-control"
-                                    defaultValue={review?.fname}
+                                    defaultValue={currentUser?.firstName}
                                     placeholder='First Name'
                                     required="true"
-                                    // onChange={(e) => {
-                                    //     setReview({ ...review, fname: e.target.value })
-                                    // }}
+                                // onChange={(e) => {
+                                //     setReview({ ...review, fname: e.target.value })
+                                // }}
                                 />
 
                             </div>
@@ -388,14 +418,14 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                         <div className="col-sm-6">
                             <div className="form-group">
                                 <input type="text"
-                                name="lastName"
+                                    name="lastName"
                                     className="form-control"
-                                    defaultValue={review?.last_name}
+                                    defaultValue={currentUser?.lastName}
                                     placeholder='Last Name'
                                     required="true"
-                                    // onChange={(e) => {
-                                    //     setReview({ ...review, last_name: e.target.value })
-                                    // }}
+                                // onChange={(e) => {
+                                //     setReview({ ...review, last_name: e.target.value })
+                                // }}
                                 />
 
                             </div>
@@ -407,14 +437,14 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                     <div className="form-group">
                         <input type="text"
                             className="form-control"
-                            defaultValue={review?.contact}
+                            defaultValue={currentUser?.phone}
                             placeholder='Enter the contact number...'
                             required="true"
                             name="phone"
                             pattern="[7-9]{1}[0-9]{9}"
-                            // onChange={(e) => {
-                            //     setReview({ ...review, contact: e.target.value })
-                            // }}
+                        // onChange={(e) => {
+                        //     setReview({ ...review, contact: e.target.value })
+                        // }}
                         />
 
 
@@ -428,9 +458,9 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                             placeholder='Address'
                             name="address"
                             required="true"
-                            // onChange={(e) => {
-                            //     setReview({ ...review, address: e.target.value })
-                            // }}
+                        // onChange={(e) => {
+                        //     setReview({ ...review, address: e.target.value })
+                        // }}
                         />
 
                     </div>
@@ -439,9 +469,9 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                             className="form-control"
                             name="apprt"
                             placeholder='Apartment, suite, etc. (optional)'
-                            // onChange={(e) => {
-                            //     setReview({ ...review, apprtment_name: e.target.value })
-                            // }}
+                        // onChange={(e) => {
+                        //     setReview({ ...review, apprtment_name: e.target.value })
+                        // }}
                         />
 
                     </div>
@@ -454,9 +484,9 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                                     required="true"
                                     placeholder='City '
                                     name="city"
-                                    // onChange={(e) => {
-                                    //     setReview({ ...review, city: e.target.value })
-                                    // }}
+                                // onChange={(e) => {
+                                //     setReview({ ...review, city: e.target.value })
+                                // }}
                                 />
 
                             </div>
@@ -514,12 +544,23 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                                     required="true"
                                     name="pincode"
                                     pattern='[0-9]{6}'
-                                    // onChange={(e) => {
-                                    //     setReview({ ...review, postal_code: e.target.value })
-                                    // }}
+                                // onChange={(e) => {
+                                //     setReview({ ...review, postal_code: e.target.value })
+                                // }}
                                 />
 
                             </div>
+                        </div>
+                    </div>
+                    <h3 className="ps-form__heading">Payment Modes</h3>
+                    <div className="w-100">
+                        <div className="form-group">
+                            <select placeholder='select payment mode' name="paymentType" onChange={(event) => { setReview({ ...review, paymentType: event.target.value }) }} className='form-control'>
+                                <option>Online Payment</option>
+                                {codIsEnabled == 'enabled' &&
+                                    <option>Cash on Delivery</option>
+                                }
+                            </select>
                         </div>
                     </div>
 
