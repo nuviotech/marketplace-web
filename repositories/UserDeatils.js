@@ -126,16 +126,17 @@ export const saveUserDetails=async (state,pathValue,router)=>{
                 });
                 modal.update;
             } else if (res.status == '0') {
-                const modal = Modal.success({
-                    centered: true,
-                    title: `All Set!`,
-                    content: `Your account is ready to go. Dive into Nuvio and discover our exclusive offers and latest arrivals.`,
-                });
-                modal.update;
+                
                 saveToken(res.token, "normal_account");
                 if(pathValue=='checkout' || pathValue==='checkout'){
                     router.push('/account/checkout')
                 }else{
+                    const modal = Modal.success({
+                        centered: true,
+                        title: `All Set!`,
+                        content: `Your account is ready to go. Dive into Nuvio and discover our exclusive offers and latest arrivals.`,
+                    });
+                    modal.update;
                     router.push('/shop');
                 }
             }
