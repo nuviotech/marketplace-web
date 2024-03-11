@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { Modal } from 'antd';
@@ -9,22 +9,28 @@ const ModuleDetailShoppingActions = ({
     product,
     extended = false,
 }) => {
-    const [quantity, setQuantity] = useState(1);
+    const [quantity, setQuantity] = useState(0);
+
     const Router = useRouter();
-    const { addItem } = useEcomerce();
+    const { addItem, increaseQty, decreaseQty } = useEcomerce();
     function handleAddItemToCart(e) {
         e.preventDefault();
-        addItem(
-            { id: product?.id, quantity: quantity },
-            ecomerce.cartItems,
-            'cart'
-        );
+        setQuantity(quantity + 1);
+        if (quantity == 0) {
+            addItem(
+                { id: product?.id, quantity: 1 },
+                ecomerce.cartItems,
+                'cart'
+            );
+        } else {
+            increaseQty({ id: product.id }, ecomerce.cartItems)
+        }
     }
 
     function handleBuynow(e) {
         e.preventDefault();
         addItem(
-            { id: product?.id, quantity: quantity },
+            { id: product?.id, quantity: 1 },
             ecomerce.cartItems,
             'cart'
         );
@@ -58,15 +64,41 @@ const ModuleDetailShoppingActions = ({
 
     function handleIncreaseItemQty(e) {
         e.preventDefault();
-        setQuantity(quantity + 1);
+        var flag=true;
+        ecomerce.cartItems.map(p => {
+            if (p.id == product.id) {
+                increaseQty({ id: product.id }, ecomerce.cartItems)
+                setQuantity(quantity + 1);
+                flag=false;
+            } 
+        })
+
+        if(flag){
+            addItem(
+                { id: product?.id, quantity: 1 },
+                ecomerce.cartItems,
+                'cart'
+            );
+            setQuantity(quantity + 1);
+        }
     }
 
     function handleDecreaseItemQty(e) {
         e.preventDefault();
+        decreaseQty({ id: product.id }, ecomerce.cartItems)
         if (quantity > 1) {
             setQuantity(quantity - 1);
         }
     }
+
+    useEffect(() => {
+        ecomerce.cartItems.map(p => {
+            if (p.id == product.id) {
+                setQuantity(p.quantity);
+            }
+        })
+    }, [])
+
     if (!extended) {
         return (
             <div className="ps-product__shopping">
