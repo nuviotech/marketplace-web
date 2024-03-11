@@ -9,7 +9,7 @@ import { generateTempArray } from '~/utilities/common-helpers';
 import SkeletonProduct from '~/components/elements/skeletons/SkeletonProduct';
 import useGetProducts from '~/hooks/useGetProducts';
 
-const ShopItems = ({ columns = 4, pageSize = 12 }) => {
+const ShopItems = ({ columns = 4, pageSize = 20 }) => {
     const Router = useRouter();
     const { page } = Router.query;
     const { query } = Router;

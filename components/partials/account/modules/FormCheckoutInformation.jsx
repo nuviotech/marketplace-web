@@ -491,7 +491,6 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                                 //     setReview({ ...review, city: e.target.value })
                                 // }}
                                 />
-
                             </div>
                         </div>
                         <div className="col-sm-4">
@@ -527,6 +526,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                                     <option>Uttar Pradesh</option>
                                     <option>West Bengal</option>
                                     <option>Tamil Nadu</option>
+                                    <option>Telangana</option>
                                     <option>Tripura</option>
                                     <option>Andaman and Nicobar Islands</option>
                                     <option>Chandigarh</option>
