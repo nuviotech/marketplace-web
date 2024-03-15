@@ -9,8 +9,6 @@ import '~/public/static/css/slick.min.css';
 import '~/public/static/css/style.css'
 import '~/scss/style.scss';
 import '~/scss/home-default.scss';
-
-/*
 import '~/scss/market-place-1.scss';
 import '~/scss/market-place-2.scss';
 import '~/scss/market-place-3.scss';
@@ -21,7 +19,6 @@ import '~/scss/organic.scss';
 import '~/scss/technology.scss';
 import '~/scss/autopart.scss';
 import '~/scss/electronic.scss';
-*/
 import Head from 'next/head';
 import { AuthContext, AuthContextProvider } from '~/context/loginContext';
 import { useContext } from 'react';

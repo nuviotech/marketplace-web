@@ -404,6 +404,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                     <div className="row">
                         <div className="col-sm-6">
                             <div className="form-group">
+                                <small className='text-muted'>first name <span className="text-danger">*</span></small>
                                 <input type="text"
                                     name="firstName"
                                     className="form-control"
@@ -420,6 +421,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
 
                         <div className="col-sm-6">
                             <div className="form-group">
+                            <small className='text-muted'>last name <span className="text-danger">*</span></small>
                                 <input type="text"
                                     name="lastName"
                                     className="form-control"
@@ -438,10 +440,11 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
 
 
                     <div className="form-group">
-                        <input type="text"
+                    <small className='text-muted'>Contact number <span className="text-danger">*</span></small>
+                        <input type="tel"
                             className="form-control"
                             defaultValue={currentUser?.phone}
-                            placeholder='Enter the contact number...'
+                            placeholder='Enter the contact number.'
                             required="true"
                             name="phone"
                             pattern="[7-9]{1}[0-9]{9}"
@@ -455,7 +458,9 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                     <h4 className="ps-form__heading">Address Information</h4>
 
                     <div className="form-group">
+                        {/* <small className='text-muted'>Address <span className="text-danger">*</span></small> */}
                         <input type="text"
+                            id='addressI'
                             className="form-control"
                             defaultValue={review?.address}
                             placeholder='Address'
@@ -468,6 +473,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
 
                     </div>
                     <div className="form-group">
+                        {/* <small className='text-muted'>Apartment, suite, etc. </small> */}
                         <input type="text"
                             className="form-control"
                             name="apprt"
@@ -481,6 +487,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                     <div className="row">
                         <div className="col-sm-4">
                             <div className="form-group">
+                            {/* <small className='text-muted'>City<span className="text-danger">*</span></small> */}
                                 <input type="text"
                                     className="form-control"
                                     defaultValue={review?.city}
@@ -495,6 +502,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                         </div>
                         <div className="col-sm-4">
                             <div className="form-group">
+                                {/* <small className='text-muted'>Select state<span className="text-danger">*</span></small> */}
                                 <select name="state" onChange={(event) => { setReview({ ...review, state: event.target.value }) }} className='form-control'>
                                     <option>{review.state}</option>
                                     <option>Andhra Pradesh</option>
@@ -540,6 +548,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                         </div>
                         <div className="col-sm-4">
                             <div className="form-group">
+                                {/* <small className='text-muted'>Pincode <span className="text-danger">*</span></small> */}
                                 <input type="text"
                                     className="form-control"
                                     defaultValue={review.postal_code}
@@ -575,8 +584,6 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                             </a>
                         </Link>
                         <div className="ps-block__footer">
-
-
                             {loader ? (
                                 <i>please wait <span className='spinner-border'></span> </i>
                             ) : (
