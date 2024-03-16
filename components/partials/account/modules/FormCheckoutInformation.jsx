@@ -21,7 +21,9 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     const [state, setState] = useState({});
     const [review, setReview] = useState({ state: "select state" });
     const { removeItems } = useEcomerce();
+    const [inputErrors, setInputErrors] = useState({ isError: false, type: null, message: null });
     var flag = ecomerce + currentUser;
+    //no use guestUserData function yet 
     const guestUserData = (data) => {
         setReview({
             fname: data?.firstName,
@@ -32,6 +34,15 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
             city: '',
             postal_code: '',
         })
+    }
+
+    const numberCheck = (e) => {
+        const phoneRegex = /^[789]\d{9}$/;
+        if (phoneRegex.test(e)) {
+            setInputErrors({ isError: false, type: null, message: null });
+        } else {
+            setInputErrors({ isError: true, type: "number", message: "Invalid mobile number. Please enter 10 digits only." });
+        }
     }
 
     let totalAmount = 0;
@@ -421,7 +432,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
 
                         <div className="col-sm-6">
                             <div className="form-group">
-                            <small className='text-muted'>last name <span className="text-danger">*</span></small>
+                                <small className='text-muted'>last name <span className="text-danger">*</span></small>
                                 <input type="text"
                                     name="lastName"
                                     className="form-control"
@@ -437,10 +448,8 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                         </div>
                     </div>
 
-
-
                     <div className="form-group">
-                    <small className='text-muted'>Contact number <span className="text-danger">*</span></small>
+                        <small className='text-muted'>Contact number <span className="text-danger">*</span></small>
                         <input type="tel"
                             className="form-control"
                             defaultValue={currentUser?.phone}
@@ -448,10 +457,14 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                             required="true"
                             name="phone"
                             pattern="[7-9]{1}[0-9]{9}"
-                        // onChange={(e) => {
-                        //     setReview({ ...review, contact: e.target.value })
-                        // }}
+                            onChange={(e) => {
+                                numberCheck(e.target.value)
+                            }}
                         />
+                        {
+                            (inputErrors?.isError && inputErrors?.type == 'number') &&
+                            <label className='text-danger' >{inputErrors.message}</label>
+                        }
 
 
                     </div>
@@ -487,7 +500,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                     <div className="row">
                         <div className="col-sm-4">
                             <div className="form-group">
-                            {/* <small className='text-muted'>City<span className="text-danger">*</span></small> */}
+                                {/* <small className='text-muted'>City<span className="text-danger">*</span></small> */}
                                 <input type="text"
                                     className="form-control"
                                     defaultValue={review?.city}
