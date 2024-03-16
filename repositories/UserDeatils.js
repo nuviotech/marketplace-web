@@ -129,7 +129,7 @@ export const saveUserDetails=async (state,pathValue,router)=>{
                 
                 saveToken(res.token, "normal_account");
                 if(pathValue=='checkout' || pathValue==='checkout'){
-                    router.push('/account/checkout')
+                    window.location.assign('/account/checkout')
                 }else{
                     const modal = Modal.success({
                         centered: true,
