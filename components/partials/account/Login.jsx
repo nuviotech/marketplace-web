@@ -11,6 +11,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 
 import FacebookLogin from 'react-facebook-login';
+import { MathCaptcha } from '../commons/MathCaptcha';
 
 
 
@@ -42,8 +43,12 @@ class Login extends Component {
         });
     }
 
-    onChange = value => {
-        this.setState({ cflag: value });
+    // onChange = value => {
+    //     this.setState({ cflag: value });
+    // }
+
+    handleCaptchaSuccess = ()=>{
+        this.setState({ cflag: true });
     }
 
     responseFacebook = (response) => {
@@ -199,11 +204,14 @@ class Login extends Component {
                                     </Form.Item>
                                 </div>
 
-                                <ReCAPTCHA
+                                {/* <ReCAPTCHA
                                     sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
                                     onChange={this.onChange}
                                     size="normal"
-                                />
+                                /> */}
+
+                                <MathCaptcha onInvalid={()=>{this.setState({ cflag: null });}} onSuccess={this.handleCaptchaSuccess} />
+
 
                                 <div className="form-group submit mt-3">
                                     <button

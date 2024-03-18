@@ -1,16 +1,31 @@
-import { Button, Form, Input, Modal } from 'antd';
+import {  Modal } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha';
 import { saveUserDetails } from '~/repositories/UserDeatils';
+import { MathCaptcha } from '../../commons/MathCaptcha';
 
 export default function GuestUserForm({ guestUserData }) {
     const [state, setState] = useState({ firstName: '', lastName: '', email: '', phone: '', password: '', password2: '' });
     const router = useRouter();
-    const [cflag,setCflag]=useState(null);
+    const [cflag, setCflag] = useState(null);
+    const [inputErrors, setInputErrors] = useState({ isError: false, type: null, message: null });
 
-    const onChangeCatcha = (value) => {
-        setCflag(value);
+
+    // const onChangeCatcha = (value) => {
+    //     setCflag(value);
+    // }
+
+    const numberCheck = (e) => {
+        const phoneRegex = /^[789]\d{9}$/;
+        if (phoneRegex.test(e)) {
+            setInputErrors({ isError: false, type: null, message: null });
+        } else {
+            setInputErrors({ isError: true, type: "number", message: "Invalid mobile number. Please enter 10 digits only." });
+        }
+    }
+
+    const handleCaptchaSuccess = () => {
+        setCflag(true);
     }
 
     const handleGuestUserForm = (e) => {
@@ -53,11 +68,11 @@ export default function GuestUserForm({ guestUserData }) {
                 content: `Please enter the same password in both fields to confirm it..`,
             });
             modal.update;
-        }else if(cflag==null){
+        } else if (cflag == null) {
             const modal = Modal.error({
                 centered: true,
-                title: 'Check the captcha !!',
-                content: `Before proceeding, please complete the CAPTCHA.`,
+                title: 'Solve math captcha !!',
+                content: `Please solve the puzzle before submitting..`,
             });
             modal.update;
         } else {
@@ -73,12 +88,12 @@ export default function GuestUserForm({ guestUserData }) {
         <div>
             <h3 className="ps-form__heading">Account Information</h3>
             <form>
-                <div className="form-group">
+                <div className="">
                     <div className='row'>
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 form-group">
                             <input type="text" required="required" className='form-control' placeholder='first name' name="firstName" onChange={(e) => { setState({ ...state, firstName: e.target.value }) }} />
                         </div>
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 form-group">
                             <input type="text" required="required" className='form-control' placeholder='last name' name="lastName" onChange={(e) => { setState({ ...state, lastName: e.target.value }) }} />
                         </div>
                     </div>
@@ -87,24 +102,32 @@ export default function GuestUserForm({ guestUserData }) {
                     <input type="email" required="required" className='form-control' placeholder='email' onChange={(e) => { setState({ ...state, email: e.target.value }) }} />
                 </div>
                 <div className="form-group">
-                    <input type="text" required="required" className='form-control' placeholder='contact number' onChange={(e) => { setState({ ...state, phone: e.target.value }) }} />
+                    <input type="text" required="required"  className='form-control' placeholder='contact number' onChange={(e) => { numberCheck(e.target.value);setState({ ...state, phone: e.target.value }) }} />
+                    {
+                        (inputErrors?.isError && inputErrors?.type == 'number') &&
+                        <label className='text-danger' >{inputErrors.message}</label>
+                    }
                 </div>
-                <div className="form-group">
+                <div className="">
                     <div className='row'>
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 form-group">
                             <input type="password" required="required" className='form-control' placeholder='password' name="password" onChange={(e) => { setState({ ...state, password: e.target.value }) }} />
                         </div>
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 form-group">
                             <input type="password" required="required" className='form-control' placeholder='confirm password' name="cpass" onChange={(e) => { setState({ ...state, password2: e.target.value }) }} />
                         </div>
                     </div>
                 </div>
 
-                <ReCAPTCHA
+                {/* <ReCAPTCHA
                     sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
                     onChange={onChangeCatcha}
                     size="normal"
-                />
+                /> */}
+
+                <MathCaptcha onInvalid={() => { setCflag(null); }} onSuccess={handleCaptchaSuccess} />
+
+
                 <div>
                     <button onClick={handleGuestUserForm} className="ps-btn ps-btn--fullwidth">submit</button>
                 </div>

@@ -24,7 +24,7 @@ const FooterWidgets = () => (
 
                 <p>Whatsapp us 24/7</p>
                 <div className='mb-5'>
-                    <FloatingWhatsApp phoneNumber={`91${process?.env?.NEXT_PUBLIC_WHATSAPP_NUMBER}`} accountName={`${process?.env?.NEXT_PUBLIC_FOOTER_WEBSITE_NAME} seller`} />
+                    {/* <FloatingWhatsApp phoneNumber={`91${process?.env?.NEXT_PUBLIC_WHATSAPP_NUMBER}`} accountName={`${process?.env?.NEXT_PUBLIC_FOOTER_WEBSITE_NAME} seller`} /> */}
 
                     <ReactWhatsapp number={`91${process?.env?.NEXT_PUBLIC_WHATSAPP_NUMBER}`} message="Hi" element={"div"} >
                         <WhatsappIcon size={35} round="true"></WhatsappIcon>
