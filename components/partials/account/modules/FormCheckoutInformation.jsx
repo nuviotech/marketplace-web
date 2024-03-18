@@ -1,4 +1,4 @@
-import React, { Component, useCallback, useContext, useEffect, useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
@@ -37,6 +37,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     }
 
     const numberCheck = (e) => {
+        
         const phoneRegex = /^[789]\d{9}$/;
         if (phoneRegex.test(e)) {
             setInputErrors({ isError: false, type: null, message: null });

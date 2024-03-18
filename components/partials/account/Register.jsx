@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import TextArea from 'antd/lib/input/TextArea';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { saveUserDetails } from '~/repositories/UserDeatils';
+import { MathCaptcha } from '../commons/MathCaptcha';
 
 class Register extends Component {
 
@@ -39,6 +40,10 @@ class Register extends Component {
 
     onChangeCatcha = value => {
         this.setState({ cflag: value });
+    }
+
+    handleCaptchaSuccess = ()=>{
+        this.setState({ cflag: true });
     }
 
     fetchData() {
@@ -113,8 +118,8 @@ class Register extends Component {
         }else if(this.state.cflag==null){
             const modal = Modal.error({
                 centered: true,
-                title: 'Check the captcha !!',
-                content: `Before proceeding, please complete the CAPTCHA.`,
+                title: 'Solve the math captcha !!',
+                content: `Please solve the puzzle before submitting.`,
             });
             modal.update;
         } else {
@@ -300,11 +305,14 @@ class Register extends Component {
                                 </div>
 
 
-                                <ReCAPTCHA
+                                {/* <ReCAPTCHA
                                     sitekey={process.env.NEXT_PUBLIC_GOOGLE_CAPTCHA_SITEKEY}
                                     onChange={this.onChangeCatcha}
                                     size="normal"
-                                />
+                                /> */}
+
+                                <MathCaptcha onInvalid={()=>{this.setState({ cflag: null });}} onSuccess={this.handleCaptchaSuccess} />
+
 
                                 <Checkbox className='my-2' onChange={this.onCheckBoxChange}>
                                     Accept Terms And Conditions

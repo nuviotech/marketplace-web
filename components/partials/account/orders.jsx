@@ -56,16 +56,21 @@ function Invoices() {
         }).then(
             async (response) => {
                 if(response.data==0){
-                    const modal = Modal.success({
-                        centered: true,
-                        title: 'Order ID : '+txid,
-                        content: `You'r order place successfully, thanks for order the product.`,
+                    // const modal = Modal.success({
+                    //     centered: true,
+                    //     title: 'Order ID : '+txid,
+                    //     content: `You'r order place successfully, thanks for order the product.`,
+                    // });
+                    notification["success"]({
+                        message: 'Order ID : '+txid, 
+                        description: "You'r order place successfully, thanks for order the product.",
                     });
                     removeItems("cart")
                     //window.location.assign("/account/orders")
                     setReset(true);
-                    modal.update;
+                   // modal.update;
                 }else if(response.data==1){
+                    
                     const modal = Modal.error({
                         centered: true,
                         title: 'Order ID : '+txid,
@@ -180,7 +185,7 @@ function Invoices() {
                                 <div className="ps-page__content">
                                     <div className="ps-section--account-setting">
                                         <div className="ps-section__header">
-                                            <h3>Orders</h3>
+                                            <h3>Orders </h3>
                                         </div>
                                         <div className="ps-section__content">
                                             <TableInvoices data={currentUser} />

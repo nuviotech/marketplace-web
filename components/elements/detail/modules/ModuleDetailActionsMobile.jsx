@@ -19,7 +19,7 @@ const ModuleDetailActionsMobile = ({ ecomerce, product }) => {
     };
 
     return (
-        <div className="ps-product__actions-mobile">
+        <div className="ps-product__actions-mobile" style={{position:"fixed",bottom:"70px",zIndex:"100"}}>
             <a
                 className="ps-btn ps-btn--black"
                 href="#"
