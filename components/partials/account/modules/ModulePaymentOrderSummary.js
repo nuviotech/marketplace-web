@@ -13,15 +13,40 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
     const [coupon, setCoupon] = useState(null);
     const { products, getProducts } = useEcomerce();
     const [couponDiscount, setCouponDiscount] = useState({ isValid: false, discountAmt: 0, msg: null })
-    
+    const [defaultCoupon, setDefaultCoupon] = useState(null);
     // view
     let listItemsView, shippingView, totalView;
     let amount;
 
+    const showCoupon = () =>{
+        const modal = Modal.success({
+            centered: true,
+            title: 'Success',
+            content: `Your coupon code is:  ${defaultCoupon}`,
+        });
+        modal.update;
+    }
+    const getDefaultCouponDetails = async () => {
+        await Axios.get(`${marketplaceUrl}/getDefaultCoupon`)
+            .then(
+                (response) => {
+                    if (response?.data?.status == 0) {
+                        setDefaultCoupon(response?.data?.coupon)
+                    } else {
+                        console.error("Default coupon : " + response);
+                    }
+                },
+                (error) => {
+                    console.error("Default coupon : " + error);
+                    return null;
+                }
+            )
+    }
+
     useEffect(() => {
         if (ecomerce.cartItems) {
+            getDefaultCouponDetails();
             getProducts(ecomerce.cartItems, 'cart');
-
         }
     }, [ecomerce]);
 
@@ -30,7 +55,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
         const obj = {
             products: JSON.stringify(ecomerce.cartItems),
             coupon: coupon,
-            amount:parseInt(amount)
+            amount: parseInt(amount)
         }
 
         await Axios.post(`${marketplaceUrl}/applyCoupon`, obj, {
@@ -40,22 +65,22 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
         }).then(
             (response) => {
                 if (response.data.status == 0) {
-                    handleSetCoupon(coupon,parseInt(amount));
+                    handleSetCoupon(coupon, parseInt(amount));
                     setCouponDiscount({ isValid: true, discountAmt: response.data.discountedPrice, coupon: coupon })
                     const modal = Modal.success({
                         centered: true,
                         title: 'Valid Coupon Code.',
-                        content:response.data.message,
+                        content: response.data.message,
                     });
                     modal.update;
                 }
                 if (response.data.status == 1) {
-                    handleSetCoupon(null,0);
+                    handleSetCoupon(null, 0);
                     setCouponDiscount({ isValid: false, discountAmt: 0, msg: null })
                     const modal = Modal.error({
                         centered: true,
                         title: 'Invalid Coupon Code.',
-                        content:response.data.message,
+                        content: response.data.message,
                     });
                     modal.update;
                 }
@@ -71,7 +96,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
         });
     }
 
-    
+
     //let tax=0;
     if (products && products.length > 0) {
         amount = calculateAmount(products);
@@ -110,12 +135,12 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                 <h3>
                     Total
                     {
-                        parseInt(amount)>0 ?
+                        parseInt(amount) > 0 ?
                             <strong>₹{parseInt(amount) + 50}.00</strong>
                             :
                             <strong>₹ 00.00</strong>
                     }
-                    
+
                 </h3>
             </figure>
         );
@@ -158,12 +183,15 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                     <figcaption>
                         <h4>Coupon Discount</h4>
                     </figcaption>
+                    {defaultCoupon &&
+                        <p ><b>Don't have a coupon?No worries! </b> <u onClick={()=>{showCoupon()}} style={{cursor:"pointer"}} className='text-warning'>Click here </u>to grab yours and enjoy special discounts on your next purchase!</p>
+                    }
                     {
                         couponDiscount.isValid &&
                         <div className='card p-3'>
                             <h5>Coupon code : <strong>{couponDiscount.coupon}</strong> </h5>
-                            <h5>Before Coupon Applied Price :  <strong>₹{parseInt(amount)+50}.00 </strong></h5>
-                            <h5>After Coupon Applied Price :  <strong>₹{couponDiscount.discountAmt+50}.00</strong></h5>
+                            <h5>Before Coupon Applied Price :  <strong>₹{parseInt(amount) + 50}.00 </strong></h5>
+                            <h5>After Coupon Applied Price :  <strong>₹{couponDiscount.discountAmt + 50}.00</strong></h5>
                         </div>
 
 
@@ -184,7 +212,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                         </div>
                     </div>
                 </figure>
-            </div>
+            </div >
         </>
 
     );

@@ -105,13 +105,18 @@ export const saveUserDetails = async (state, pathValue, router) => {
                 });
                 modal.update;
             } else if (res.status == -5) {
+                if (pathValue == 'checkout' || pathValue === 'checkout') {
+                    if (typeof window !== 'undefined') {
+                        sessionStorage.setItem("action", "checkout")
+                    }
+                }
 
                 const modal = Modal.error({
                     centered: true,
                     title: 'Email Already Registered !!',
                     content: `We're sorry, but it seems like the email address you entered is already registered with us. If you're having trouble accessing your account, use the 'Forgot Password' option.`,
                 });
-                router.push('/account/login');
+                router.push('/account/login?email='+state?.email);
                 modal.update;
 
             } else if (res.status == -6) {
