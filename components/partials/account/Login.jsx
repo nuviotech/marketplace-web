@@ -8,6 +8,8 @@ import { Form, Input, notification, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { AuthContextProvider } from '~/context/loginContext';
 import ReCAPTCHA from "react-google-recaptcha";
+// import { AlgebraicCaptcha } from 'algebraic-captcha';
+
 
 
 import FacebookLogin from 'react-facebook-login';
@@ -224,7 +226,7 @@ class Login extends Component {
                                 /> */}
 
                                 <MathCaptcha onInvalid={() => { this.setState({ cflag: null }); }} onSuccess={this.handleCaptchaSuccess} />
-
+                                {/* <AlgebraicCaptcha onSuccess={handleCaptchaSuccess} /> */}
 
                                 <div className="form-group submit mt-3">
                                     <button
