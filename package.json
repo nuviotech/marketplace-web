@@ -13,6 +13,7 @@
     "dependencies": {
         "@bradgarropy/next-seo": "^1.2.0",
         "@react-oauth/google": "^0.10.0",
+        "algebraic-captcha": "^1.0.1",
         "antd": "^4.5.2",
         "axios": "^0.19.2",
         "es6-promise": "^4.2.8",

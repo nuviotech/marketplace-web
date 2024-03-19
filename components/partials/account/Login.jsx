@@ -8,6 +8,8 @@ import { Form, Input, notification, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { AuthContextProvider } from '~/context/loginContext';
 import ReCAPTCHA from "react-google-recaptcha";
+// import { AlgebraicCaptcha } from 'algebraic-captcha';
+
 
 
 import FacebookLogin from 'react-facebook-login';
@@ -31,6 +33,7 @@ class Login extends Component {
         if (props.isLoggedIn === true) {
             Router.push('/');
         }
+
         return false;
     }
 
@@ -47,7 +50,7 @@ class Login extends Component {
     //     this.setState({ cflag: value });
     // }
 
-    handleCaptchaSuccess = ()=>{
+    handleCaptchaSuccess = () => {
         this.setState({ cflag: true });
     }
 
@@ -144,9 +147,24 @@ class Login extends Component {
         //  Router.push('/');
     };
 
-    render() {
 
+    componentDidMount() {
+        try {
+            const { email } = Router.query;
+            if (email) {
+                this.setState({ email: email });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+
+    render() {
+       
         return (
+
             <div className="ps-my-account">
                 <div className="container">
                     <Form
@@ -164,22 +182,19 @@ class Login extends Component {
                                 </Link>
                             </li>
                         </ul>
+
                         <div className="ps-tab active" id="sign-in">
                             <div className="ps-form__content">
                                 <h5>Log In Your Account</h5>
+                               
                                 <div className="form-group">
-                                    <Form.Item
-                                        name="username"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please input your email!',
-                                            },
-                                        ]}>
+                                    <Form.Item>
                                         <Input
+                                            name="username"
+                                            required
                                             className="form-control"
                                             type="text"
+                                            value={this.state.email}
                                             placeholder="enter email address"
                                             onChange={(event) => { this.setState({ email: event.target.value }) }}
                                         />
@@ -210,8 +225,8 @@ class Login extends Component {
                                     size="normal"
                                 /> */}
 
-                                <MathCaptcha onInvalid={()=>{this.setState({ cflag: null });}} onSuccess={this.handleCaptchaSuccess} />
-
+                                <MathCaptcha onInvalid={() => { this.setState({ cflag: null }); }} onSuccess={this.handleCaptchaSuccess} />
+                                {/* <AlgebraicCaptcha onSuccess={handleCaptchaSuccess} /> */}
 
                                 <div className="form-group submit mt-3">
                                     <button
