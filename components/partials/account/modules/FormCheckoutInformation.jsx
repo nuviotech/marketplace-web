@@ -14,6 +14,10 @@ import GuestUserForm from './GuestUserForm';
 
 const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     var userLoginStatus = userIsLogin();
+    const Router = useRouter();
+
+    const { C_code } = Router.query;//coupon code
+
     //const { currentUser } = useContext(AuthContext);
     const [currentUser, setCurrentUser] = useState({});
     const [loader, setLoader] = useState(false)
@@ -21,6 +25,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     const [state, setState] = useState({});
     const [review, setReview] = useState({ state: "select state" });
     const { removeItems } = useEcomerce();
+
     const [inputErrors, setInputErrors] = useState({ isError: false, type: null, message: null });
     var flag = ecomerce + currentUser;
     //no use guestUserData function yet 
@@ -85,6 +90,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                 getProducts(ecomerce.cartItems, 'cart');
                 setDefaultValues();
             }
+         
         };
 
         fetchData(); // Call the async function
@@ -108,7 +114,8 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     const handleLoginSubmit = (event) => {
         event.preventDefault();
         const dt = new FormData(event.currentTarget);
-
+        if(coupon)
+            C_code=coupon
         const orderInformation = {
             "fname": dt.get("firstName"),
             "lname": dt.get("lastName"),
@@ -121,10 +128,12 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
             "totalBill": totalAmount,
             "token": getToken(),
             "state": dt.get("state"),
-            "couponCode": coupon,
+            "couponCode": C_code,
             "orderTotalAmtBeforeApplyingCoupon": orderTotalAmt,
             "paymentType": dt.get("paymentType")
         }
+
+        
         if (orderInformation.products.length == 0) {
             Modal.error({
                 centered: true,
@@ -611,7 +620,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                 </div>
                 :
                 <div className='mb-5'>
-                    <GuestUserForm guestUserData={guestUserData} />
+                    <GuestUserForm guestUserData={guestUserData} coupon={coupon} />
                     <h4 class="" className="">Already Registered? <span onClick={() => { goToLogin() }} style={{ cursor: "pointer" }}><u>Login Here</u></span></h4>
                 </div>
             }

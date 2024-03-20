@@ -72,7 +72,7 @@ export const returnPolicyByUser = async (info) => {
     return data;
 }
 
-export const saveUserDetails = async (state, pathValue, router) => {
+export const saveUserDetails = async (state, pathValue, router,{coupon}) => {
     await axios.post(`${marketplaceUrl}/saveUser`, state).then(
         (response) => {
             var res = response.data;
@@ -137,7 +137,11 @@ export const saveUserDetails = async (state, pathValue, router) => {
 
                 saveToken(res.token, "normal_account");
                 if (pathValue == 'checkout' || pathValue === 'checkout') {
-                    window.location.assign('/account/checkout')
+                    if(coupon)
+                        window.location.assign('/account/checkout?C_code='+coupon)
+                    else{
+                        window.location.assign('/account/checkout')
+                    }
                 } else {
                     const modal = Modal.success({
                         centered: true,

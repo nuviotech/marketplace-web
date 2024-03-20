@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { marketplaceUrl } from '~/repositories/Repository';
-import { Modal } from 'antd';
+import { Modal, notification } from 'antd';
 import useEcomerce from '~/hooks/useEcomerce';
 
 function Invoices() {
@@ -63,7 +63,7 @@ function Invoices() {
                     //     content: `You'r order place successfully, thanks for order the product.`,
                     // });
                     notification["success"]({
-                        message: 'Order ID : '+txid, 
+                        message: txid, 
                         description: "You'r order place successfully, thanks for order the product.",
                     });
                     removeItems("cart")
@@ -143,7 +143,7 @@ function Invoices() {
                                 <div className="ps-page__left">
                                     <aside className="ps-widget--account-dashboard">
                                         <div className="ps-widget__header">
-                                            <img src="/static/img/users/3.jpg" />
+                                            <img src="/static/img/users/1.png" />
                                             <figure>
                                                 <figcaption>Hello <span className='text-capitalize'>{currentUser.firstName}</span></figcaption>
                                                 <p>{currentUser.email}</p>

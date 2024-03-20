@@ -84,7 +84,7 @@ const UserInformation = () => {
                                 <div className="ps-section__left">
                                     <aside className="ps-widget--account-dashboard">
                                         <div className="ps-widget__header">
-                                            <img src="/static/img/users/3.jpg" />
+                                            <img src="/static/img/users/1.png" />
                                             <figure>
                                                 <figcaption>Hello <span className='text-capitalize'>{currentUser.firstName}</span></figcaption>
                                                 <p>{currentUser.email}</p>

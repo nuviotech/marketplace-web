@@ -3,11 +3,17 @@ import FormCheckoutInformation from './modules/FormCheckoutInformation';
 import ModulePaymentOrderSummary from '~/components/partials/account/modules/ModulePaymentOrderSummary';
 import useEcomerce from '~/hooks/useEcomerce';
 import { userIsLogin } from '~/store/auth/action';
+import { Router } from 'next/router';
 const Checkout = () => {
+    
     const [coupon, setCoupon] = useState(null);
-
-
     const [orderTotalAmt, setOrderTotalAmt] = useState();
+    
+  
+        
+    
+
+
     const handleSetCoupon = (couponCode, amt) => {
         setCoupon(couponCode);
         setOrderTotalAmt(amt);
@@ -28,7 +34,6 @@ const Checkout = () => {
                                         <h3>Your Order</h3>
                                         <ModulePaymentOrderSummary handleSetCoupon={handleSetCoupon} />
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -39,19 +44,12 @@ const Checkout = () => {
                                 userIsLogin() ?
                                 <div className="row ">
 
-                                    <div className="mx-4 alert alert-info" role="alert">
-                                        <h4 className="alert-heading ">Just a little more to go!</h4>
-                                        <p>To complete your order, we just need a bit more information. <u>Please provide your shipping details </u> below to ensure your order arrives without a hitch.</p>
-                                    </div>
-
-
-
-                                    <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
+                                    {/* <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
                                         <div className="ps-form__orders">
                                             <h3>Your Order</h3>
                                             <ModulePaymentOrderSummary handleSetCoupon={handleSetCoupon} />
                                         </div>
-                                    </div>
+                                    </div> */}
 
                                     <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
                                         <FormCheckoutInformation coupon={coupon} orderTotalAmt={orderTotalAmt} />
@@ -59,17 +57,19 @@ const Checkout = () => {
 
                                 </div>
                                 :
+
                                 <div className="row ">
-                                    <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                        <FormCheckoutInformation coupon={coupon} orderTotalAmt={orderTotalAmt} />
-                                    </div>
-                                    
                                     <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-3  ps-block--checkout-order">
                                         <div className="ps-form__orders">
                                             <h3>Your Order</h3>
                                             <ModulePaymentOrderSummary handleSetCoupon={handleSetCoupon} />
                                         </div>
                                     </div>
+                                    <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                                        <FormCheckoutInformation coupon={coupon} orderTotalAmt={orderTotalAmt} />
+                                    </div>
+                                    
+                                    
 
                                 </div>
                             }
