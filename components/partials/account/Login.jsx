@@ -8,13 +8,9 @@ import { Form, Input, notification, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { AuthContextProvider } from '~/context/loginContext';
 import ReCAPTCHA from "react-google-recaptcha";
-// import { AlgebraicCaptcha } from 'algebraic-captcha';
-
-
-
+//  import { AlgebraicCaptcha } from 'algebraic-captcha';
 import FacebookLogin from 'react-facebook-login';
 import { MathCaptcha } from '../commons/MathCaptcha';
-
 
 
 class Login extends Component {
