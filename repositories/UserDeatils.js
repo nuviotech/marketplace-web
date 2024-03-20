@@ -114,7 +114,7 @@ export const saveUserDetails = async (state, pathValue, router,{coupon}) => {
                 const modal = Modal.error({
                     centered: true,
                     title: 'Email Already Registered !!',
-                    content: `We're sorry, but it seems like the email address you entered is already registered with us. If you're having trouble accessing your account, use the 'Forgot Password' option.`,
+                    content: state?.email+` this email is already registered. Please log in instead.`,
                 });
                 router.push('/account/login?email='+state?.email);
                 modal.update;
