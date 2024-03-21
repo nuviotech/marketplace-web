@@ -72,7 +72,7 @@ export const returnPolicyByUser = async (info) => {
     return data;
 }
 
-export const saveUserDetails = async (state, pathValue, router,{coupon}) => {
+export const saveUserDetails = async (state, pathValue, router, { coupon }) => {
     await axios.post(`${marketplaceUrl}/saveUser`, state).then(
         (response) => {
             var res = response.data;
@@ -114,9 +114,9 @@ export const saveUserDetails = async (state, pathValue, router,{coupon}) => {
                 const modal = Modal.error({
                     centered: true,
                     title: 'Email Already Registered !!',
-                    content: `We're sorry, but it seems like the email address you entered is already registered with us. If you're having trouble accessing your account, use the 'Forgot Password' option.`,
+                    content: state?.email + ` this email is already registered. Please log in instead.`,
                 });
-                router.push('/account/login?email='+state?.email);
+                router.push('/account/login?email=' + state?.email);
                 modal.update;
 
             } else if (res.status == -6) {
@@ -137,11 +137,7 @@ export const saveUserDetails = async (state, pathValue, router,{coupon}) => {
 
                 saveToken(res.token, "normal_account");
                 if (pathValue == 'checkout' || pathValue === 'checkout') {
-                    if(coupon)
-                        window.location.assign('/account/checkout?C_code='+coupon)
-                    else{
-                        window.location.assign('/account/checkout')
-                    }
+                    window.location.assign('/account/checkout')
                 } else {
                     const modal = Modal.success({
                         centered: true,

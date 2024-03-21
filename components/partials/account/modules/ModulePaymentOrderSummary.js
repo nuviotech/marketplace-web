@@ -7,6 +7,7 @@ import { marketplaceUrl } from '~/repositories/Repository';
 import Axios from 'axios';
 import { getToken, logOut } from '~/store/auth/action';
 import { Modal } from 'antd';
+import { encryptString, getDataFromLocalStorage } from '~/repositories/WebHelper';
 
 const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
     //const[tax,setTax] =useState(0);
@@ -18,7 +19,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
     let listItemsView, shippingView, totalView;
     let amount;
 
-    const showCoupon = () =>{
+    const showCoupon = () => {
         const modal = Modal.success({
             centered: true,
             title: 'Success',
@@ -47,6 +48,15 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
         if (ecomerce.cartItems) {
             getDefaultCouponDetails();
             getProducts(ecomerce.cartItems, 'cart');
+            const coupon = getDataFromLocalStorage('c_code');
+            const amt = getDataFromLocalStorage('c_amt');
+            if (coupon && amt)
+                setCouponDiscount({ isValid: true, discountAmt: amt, coupon: coupon });
+            else{
+                handleSetCoupon(null)
+                setCoupon(null)
+                setCouponDiscount({ isValid: false, discountAmt: 0, msg: null });
+            }
         }
     }, [ecomerce]);
 
@@ -65,14 +75,21 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
         }).then(
             (response) => {
                 if (response.data.status == 0) {
-                    handleSetCoupon(coupon, parseInt(amount));
-                    setCouponDiscount({ isValid: true, discountAmt: response.data.discountedPrice, coupon: coupon })
-                    const modal = Modal.success({
-                        centered: true,
-                        title: 'Valid Coupon Code.',
-                        content: response.data.message,
-                    });
-                    modal.update;
+                    try {
+                        handleSetCoupon(coupon, parseInt(amount));
+                        
+                        window.localStorage.setItem("c_code",encryptString(coupon) );
+                        window.localStorage.setItem("c_amt", encryptString(response?.data?.discountedPrice+""));
+                        setCouponDiscount({ isValid: true, discountAmt: response.data.discountedPrice, coupon: coupon })
+                        const modal = Modal.success({
+                            centered: true,
+                            title: 'Valid Coupon Code.',
+                            content: response.data.message,
+                        });
+                        modal.update;
+                    } catch (error) {
+                        alert(error)
+                    }
                 }
                 if (response.data.status == 1) {
                     handleSetCoupon(null, 0);
@@ -82,6 +99,8 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                         title: 'Invalid Coupon Code.',
                         content: response.data.message,
                     });
+                    window.localStorage.removeItem("c_code");
+                    window.localStorage.removeItem("c_amt")
                     modal.update;
                 }
             },
@@ -184,14 +203,15 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                         <h4>Coupon Discount</h4>
                     </figcaption>
                     {defaultCoupon &&
-                        <p ><b>Don't have a coupon?No worries! </b> <u onClick={()=>{showCoupon()}} style={{cursor:"pointer"}} className='text-warning'>Click here </u>to grab yours and enjoy special discounts on your next purchase!</p>
+
+                        <p ><b>Don't have a coupon?No worries! </b> <u onClick={() => { showCoupon() }} style={{ cursor: "pointer" }} className='text-warning'>Click here </u>to grab yours and enjoy special discounts on your next purchase!</p>
                     }
                     {
                         couponDiscount.isValid &&
                         <div className='card p-3'>
                             <h5>Coupon code : <strong>{couponDiscount.coupon}</strong> </h5>
                             <h5>Before Coupon Applied Price :  <strong>₹{parseInt(amount) + 50}.00 </strong></h5>
-                            <h5>After Coupon Applied Price :  <strong>₹{couponDiscount.discountAmt + 50}.00</strong></h5>
+                            <h5>After Coupon Applied Price :  <strong>₹{parseInt(couponDiscount.discountAmt) + 50}.00</strong></h5>
                         </div>
 
 

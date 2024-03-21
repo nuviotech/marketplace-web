@@ -8,16 +8,12 @@ import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '~/utilities/ecomerce-helpers';
 import { userIsLogin, getToken } from '~/store/auth/action';
 import Router, { useRouter } from 'next/router';
-import { AuthContext } from '~/context/loginContext';
 import { identifyCodStatus, userData } from '~/repositories/UserDeatils';
 import GuestUserForm from './GuestUserForm';
 
-const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
+const FormCheckoutInformation = ({ ecomerce, coupon }) => {
     var userLoginStatus = userIsLogin();
-    const Router = useRouter();
-
-    const { C_code } = Router.query;//coupon code
-
+    
     //const { currentUser } = useContext(AuthContext);
     const [currentUser, setCurrentUser] = useState({});
     const [loader, setLoader] = useState(false)
@@ -27,7 +23,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     const { removeItems } = useEcomerce();
 
     const [inputErrors, setInputErrors] = useState({ isError: false, type: null, message: null });
-    var flag = ecomerce + currentUser;
+   // var flag = ecomerce + currentUser;
     //no use guestUserData function yet 
     const guestUserData = (data) => {
         setReview({
@@ -90,9 +86,7 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                 getProducts(ecomerce.cartItems, 'cart');
                 setDefaultValues();
             }
-         
         };
-
         fetchData(); // Call the async function
 
     }, [ecomerce]);
@@ -114,8 +108,6 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
     const handleLoginSubmit = (event) => {
         event.preventDefault();
         const dt = new FormData(event.currentTarget);
-        if(coupon)
-            C_code=coupon
         const orderInformation = {
             "fname": dt.get("firstName"),
             "lname": dt.get("lastName"),
@@ -128,8 +120,8 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
             "totalBill": totalAmount,
             "token": getToken(),
             "state": dt.get("state"),
-            "couponCode": C_code,
-            "orderTotalAmtBeforeApplyingCoupon": orderTotalAmt,
+            "couponCode": coupon,
+        //    "orderTotalAmtBeforeApplyingCoupon": orderTotalAmt,
             "paymentType": dt.get("paymentType")
         }
 
@@ -216,7 +208,6 @@ const FormCheckoutInformation = ({ ecomerce, coupon, orderTotalAmt }) => {
                         });
                     } else if (response.data === 'cod_order_save') {
                         removeItems('cart');
-
                         window.location.assign("/account/orders?orId=OD-nuvio-2024&cod=true");
                     } else if (response.data === 'cash_on_delivery_not_available') {
                         Modal.error({

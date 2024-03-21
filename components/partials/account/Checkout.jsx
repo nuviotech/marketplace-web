@@ -1,23 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import FormCheckoutInformation from './modules/FormCheckoutInformation';
 import ModulePaymentOrderSummary from '~/components/partials/account/modules/ModulePaymentOrderSummary';
-import useEcomerce from '~/hooks/useEcomerce';
+import { getDataFromLocalStorage } from '~/repositories/WebHelper';
 import { userIsLogin } from '~/store/auth/action';
-import { Router } from 'next/router';
 const Checkout = () => {
-    
-    const [coupon, setCoupon] = useState(null);
-    const [orderTotalAmt, setOrderTotalAmt] = useState();
-    
-  
-        
-    
+    const [coupon, setCoupon] = useState(() => {
+        // Try to  retrieve coupon details from localStorage on initial render
+        return getDataFromLocalStorage('c_code');
 
-
-    const handleSetCoupon = (couponCode, amt) => {
+    });
+    const handleSetCoupon = async (couponCode) => {
         setCoupon(couponCode);
-        setOrderTotalAmt(amt);
     }
+
     return (
         <div className="ps-checkout ps-section--shopping">
             <div className="container">
@@ -27,7 +22,7 @@ const Checkout = () => {
                         <div className="ps-form__content d-md-block d-none">
                             <div className="row ">
                                 <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                    <FormCheckoutInformation coupon={coupon} orderTotalAmt={orderTotalAmt} />
+                                    <FormCheckoutInformation coupon={coupon} />
                                 </div>
                                 <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
                                     <div className="ps-form__orders">
@@ -41,37 +36,22 @@ const Checkout = () => {
                         {/* this for mobile sreen */}
                         <div className="ps-form__content d-block d-md-none ">
                             {
-                                userIsLogin() ?
-                                <div className="row ">
-
-                                    {/* <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
-                                        <div className="ps-form__orders">
-                                            <h3>Your Order</h3>
-                                            <ModulePaymentOrderSummary handleSetCoupon={handleSetCoupon} />
+                                <>
+                                    {userIsLogin() &&
+                                        <div className='alert alert-info'>✅ Provide Delivery Information</div>
+                                    }
+                                    <div className="row ">
+                                        <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
+                                            <div className="ps-form__orders">
+                                                <h3>Your Order</h3>
+                                                <ModulePaymentOrderSummary handleSetCoupon={handleSetCoupon} />
+                                            </div>
                                         </div>
-                                    </div> */}
-
-                                    <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                        <FormCheckoutInformation coupon={coupon} orderTotalAmt={orderTotalAmt} />
-                                    </div>
-
-                                </div>
-                                :
-
-                                <div className="row ">
-                                    <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-3  ps-block--checkout-order">
-                                        <div className="ps-form__orders">
-                                            <h3>Your Order</h3>
-                                            <ModulePaymentOrderSummary handleSetCoupon={handleSetCoupon} />
+                                        <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
+                                            <FormCheckoutInformation coupon={coupon} />
                                         </div>
                                     </div>
-                                    <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12">
-                                        <FormCheckoutInformation coupon={coupon} orderTotalAmt={orderTotalAmt} />
-                                    </div>
-                                    
-                                    
-
-                                </div>
+                                </>
                             }
                         </div>
 
