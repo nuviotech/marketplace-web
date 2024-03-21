@@ -16,6 +16,11 @@ export function loginSuccess() {
     return { type: actionTypes.LOGIN_SUCCESS };
 }
 
+export function removeCouponDetails(){
+    localStorage.removeItem("c_code");
+    localStorage.removeItem("c_amt");
+}
+
 export function logOut() {
    // localStorage.clear();
     localStorage.removeItem("token");
@@ -23,6 +28,8 @@ export function logOut() {
     localStorage.removeItem("_loginType_");
     localStorage.removeItem("name");
     localStorage.removeItem("action");
+    localStorage.removeItem("c_code");
+    localStorage.removeItem("c_amt");
     if(lt=="affiliate_account")
         window.location.href="/page/add_affiliate_accnt?tab=2";
     else

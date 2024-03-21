@@ -24,56 +24,56 @@ function Invoices() {
 
     const dispatch = useDispatch();
     const { removeItems } = useEcomerce();
-    const [reset,setReset] =useState(false);
+    const [reset, setReset] = useState(false);
 
     const router = useRouter();
     const { flag } = router.query;
     const { actionType } = router.query;
     const { txid } = router.query;
-    const {cod} = router.query;
-    
-    if(cod){
-        const modal =Modal.success({
-            centered: true,
-            title: 'Your Order Is Successfully Placed! 🎉',
-            content:`Congratulations, ${currentUser?.firstName}! Your order has been successfully placed. `
-        });
-        modal.update;
-    }
-    
+    const { cod } = router.query;
 
-   
-    if (flag == 1 || flag === 1) {
-       // console.log("inside flag condition.........")
-        const data={
-            "txid" : txid
+    if (cod) {
+        if (currentUser) {
+            const modal = Modal.success({
+                centered: true,
+                title: 'Your Order Is Successfully Placed! 🎉',
+                content: `Congratulations, ${currentUser?.firstName}! Your order has been successfully placed. `
+            });
+            modal.update;
         }
-        
-        axios.post(`${marketplaceUrl}/updateOrder`,data,{
+    }
+
+    if (flag == 1 || flag === 1) {
+        // console.log("inside flag condition.........")
+        const data = {
+            "txid": txid
+        }
+
+        axios.post(`${marketplaceUrl}/updateOrder`, data, {
             headers: {
                 Authorization: "Bearer " + getToken(),
             }
         }).then(
             async (response) => {
-                if(response.data==0){
+                if (response.data == 0) {
                     // const modal = Modal.success({
                     //     centered: true,
                     //     title: 'Order ID : '+txid,
                     //     content: `You'r order place successfully, thanks for order the product.`,
                     // });
                     notification["success"]({
-                        message: txid, 
+                        message: txid,
                         description: "You'r order place successfully, thanks for order the product.",
                     });
                     removeItems("cart")
                     //window.location.assign("/account/orders")
                     setReset(true);
-                   // modal.update;
-                }else if(response.data==1){
-                    
+                    // modal.update;
+                } else if (response.data == 1) {
+
                     const modal = Modal.error({
                         centered: true,
-                        title: 'Order ID : '+txid,
+                        title: 'Order ID : ' + txid,
                         content: `payment failed`,
                     });
                     //window.location.assign("/account/orders")
@@ -83,7 +83,7 @@ function Invoices() {
             },
             (error) => {
                 //order details is not save to database
-                alert("Something went wrong! "+JSON.stringify(error));
+                alert("Something went wrong! " + JSON.stringify(error));
                 console.log("error : " + JSON.stringify(error));
             }
         )
@@ -189,7 +189,7 @@ function Invoices() {
                                         </div>
                                         <div className="ps-section__content">
                                             <TableInvoices data={currentUser} />
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -200,8 +200,8 @@ function Invoices() {
                     <div className='text-center'>
                         <h3 className='text-danger text-center'>Please login first to access this page !!</h3>
                         <a onClick={() => {
-                           // Router.push('/account/login');
-                           window.location.assign("/account/login")
+                            // Router.push('/account/login');
+                            window.location.assign("/account/login")
                         }} className='btn btn-lg btn-warning text-center'>Login Here !!</a>
                     </div>
             }
