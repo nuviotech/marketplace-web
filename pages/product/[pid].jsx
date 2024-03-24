@@ -126,6 +126,7 @@ const ProductDefaultPage = ({ responseData }) => {
                 <BreadCrumb breacrumb={breadCrumb} layout="fullwidth" />
 
                 <div className="ps-page--product">
+                    
                     <div className="ps-container">
                         <div className="ps-page__container">
                             <div className="ps-page__left">{productView}</div>
