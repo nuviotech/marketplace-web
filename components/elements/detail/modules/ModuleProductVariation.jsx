@@ -9,16 +9,18 @@ export const ModuleProductVariation = ({ product }) => {
     const router = useRouter();
 
     const getVariations = async () => {
-        await Axios.get(`${marketplaceUrl}/getProductVariations?variationId=${product?.productVariationId}`)
-            .then(
-                (response) => {
-                    setVariationProducts(response?.data);
-                },
-                (error) => {
-                    console.error("product variation : " + error);
-                    return null;
-                }
-            )
+        if (product?.productVariationId && product?.productVariationId!='NA') {
+            await Axios.get(`${marketplaceUrl}/getProductVariations?variationId=${product?.productVariationId}`)
+                .then(
+                    (response) => {
+                        setVariationProducts(response?.data);
+                    },
+                    (error) => {
+                        console.error("product variation : " + error);
+                        return null;
+                    }
+                )
+        }
     }
 
     useEffect(() => {
@@ -34,15 +36,17 @@ export const ModuleProductVariation = ({ product }) => {
                     var variation = "";
                     var variationProduct = JSON.parse(vd?.product);
                     JSON?.parse(vd?.data)?.map(vName => {
-                        variation += vName?.key + " : " + vName.value + " ";
+                        if (vName?.key?.length > 0 || vName.value?.length > 0)
+                            variation += vName?.key + " : " + vName.value + " ";
                     })
 
                     return (
+                        
                         <Link href="/product/[pid]" as={`/product/${variationProduct?.title?.replaceAll("/", " | ").replaceAll(" ", "-")}&pid=${variationProduct?.id}`}>
-                            {product?.id===variationProduct?.id ?
-                                <button className="btn btn-bg btn-info mx-1">{variation}</button>
-                            :
-                                <button className="btn btn-bg btn-outline-dark mx-1">{variation}</button>
+                            {product?.id === variationProduct?.id ?
+                                <button className="btn btn-bg btn-info mx-1 p-2"><b>{variation}</b></button>
+                                :
+                                <button className="btn btn-bg btn-outline-dark mx-1 p-2">{variation}</button>
                             }
                         </Link>
                     )

@@ -14,10 +14,11 @@ const ProductDetailFullwidth = ({ product, pid }) => {
     return (
         <div className="ps-product--detail ps-product--fullwidth">
             <div className="ps-product__header">
+                
                 <ThumbnailDefault product={product} />
                 <div className="ps-product__info">
                     <ModuleDetailTopInformation product={product} />
-                    {(product?.productVariationId != "NA" && product?.productVariationId.length > 2) &&
+                    {(product?.productVariationId != "NA" && product?.productVariationId.length > 0) &&
                         <ModuleProductVariation product={product} />
                     }
                     <ModuleProductDetailDescription product={product} />
