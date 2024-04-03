@@ -145,7 +145,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
             <figure>
                 <figcaption>
                     <strong>Shipping Fee</strong>
-                    <small>₹50.00</small>
+                    <small>₹49.00</small>
                 </figcaption>
             </figure>
         );
@@ -155,7 +155,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                     Total
                     {
                         parseInt(amount) > 0 ?
-                            <strong>₹{parseInt(amount) + 50}.00</strong>
+                            <strong>₹{parseInt(amount) + 49}.00</strong>
                             :
                             <strong>₹ 00.00</strong>
                     }
@@ -210,8 +210,8 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, handleSetCoupon }) => {
                         couponDiscount.isValid &&
                         <div className='card p-3'>
                             <h5>Coupon code : <strong>{couponDiscount.coupon}</strong> </h5>
-                            <h5>Before Coupon Applied Price :  <strong>₹{parseInt(amount) + 50}.00 </strong></h5>
-                            <h5>After Coupon Applied Price :  <strong>₹{parseInt(couponDiscount.discountAmt) + 50}.00</strong></h5>
+                            <h5>Before Coupon Applied Price :  <strong>₹{parseInt(amount) + 49}.00 </strong></h5>
+                            <h5>After Coupon Applied Price :  <strong>₹{parseInt(couponDiscount.discountAmt) + 49}.00</strong></h5>
                         </div>
 
 
