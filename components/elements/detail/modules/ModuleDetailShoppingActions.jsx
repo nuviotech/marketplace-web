@@ -9,22 +9,17 @@ const ModuleDetailShoppingActions = ({
     product,
     extended = false,
 }) => {
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
 
     const Router = useRouter();
-    const { addItem, increaseQty, decreaseQty } = useEcomerce();
+    const { addItem } = useEcomerce();
     function handleAddItemToCart(e) {
         e.preventDefault();
-        setQuantity(quantity + 1);
-        if (quantity == 0) {
-            addItem(
-                { id: product?.id, quantity: 1 },
-                ecomerce.cartItems,
-                'cart'
-            );
-        } else {
-            increaseQty({ id: product.id }, ecomerce.cartItems)
-        }
+        addItem(
+            { id: product?.id, quantity: quantity },
+            ecomerce.cartItems,
+            'cart'
+        );
     }
 
     function handleBuynow(e) {
@@ -64,40 +59,24 @@ const ModuleDetailShoppingActions = ({
 
     function handleIncreaseItemQty(e) {
         e.preventDefault();
-        var flag=true;
-        ecomerce.cartItems.map(p => {
-            if (p.id == product.id) {
-                increaseQty({ id: product.id }, ecomerce.cartItems)
-                setQuantity(quantity + 1);
-                flag=false;
-            } 
-        })
-
-        if(flag){
-            addItem(
-                { id: product?.id, quantity: 1 },
-                ecomerce.cartItems,
-                'cart'
-            );
-            setQuantity(quantity + 1);
-        }
+        setQuantity(quantity + 1);
     }
 
     function handleDecreaseItemQty(e) {
         e.preventDefault();
-        decreaseQty({ id: product.id }, ecomerce.cartItems)
+        //decreaseQty({ id: product.id }, ecomerce.cartItems)
         if (quantity > 1) {
             setQuantity(quantity - 1);
         }
     }
 
-    useEffect(() => {
-        ecomerce.cartItems.map(p => {
-            if (p.id == product.id) {
-                setQuantity(p.quantity);
-            }
-        })
-    }, [])
+    // useEffect(() => {
+    //     ecomerce.cartItems.map(p => {
+    //         if (p.id == product.id) {
+    //             setQuantity(p.quantity);
+    //         }
+    //     })
+    // }, [])
 
     if (!extended) {
         return (
