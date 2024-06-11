@@ -5,7 +5,7 @@ import { calculateAmount } from '~/utilities/ecomerce-helpers';
 const ModuleCartSummary = ({ source }) => {
     // View
     let productItemsView, amount;
-    if (source && source.length > 0) {
+    if (source && source?.length > 0) {
         amount = calculateAmount(source);
         productItemsView = source?.map((item) => (
             <li key={item?.id}>

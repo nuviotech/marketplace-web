@@ -18,7 +18,7 @@ const ProductDetailFullwidth = ({ product, pid }) => {
                 <ThumbnailDefault product={product} />
                 <div className="ps-product__info">
                     <ModuleDetailTopInformation product={product} />
-                    {(product?.productVariationId != "NA" && product?.productVariationId.length > 0) &&
+                    {(product?.productVariationId != "NA" && product?.productVariationId?.length > 0) &&
                         <ModuleProductVariation product={product} />
                     }
                     <ModuleProductDetailDescription product={product} />
