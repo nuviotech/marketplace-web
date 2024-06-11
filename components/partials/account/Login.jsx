@@ -84,7 +84,7 @@ class Login extends Component {
                         if (action == "checkout") {
                             Router.push('/account/checkout')
                             sessionStorage.removeItem("action");
-                        } else if (action != null && action.length > 0) {
+                        } else if (action != null && action?.length > 0) {
                             Router.push(action);
                             sessionStorage.removeItem("action");
                         } else
