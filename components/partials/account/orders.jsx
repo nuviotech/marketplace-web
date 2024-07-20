@@ -30,6 +30,7 @@ function Invoices() {
     const { flag } = router.query;
     const { actionType } = router.query;
     const { txid } = router.query;
+
     const { cod } = router.query;
 
     if (cod) {
@@ -41,7 +42,9 @@ function Invoices() {
             });
             modal.update;
         }
+
     }
+
 
     if (flag == 1 || flag === 1) {
         // console.log("inside flag condition.........")
