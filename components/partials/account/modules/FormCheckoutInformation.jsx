@@ -233,6 +233,12 @@ const FormCheckoutInformation = ({ ecomerce, coupon }) => {
                             centered: true,
                             title: 'GSTIN number is required!',
                         });
+                    }else if(response?.data?.startsWith("Your order from")){
+                        Modal.error({
+                            centered: true,
+                            title: 'Insufficient Minimum Order Value',
+                            content:response?.data
+                        });
                     } else {
                         const modal = Modal.error({
                             centered: true,
